@@ -12,6 +12,14 @@
   --gray-700: rgb(55, 65, 81);
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 ol,
 ul,
 menu {
