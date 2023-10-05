@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~normalize.css/normalize.css";
+@import "@fontsource/roboto";
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import "@fortawesome/fontawesome-free/css/brands.css";
+
+:root{
+  --primary: rgb(17, 33, 47);
+  --accent: rgb(43, 176, 225);
+  --white: rgb(255, 255, 255);
+  --gray-300: rgb(209,213, 219);
+  --gray-700: rgb(55, 65, 81);
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
