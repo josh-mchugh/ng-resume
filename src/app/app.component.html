@@ -4,7 +4,7 @@
     <div class="input__section">
       <div class="section__header">Your Details</div>
       <label>Name</label>
-      <input type="text" placeholder="Name"/>
+      <input type="text" placeholder="Name" (input)="handleNameInput($event)"/>
       <label>Title</label>
       <input type="text" placeholder="Title"/>
       <label>Summary</label>
@@ -100,7 +100,7 @@
             <div style="height: auto">
               <!-- Name & Title Section -->
               <div class="section__name">
-                <div class="name">John Doe</div>
+                <div class="name">{{(name$ | async)}}</div>
                 <div class="title">Web and Graphic Designer</div>
               </div>
               <!-- Summary Section -->
