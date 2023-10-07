@@ -8,7 +8,7 @@
       <label>Title</label>
       <input type="text" placeholder="Title" (input)="onTitleInput($event)"/>
       <label>Summary</label>
-      <textarea placeholder="Summary"></textarea>
+      <textarea placeholder="Summary" (input)="onSummaryInput($event)"></textarea>
     </div>
     <!-- Contact Details Section -->
     <div class="input__section">
@@ -113,7 +113,7 @@
                 </div>
               </div>
               <div class="section__summary">
-                <div class="summary">Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.</div>
+                <div class="summary">{{summary$ | async}}</div>
               </div>
               <!-- Contact Section -->
               <div class="section__header section__header--contact">
