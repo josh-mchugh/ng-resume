@@ -34,40 +34,34 @@ export class AppComponent {
     this.location$ = this.store.select(state => state.app.location);
   }
 
-  public onNameInput(event: Event): boolean {
+  public onNameInput(event: Event): void {
     const name = this.getInputValue(event);
     this.store.dispatch(new NameUpdate(name));
-    return false;
   }
 
-  public onTitleInput(event: Event): boolean {
+  public onTitleInput(event: Event): void {
     const title = this.getInputValue(event);
     this.store.dispatch(new TitleUpdate(title));
-    return false;
   }
 
-  public onSummaryInput(event: Event): boolean {
+  public onSummaryInput(event: Event): void {
     const summary = this.getInputValue(event);
     this.store.dispatch(new SummaryUpdate(summary));
-    return false;
   }
 
-  public onPhoneInput(event: Event): boolean {
+  public onPhoneInput(event: Event): void {
     const phone = this.getInputValue(event);
     this.store.dispatch(new PhoneUpdate(phone));
-    return false;
   }
 
-  public onEmailInput(event: Event): boolean {
+  public onEmailInput(event: Event): void {
     const email = this.getInputValue(event);
     this.store.dispatch(new EmailUpdate(email));
-    return false;
   }
 
-  public onLocationInput(event: Event): boolean {
+  public onLocationInput(event: Event): void {
     const location = this.getInputValue(event);
     this.store.dispatch(new LocationUpdate(location));
-    return false;
   }
 
   private getInputValue(event: Event): string {
