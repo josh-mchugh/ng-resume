@@ -22,3 +22,8 @@ export class EmailUpdate {
   static readonly type = '[Email] Update';
   constructor(public email: string) {}
 }
+
+export class LocationUpdate {
+  static readonly type = '[Location] Update';
+  constructor(public location: string) {}
+}

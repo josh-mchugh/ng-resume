@@ -4,6 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import { AppState, AppStateModel } from './app.state';
 import {
   EmailUpdate,
+  LocationUpdate,
   NameUpdate,
   PhoneUpdate,
   SummaryUpdate,
@@ -22,6 +23,7 @@ export class AppComponent {
   summary$: Observable<string>;
   phone$: Observable<string>;
   email$: Observable<string>;
+  location$: Observable<string>;
 
   constructor(private store: Store) {
     this.name$ = this.store.select(state => state.app.name);
@@ -29,6 +31,7 @@ export class AppComponent {
     this.summary$ = this.store.select(state => state.app.summary);
     this.phone$ = this.store.select(state => state.app.phone);
     this.email$ = this.store.select(state => state.app.email);
+    this.location$ = this.store.select(state => state.app.location);
   }
 
   public onNameInput(event: Event): boolean {
@@ -58,6 +61,12 @@ export class AppComponent {
   public onEmailInput(event: Event): boolean {
     const email = (event.target as HTMLInputElement).value;
     this.store.dispatch(new EmailUpdate(email));
+    return false;
+  }
+
+  public onLocationInput(event: Event): boolean {
+    const location = (event.target as HTMLInputElement).value;
+    this.store.dispatch(new LocationUpdate(location));
     return false;
   }
 }

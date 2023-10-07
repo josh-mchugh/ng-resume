@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import {
   EmailUpdate,
+  LocationUpdate,
   NameUpdate,
   PhoneUpdate,
   SummaryUpdate,
@@ -14,6 +15,7 @@ export interface AppStateModel {
   summary: string;
   phone: string;
   email: string;
+  location: string;
 }
 
 @State<AppStateModel>({
@@ -23,7 +25,8 @@ export interface AppStateModel {
     title: "Web and Graphic Designer",
     summary: "Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.",
     phone: "(123) 456-8899",
-    email: "info@youremail.com"
+    email: "info@youremail.com",
+    location: "New York, New York"
   }
 })
 @Injectable()
@@ -66,6 +69,14 @@ export class AppState {
     ctx.setState({
       ...ctx.getState(),
       email: action.email
+    });
+  }
+
+  @Action(LocationUpdate)
+  locationUpdate(ctx: StateContext<AppStateModel>, action: LocationUpdate) {
+    ctx.setState({
+      ...ctx.getState(),
+      location: action.location
     });
   }
 }

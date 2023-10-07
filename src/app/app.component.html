@@ -18,7 +18,7 @@
       <label>Email</label>
       <input type="text" placeholder="Email" (input)="onEmailInput($event)"/>
       <label>Location</label>
-      <input type="text" placeholder="Location" />
+      <input type="text" placeholder="Location" (input)="onLocationInput($event)"/>
     </div>
     <!-- Social Section -->
     <div class="input__section">
@@ -130,11 +130,11 @@
                   </li>
                   <li class="list__item">
                     <i class="fa-solid fa-envelope list__item_icon"></i>
-                    <a class="list__item_text list__item_text--email" href="info@youremail.com">{{email$ | async}}</a>
+                    <a class="list__item_text list__item_text--email" href="mailto:{{email$ | async}}">{{email$ | async}}</a>
                   </li>
                   <li class="list__item">
                     <i class="fa-solid fa-location-dot list__item_icon"></i>
-                    <span class="list__item_text">New York, New York</span>
+                    <span class="list__item_text">{{location$ | async}}</span>
                   </li>
                 </ul>
               </div>
