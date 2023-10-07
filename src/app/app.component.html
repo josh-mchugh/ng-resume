@@ -14,9 +14,9 @@
     <div class="input__section">
       <div class="section__header">Contact Details</div>
       <label>Phone</label>
-      <input type="text" placeholder="Phone" (input)="onPhoneInput($event)" />
+      <input type="text" placeholder="Phone" (input)="onPhoneInput($event)"/>
       <label>Email</label>
-      <input type="text" placeholder="Email" />
+      <input type="text" placeholder="Email" (input)="onEmailInput($event)"/>
       <label>Location</label>
       <input type="text" placeholder="Location" />
     </div>
@@ -130,7 +130,7 @@
                   </li>
                   <li class="list__item">
                     <i class="fa-solid fa-envelope list__item_icon"></i>
-                    <a class="list__item_text list__item_text--email" href="info@youremail.com">info@youremail.com</a>
+                    <a class="list__item_text list__item_text--email" href="info@youremail.com">{{email$ | async}}</a>
                   </li>
                   <li class="list__item">
                     <i class="fa-solid fa-location-dot list__item_icon"></i>

@@ -17,3 +17,8 @@ export class PhoneUpdate {
   static readonly type = '[Phone] Update';
   constructor(public phone: string) {}
 }
+
+export class EmailUpdate {
+  static readonly type = '[Email] Update';
+  constructor(public email: string) {}
+}
