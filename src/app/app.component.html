@@ -14,7 +14,7 @@
     <div class="input__section">
       <div class="section__header">Contact Details</div>
       <label>Phone</label>
-      <input type="text" placeholder="Phone" />
+      <input type="text" placeholder="Phone" (input)="onPhoneInput($event)" />
       <label>Email</label>
       <input type="text" placeholder="Email" />
       <label>Location</label>
@@ -126,7 +126,7 @@
                 <ul class="list">
                   <li class="list__item">
                     <i class="fa-solid fa-phone list__item_icon"></i>
-                    <span class="list__item_text">(123) 456-8899</span>
+                    <span class="list__item_text">{{phone$ | async}}</span>
                   </li>
                   <li class="list__item">
                     <i class="fa-solid fa-envelope list__item_icon"></i>

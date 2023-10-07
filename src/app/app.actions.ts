@@ -12,3 +12,8 @@ export class SummaryUpdate {
   static readonly type = '[Summary] Update';
   constructor(public summary: string) {}
 }
+
+export class PhoneUpdate {
+  static readonly type = '[Phone] Update';
+  constructor(public phone: string) {}
+}

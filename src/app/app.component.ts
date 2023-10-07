@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import { AppState, AppStateModel } from './app.state';
-import { NameUpdate, TitleUpdate, SummaryUpdate } from './app.actions';
+import {
+  NameUpdate,
+  PhoneUpdate,
+  SummaryUpdate,
+  TitleUpdate
+} from './app.actions';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +19,13 @@ export class AppComponent {
   name$: Observable<string>;
   title$: Observable<string>;
   summary$: Observable<string>;
+  phone$: Observable<string>;
 
   constructor(private store: Store) {
     this.name$ = this.store.select(state => state.app.name);
     this.title$ = this.store.select(state => state.app.title);
     this.summary$ = this.store.select(state => state.app.summary);
+    this.phone$ = this.store.select(state => state.app.phone);
   }
 
   public onNameInput(event: Event): boolean {
@@ -36,6 +43,12 @@ export class AppComponent {
   public onSummaryInput(event: Event): boolean {
     const summary = (event.target as HTMLInputElement).value;
     this.store.dispatch(new SummaryUpdate(summary));
+    return false;
+  }
+
+  public onPhoneInput(event: Event): boolean {
+    const phone = (event.target as HTMLInputElement).value;
+    this.store.dispatch(new PhoneUpdate(phone));
     return false;
   }
 }

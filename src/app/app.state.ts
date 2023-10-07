@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
-import { NameUpdate, TitleUpdate, SummaryUpdate } from './app.actions';
+import {
+  NameUpdate,
+  PhoneUpdate,
+  SummaryUpdate,
+  TitleUpdate
+} from './app.actions';
 
 export interface AppStateModel {
   name: string;
   title: string;
   summary: string;
+  phone: string;
 }
 
 @State<AppStateModel>({
@@ -13,7 +19,8 @@ export interface AppStateModel {
   defaults: {
     name: "John Doe",
     title: "Web and Graphic Designer",
-    summary: "Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow."
+    summary: "Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.",
+    phone: "(123) 456-8899"
   }
 })
 @Injectable()
@@ -40,6 +47,14 @@ export class AppState {
     ctx.setState({
       ...ctx.getState(),
       summary: action.summary
+    });
+  }
+
+  @Action(PhoneUpdate)
+  phoneUpdate(ctx: StateContext<AppStateModel>, action: PhoneUpdate) {
+    ctx.setState({
+      ...ctx.getState(),
+      phone: action.phone
     });
   }
 }
