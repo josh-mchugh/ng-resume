@@ -35,38 +35,42 @@ export class AppComponent {
   }
 
   public onNameInput(event: Event): boolean {
-    const name = (event.target as HTMLInputElement).value;
+    const name = this.getInputValue(event);
     this.store.dispatch(new NameUpdate(name));
     return false;
   }
 
   public onTitleInput(event: Event): boolean {
-    const title = (event.target as HTMLInputElement).value;
+    const title = this.getInputValue(event);
     this.store.dispatch(new TitleUpdate(title));
     return false;
   }
 
   public onSummaryInput(event: Event): boolean {
-    const summary = (event.target as HTMLInputElement).value;
+    const summary = this.getInputValue(event);
     this.store.dispatch(new SummaryUpdate(summary));
     return false;
   }
 
   public onPhoneInput(event: Event): boolean {
-    const phone = (event.target as HTMLInputElement).value;
+    const phone = this.getInputValue(event);
     this.store.dispatch(new PhoneUpdate(phone));
     return false;
   }
 
   public onEmailInput(event: Event): boolean {
-    const email = (event.target as HTMLInputElement).value;
+    const email = this.getInputValue(event);
     this.store.dispatch(new EmailUpdate(email));
     return false;
   }
 
   public onLocationInput(event: Event): boolean {
-    const location = (event.target as HTMLInputElement).value;
+    const location = this.getInputValue(event);
     this.store.dispatch(new LocationUpdate(location));
     return false;
+  }
+
+  private getInputValue(event: Event): string {
+    return (event.target as HTMLInputElement).value;
   }
 }
