@@ -7,6 +7,10 @@ import {
   Social
 } from './app.state';
 import {
+  FormState,
+  FormStateModel
+} from './form.state';
+import {
   EmailUpdate,
   LocationUpdate,
   NameUpdate,
@@ -18,6 +22,7 @@ import {
   SummaryUpdate,
   TitleUpdate
 } from './app.actions';
+import { Form } from './form.actions';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +30,13 @@ import {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  formName$: Observable<string>;
+  formTitle$: Observable<string>;
+  formSummary$: Observable<string>;
+  formPhone$: Observable<string>;
+  formEmail$: Observable<string>;
+  formLocation$: Observable<string>;
 
   name$: Observable<string>;
   title$: Observable<string>;
@@ -35,6 +47,13 @@ export class AppComponent {
   socials$: Observable<Array<Social>>;
 
   constructor(private store: Store) {
+    this.formName$ = this.store.select(state => state.form.name);
+    this.formTitle$ = this.store.select(state => state.form.title);
+    this.formSummary$ = this.store.select(state => state.form.summary);
+    this.formPhone$ = this.store.select(state => state.form.phone);
+    this.formEmail$ = this.store.select(state => state.form.email);
+    this.formLocation$ = this.store.select(state => state.form.location);
+
     this.name$ = this.store.select(state => state.app.name);
     this.title$ = this.store.select(state => state.app.title);
     this.summary$ = this.store.select(state => state.app.summary);
@@ -46,32 +65,50 @@ export class AppComponent {
 
   public onNameInput(event: Event): void {
     const name = this.getInputValue(event);
-    this.store.dispatch(new NameUpdate(name));
+    this.store.dispatch([
+      new Form.NameUpdate(name),
+      new NameUpdate(name)
+    ]);
   }
 
   public onTitleInput(event: Event): void {
     const title = this.getInputValue(event);
-    this.store.dispatch(new TitleUpdate(title));
+    this.store.dispatch([
+      new Form.TitleUpdate(title),
+      new TitleUpdate(title)
+    ]);
   }
 
   public onSummaryInput(event: Event): void {
     const summary = this.getInputValue(event);
-    this.store.dispatch(new SummaryUpdate(summary));
+    this.store.dispatch([
+      new Form.SummaryUpdate(summary),
+      new SummaryUpdate(summary)
+    ]);
   }
 
   public onPhoneInput(event: Event): void {
     const phone = this.getInputValue(event);
-    this.store.dispatch(new PhoneUpdate(phone));
+    this.store.dispatch([
+      new Form.PhoneUpdate(phone),
+      new PhoneUpdate(phone)
+    ]);
   }
 
   public onEmailInput(event: Event): void {
     const email = this.getInputValue(event);
-    this.store.dispatch(new EmailUpdate(email));
+    this.store.dispatch([
+      new Form.EmailUpdate(email),
+      new EmailUpdate(email)
+    ]);
   }
 
   public onLocationInput(event: Event): void {
     const location = this.getInputValue(event);
-    this.store.dispatch(new LocationUpdate(location));
+    this.store.dispatch([
+      new Form.LocationUpdate(location),
+      new LocationUpdate(location)
+    ]);
   }
 
   public handleSocialTrackBy(index: number): number {

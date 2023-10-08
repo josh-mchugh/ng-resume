@@ -3,12 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 
 import { AppComponent } from './app.component';
 
 import { environment } from './../environments/environment';
 import { AppState } from './app.state';
+import { FormState } from './form.state';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,11 @@ import { AppState } from './app.state';
   imports: [
     BrowserModule,
     FormsModule,
-    NgxsModule.forRoot([AppState], {
+    NgxsModule.forRoot([FormState, AppState], {
       developmentMode: !environment.production
+    }),
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production
     }),
     NgxsLoggerPluginModule.forRoot({
       disabled: environment.production

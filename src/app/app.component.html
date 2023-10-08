@@ -1,24 +1,25 @@
+
 <div class="main">
   <div class="sidebar">
     <!-- Your Details Section -->
     <div class="input__section">
       <div class="section__header">Your Details</div>
       <label>Name</label>
-      <input type="text" placeholder="Name" (input)="onNameInput($event)"/>
+      <input type="text" placeholder="Name" [value]="formName$ | async" (input)="onNameInput($event)"/>
       <label>Title</label>
-      <input type="text" placeholder="Title" (input)="onTitleInput($event)"/>
+      <input type="text" placeholder="Title" [value]="formTitle$ | async" (input)="onTitleInput($event)"/>
       <label>Summary</label>
-      <textarea placeholder="Summary" (input)="onSummaryInput($event)"></textarea>
+      <textarea placeholder="Summary" [value]="formSummary$ | async" (input)="onSummaryInput($event)"></textarea>
     </div>
     <!-- Contact Details Section -->
     <div class="input__section">
       <div class="section__header">Contact Details</div>
       <label>Phone</label>
-      <input type="text" placeholder="Phone" (input)="onPhoneInput($event)"/>
+      <input type="text" placeholder="Phone" [value]="formPhone$ | async" (input)="onPhoneInput($event)"/>
       <label>Email</label>
-      <input type="text" placeholder="Email" (input)="onEmailInput($event)"/>
+      <input type="text" placeholder="Email" [value]="formEmail$ | async" (input)="onEmailInput($event)"/>
       <label>Location</label>
-      <input type="text" placeholder="Location" (input)="onLocationInput($event)"/>
+      <input type="text" placeholder="Location" [value]="formLocation$ | async" (input)="onLocationInput($event)"/>
     </div>
     <!-- Social Section -->
     <div class="input__section">
