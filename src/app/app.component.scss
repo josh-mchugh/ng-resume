@@ -470,12 +470,12 @@ flex-auto w-64 px-7 my-16
 }
 
 .input__section .section__content {
-    padding-bottom: 0.5rem;
-}
+  padding-bottom: 0.5rem;
 
-.input__section .section__content:not(:first-child) {
+  &:not(:first-child) {
     padding-top: 0.5rem;
     border-top: 1px dashed var(--gray-700);
+  }
 }
 
 .input__section .section__content-remove {

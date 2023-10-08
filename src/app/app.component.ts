@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
-import { AppState, AppStateModel } from './app.state';
+import {
+  AppState,
+  AppStateModel,
+  Social
+} from './app.state';
 import {
   EmailUpdate,
   LocationUpdate,
   NameUpdate,
   PhoneUpdate,
+  SocialCreate,
+  SocialDelete,
+  SocialNameUpdate,
+  SocialUrlUpdate,
   SummaryUpdate,
   TitleUpdate
 } from './app.actions';
@@ -24,6 +32,7 @@ export class AppComponent {
   phone$: Observable<string>;
   email$: Observable<string>;
   location$: Observable<string>;
+  socials$: Observable<Array<Social>>;
 
   constructor(private store: Store) {
     this.name$ = this.store.select(state => state.app.name);
@@ -32,6 +41,7 @@ export class AppComponent {
     this.phone$ = this.store.select(state => state.app.phone);
     this.email$ = this.store.select(state => state.app.email);
     this.location$ = this.store.select(state => state.app.location);
+    this.socials$ = this.store.select(state => state.app.socials);
   }
 
   public onNameInput(event: Event): void {
@@ -62,6 +72,30 @@ export class AppComponent {
   public onLocationInput(event: Event): void {
     const location = this.getInputValue(event);
     this.store.dispatch(new LocationUpdate(location));
+  }
+
+  public handleSocialTrackBy(index: number): number {
+    return index;
+  }
+
+  public onSocialCreate(): boolean {
+    this.store.dispatch(new SocialCreate());
+    return false;
+  }
+
+  public onSocialRemove(index: number): boolean {
+    this.store.dispatch(new SocialDelete(index));
+    return false;
+  }
+
+  public onSocialNameInput(index: number, event: Event): void {
+    const name = this.getInputValue(event);
+    this.store.dispatch(new SocialNameUpdate(index, name));
+  }
+
+  public onSocialUrlInput(index: number, event: Event): void {
+    const url = this.getInputValue(event);
+    this.store.dispatch(new SocialUrlUpdate(index, url));
   }
 
   private getInputValue(event: Event): string {

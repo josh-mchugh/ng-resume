@@ -27,3 +27,23 @@ export class LocationUpdate {
   static readonly type = '[Location] Update';
   constructor(public location: string) {}
 }
+
+export class SocialCreate {
+  static readonly type = '[Social] Create';
+  constructor() {}
+}
+
+export class SocialDelete {
+  static readonly type = '[Social] Delete';
+  constructor(public index: number) {}
+}
+
+export class SocialNameUpdate {
+  static readonly type = '[Social] Update Name';
+  constructor(public index: number, public name: string) {}
+}
+
+export class SocialUrlUpdate {
+  static readonly type = '[Social] Update Url';
+  constructor(public index: number, public url: string) {}
+}
