@@ -66,5 +66,10 @@ export namespace Form {
       static readonly type = '[Form] Experience Title Update';
       constructor(public index: number, public title: string) {}
     }
+
+    export class OrganizationUpdate {
+      static readonly type = '[Form] Experience Organization Update';
+      constructor(public index: number, public organization: string) {}
+    }
   }
 }

@@ -130,6 +130,11 @@ export class AppComponent {
     this.store.dispatch(new Form.Experience.TitleUpdate(index, title));
   }
 
+  public onExperienceOrganizationUpdate(index: number, event: Event): void {
+    const organization = this.getInputValue(event);
+    this.store.dispatch(new Form.Experience.OrganizationUpdate(index, organization));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
