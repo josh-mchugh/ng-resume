@@ -50,7 +50,7 @@
             </div>
           </ng-template>
           <label>Title</label>
-          <input type="text" placeholder="Title" />
+          <input type="text" placeholder="Title" (input)="onExperienceTitleInput(i, $event)" />
           <label>Organization</label>
           <input type="text" placeholder="Organization" />
           <label>Duration</label>
