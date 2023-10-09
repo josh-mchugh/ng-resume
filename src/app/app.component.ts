@@ -2,26 +2,14 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import {
-  AppState,
-  AppStateModel,
+  ResumeState,
+  ResumeStateModel,
   Social
-} from './app.state';
+} from './resume.state';
 import {
   FormState,
   FormStateModel
 } from './form.state';
-import {
-  EmailUpdate,
-  LocationUpdate,
-  NameUpdate,
-  PhoneUpdate,
-  SocialCreate,
-  SocialDelete,
-  SocialNameUpdate,
-  SocialUrlUpdate,
-  SummaryUpdate,
-  TitleUpdate
-} from './app.actions';
 import { Form } from './form.actions';
 
 @Component({
@@ -37,6 +25,7 @@ export class AppComponent {
   formPhone$: Observable<string>;
   formEmail$: Observable<string>;
   formLocation$: Observable<string>;
+  formSocials$: Observable<any>;
 
   name$: Observable<string>;
   title$: Observable<string>;
@@ -53,62 +42,45 @@ export class AppComponent {
     this.formPhone$ = this.store.select(state => state.form.phone);
     this.formEmail$ = this.store.select(state => state.form.email);
     this.formLocation$ = this.store.select(state => state.form.location);
+    this.formSocials$ = this.store.select(state => state.form.socials);
 
-    this.name$ = this.store.select(state => state.app.name);
-    this.title$ = this.store.select(state => state.app.title);
-    this.summary$ = this.store.select(state => state.app.summary);
-    this.phone$ = this.store.select(state => state.app.phone);
-    this.email$ = this.store.select(state => state.app.email);
-    this.location$ = this.store.select(state => state.app.location);
-    this.socials$ = this.store.select(state => state.app.socials);
+    this.name$ = this.store.select(state => state.resume.name);
+    this.title$ = this.store.select(state => state.resume.title);
+    this.summary$ = this.store.select(state => state.resume.summary);
+    this.phone$ = this.store.select(state => state.resume.phone);
+    this.email$ = this.store.select(state => state.resume.email);
+    this.location$ = this.store.select(state => state.resume.location);
+    this.socials$ = this.store.select(state => state.resume.socials);
   }
 
   public onNameInput(event: Event): void {
     const name = this.getInputValue(event);
-    this.store.dispatch([
-      new Form.NameUpdate(name),
-      new NameUpdate(name)
-    ]);
+    this.store.dispatch(new Form.NameUpdate(name));
   }
 
   public onTitleInput(event: Event): void {
     const title = this.getInputValue(event);
-    this.store.dispatch([
-      new Form.TitleUpdate(title),
-      new TitleUpdate(title)
-    ]);
+    this.store.dispatch(new Form.TitleUpdate(title));
   }
 
   public onSummaryInput(event: Event): void {
     const summary = this.getInputValue(event);
-    this.store.dispatch([
-      new Form.SummaryUpdate(summary),
-      new SummaryUpdate(summary)
-    ]);
+    this.store.dispatch(new Form.SummaryUpdate(summary));
   }
 
   public onPhoneInput(event: Event): void {
     const phone = this.getInputValue(event);
-    this.store.dispatch([
-      new Form.PhoneUpdate(phone),
-      new PhoneUpdate(phone)
-    ]);
+    this.store.dispatch(new Form.PhoneUpdate(phone));
   }
 
   public onEmailInput(event: Event): void {
     const email = this.getInputValue(event);
-    this.store.dispatch([
-      new Form.EmailUpdate(email),
-      new EmailUpdate(email)
-    ]);
+    this.store.dispatch(new Form.EmailUpdate(email));
   }
 
   public onLocationInput(event: Event): void {
     const location = this.getInputValue(event);
-    this.store.dispatch([
-      new Form.LocationUpdate(location),
-      new LocationUpdate(location)
-    ]);
+    this.store.dispatch(new Form.LocationUpdate(location));
   }
 
   public handleSocialTrackBy(index: number): number {
@@ -116,23 +88,23 @@ export class AppComponent {
   }
 
   public onSocialCreate(): boolean {
-    this.store.dispatch(new SocialCreate());
+    this.store.dispatch(new Form.Social.Create());
     return false;
   }
 
   public onSocialRemove(index: number): boolean {
-    this.store.dispatch(new SocialDelete(index));
+    this.store.dispatch(new Form.Social.Delete(index));
     return false;
   }
 
   public onSocialNameInput(index: number, event: Event): void {
     const name = this.getInputValue(event);
-    this.store.dispatch(new SocialNameUpdate(index, name));
+    this.store.dispatch(new Form.Social.NameUpdate(index, name));
   }
 
   public onSocialUrlInput(index: number, event: Event): void {
     const url = this.getInputValue(event);
-    this.store.dispatch(new SocialUrlUpdate(index, url));
+    this.store.dispatch(new Form.Social.UrlUpdate(index, url));
   }
 
   private getInputValue(event: Event): string {

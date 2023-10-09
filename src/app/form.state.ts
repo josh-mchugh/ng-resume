@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
+import { Resume } from './resume.actions';
 
 export interface FormStateModel {
   name: string;
@@ -9,6 +10,7 @@ export interface FormStateModel {
   phone: string;
   email: string;
   location: string;
+  socials: Array<any>;
 }
 
 @State<FormStateModel>({
@@ -19,7 +21,13 @@ export interface FormStateModel {
     summary: '',
     phone: '',
     email: '',
-    location: ''
+    location: '',
+    socials: [
+      {
+        name: "",
+        url: ""
+      }
+    ]
   }
 })
 @Injectable()
@@ -31,6 +39,7 @@ export class FormState {
       ...ctx.getState(),
       name: action.name
     });
+    ctx.dispatch(new Resume.NameUpdate(action.name));
   }
 
   @Action(Form.TitleUpdate)
@@ -39,6 +48,7 @@ export class FormState {
       ...ctx.getState(),
       title: action.title
     });
+    ctx.dispatch(new Resume.TitleUpdate(action.title));
   }
 
   @Action(Form.SummaryUpdate)
@@ -47,6 +57,7 @@ export class FormState {
       ...ctx.getState(),
       summary: action.summary
     });
+    ctx.dispatch(new Resume.SummaryUpdate(action.summary));
   }
 
   @Action(Form.PhoneUpdate)
@@ -55,6 +66,7 @@ export class FormState {
       ...ctx.getState(),
       phone: action.phone
     });
+    ctx.dispatch(new Resume.PhoneUpdate(action.phone));
   }
 
   @Action(Form.EmailUpdate)
@@ -63,6 +75,7 @@ export class FormState {
       ...ctx.getState(),
       email: action.email
     });
+    ctx.dispatch(new Resume.EmailUpdate(action.email));
   }
 
   @Action(Form.LocationUpdate)
@@ -71,5 +84,54 @@ export class FormState {
       ...ctx.getState(),
       location: action.location
     });
+    ctx.dispatch(new Resume.LocationUpdate(action.location));
+  }
+
+  @Action(Form.Social.Create)
+  socialCreate(ctx: StateContext<FormStateModel>, action: Form.Social.Create) {
+    const state = ctx.getState();
+    const updatedSocials = state.socials.concat( { name: "", url: "" } );
+    ctx.setState({
+      ...state,
+      socials: updatedSocials
+    });
+    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+  }
+
+  @Action(Form.Social.Delete)
+  socialDelete(ctx: StateContext<FormStateModel>, action: Form.Social.Delete) {
+    const state = ctx.getState();
+    const updatedSocials = state.socials.filter((social, index) => index !== action.index);
+    ctx.setState({
+      ...state,
+      socials: updatedSocials
+    });
+    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+  }
+
+  @Action(Form.Social.NameUpdate)
+  socialNameUpdate(ctx: StateContext<FormStateModel>, action: Form.Social.NameUpdate) {
+    const state = ctx.getState();
+    const updatedSocials = state.socials.map((social, index) =>
+      index === action.index ? {...social, name: action.name} : social
+    );
+    ctx.setState({
+      ...state,
+      socials: updatedSocials
+    });
+    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+  }
+
+  @Action(Form.Social.UrlUpdate)
+  socialUrlUpdate(ctx: StateContext<FormStateModel>, action: Form.Social.UrlUpdate) {
+    const state = ctx.getState();
+    const updatedSocials = state.socials.map((social, index) =>
+      index === action.index ? {...social, url: action.url} : social
+    );
+    ctx.setState({
+      ...state,
+      socials: updatedSocials
+    });
+    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
   }
 }

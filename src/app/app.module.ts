@@ -9,7 +9,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppComponent } from './app.component';
 
 import { environment } from './../environments/environment';
-import { AppState } from './app.state';
+import { ResumeState } from './resume.state';
 import { FormState } from './form.state';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { FormState } from './form.state';
   imports: [
     BrowserModule,
     FormsModule,
-    NgxsModule.forRoot([FormState, AppState], {
+    NgxsModule.forRoot([FormState, ResumeState], {
       developmentMode: !environment.production
     }),
     NgxsReduxDevtoolsPluginModule.forRoot({

@@ -24,7 +24,7 @@
     <!-- Social Section -->
     <div class="input__section">
       <div class="section__header">Social</div>
-      <div *ngFor="let social of socials$ | async; let i = index; trackBy:handleSocialTrackBy">
+      <div *ngFor="let social of formSocials$ | async; let i = index; trackBy:handleSocialTrackBy">
           <div class="section__content">
             <ng-template [ngIf]="i > 0">
               <div class="section__content-remove" (click)="onSocialRemove(i)">

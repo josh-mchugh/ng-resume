@@ -28,4 +28,26 @@ export namespace Form {
     static readonly type = '[Form] Location Update';
     constructor(public location: string) {}
   }
+
+  export namespace Social {
+    export class Create {
+      static readonly type = '[Form] Social Create';
+      constructor() {}
+    }
+
+    export class Delete {
+      static readonly type = '[Form] Social Delete';
+      constructor(public index: number) {}
+    }
+
+    export class NameUpdate {
+      static readonly type = '[Form] Social Name Update';
+      constructor(public index: number, public name: string) {}
+    }
+
+    export class UrlUpdate {
+      static readonly type = '[Form] Social Url Update';
+      constructor(public index: number, public url: string) {}
+    }
+  }
 }
