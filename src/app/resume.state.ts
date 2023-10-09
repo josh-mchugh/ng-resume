@@ -173,4 +173,12 @@ export class ResumeState {
       socials: action.socials
     });
   }
+
+  @Action(Resume.ExperiencesUpdate)
+  experiencesUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.ExperiencesUpdate) {
+    ctx.setState({
+      ...ctx.getState(),
+      experiences: action.experiences
+    });
+  }
 }

@@ -1,4 +1,7 @@
-import { ResumeSocialModel } from './resume.state';
+import {
+  ResumeExperienceModel,
+  ResumeSocialModel
+} from './resume.state';
 
 export namespace Resume {
   export class NameUpdate {
@@ -34,5 +37,10 @@ export namespace Resume {
   export class SocialsUpdate {
     static readonly type = '[Resume] Socials Update';
     constructor(public socials: Array<ResumeSocialModel>) {}
+  }
+
+  export class ExperiencesUpdate {
+    static readonly type = '[Resume] Experiences Update';
+    constructor(public experiences: Array<ResumeExperienceModel>) {}
   }
 }

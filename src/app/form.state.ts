@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
-import { ResumeSocialModel } from './resume.state';
+import {
+  ResumeExperienceModel,
+  ResumeSocialModel
+} from './resume.state';
 
 export interface FormStateModel {
   name: string;
@@ -194,6 +197,8 @@ export class FormState {
       ...state,
       experiences: updatedExperiences
     });
+    const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   @Action(Form.Experience.OrganizationUpdate)
@@ -204,6 +209,8 @@ export class FormState {
       ...state,
       experiences: updatedExperiences
     });
+    const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   @Action(Form.Experience.DurationUpdate)
@@ -214,6 +221,8 @@ export class FormState {
       ...state,
       experiences: updatedExperiences
     });
+    const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   @Action(Form.Experience.LocationUpdate)
@@ -224,6 +233,8 @@ export class FormState {
       ...state,
       experiences: updatedExperiences
     });
+    const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   @Action(Form.Experience.DescriptionUpdate)
@@ -234,6 +245,8 @@ export class FormState {
       ...state,
       experiences: updatedExperiences
     });
+    const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   @Action(Form.Experience.SkillsUpdate)
@@ -244,10 +257,23 @@ export class FormState {
       ...state,
       experiences: updatedExperiences
     });
+    const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );
+  }
+
+  mapFormExperiencesToResumeExperiences(formExperiences: Array<FormExperienceModel>): Array<ResumeExperienceModel> {
+    return formExperiences.map(experience => ({
+      title: experience.title,
+      organization: experience.organization,
+      duration: experience.duration,
+      location: experience.location,
+      descriptions: experience.description.length ? experience.description.split("\n") : [],
+      skills: experience.skills.length ? experience.skills.split(", ") : []
+    }));
   }
 }
