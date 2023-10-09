@@ -305,6 +305,18 @@ export class FormState {
     });
   }
 
+  @Action(Form.Skill.ProficiencyUpdate)
+  skillProficiencyUpdate(ctx: StateContext<FormStateModel>, action: Form.Skill.ProficiencyUpdate) {
+    const state = ctx.getState();
+    const updatedSkills = state.skills.map((skill, index) =>
+      index == action.index ? {...skill, proficiency: action.proficiency} : skill
+    );
+    ctx.setState({
+      ...state,
+      skills: updatedSkills
+    });
+  }
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );

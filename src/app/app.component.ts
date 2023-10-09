@@ -180,6 +180,11 @@ export class AppComponent {
     this.store.dispatch(new Form.Skill.NameUpdate(index, name));
   }
 
+  public onSkillProficiencyUpdate(index: number, event: Event): void {
+    const proficiency = parseInt(this.getInputValue(event), 10);
+    this.store.dispatch(new Form.Skill.ProficiencyUpdate(index, proficiency));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }

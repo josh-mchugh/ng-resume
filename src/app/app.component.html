@@ -78,7 +78,7 @@
           <label>Name</label>
           <input type="text" placeholder="Name" [value]="skill.name" (input)="onSkillNameUpdate(i, $event)"/>
           <label>Proficiency</label>
-          <input type="range" placeholder="Proficiency" minx="0" max="5" />
+          <input type="range" placeholder="Proficiency" minx="0" max="5" [value]="skill.proficiency" (input)="onSkillProficiencyUpdate(i, $event)"/>
         </div>
         <button type="button" (click)="onSkillCreate()">+ Add Skill</button>
       </div>
