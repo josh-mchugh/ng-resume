@@ -176,6 +176,16 @@ export class FormState {
     });
   }
 
+  @Action(Form.Experience.Delete)
+  experienceDelete(ctx: StateContext<FormStateModel>, action: Form.Experience.Delete) {
+    const state = ctx.getState();
+    const updatedExperiences = state.experiences.filter((experience, index) => index !== action.index);
+    ctx.setState({
+      ...state,
+      experiences: updatedExperiences
+    });
+  }
+
 
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {

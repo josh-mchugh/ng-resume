@@ -56,5 +56,10 @@ export namespace Form {
       static readonly type = '[Form] Experience Create';
       constructor() {}
     }
+
+    export class Delete {
+      static readonly type = 'Form Experience Delete';
+      constructor(public index: number) {}
+    }
   }
 }

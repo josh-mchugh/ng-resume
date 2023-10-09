@@ -96,7 +96,7 @@ export class AppComponent {
     return false;
   }
 
-  public onSocialRemove(index: number): boolean {
+  public onSocialDelete(index: number): boolean {
     this.store.dispatch(new Form.Social.Delete(index));
     return false;
   }
@@ -117,6 +117,11 @@ export class AppComponent {
 
   public onExperienceCreate(): boolean {
     this.store.dispatch(new Form.Experience.Create());
+    return false;
+  }
+
+  public onExperienceDelete(index: number): boolean {
+    this.store.dispatch(new Form.Experience.Delete(index));
     return false;
   }
 
