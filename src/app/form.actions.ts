@@ -114,4 +114,11 @@ export namespace Form {
       constructor(public index: number, public proficiency: number) {}
     }
   }
+
+  export namespace Certification {
+    export class Create {
+      static readonly type = '[Form] Certification Create';
+      constructor() {}
+    }
+  }
 }

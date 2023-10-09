@@ -195,6 +195,11 @@ export class AppComponent {
     return index;
   }
 
+  public onCertificationCreate(): boolean {
+    this.store.dispatch(new Form.Certification.Create());
+    return false;
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }

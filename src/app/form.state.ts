@@ -346,6 +346,16 @@ export class FormState {
     ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
   }
 
+  @Action(Form.Certification.Create)
+  certificationCreate(ctx: StateContext<FormStateModel>) {
+    const state = ctx.getState();
+    const updatedCertifications = state.certifications.concat(emptyCertification());
+    ctx.setState({
+      ...state,
+      certifications: updatedCertifications
+    });
+  }
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );
