@@ -60,7 +60,7 @@
           <label>Description</label>
           <textarea placeholder="Description" (input)="onExperienceDescriptionUpdate(i, $event)"></textarea>
           <label>Skills</label>
-          <input type="text" placeholder="Skills" />
+          <input type="text" placeholder="Skills" (input)="onExperienceSkillsUpdate(i, $event)"/>
         </div>
       </div>
       <button type="button" (click)="onExperienceCreate()">+ Add Experience</button>

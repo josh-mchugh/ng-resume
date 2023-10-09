@@ -86,5 +86,10 @@ export namespace Form {
       static readonly type = '[Form] Experience Description Update';
       constructor(public index: number, public description: string) {}
     }
+
+    export class SkillsUpdate {
+      static readonly type = '[Form] Experience Skills Update';
+      constructor(public index: number, public skills: string) {}
+    }
   }
 }

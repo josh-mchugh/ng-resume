@@ -236,6 +236,16 @@ export class FormState {
     });
   }
 
+  @Action(Form.Experience.SkillsUpdate)
+  experienceSkillsUpdate(ctx: StateContext<FormStateModel>, action: Form.Experience.SkillsUpdate) {
+    const state = ctx.getState();
+    const updatedExperiences = state.experiences.map((experience, index) => index === action.index ? {...experience, skills: action.skills} : experience);
+    ctx.setState({
+      ...state,
+      experiences: updatedExperiences
+    });
+  }
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );

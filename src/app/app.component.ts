@@ -150,6 +150,11 @@ export class AppComponent {
     this.store.dispatch(new Form.Experience.DescriptionUpdate(index, description));
   }
 
+  public onExperienceSkillsUpdate(index: number, event: Event): void {
+    const skills = this.getInputValue(event);
+    this.store.dispatch(new Form.Experience.SkillsUpdate(index, skills));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
