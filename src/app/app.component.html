@@ -86,20 +86,24 @@
     <!-- Certifications -->
     <div class="input__section">
       <div class="section__header">Certifications</div>
-      <div class="section__content">
-        <div class="section__content-remove">
-          <div class="section__content-remove-icon">&times;</div>
+      <div>
+        <div class="section__content" *ngFor="let certification of formCertifications$ | async; let i = index; trackBy:handleCertificationTrackBy">
+          <ng-template [ngIf]="i > 0">
+            <div class="section__content-remove">
+              <div class="section__content-remove-icon">&times;</div>
+            </div>
+          </ng-template>
+          <label>Title</label>
+          <input type="text" placeholder="Title" />
+          <label>Organization</label>
+          <input type="text" placeholder="Organization" />
+          <label>Year</label>
+          <input type="text" placeholder="Year" />
+          <label>Location</label>
+          <input type="text" placeholder="Location" />
         </div>
-        <label>Title</label>
-        <input type="text" placeholder="Title" />
-        <label>Organization</label>
-        <input type="text" placeholder="Organization" />
-        <label>Year</label>
-        <input type="text" placeholder="Year" />
-        <label>Location</label>
-        <input type="text" placeholder="Location" />
+        <button>+ Add Certifiation</button>
       </div>
-      <button>+ Add Certifiation</button>
     </div>
   </div>
   <div class="content">

@@ -18,6 +18,7 @@ export interface FormStateModel {
   socials: Array<FormSocialModel>;
   experiences: Array<FormExperienceModel>;
   skills: Array<FormSkillModel>;
+  certifications: Array<FormCertificationModel>;
 }
 
 export interface FormSocialModel {
@@ -61,6 +62,22 @@ function emptySkill(): FormSkillModel {
   }
 }
 
+export interface FormCertificationModel {
+  title: string;
+  organization: string;
+  year: string;
+  location: string;
+}
+
+function emptyCertification(): FormCertificationModel {
+  return {
+    title: "",
+    organization: "",
+    year: "",
+    location: ""
+  }
+}
+
 @State<FormStateModel>({
   name: 'form',
   defaults: {
@@ -72,7 +89,8 @@ function emptySkill(): FormSkillModel {
     location: '',
     socials: [emptySocial()],
     experiences: [emptyExperience()],
-    skills: [emptySkill()]
+    skills: [emptySkill()],
+    certifications: [emptyCertification()]
   }
 })
 @Injectable()
