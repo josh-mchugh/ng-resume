@@ -24,26 +24,26 @@
     <!-- Social Section -->
     <div class="input__section">
       <div class="section__header">Social</div>
-      <div *ngFor="let social of formSocials$ | async; let i = index; trackBy:handleSocialTrackBy">
-          <div class="section__content">
-            <ng-template [ngIf]="i > 0">
-              <div class="section__content-remove" (click)="onSocialDelete(i)">
-                <div class="section__content-remove-icon">&times;</div>
-              </div>
-            </ng-template>
-            <label>Name</label>
-            <input type="text" placeholder="Name" [value]="social.name" (input)="onSocialNameInput(i, $event)"/>
-            <label>URL</label>
-            <input type="text" placeholder="URL" [value]="social.url" (input)="onSocialUrlInput(i, $event)"/>
-          </div>
+      <div>
+        <div class="section__content" *ngFor="let social of formSocials$ | async; let i = index; trackBy:handleSocialTrackBy">
+          <ng-template [ngIf]="i > 0">
+            <div class="section__content-remove" (click)="onSocialDelete(i)">
+              <div class="section__content-remove-icon">&times;</div>
+            </div>
+          </ng-template>
+          <label>Name</label>
+          <input type="text" placeholder="Name" [value]="social.name" (input)="onSocialNameInput(i, $event)"/>
+          <label>URL</label>
+          <input type="text" placeholder="URL" [value]="social.url" (input)="onSocialUrlInput(i, $event)"/>
+        </div>
+        <button type="button" (click)="onSocialCreate()">+ Add Another</button>
       </div>
-      <button type="button" (click)="onSocialCreate()">+ Add Another</button>
     </div>
     <!-- Experiences Section -->
     <div class="input__section">
       <div class="section__header">Experience</div>
-      <div *ngFor="let experience of formExperiences$ | async; let i = index; trackBy:handleExperienceTrackBy">
-        <div class="section__content">
+      <div>
+        <div class="section__content" *ngFor="let experience of formExperiences$ | async; let i = index; trackBy:handleSkillTrackBy">
           <ng-template [ngIf]="i > 0">
             <div class="section__content-remove" (click)="onExperienceDelete(i)">
               <div class="section__content-remove-icon">&times;</div>
@@ -68,16 +68,20 @@
     <!-- Skills Section -->
     <div class="input__section">
       <div class="section__header">Skills</div>
-      <div class="section__content">
-        <div class="section__content-remove">
-          <div class="section__content-remove-icon">&times;</div>
+      <div>
+        <div class="section__content" *ngFor="let skill of formSkills$ | async; let i = index;">
+          <ng-template [ngIf]="i > 0">
+            <div class="section__content-remove">
+              <div class="section__content-remove-icon">&times;</div>
+            </div>
+          </ng-template>
+          <label>Name</label>
+          <input type="text" placeholder="Name" />
+          <label>Proficiency</label>
+          <input type="range" placeholder="Proficiency" minx="0" max="5" />
         </div>
-        <label>Name</label>
-        <input type="text" placeholder="Name" />
-        <label>Proficiency</label>
-        <input type="range" placeholder="Proficiency" minx="0" max="5" />
+        <button type="button" (click)="onSkillCreate()">+ Add Skill</button>
       </div>
-      <button>+ Add Skill</button>
     </div>
     <!-- Certifications -->
     <div class="input__section">

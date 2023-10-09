@@ -92,4 +92,11 @@ export namespace Form {
       constructor(public index: number, public skills: string) {}
     }
   }
+
+  export namespace Skill {
+    export class Create {
+      static readonly type = '[Form] Skill Create';
+      constructor() {}
+    }
+  }
 }

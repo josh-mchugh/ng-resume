@@ -9,6 +9,7 @@ import {
 } from './resume.state';
 import {
   FormExperienceModel,
+  FormSkillModel,
   FormState,
   FormStateModel,
   FormSocialModel
@@ -30,6 +31,7 @@ export class AppComponent {
   formLocation$: Observable<string>;
   formSocials$: Observable<Array<FormSocialModel>>;
   formExperiences$: Observable<Array<FormExperienceModel>>;
+  formSkills$: Observable<Array<FormSkillModel>>;
 
   name$: Observable<string>;
   title$: Observable<string>;
@@ -49,6 +51,7 @@ export class AppComponent {
     this.formLocation$ = this.store.select(state => state.form.location);
     this.formSocials$ = this.store.select(state => state.form.socials);
     this.formExperiences$ = this.store.select(state => state.form.experiences);
+    this.formSkills$ = this.store.select(state => state.form.skills);
 
     this.name$ = this.store.select(state => state.resume.name);
     this.title$ = this.store.select(state => state.resume.title);
@@ -156,6 +159,15 @@ export class AppComponent {
   public onExperienceSkillsUpdate(index: number, event: Event): void {
     const skills = this.getInputValue(event);
     this.store.dispatch(new Form.Experience.SkillsUpdate(index, skills));
+  }
+
+  public handleSkillTrackBy(index: number): number {
+    return index;
+  }
+
+  public onSkillCreate(): boolean {
+    this.store.dispatch(new Form.Skill.Create());
+    return false;
   }
 
   private getInputValue(event: Event): string {

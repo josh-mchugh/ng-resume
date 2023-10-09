@@ -16,6 +16,7 @@ export interface FormStateModel {
   location: string;
   socials: Array<FormSocialModel>;
   experiences: Array<FormExperienceModel>;
+  skills: Array<FormSkillModel>;
 }
 
 export interface FormSocialModel {
@@ -47,6 +48,18 @@ function emptyExperience(): FormExperienceModel {
   };
 }
 
+export interface FormSkillModel {
+  name: string;
+  proficiency: number;
+}
+
+function emptySkill(): FormSkillModel {
+  return {
+    name: "",
+    proficiency: 0
+  }
+}
+
 @State<FormStateModel>({
   name: 'form',
   defaults: {
@@ -57,7 +70,8 @@ function emptyExperience(): FormExperienceModel {
     email: '',
     location: '',
     socials: [emptySocial()],
-    experiences: [emptyExperience()]
+    experiences: [emptyExperience()],
+    skills: [emptySkill()]
   }
 })
 @Injectable()
@@ -259,6 +273,15 @@ export class FormState {
     });
     const resumeExperiences = this.mapFormExperiencesToResumeExperiences(updatedExperiences);
     ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+  }
+
+  @Action(Form.Skill.Create)
+  skillCreate(ctx: StateContext<FormStateModel>) {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      skills: state.skills.concat(emptySkill())
+    });
   }
 
   /* Util Functions */
