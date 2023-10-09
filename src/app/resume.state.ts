@@ -10,12 +10,22 @@ export interface ResumeStateModel {
   email: string;
   location: string;
   socials: Array<ResumeSocialModel>;
+  experiences: Array<ResumeExperienceModel>;
 }
 
 export interface ResumeSocialModel {
   icon: string;
   name: string;
   url: string;
+}
+
+export interface ResumeExperienceModel {
+  title: string;
+  organization: string;
+  duration: string;
+  location: string;
+  descriptions: Array<string>;
+  skills: Array<string>;
 }
 
 @State<ResumeStateModel>({
@@ -42,6 +52,65 @@ export interface ResumeSocialModel {
         name: "LinkedIn",
         icon: "fa-brands fa-linkedin",
         url: "https://linkedin.com/profile"
+      }
+    ],
+    experiences: [
+      {
+        organization: "Company Name Here",
+        title: "Senior Web Developer",
+        duration: "Jan 2023 - Present",
+        location: "Remote",
+        descriptions: [
+          "Efficiently unleash cross-media information without cross-media value.",
+          "Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.",
+          "Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas"
+        ],
+        skills: [
+          "Photoshop",
+          "HTML",
+          "CSS",
+          "Illustrator",
+          "PHP",
+          "JavaScript"
+        ]
+      },
+      {
+        organization: "Company Name Here",
+        title: "Senior Web Developer",
+        duration: "Jan 2022 – Dec 2022",
+        location: "Remote",
+        descriptions: [
+          "Collaboratively administrate empowered markets via plug-and-play networks.",
+          "Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.",
+          "Completely pursue scalable customer service through sustainable potentialities."
+        ],
+        skills: [
+          "Photoshop",
+          "HTML",
+          "CSS",
+          "Illustrator",
+          "PHP",
+          "JavaScript"
+        ]
+      },
+      {
+        organization: "Company Name Here",
+        title: "Senior Web Developer",
+        duration: "Jan 2021 – Dec 2021",
+        location: "Remote",
+        descriptions: [
+          "Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.",
+          "Proactively envisioned multimedia based expertise and cross-media growth strategies.",
+          "Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. "
+        ],
+        skills: [
+          "Photoshop",
+          "HTML",
+          "CSS",
+          "Illustrator",
+          "PHP",
+          "JavaScript"
+        ]
       }
     ]
   }

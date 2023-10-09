@@ -156,6 +156,7 @@
               </div>
               <div class="section__social">
                 <ul class="list">
+                  <!-- Socials -->
                   <li class="list__item" *ngFor="let social of socials$ | async">
                     <div>
                       <i class="{{social.icon}} social__icon"></i>
@@ -179,183 +180,29 @@
                   <div class="divider__line"></div>
                 </div>
               </div>
-              <!-- Experience #1 -->
-              <div class="section__experience">
+              <!-- Experiences -->
+              <div class="section__experience" *ngFor="let experience of experiences$ | async;">
                 <div class="header">
-                  <div class="header__title">Senior Web Developer</div>
-                  <div>Jan 2023 - Present</div>
+                  <div class="header__title">{{experience.title}}</div>
+                  <div>{{experience.duration}}</div>
                 </div>
                 <div class="header">
-                  <div>Company Name Here</div>
-                  <div>Remote</div>
+                  <div>{{experience.organization}}</div>
+                  <div>{{experience.location}}</div>
                 </div>
                 <ul class="description_list">
-                  <!-- Description #1 -->
-                  <li class="description_list__item">
+                  <!-- Descriptions -->
+                  <li class="description_list__item" *ngFor="let description of experience.descriptions;">
                     <div class="description_list__item_icon">
                       <i class="fa-solid fa-chevron-right"></i>
                     </div>
-                    <div class="description_list__item_text">Efficiently unleash cross-media information without cross-media value.</div>
-                  </li>
-                  <!-- Description #2 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</div>
-                  </li>
-                  <!-- Description #3 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.</div>
+                    <div class="description_list__item_text">{{description}}</div>
                   </li>
                 </ul>
                 <div class="skill_list">
-                  <!-- Skill #1 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">Photoshop</div>
-                  </div>
-                  <!-- Skill #2 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">HTML</div>
-                  </div>
-                  <!-- Skill #3 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">CSS</div>
-                  </div>
-                  <!-- Skill #4 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">Illustrator</div>
-                  </div>
-                  <!-- Skill #5 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">PHP</div>
-                  </div>
-                  <!-- Skill #6 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">JavaScript</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Experience #2 -->
-              <div class="section__experience">
-                <div class="header">
-                  <div class="header__title">Senior Web Developer</div>
-                  <div>Jan 2022 - Dec 2022</div>
-                </div>
-                <div class="header">
-                  <div>Company Name Here</div>
-                  <div>Remote</div>
-                </div>
-                <ul class="description_list">
-                  <!-- Description #1 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Collaboratively administrate empowered markets via plug-and-play networks.</div>
-                  </li>
-                  <!-- Description #2 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</div>
-                  </li>
-                  <!-- Description #3 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Completely pursue scalable customer service through sustainable potentialities.</div>
-                  </li>
-                </ul>
-                <div class="skill_list">
-                  <!-- Skill #1 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">Photoshop</div>
-                  </div>
-                  <!-- Skill #2 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">HTML</div>
-                  </div>
-                  <!-- Skill #3 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">CSS</div>
-                  </div>
-                  <!-- Skill #4 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">Illustrator</div>
-                  </div>
-                  <!-- Skill #5 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">PHP</div>
-                  </div>
-                  <!-- Skill #6 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">JavaScript</div>
-                  </div>
-                </div>
-              </div>
-              <!-- Experience #3 -->
-              <div class="section__experience">
-                <div class="header">
-                  <div class="header__title">Senior Web Developer</div>
-                  <div>Jan 2021 - Dec 2021</div>
-                </div>
-                <div class="header">
-                  <div>Company Name Here</div>
-                  <div>Remote</div>
-                </div>
-                <ul class="description_list">
-                  <!-- Description #1 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.</div>
-                  </li>
-                  <!-- Description #2 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Proactively envisioned multimedia based expertise and cross-media growth strategies.</div>
-                  </li>
-                  <!-- Description #3 -->
-                  <li class="description_list__item">
-                    <div class="description_list__item_icon">
-                      <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                    <div class="description_list__item_text">Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.</div>
-                  </li>
-                </ul>
-                <div class="skill_list">
-                  <!-- Skill #1 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">Photoshop</div>
-                  </div>
-                  <!-- Skill #2 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">HTML</div>
-                  </div>
-                  <!-- Skill #3 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">CSS</div>
-                  </div>
-                  <!-- Skill #4 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">Illustrator</div>
-                  </div>
-                  <!-- Skill #5 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">PHP</div>
-                  </div>
-                  <!-- Skill #6 -->
-                  <div class="skill_list__item">
-                    <div class="skill_list__item_text">JavaScript</div>
+                  <!-- Skills -->
+                  <div class="skill_list__item" *ngFor="let skill of experience.skills;">
+                    <div class="skill_list__item_text">{{skill}}</div>
                   </div>
                 </div>
               </div>
