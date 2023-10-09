@@ -284,6 +284,15 @@ export class FormState {
     });
   }
 
+  @Action(Form.Skill.Delete)
+  skillDelete(ctx: StateContext<FormStateModel>, action: Form.Skill.Delete) {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      skills: state.skills.filter((skill, index) => index !== action.index)
+    });
+  }
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );

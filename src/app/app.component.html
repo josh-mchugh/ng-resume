@@ -71,7 +71,7 @@
       <div>
         <div class="section__content" *ngFor="let skill of formSkills$ | async; let i = index;">
           <ng-template [ngIf]="i > 0">
-            <div class="section__content-remove">
+            <div class="section__content-remove" (click)="onSkillDelete(i)">
               <div class="section__content-remove-icon">&times;</div>
             </div>
           </ng-template>
