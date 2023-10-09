@@ -42,24 +42,28 @@
     <!-- Experiences Section -->
     <div class="input__section">
       <div class="section__header">Experience</div>
-      <div class="section__content">
-        <div class="section__content-remove">
-          <div class="section__content-remove-icon">&times;</div>
+      <div *ngFor="let experience of formExperiences$ | async; let i = index; trackBy:handleExperienceTrackBy">
+        <div class="section__content">
+          <ng-template [ngIf]="i > 0">
+            <div class="section__content-remove">
+              <div class="section__content-remove-icon">&times;</div>
+            </div>
+          </ng-template>
+          <label>Title</label>
+          <input type="text" placeholder="Title" />
+          <label>Organization</label>
+          <input type="text" placeholder="Organization" />
+          <label>Duration</label>
+          <input type="text" placeholder="Duration" />
+          <label>Location</label>
+          <input type="text" placeholder="Location" />
+          <label>Description</label>
+          <textarea placeholder="Description"></textarea>
+          <label>Skills</label>
+          <input type="text" placeholder="Skills" />
         </div>
-        <label>Title</label>
-        <input type="text" placeholder="Title" />
-        <label>Organization</label>
-        <input type="text" placeholder="Organization" />
-        <label>Duration</label>
-        <input type="text" placeholder="Duration" />
-        <label>Location</label>
-        <input type="text" placeholder="Location" />
-        <label>Description</label>
-        <textarea placeholder="Description"></textarea>
-        <label>Skills</label>
-        <input type="text" placeholder="Skills" />
       </div>
-      <button>+ Add Experience</button>
+      <button type="button" (click)="onExperienceCreate()">+ Add Experience</button>
     </div>
     <!-- Skills Section -->
     <div class="input__section">

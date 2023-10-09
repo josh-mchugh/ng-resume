@@ -12,11 +12,36 @@ export interface FormStateModel {
   email: string;
   location: string;
   socials: Array<FormSocialModel>;
+  experiences: Array<FormExperienceModel>;
 }
 
 export interface FormSocialModel {
   name: string;
   url: string;
+}
+
+function emptySocial(): FormSocialModel {
+  return { name: '', url: '' };
+}
+
+export interface FormExperienceModel {
+  title: string;
+  organization: string;
+  duration: string;
+  location: string;
+  description: string;
+  skills: string;
+}
+
+function emptyExperience(): FormExperienceModel {
+  return {
+    title: '',
+    organization: '',
+    duration: '',
+    location: '',
+    description: '',
+    skills: ''
+  };
 }
 
 @State<FormStateModel>({
@@ -28,12 +53,8 @@ export interface FormSocialModel {
     phone: '',
     email: '',
     location: '',
-    socials: [
-      {
-        name: "",
-        url: ""
-      }
-    ]
+    socials: [emptySocial()],
+    experiences: [emptyExperience()]
   }
 })
 @Injectable()
@@ -96,7 +117,7 @@ export class FormState {
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>, action: Form.Social.Create) {
     const state = ctx.getState();
-    const updatedSocials = state.socials.concat( { name: "", url: "" } );
+    const updatedSocials = state.socials.concat(emptySocial());
     ctx.setState({
       ...state,
       socials: updatedSocials
@@ -145,7 +166,19 @@ export class FormState {
     ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
   }
 
+  @Action(Form.Experience.Create)
+  experienceCreate(ctx: StateContext<FormStateModel>) {
+    const state = ctx.getState();
+    const updatedExperiences = state.experiences.concat(emptyExperience());
+    ctx.setState({
+      ...state,
+      experiences: updatedExperiences
+    });
+  }
+
+
+  /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
-    return formSocials.map(social => ({...social, icon: ''}));
+    return formSocials.map(social => ({...social, icon: ''}) );
   }
 }

@@ -50,4 +50,11 @@ export namespace Form {
       constructor(public index: number, public url: string) {}
     }
   }
+
+  export namespace Experience {
+    export class Create {
+      static readonly type = '[Form] Experience Create';
+      constructor() {}
+    }
+  }
 }

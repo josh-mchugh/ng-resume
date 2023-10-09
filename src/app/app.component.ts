@@ -7,8 +7,10 @@ import {
   ResumeSocialModel
 } from './resume.state';
 import {
+  FormExperienceModel,
   FormState,
-  FormStateModel
+  FormStateModel,
+  FormSocialModel
 } from './form.state';
 import { Form } from './form.actions';
 
@@ -25,7 +27,8 @@ export class AppComponent {
   formPhone$: Observable<string>;
   formEmail$: Observable<string>;
   formLocation$: Observable<string>;
-  formSocials$: Observable<any>;
+  formSocials$: Observable<Array<FormSocialModel>>;
+  formExperiences$: Observable<Array<FormExperienceModel>>;
 
   name$: Observable<string>;
   title$: Observable<string>;
@@ -43,6 +46,7 @@ export class AppComponent {
     this.formEmail$ = this.store.select(state => state.form.email);
     this.formLocation$ = this.store.select(state => state.form.location);
     this.formSocials$ = this.store.select(state => state.form.socials);
+    this.formExperiences$ = this.store.select(state => state.form.experiences);
 
     this.name$ = this.store.select(state => state.resume.name);
     this.title$ = this.store.select(state => state.resume.title);
@@ -105,6 +109,15 @@ export class AppComponent {
   public onSocialUrlInput(index: number, event: Event): void {
     const url = this.getInputValue(event);
     this.store.dispatch(new Form.Social.UrlUpdate(index, url));
+  }
+
+  public handleExperienceTrackBy(index: number): number {
+    return index;
+  }
+
+  public onExperienceCreate(): boolean {
+    this.store.dispatch(new Form.Experience.Create());
+    return false;
   }
 
   private getInputValue(event: Event): string {
