@@ -219,81 +219,15 @@
               </div>
               <div class="section__skill">
                 <div class="list">
-                  <!-- Skill #1 -->
-                  <div class="item">
-                    <div>Photoshop</div>
+                  <!-- Skills -->
+                  <div class="item" *ngFor="let skill of skills$ | async;">
+                    <div>{{skill.name}}</div>
                     <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                    </div>
-                  </div>
-                  <!-- Skill #2 -->
-                  <div class="item">
-                    <div>Illustrator</div>
-                    <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                    </div>
-                  </div>
-                  <!-- Skill #3 -->
-                  <div class="item">
-                    <div>PHP</div>
-                    <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                    </div>
-                  </div>
-                  <!-- Skill #4 -->
-                  <div class="item">
-                    <div>HTML</div>
-                    <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                    </div>
-                  </div>
-                  <!-- Skill #5 -->
-                  <div class="item">
-                    <div>WordPress</div>
-                    <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                    </div>
-                  </div>
-                  <!-- Skill #6 -->
-                  <div class="item">
-                    <div>CSS</div>
-                    <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
-                    </div>
-                  </div>
-                  <!-- Skill #7 -->
-                  <div class="item">
-                    <div>Joomla</div>
-                    <div class="rating">
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block block--active"></div>
-                      <div class="block"></div>
-                      <div class="block"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 0"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 1"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 2"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 3"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 4"></div>
                     </div>
                   </div>
                 </div>

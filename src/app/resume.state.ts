@@ -11,6 +11,7 @@ export interface ResumeStateModel {
   location: string;
   socials: Array<ResumeSocialModel>;
   experiences: Array<ResumeExperienceModel>;
+  skills: Array<ResumeSkillModel>;
 }
 
 export interface ResumeSocialModel {
@@ -26,6 +27,11 @@ export interface ResumeExperienceModel {
   location: string;
   descriptions: Array<string>;
   skills: Array<string>;
+}
+
+export interface ResumeSkillModel {
+  name: string;
+  proficiency: number;
 }
 
 @State<ResumeStateModel>({
@@ -111,6 +117,36 @@ export interface ResumeExperienceModel {
           "PHP",
           "JavaScript"
         ]
+      },
+    ],
+    skills: [
+      {
+        name: "Photoshop",
+        proficiency: 4
+      },
+      {
+        name: "Illustrator",
+        proficiency: 2
+      },
+      {
+        name: "PHP",
+        proficiency: 2
+      },
+      {
+        name: "HTML",
+        proficiency: 3
+      },
+      {
+        name: "WordPress",
+        proficiency: 3
+      },
+      {
+        name: "CSS",
+        proficiency: 3
+      },
+      {
+        name: "Joomla",
+        proficiency: 3
       }
     ]
   }
