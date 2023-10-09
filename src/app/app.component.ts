@@ -140,6 +140,16 @@ export class AppComponent {
     this.store.dispatch(new Form.Experience.DurationUpdate(index, duration));
   }
 
+  public onExperienceLocationUpdate(index: number, event: Event): void {
+    const location = this.getInputValue(event);
+    this.store.dispatch(new Form.Experience.LocationUpdate(index, location));
+  }
+
+  public onExperienceDescriptionUpdate(index: number, event: Event): void {
+    const description = this.getInputValue(event);
+    this.store.dispatch(new Form.Experience.DescriptionUpdate(index, description));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }

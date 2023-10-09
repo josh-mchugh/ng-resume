@@ -213,7 +213,27 @@ export class FormState {
     ctx.setState({
       ...state,
       experiences: updatedExperiences
-    })
+    });
+  }
+
+  @Action(Form.Experience.LocationUpdate)
+  experienceLocationUpdate(ctx: StateContext<FormStateModel>, action: Form.Experience.LocationUpdate) {
+    const state = ctx.getState();
+    const updatedExperiences = state.experiences.map((experience, index) => index === action.index ? {...experience, location: action.location} : experience);
+    ctx.setState({
+      ...state,
+      experiences: updatedExperiences
+    });
+  }
+
+  @Action(Form.Experience.DescriptionUpdate)
+  experienceDescriptionUpdate(ctx: StateContext<FormStateModel>, action: Form.Experience.DescriptionUpdate) {
+    const state = ctx.getState();
+    const updatedExperiences = state.experiences.map((experience, index) => index === action.index ? {...experience, description: action.description} : experience);
+    ctx.setState({
+      ...state,
+      experiences: updatedExperiences
+    });
   }
 
   /* Util Functions */

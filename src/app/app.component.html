@@ -56,9 +56,9 @@
           <label>Duration</label>
           <input type="text" placeholder="Duration" (input)="onExperienceDurationUpdate(i, $event)"/>
           <label>Location</label>
-          <input type="text" placeholder="Location" />
+          <input type="text" placeholder="Location" (input)="onExperienceLocationUpdate(i, $event)"/>
           <label>Description</label>
-          <textarea placeholder="Description"></textarea>
+          <textarea placeholder="Description" (input)="onExperienceDescriptionUpdate(i, $event)"></textarea>
           <label>Skills</label>
           <input type="text" placeholder="Skills" />
         </div>
