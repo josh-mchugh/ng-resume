@@ -4,7 +4,7 @@ import { Store, Select } from '@ngxs/store';
 import {
   ResumeState,
   ResumeStateModel,
-  Social
+  ResumeSocialModel
 } from './resume.state';
 import {
   FormState,
@@ -33,7 +33,7 @@ export class AppComponent {
   phone$: Observable<string>;
   email$: Observable<string>;
   location$: Observable<string>;
-  socials$: Observable<Array<Social>>;
+  socials$: Observable<Array<ResumeSocialModel>>;
 
   constructor(private store: Store) {
     this.formName$ = this.store.select(state => state.form.name);

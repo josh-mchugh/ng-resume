@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
+import { ResumeSocialModel } from './resume.state';
 
 export interface FormStateModel {
   name: string;
@@ -10,7 +11,12 @@ export interface FormStateModel {
   phone: string;
   email: string;
   location: string;
-  socials: Array<any>;
+  socials: Array<FormSocialModel>;
+}
+
+export interface FormSocialModel {
+  name: string;
+  url: string;
 }
 
 @State<FormStateModel>({
@@ -95,7 +101,8 @@ export class FormState {
       ...state,
       socials: updatedSocials
     });
-    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
+    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
   }
 
   @Action(Form.Social.Delete)
@@ -106,7 +113,8 @@ export class FormState {
       ...state,
       socials: updatedSocials
     });
-    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
+    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
   }
 
   @Action(Form.Social.NameUpdate)
@@ -119,7 +127,8 @@ export class FormState {
       ...state,
       socials: updatedSocials
     });
-    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
+    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
   }
 
   @Action(Form.Social.UrlUpdate)
@@ -132,6 +141,11 @@ export class FormState {
       ...state,
       socials: updatedSocials
     });
-    ctx.dispatch(new Resume.SocialsUpdate(updatedSocials));
+    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
+    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
+  }
+
+  mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
+    return formSocials.map(social => ({...social, icon: ''}));
   }
 }

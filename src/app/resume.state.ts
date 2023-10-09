@@ -9,10 +9,10 @@ export interface ResumeStateModel {
   phone: string;
   email: string;
   location: string;
-  socials: Array<Social>;
+  socials: Array<ResumeSocialModel>;
 }
 
-export interface Social {
+export interface ResumeSocialModel {
   icon: string;
   name: string;
   url: string;

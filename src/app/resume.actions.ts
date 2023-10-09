@@ -1,4 +1,4 @@
-import { Social } from './resume.state';
+import { ResumeSocialModel } from './resume.state';
 
 export namespace Resume {
   export class NameUpdate {
@@ -33,6 +33,6 @@ export namespace Resume {
 
   export class SocialsUpdate {
     static readonly type = '[Resume] Socials Update';
-    constructor(public socials: Array<Social>) {}
+    constructor(public socials: Array<ResumeSocialModel>) {}
   }
 }
