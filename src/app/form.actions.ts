@@ -103,5 +103,10 @@ export namespace Form {
       static readonly type = '[Form] Skill Delete';
       constructor(public index: number) {}
     }
+
+    export class NameUpdate {
+      static readonly type = '[Form] Skill Name Update';
+      constructor(public index: number, public name: string) {}
+    }
   }
 }

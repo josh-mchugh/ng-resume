@@ -50,17 +50,17 @@
             </div>
           </ng-template>
           <label>Title</label>
-          <input type="text" placeholder="Title" (input)="onExperienceTitleInput(i, $event)" />
+          <input type="text" placeholder="Title" [value]="experience.title" (input)="onExperienceTitleInput(i, $event)" />
           <label>Organization</label>
-          <input type="text" placeholder="Organization" (input)="onExperienceOrganizationUpdate(i, $event)" />
+          <input type="text" placeholder="Organization" [value]="experience.organization" (input)="onExperienceOrganizationUpdate(i, $event)" />
           <label>Duration</label>
-          <input type="text" placeholder="Duration" (input)="onExperienceDurationUpdate(i, $event)"/>
+          <input type="text" placeholder="Duration" [value]="experience.duration" (input)="onExperienceDurationUpdate(i, $event)"/>
           <label>Location</label>
-          <input type="text" placeholder="Location" (input)="onExperienceLocationUpdate(i, $event)"/>
+          <input type="text" placeholder="Location" [value]="experience.location" (input)="onExperienceLocationUpdate(i, $event)"/>
           <label>Description</label>
-          <textarea placeholder="Description" (input)="onExperienceDescriptionUpdate(i, $event)"></textarea>
+          <textarea placeholder="Description" [value]="experience.description" (input)="onExperienceDescriptionUpdate(i, $event)"></textarea>
           <label>Skills</label>
-          <input type="text" placeholder="Skills" (input)="onExperienceSkillsUpdate(i, $event)"/>
+          <input type="text" placeholder="Skills" [value]="experience.skills" (input)="onExperienceSkillsUpdate(i, $event)"/>
         </div>
       </div>
       <button type="button" (click)="onExperienceCreate()">+ Add Experience</button>
@@ -69,14 +69,14 @@
     <div class="input__section">
       <div class="section__header">Skills</div>
       <div>
-        <div class="section__content" *ngFor="let skill of formSkills$ | async; let i = index;">
+        <div class="section__content" *ngFor="let skill of formSkills$ | async; let i = index; trackBy:handleSkillTrackBy">
           <ng-template [ngIf]="i > 0">
             <div class="section__content-remove" (click)="onSkillDelete(i)">
               <div class="section__content-remove-icon">&times;</div>
             </div>
           </ng-template>
           <label>Name</label>
-          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Name" [value]="skill.name" (input)="onSkillNameUpdate(i, $event)"/>
           <label>Proficiency</label>
           <input type="range" placeholder="Proficiency" minx="0" max="5" />
         </div>

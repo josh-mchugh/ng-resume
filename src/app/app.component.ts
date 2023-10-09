@@ -175,6 +175,11 @@ export class AppComponent {
     return false;
   }
 
+  public onSkillNameUpdate(index: number, event: Event): void {
+    const name = this.getInputValue(event);
+    this.store.dispatch(new Form.Skill.NameUpdate(index, name));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
