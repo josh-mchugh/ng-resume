@@ -4,6 +4,7 @@ import { Form } from './form.actions';
 import { Resume } from './resume.actions';
 import {
   ResumeExperienceModel,
+  ResumeSkillModel,
   ResumeSocialModel
 } from './resume.state';
 
@@ -278,19 +279,25 @@ export class FormState {
   @Action(Form.Skill.Create)
   skillCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
+    const updatedSkills = state.skills.concat(emptySkill());
     ctx.setState({
       ...state,
-      skills: state.skills.concat(emptySkill())
+      skills: updatedSkills
     });
+    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
+    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
   }
 
   @Action(Form.Skill.Delete)
   skillDelete(ctx: StateContext<FormStateModel>, action: Form.Skill.Delete) {
     const state = ctx.getState();
+    const updatedSkills = state.skills.filter((skill, index) => index !== action.index);
     ctx.setState({
       ...state,
-      skills: state.skills.filter((skill, index) => index !== action.index)
+      skills: updatedSkills
     });
+    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
+    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
   }
 
   @Action(Form.Skill.NameUpdate)
@@ -303,6 +310,8 @@ export class FormState {
       ...state,
       skills: updatedSkills
     });
+    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
+    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
   }
 
   @Action(Form.Skill.ProficiencyUpdate)
@@ -315,6 +324,8 @@ export class FormState {
       ...state,
       skills: updatedSkills
     });
+    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
+    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
   }
 
   /* Util Functions */
@@ -331,5 +342,9 @@ export class FormState {
       descriptions: experience.description.length ? experience.description.split("\n") : [],
       skills: experience.skills.length ? experience.skills.split(", ") : []
     }));
+  }
+
+  mapFormSkillsToResumeSkills(formSkills: Array<FormSkillModel>): Array<ResumeSkillModel> {
+    return formSkills.map(skill => ({...skill}) );
   }
 }

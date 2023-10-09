@@ -221,14 +221,16 @@
                 <div class="list">
                   <!-- Skills -->
                   <div class="item" *ngFor="let skill of skills$ | async;">
-                    <div>{{skill.name}}</div>
-                    <div class="rating">
-                      <div class="block" [class.block--active]="skill.proficiency > 0"></div>
-                      <div class="block" [class.block--active]="skill.proficiency > 1"></div>
-                      <div class="block" [class.block--active]="skill.proficiency > 2"></div>
-                      <div class="block" [class.block--active]="skill.proficiency > 3"></div>
-                      <div class="block" [class.block--active]="skill.proficiency > 4"></div>
-                    </div>
+                    <ng-template [ngIf]="skill.name">
+                      <div>{{skill.name}}</div>
+                      <div class="rating">
+                        <div class="block" [class.block--active]="skill.proficiency > 0"></div>
+                        <div class="block" [class.block--active]="skill.proficiency > 1"></div>
+                        <div class="block" [class.block--active]="skill.proficiency > 2"></div>
+                        <div class="block" [class.block--active]="skill.proficiency > 3"></div>
+                        <div class="block" [class.block--active]="skill.proficiency > 4"></div>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>
