@@ -135,6 +135,11 @@ export class AppComponent {
     this.store.dispatch(new Form.Experience.OrganizationUpdate(index, organization));
   }
 
+  public onExperienceDurationUpdate(index: number, event: Event): void {
+    const duration = this.getInputValue(event);
+    this.store.dispatch(new Form.Experience.DurationUpdate(index, duration));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
