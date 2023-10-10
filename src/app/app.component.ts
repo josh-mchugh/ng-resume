@@ -205,6 +205,11 @@ export class AppComponent {
     return false;
   }
 
+  public onCertificationTitleUpdate(index: number, event: Event): void {
+    const title = this.getInputValue(event);
+    this.store.dispatch(new Form.Certification.TitleUpdate(index, title));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }

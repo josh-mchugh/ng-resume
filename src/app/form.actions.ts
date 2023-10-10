@@ -125,5 +125,10 @@ export namespace Form {
       static readonly type = '[Form] Certification Delete';
       constructor(public index: number) {}
     }
+
+    export class TitleUpdate {
+      static readonly type = '[Form] Certification Title Update';
+      constructor(public index: number, public title: string) {}
+    }
   }
 }
