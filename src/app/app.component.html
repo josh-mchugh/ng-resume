@@ -100,7 +100,7 @@
           <label>Year</label>
           <input type="text" placeholder="Year" [value]="certification.year" (input)="onCertificationYearInput(i, $event)"/>
           <label>Location</label>
-          <input type="text" placeholder="Location" />
+          <input type="text" placeholder="Location" [value]="certification.location" (input)="onCertificationLocationInput(i, $event)"/>
         </div>
         <button type="button" (click)="onCertificationCreate()">+ Add Certifiation</button>
       </div>

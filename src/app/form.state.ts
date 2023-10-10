@@ -396,6 +396,16 @@ export class FormState {
     });
   }
 
+  @Action(Form.Certification.LocationUpdate)
+  certificationLocationUpdate(ctx: StateContext<FormStateModel>, action: Form.Certification.LocationUpdate){
+    const state = ctx.getState();
+    const updatedCertification = state.certifications.map((certification, index) => index === action.index ? {...certification, location: action.location} : certification);
+    ctx.setState({
+      ...state,
+      certifications: updatedCertification
+    });
+  }
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );

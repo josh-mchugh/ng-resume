@@ -220,6 +220,11 @@ export class AppComponent {
     this.store.dispatch(new Form.Certification.YearUpdate(index, year));
   }
 
+  public onCertificationLocationInput(index: number, event: Event): void {
+    const location = this.getInputValue(event);
+    this.store.dispatch(new Form.Certification.LocationUpdate(index, location));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
