@@ -246,15 +246,15 @@
                 </div>
               </div>
               <div class="section__certification">
-                <!-- Certification #1 -->
-                <div class="certification">
+                <!-- Certifications -->
+                <div class="certification" *ngFor="let certification of certifications$ | async;">
                   <div class="header">
-                    <div class="title">Master Degree in Studies</div>
-                    <div>2012</div>
+                    <div class="title">{{certification.title}}</div>
+                    <div>{{certification.year}}</div>
                   </div>
                   <div class="header">
-                    <div>Name of University</div>
-                    <div>New York, New York</div>
+                    <div>{{certification.organization}}</div>
+                    <div>{{certification.location}}</div>
                   </div>
                 </div>
               </div>

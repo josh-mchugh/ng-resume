@@ -3,6 +3,7 @@ import { State, Action, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
 import {
+  ResumeCertificationModel,
   ResumeExperienceModel,
   ResumeSkillModel,
   ResumeSocialModel
@@ -354,56 +355,68 @@ export class FormState {
       ...state,
       certifications: updatedCertifications
     });
+    const resumeCertifications = this.mapFormCertificationsToResumeCertifications(updatedCertifications);
+    ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
   @Action(Form.Certification.Delete)
   certificationDelete(ctx: StateContext<FormStateModel>, action: Form.Certification.Delete) {
     const state = ctx.getState();
-    const updatedCertification = state.certifications.filter((certification, index) => index !== action.index);
+    const updatedCertifications = state.certifications.filter((certification, index) => index !== action.index);
     ctx.setState({
       ...state,
-      certifications: updatedCertification
+      certifications: updatedCertifications
     });
+    const resumeCertifications = this.mapFormCertificationsToResumeCertifications(updatedCertifications);
+    ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
   @Action(Form.Certification.TitleUpdate)
   certificationTitleUpdate(ctx: StateContext<FormStateModel>, action: Form.Certification.TitleUpdate) {
     const state = ctx.getState();
-    const updatedCertification = state.certifications.map((certification, index) => index === action.index ? {...certification, title: action.title} : certification);
+    const updatedCertifications = state.certifications.map((certification, index) => index === action.index ? {...certification, title: action.title} : certification);
     ctx.setState({
       ...state,
-      certifications: updatedCertification
+      certifications: updatedCertifications
     });
+    const resumeCertifications = this.mapFormCertificationsToResumeCertifications(updatedCertifications);
+    ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
   @Action(Form.Certification.OrganizationUpdate)
   certificationOrganizationUpdate(ctx: StateContext<FormStateModel>, action: Form.Certification.OrganizationUpdate) {
     const state = ctx.getState();
-    const updatedCertification = state.certifications.map((certification, index) => index === action.index ? {...certification, organization: action.organization} : certification);
+    const updatedCertifications = state.certifications.map((certification, index) => index === action.index ? {...certification, organization: action.organization} : certification);
     ctx.setState({
       ...state,
-      certifications: updatedCertification
+      certifications: updatedCertifications
     });
+    const resumeCertifications = this.mapFormCertificationsToResumeCertifications(updatedCertifications);
+    ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
   @Action(Form.Certification.YearUpdate)
   certificationYearUpdate(ctx: StateContext<FormStateModel>, action: Form.Certification.YearUpdate) {
     const state = ctx.getState();
-    const updatedCertification = state.certifications.map((certification, index) => index === action.index ? {...certification, year: action.year} : certification);
+    const updatedCertifications = state.certifications.map((certification, index) => index === action.index ? {...certification, year: action.year} : certification);
     ctx.setState({
       ...state,
-      certifications: updatedCertification
+      certifications: updatedCertifications
     });
+    const resumeCertifications = this.mapFormCertificationsToResumeCertifications(updatedCertifications);
+    ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
   @Action(Form.Certification.LocationUpdate)
   certificationLocationUpdate(ctx: StateContext<FormStateModel>, action: Form.Certification.LocationUpdate){
     const state = ctx.getState();
-    const updatedCertification = state.certifications.map((certification, index) => index === action.index ? {...certification, location: action.location} : certification);
+    const updatedCertifications = state.certifications.map((certification, index) => index === action.index ? {...certification, location: action.location} : certification);
     ctx.setState({
       ...state,
-      certifications: updatedCertification
+      certifications: updatedCertifications
     });
+    const resumeCertifications = this.mapFormCertificationsToResumeCertifications(updatedCertifications);
+    ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
   /* Util Functions */
@@ -424,5 +437,9 @@ export class FormState {
 
   mapFormSkillsToResumeSkills(formSkills: Array<FormSkillModel>): Array<ResumeSkillModel> {
     return formSkills.map(skill => ({...skill}) );
+  }
+
+  mapFormCertificationsToResumeCertifications(formCertifications: Array<FormCertificationModel>): Array<ResumeCertificationModel> {
+    return formCertifications.map(certification => ({...certification}) );
   }
 }

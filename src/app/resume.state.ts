@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { Resume } from './resume.actions';
@@ -12,6 +13,7 @@ export interface ResumeStateModel {
   socials: Array<ResumeSocialModel>;
   experiences: Array<ResumeExperienceModel>;
   skills: Array<ResumeSkillModel>;
+  certifications: Array<ResumeCertificationModel>;
 }
 
 export interface ResumeSocialModel {
@@ -32,6 +34,13 @@ export interface ResumeExperienceModel {
 export interface ResumeSkillModel {
   name: string;
   proficiency: number;
+}
+
+export interface ResumeCertificationModel {
+  title: string;
+  organization: string;
+  year: string;
+  location: string;
 }
 
 @State<ResumeStateModel>({
@@ -148,6 +157,14 @@ export interface ResumeSkillModel {
         name: "Joomla",
         proficiency: 3
       }
+    ],
+    certifications: [
+      {
+        title: "Master Degree in Studies",
+        organization: "Name of University",
+        location: "New York, New York",
+        year: "2012"
+      }
     ]
   }
 })
@@ -223,6 +240,14 @@ export class ResumeState {
     ctx.setState({
       ...ctx.getState(),
       skills: action.skills
+    });
+  }
+
+  @Action(Resume.CertificationsUpdate)
+  certificationsUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.CertificationsUpdate) {
+    ctx.setState({
+      ...ctx.getState(),
+      certifications: action.certifications
     });
   }
 }

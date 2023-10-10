@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import {
+  ResumeCertificationModel,
   ResumeExperienceModel,
   ResumeSkillModel,
   ResumeState,
@@ -45,6 +46,7 @@ export class AppComponent {
   socials$: Observable<Array<ResumeSocialModel>>;
   experiences$: Observable<Array<ResumeExperienceModel>>;
   skills$: Observable<Array<ResumeSkillModel>>;
+  certifications$: Observable<Array<ResumeCertificationModel>>;
 
   constructor(private store: Store) {
     this.formName$ = this.store.select(state => state.form.name);
@@ -67,6 +69,7 @@ export class AppComponent {
     this.socials$ = this.store.select(state => state.resume.socials);
     this.experiences$ = this.store.select(state => state.resume.experiences);
     this.skills$ = this.store.select(state => state.resume.skills);
+    this.certifications$ = this.store.select(state => state.resume.certifications);
   }
 
   public onNameInput(event: Event): void {

@@ -1,4 +1,5 @@
 import {
+  ResumeCertificationModel,
   ResumeExperienceModel,
   ResumeSkillModel,
   ResumeSocialModel
@@ -48,5 +49,10 @@ export namespace Resume {
   export class SkillsUpdate {
     static readonly type = '[Resume] Skills Update';
     constructor(public skills: Array<ResumeSkillModel>) {}
+  }
+
+  export class CertificationsUpdate {
+    static readonly type = '[Resume] Certifications Update';
+    constructor(public certifications: Array<ResumeCertificationModel>) {}
   }
 }
