@@ -96,7 +96,7 @@
           <label>Title</label>
           <input type="text" placeholder="Title" [value]="certification.title" (input)="onCertificationTitleUpdate(i, $event)"/>
           <label>Organization</label>
-          <input type="text" placeholder="Organization" />
+          <input type="text" placeholder="Organization" [value]="certification.organization" (input)="onCertificationOrganizationUpdate(i, $event)"/>
           <label>Year</label>
           <input type="text" placeholder="Year" />
           <label>Location</label>

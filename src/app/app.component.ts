@@ -210,6 +210,11 @@ export class AppComponent {
     this.store.dispatch(new Form.Certification.TitleUpdate(index, title));
   }
 
+  public onCertificationOrganizationUpdate(index: number, event: Event): void {
+    const organization = this.getInputValue(event);
+    this.store.dispatch(new Form.Certification.OrganizationUpdate(index, organization));
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }
