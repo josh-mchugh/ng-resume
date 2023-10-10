@@ -52,15 +52,15 @@
           <label>Title</label>
           <input type="text" placeholder="Title" [value]="experience.title" (input)="onExperienceTitleInput(i, $event)" />
           <label>Organization</label>
-          <input type="text" placeholder="Organization" [value]="experience.organization" (input)="onExperienceOrganizationUpdate(i, $event)" />
+          <input type="text" placeholder="Organization" [value]="experience.organization" (input)="onExperienceOrganizationInput(i, $event)" />
           <label>Duration</label>
-          <input type="text" placeholder="Duration" [value]="experience.duration" (input)="onExperienceDurationUpdate(i, $event)"/>
+          <input type="text" placeholder="Duration" [value]="experience.duration" (input)="onExperienceDurationInput(i, $event)"/>
           <label>Location</label>
-          <input type="text" placeholder="Location" [value]="experience.location" (input)="onExperienceLocationUpdate(i, $event)"/>
+          <input type="text" placeholder="Location" [value]="experience.location" (input)="onExperienceLocationInput(i, $event)"/>
           <label>Description</label>
-          <textarea placeholder="Description" [value]="experience.description" (input)="onExperienceDescriptionUpdate(i, $event)"></textarea>
+          <textarea placeholder="Description" [value]="experience.description" (input)="onExperienceDescriptionInput(i, $event)"></textarea>
           <label>Skills</label>
-          <input type="text" placeholder="Skills" [value]="experience.skills" (input)="onExperienceSkillsUpdate(i, $event)"/>
+          <input type="text" placeholder="Skills" [value]="experience.skills" (input)="onExperienceSkillsInput(i, $event)"/>
         </div>
       </div>
       <button type="button" (click)="onExperienceCreate()">+ Add Experience</button>
@@ -76,9 +76,9 @@
             </div>
           </ng-template>
           <label>Name</label>
-          <input type="text" placeholder="Name" [value]="skill.name" (input)="onSkillNameUpdate(i, $event)"/>
+          <input type="text" placeholder="Name" [value]="skill.name" (input)="onSkillNameInput(i, $event)"/>
           <label>Proficiency</label>
-          <input type="range" placeholder="Proficiency" minx="0" max="5" [value]="skill.proficiency" (input)="onSkillProficiencyUpdate(i, $event)"/>
+          <input type="range" placeholder="Proficiency" minx="0" max="5" [value]="skill.proficiency" (input)="onSkillProficiencyInput(i, $event)"/>
         </div>
         <button type="button" (click)="onSkillCreate()">+ Add Skill</button>
       </div>
@@ -94,11 +94,11 @@
             </div>
           </ng-template>
           <label>Title</label>
-          <input type="text" placeholder="Title" [value]="certification.title" (input)="onCertificationTitleUpdate(i, $event)"/>
+          <input type="text" placeholder="Title" [value]="certification.title" (input)="onCertificationTitleInput(i, $event)"/>
           <label>Organization</label>
-          <input type="text" placeholder="Organization" [value]="certification.organization" (input)="onCertificationOrganizationUpdate(i, $event)"/>
+          <input type="text" placeholder="Organization" [value]="certification.organization" (input)="onCertificationOrganizationInput(i, $event)"/>
           <label>Year</label>
-          <input type="text" placeholder="Year" />
+          <input type="text" placeholder="Year" [value]="certification.year" (input)="onCertificationYearInput(i, $event)"/>
           <label>Location</label>
           <input type="text" placeholder="Location" />
         </div>

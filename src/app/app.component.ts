@@ -142,27 +142,27 @@ export class AppComponent {
     this.store.dispatch(new Form.Experience.TitleUpdate(index, title));
   }
 
-  public onExperienceOrganizationUpdate(index: number, event: Event): void {
+  public onExperienceOrganizationInput(index: number, event: Event): void {
     const organization = this.getInputValue(event);
     this.store.dispatch(new Form.Experience.OrganizationUpdate(index, organization));
   }
 
-  public onExperienceDurationUpdate(index: number, event: Event): void {
+  public onExperienceDurationInput(index: number, event: Event): void {
     const duration = this.getInputValue(event);
     this.store.dispatch(new Form.Experience.DurationUpdate(index, duration));
   }
 
-  public onExperienceLocationUpdate(index: number, event: Event): void {
+  public onExperienceLocationInput(index: number, event: Event): void {
     const location = this.getInputValue(event);
     this.store.dispatch(new Form.Experience.LocationUpdate(index, location));
   }
 
-  public onExperienceDescriptionUpdate(index: number, event: Event): void {
+  public onExperienceDescriptionInput(index: number, event: Event): void {
     const description = this.getInputValue(event);
     this.store.dispatch(new Form.Experience.DescriptionUpdate(index, description));
   }
 
-  public onExperienceSkillsUpdate(index: number, event: Event): void {
+  public onExperienceSkillsInput(index: number, event: Event): void {
     const skills = this.getInputValue(event);
     this.store.dispatch(new Form.Experience.SkillsUpdate(index, skills));
   }
@@ -181,12 +181,12 @@ export class AppComponent {
     return false;
   }
 
-  public onSkillNameUpdate(index: number, event: Event): void {
+  public onSkillNameInput(index: number, event: Event): void {
     const name = this.getInputValue(event);
     this.store.dispatch(new Form.Skill.NameUpdate(index, name));
   }
 
-  public onSkillProficiencyUpdate(index: number, event: Event): void {
+  public onSkillProficiencyInput(index: number, event: Event): void {
     const proficiency = parseInt(this.getInputValue(event), 10);
     this.store.dispatch(new Form.Skill.ProficiencyUpdate(index, proficiency));
   }
@@ -205,14 +205,19 @@ export class AppComponent {
     return false;
   }
 
-  public onCertificationTitleUpdate(index: number, event: Event): void {
+  public onCertificationTitleInput(index: number, event: Event): void {
     const title = this.getInputValue(event);
     this.store.dispatch(new Form.Certification.TitleUpdate(index, title));
   }
 
-  public onCertificationOrganizationUpdate(index: number, event: Event): void {
+  public onCertificationOrganizationInput(index: number, event: Event): void {
     const organization = this.getInputValue(event);
     this.store.dispatch(new Form.Certification.OrganizationUpdate(index, organization));
+  }
+
+  public onCertificationYearInput(index: number, event: Event): void {
+    const year = this.getInputValue(event);
+    this.store.dispatch(new Form.Certification.YearUpdate(index, year));
   }
 
   private getInputValue(event: Event): string {

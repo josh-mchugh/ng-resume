@@ -135,5 +135,10 @@ export namespace Form {
       static readonly type = '[Form] Certification Organization Update';
       constructor(public index: number, public organization: string) {}
     }
+
+    export class YearUpdate {
+      static readonly type = '[Form] Certification Year Update';
+      constructor(public index: number, public year: string) {}
+    }
   }
 }
