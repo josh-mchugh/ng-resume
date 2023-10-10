@@ -200,6 +200,11 @@ export class AppComponent {
     return false;
   }
 
+  public onCertificationDelete(index: number): boolean {
+    this.store.dispatch(new Form.Certification.Delete(index));
+    return false;
+  }
+
   private getInputValue(event: Event): string {
     return (event.target as HTMLInputElement).value;
   }

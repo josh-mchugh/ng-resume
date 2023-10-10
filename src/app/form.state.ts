@@ -356,6 +356,16 @@ export class FormState {
     });
   }
 
+  @Action(Form.Certification.Delete)
+  certificationDelete(ctx: StateContext<FormStateModel>, action: Form.Certification.Delete) {
+    const state = ctx.getState();
+    const updatedCertification = state.certifications.filter((certification, index) => index !== action.index);
+    ctx.setState({
+      ...state,
+      certifications: updatedCertification
+    });
+  }
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(formSocials: Array<FormSocialModel>): Array<ResumeSocialModel> {
     return formSocials.map(social => ({...social, icon: ''}) );
