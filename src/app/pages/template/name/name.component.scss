@@ -1,0 +1,16 @@
+/* Section - Name */
+.section__name {
+  /* font-bold text-3xl */
+  .name {
+    font-weight: 700;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  /* text-sm tracking-wider */
+  .title {
+    font-size: .875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.05rem;
+  }
+}

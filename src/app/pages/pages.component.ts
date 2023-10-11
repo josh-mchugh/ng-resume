@@ -15,8 +15,6 @@ import {
 })
 export class PagesComponent {
 
-  name$: Observable<string>;
-  title$: Observable<string>;
   summary$: Observable<string>;
   phone$: Observable<string>;
   email$: Observable<string>;
@@ -27,8 +25,6 @@ export class PagesComponent {
   certifications$: Observable<Array<ResumeCertificationModel>>;
 
   constructor(private store: Store) {
-    this.name$ = this.store.select(state => state.resume.name);
-    this.title$ = this.store.select(state => state.resume.title);
     this.summary$ = this.store.select(state => state.resume.summary);
     this.phone$ = this.store.select(state => state.resume.phone);
     this.email$ = this.store.select(state => state.resume.email);

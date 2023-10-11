@@ -12,11 +12,13 @@ import { environment } from './../environments/environment';
 import { ResumeState } from './resume.state';
 import { FormState } from './form.state';
 import { PagesComponent } from './pages/pages.component';
+import { NameComponent } from './pages/template/name/name.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PagesComponent
+    PagesComponent,
+    NameComponent
   ],
   imports: [
     BrowserModule,
