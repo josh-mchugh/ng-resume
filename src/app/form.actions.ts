@@ -32,7 +32,6 @@ export namespace Form {
   export namespace Social {
     export class Create {
       static readonly type = '[Form] Social Create';
-      constructor() {}
     }
 
     export class Delete {
@@ -54,7 +53,6 @@ export namespace Form {
   export namespace Experience {
     export class Create {
       static readonly type = '[Form] Experience Create';
-      constructor() {}
     }
 
     export class Delete {
@@ -96,7 +94,6 @@ export namespace Form {
   export namespace Skill {
     export class Create {
       static readonly type = '[Form] Skill Create';
-      constructor() {}
     }
 
     export class Delete {
@@ -118,7 +115,6 @@ export namespace Form {
   export namespace Certification {
     export class Create {
       static readonly type = '[Form] Certification Create';
-      constructor() {}
     }
 
     export class Delete {
