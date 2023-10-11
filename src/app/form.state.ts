@@ -152,7 +152,7 @@ export class FormState {
   }
 
   @Action(Form.Social.Create)
-  socialCreate(ctx: StateContext<FormStateModel>, action: Form.Social.Create) {
+  socialCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
     const updatedSocials = state.socials.concat(emptySocial());
     ctx.setState({
