@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import {
   FormCertificationModel,
   FormExperienceModel,
   FormSkillModel,
-  FormState,
-  FormStateModel,
   FormSocialModel
 } from './form.state';
 import { Form } from './form.actions';
