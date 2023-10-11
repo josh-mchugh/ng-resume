@@ -1,12 +1,10 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, Select } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import {
   ResumeCertificationModel,
   ResumeExperienceModel,
   ResumeSkillModel,
-  ResumeState,
-  ResumeStateModel,
   ResumeSocialModel
 } from './../resume.state';
 
