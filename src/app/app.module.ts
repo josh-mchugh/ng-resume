@@ -11,10 +11,12 @@ import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 import { ResumeState } from './resume.state';
 import { FormState } from './form.state';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,

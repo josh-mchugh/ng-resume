@@ -2,14 +2,6 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, Select } from '@ngxs/store';
 import {
-  ResumeCertificationModel,
-  ResumeExperienceModel,
-  ResumeSkillModel,
-  ResumeState,
-  ResumeStateModel,
-  ResumeSocialModel
-} from './resume.state';
-import {
   FormCertificationModel,
   FormExperienceModel,
   FormSkillModel,
@@ -37,17 +29,6 @@ export class AppComponent {
   formSkills$: Observable<Array<FormSkillModel>>;
   formCertifications$: Observable<Array<FormCertificationModel>>;
 
-  name$: Observable<string>;
-  title$: Observable<string>;
-  summary$: Observable<string>;
-  phone$: Observable<string>;
-  email$: Observable<string>;
-  location$: Observable<string>;
-  socials$: Observable<Array<ResumeSocialModel>>;
-  experiences$: Observable<Array<ResumeExperienceModel>>;
-  skills$: Observable<Array<ResumeSkillModel>>;
-  certifications$: Observable<Array<ResumeCertificationModel>>;
-
   constructor(private store: Store) {
     this.formName$ = this.store.select(state => state.form.name);
     this.formTitle$ = this.store.select(state => state.form.title);
@@ -59,17 +40,6 @@ export class AppComponent {
     this.formExperiences$ = this.store.select(state => state.form.experiences);
     this.formSkills$ = this.store.select(state => state.form.skills);
     this.formCertifications$ = this.store.select(state => state.form.certifications);
-
-    this.name$ = this.store.select(state => state.resume.name);
-    this.title$ = this.store.select(state => state.resume.title);
-    this.summary$ = this.store.select(state => state.resume.summary);
-    this.phone$ = this.store.select(state => state.resume.phone);
-    this.email$ = this.store.select(state => state.resume.email);
-    this.location$ = this.store.select(state => state.resume.location);
-    this.socials$ = this.store.select(state => state.resume.socials);
-    this.experiences$ = this.store.select(state => state.resume.experiences);
-    this.skills$ = this.store.select(state => state.resume.skills);
-    this.certifications$ = this.store.select(state => state.resume.certifications);
   }
 
   public onNameInput(event: Event): void {

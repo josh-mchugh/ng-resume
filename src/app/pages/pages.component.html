@@ -1,0 +1,168 @@
+<!-- Sheet -->
+<div class="sheet">
+  <div class="sheet--full-height">
+    <!-- Row -->
+    <div class="row">
+      <!-- Left Column -->
+      <div class="column__left">
+        <div style="height: auto">
+          <!-- Name & Title Section -->
+          <div class="section__name">
+            <div class="name">{{name$ | async}}</div>
+            <div class="title">{{title$ | async}}</div>
+          </div>
+          <!-- Summary Section -->
+          <div class="section__header section__header--summary">
+            <div class="title">SUMMARY</div>
+            <div class="divider">
+              <div class="divider__container">
+                <div class="divider__line divider__line--white"></div>
+              </div>
+            </div>
+          </div>
+          <div class="section__summary">
+            <div class="summary">{{summary$ | async}}</div>
+          </div>
+          <!-- Contact Section -->
+          <div class="section__header section__header--contact">
+            <div class="title">CONTACT</div>
+            <div class="divider">
+              <div class="divider__line divider__line--white"></div>
+            </div>
+          </div>
+          <div class="section__contact">
+            <ul class="list">
+              <li class="list__item">
+                <i class="fa-solid fa-phone list__item_icon"></i>
+                <span class="list__item_text">{{phone$ | async}}</span>
+              </li>
+              <li class="list__item">
+                <i class="fa-solid fa-envelope list__item_icon"></i>
+                <a class="list__item_text list__item_text--email" href="mailto:{{email$ | async}}">{{email$ | async}}</a>
+              </li>
+              <li class="list__item">
+                <i class="fa-solid fa-location-dot list__item_icon"></i>
+                <span class="list__item_text">{{location$ | async}}</span>
+              </li>
+            </ul>
+          </div>
+          <!-- Social Section -->
+          <div class="section__header section__header--social">
+            <div class="title">SOCIAL</div>
+            <div class="divider">
+              <div class="divider__line divider__line--white"></div>
+            </div>
+          </div>
+          <div class="section__social">
+            <ul class="list">
+              <!-- Socials -->
+              <ng-container *ngFor="let social of socials$ | async">
+                <li class="list__item">
+                  <div>
+                    <i class="{{social.icon}} social__icon"></i>
+                    <span class="social__name">{{social.name}}</span>
+                  </div>
+                  <div>
+                    <a class="social__link" href="{{social.url}}">{{social.url}}</a>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Right -->
+      <div class="column__right">
+        <div style="height: auto">
+          <!-- Experiences Section -->
+          <div class="section__header">
+            <div class="title">WORK EXPERIENCE</div>
+            <div class="divider">
+              <div class="divider__line"></div>
+            </div>
+          </div>
+          <!-- Experiences -->
+          <ng-container *ngFor="let experience of experiences$ | async;">
+            <div class="section__experience">
+              <div class="header">
+                <div class="header__title">{{experience.title}}</div>
+                <div>{{experience.duration}}</div>
+              </div>
+              <div class="header">
+                <div>{{experience.organization}}</div>
+                <div>{{experience.location}}</div>
+              </div>
+              <ul class="description_list">
+                <!-- Descriptions -->
+                <ng-container *ngFor="let description of experience.descriptions;">
+                  <li class="description_list__item">
+                    <div class="description_list__item_icon">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="description_list__item_text">{{description}}</div>
+                  </li>
+                </ng-container>
+              </ul>
+              <div class="skill_list">
+                <!-- Skills -->
+                <ng-container *ngFor="let skill of experience.skills;">
+                  <div class="skill_list__item">
+                    <div class="skill_list__item_text">{{skill}}</div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </ng-container>
+          <!-- Skills Section -->
+          <div class="section__header section__header--skill">
+            <div class="title">PROFESSIONAL SKILLS</div>
+            <div class="divider">
+              <div class="divider__line"></div>
+            </div>
+          </div>
+          <div class="section__skill">
+            <div class="list">
+              <!-- Skills -->
+              <ng-container *ngFor="let skill of skills$ | async;">
+                <div class="item">
+                  <ng-template [ngIf]="skill.name">
+                    <div>{{skill.name}}</div>
+                    <div class="rating">
+                      <div class="block" [class.block--active]="skill.proficiency > 0"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 1"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 2"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 3"></div>
+                      <div class="block" [class.block--active]="skill.proficiency > 4"></div>
+                    </div>
+                  </ng-template>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <!-- Certifications Section -->
+          <div class="section__header section__header--certification">
+            <div class="title">EDUCATION</div>
+            <div class="divider">
+              <div class="divider__line"></div>
+            </div>
+          </div>
+          <div class="section__certification">
+            <!-- Certifications -->
+            <ng-container *ngFor="let certification of certifications$ | async;">
+              <div class="certification">
+                <div class="header">
+                  <div class="title">{{certification.title}}</div>
+                  <div>{{certification.year}}</div>
+                </div>
+                <div class="header">
+                  <div>{{certification.organization}}</div>
+                  <div>{{certification.location}}</div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
