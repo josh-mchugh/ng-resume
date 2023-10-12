@@ -2,7 +2,7 @@ import {
   ResumeCertificationModel,
   ResumeExperienceModel,
   ResumeSkillModel,
-  ResumeSocialModel
+  ResumeSocialModel,
 } from './resume.state';
 
 export namespace Resume {
