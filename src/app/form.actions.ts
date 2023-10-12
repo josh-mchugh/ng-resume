@@ -41,12 +41,18 @@ export namespace Form {
 
     export class NameUpdate {
       static readonly type = '[Form] Social Name Update';
-      constructor(public index: number, public name: string) {}
+      constructor(
+        public index: number,
+        public name: string,
+      ) {}
     }
 
     export class UrlUpdate {
       static readonly type = '[Form] Social Url Update';
-      constructor(public index: number, public url: string) {}
+      constructor(
+        public index: number,
+        public url: string,
+      ) {}
     }
   }
 
@@ -62,32 +68,50 @@ export namespace Form {
 
     export class TitleUpdate {
       static readonly type = '[Form] Experience Title Update';
-      constructor(public index: number, public title: string) {}
+      constructor(
+        public index: number,
+        public title: string,
+      ) {}
     }
 
     export class OrganizationUpdate {
       static readonly type = '[Form] Experience Organization Update';
-      constructor(public index: number, public organization: string) {}
+      constructor(
+        public index: number,
+        public organization: string,
+      ) {}
     }
 
     export class DurationUpdate {
       static readonly type = '[Form] Experience Duration Update';
-      constructor(public index: number, public duration: string) {}
+      constructor(
+        public index: number,
+        public duration: string,
+      ) {}
     }
 
     export class LocationUpdate {
       static readonly type = '[Form] Experience Location Update';
-      constructor(public index: number, public location: string) {}
+      constructor(
+        public index: number,
+        public location: string,
+      ) {}
     }
 
     export class DescriptionUpdate {
       static readonly type = '[Form] Experience Description Update';
-      constructor(public index: number, public description: string) {}
+      constructor(
+        public index: number,
+        public description: string,
+      ) {}
     }
 
     export class SkillsUpdate {
       static readonly type = '[Form] Experience Skills Update';
-      constructor(public index: number, public skills: string) {}
+      constructor(
+        public index: number,
+        public skills: string,
+      ) {}
     }
   }
 
@@ -103,12 +127,18 @@ export namespace Form {
 
     export class NameUpdate {
       static readonly type = '[Form] Skill Name Update';
-      constructor(public index: number, public name: string) {}
+      constructor(
+        public index: number,
+        public name: string,
+      ) {}
     }
 
     export class ProficiencyUpdate {
       static readonly type = '[Form] Skill Proficiency Update';
-      constructor(public index: number, public proficiency: number) {}
+      constructor(
+        public index: number,
+        public proficiency: number,
+      ) {}
     }
   }
 
@@ -124,22 +154,34 @@ export namespace Form {
 
     export class TitleUpdate {
       static readonly type = '[Form] Certification Title Update';
-      constructor(public index: number, public title: string) {}
+      constructor(
+        public index: number,
+        public title: string,
+      ) {}
     }
 
     export class OrganizationUpdate {
       static readonly type = '[Form] Certification Organization Update';
-      constructor(public index: number, public organization: string) {}
+      constructor(
+        public index: number,
+        public organization: string,
+      ) {}
     }
 
     export class YearUpdate {
       static readonly type = '[Form] Certification Year Update';
-      constructor(public index: number, public year: string) {}
+      constructor(
+        public index: number,
+        public year: string,
+      ) {}
     }
 
     export class LocationUpdate {
       static readonly type = '[Form] Certification Location Update';
-      constructor(public index: number, public location: string) {}
+      constructor(
+        public index: number,
+        public location: string,
+      ) {}
     }
   }
 }
