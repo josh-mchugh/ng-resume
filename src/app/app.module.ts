@@ -15,25 +15,21 @@ import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PagesComponent,
-    NameComponent
-  ],
+  declarations: [AppComponent, PagesComponent, NameComponent],
   imports: [
     BrowserModule,
     FormsModule,
     NgxsModule.forRoot([FormState, ResumeState], {
-      developmentMode: !environment.production
+      developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot({
-      disabled: environment.production
+      disabled: environment.production,
     }),
     NgxsLoggerPluginModule.forRoot({
-      disabled: environment.production
-    })
+      disabled: environment.production,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

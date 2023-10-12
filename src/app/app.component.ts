@@ -5,17 +5,16 @@ import {
   FormCertificationModel,
   FormExperienceModel,
   FormSkillModel,
-  FormSocialModel
+  FormSocialModel,
 } from './form.state';
 import { Form } from './form.actions';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
   formName$: Observable<string>;
   formTitle$: Observable<string>;
   formSummary$: Observable<string>;
@@ -28,16 +27,20 @@ export class AppComponent {
   formCertifications$: Observable<Array<FormCertificationModel>>;
 
   constructor(private store: Store) {
-    this.formName$ = this.store.select(state => state.form.name);
-    this.formTitle$ = this.store.select(state => state.form.title);
-    this.formSummary$ = this.store.select(state => state.form.summary);
-    this.formPhone$ = this.store.select(state => state.form.phone);
-    this.formEmail$ = this.store.select(state => state.form.email);
-    this.formLocation$ = this.store.select(state => state.form.location);
-    this.formSocials$ = this.store.select(state => state.form.socials);
-    this.formExperiences$ = this.store.select(state => state.form.experiences);
-    this.formSkills$ = this.store.select(state => state.form.skills);
-    this.formCertifications$ = this.store.select(state => state.form.certifications);
+    this.formName$ = this.store.select((state) => state.form.name);
+    this.formTitle$ = this.store.select((state) => state.form.title);
+    this.formSummary$ = this.store.select((state) => state.form.summary);
+    this.formPhone$ = this.store.select((state) => state.form.phone);
+    this.formEmail$ = this.store.select((state) => state.form.email);
+    this.formLocation$ = this.store.select((state) => state.form.location);
+    this.formSocials$ = this.store.select((state) => state.form.socials);
+    this.formExperiences$ = this.store.select(
+      (state) => state.form.experiences,
+    );
+    this.formSkills$ = this.store.select((state) => state.form.skills);
+    this.formCertifications$ = this.store.select(
+      (state) => state.form.certifications,
+    );
   }
 
   public onNameInput(event: Event): void {
@@ -115,7 +118,9 @@ export class AppComponent {
 
   public onExperienceOrganizationInput(index: number, event: Event): void {
     const organization = this.getInputValue(event);
-    this.store.dispatch(new Form.Experience.OrganizationUpdate(index, organization));
+    this.store.dispatch(
+      new Form.Experience.OrganizationUpdate(index, organization),
+    );
   }
 
   public onExperienceDurationInput(index: number, event: Event): void {
@@ -130,7 +135,9 @@ export class AppComponent {
 
   public onExperienceDescriptionInput(index: number, event: Event): void {
     const description = this.getInputValue(event);
-    this.store.dispatch(new Form.Experience.DescriptionUpdate(index, description));
+    this.store.dispatch(
+      new Form.Experience.DescriptionUpdate(index, description),
+    );
   }
 
   public onExperienceSkillsInput(index: number, event: Event): void {
@@ -183,7 +190,9 @@ export class AppComponent {
 
   public onCertificationOrganizationInput(index: number, event: Event): void {
     const organization = this.getInputValue(event);
-    this.store.dispatch(new Form.Certification.OrganizationUpdate(index, organization));
+    this.store.dispatch(
+      new Form.Certification.OrganizationUpdate(index, organization),
+    );
   }
 
   public onCertificationYearInput(index: number, event: Event): void {
