@@ -1,41 +1,98 @@
-
 <div class="main">
   <div class="sidebar">
     <!-- Your Details Section -->
     <div class="input__section">
       <div class="section__header">Your Details</div>
       <label for="name">Name</label>
-      <input type="text" name="name" placeholder="Name" [value]="formName$ | async" (input)="onNameInput($event)"/>
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        [value]="formName$ | async"
+        (input)="onNameInput($event)"
+      />
       <label for="title">Title</label>
-      <input type="text" name="title" placeholder="Title" [value]="formTitle$ | async" (input)="onTitleInput($event)"/>
+      <input
+        type="text"
+        name="title"
+        placeholder="Title"
+        [value]="formTitle$ | async"
+        (input)="onTitleInput($event)"
+      />
       <label for="summary">Summary</label>
-      <textarea name="summary" placeholder="Summary" [value]="formSummary$ | async" (input)="onSummaryInput($event)"></textarea>
+      <textarea
+        name="summary"
+        placeholder="Summary"
+        [value]="formSummary$ | async"
+        (input)="onSummaryInput($event)"
+      ></textarea>
     </div>
     <!-- Contact Details Section -->
     <div class="input__section">
       <div class="section__header">Contact Details</div>
       <label for="phone">Phone</label>
-      <input type="text" name="phone" placeholder="Phone" [value]="formPhone$ | async" (input)="onPhoneInput($event)"/>
+      <input
+        type="text"
+        name="phone"
+        placeholder="Phone"
+        [value]="formPhone$ | async"
+        (input)="onPhoneInput($event)"
+      />
       <label for="email">Email</label>
-      <input type="text" name="email" placeholder="Email" [value]="formEmail$ | async" (input)="onEmailInput($event)"/>
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        [value]="formEmail$ | async"
+        (input)="onEmailInput($event)"
+      />
       <label for="location">Location</label>
-      <input type="text" name="location" placeholder="Location" [value]="formLocation$ | async" (input)="onLocationInput($event)"/>
+      <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        [value]="formLocation$ | async"
+        (input)="onLocationInput($event)"
+      />
     </div>
     <!-- Social Section -->
     <div class="input__section">
       <div class="section__header">Social</div>
       <div>
-        <ng-container *ngFor="let social of formSocials$ | async; let i = index; trackBy:handleSocialTrackBy">
+        <ng-container
+          *ngFor="
+            let social of formSocials$ | async;
+            let i = index;
+            trackBy: handleSocialTrackBy
+          "
+        >
           <div class="section__content">
             <ng-template [ngIf]="i > 0">
-              <div class="section__content-remove" (click)="onSocialDelete(i)" (keyup.enter)="onSocialDelete(i)" tabindex="0">
+              <div
+                class="section__content-remove"
+                (click)="onSocialDelete(i)"
+                (keyup.enter)="onSocialDelete(i)"
+                tabindex="0"
+              >
                 <div class="section__content-remove-icon">&times;</div>
               </div>
             </ng-template>
-            <label for="socialName{{i}}">Name</label>
-            <input type="text" name="socialName{{i}}" placeholder="Name" [value]="social.name" (input)="onSocialNameInput(i, $event)"/>
-            <label for="socialUrl{{i}}">URL</label>
-            <input type="text" name="socialUrl{{i}}" placeholder="URL" [value]="social.url" (input)="onSocialUrlInput(i, $event)"/>
+            <label for="socialName{{ i }}">Name</label>
+            <input
+              type="text"
+              name="socialName{{ i }}"
+              placeholder="Name"
+              [value]="social.name"
+              (input)="onSocialNameInput(i, $event)"
+            />
+            <label for="socialUrl{{ i }}">URL</label>
+            <input
+              type="text"
+              name="socialUrl{{ i }}"
+              placeholder="URL"
+              [value]="social.url"
+              (input)="onSocialUrlInput(i, $event)"
+            />
           </div>
         </ng-container>
         <button type="button" (click)="onSocialCreate()">+ Add Another</button>
@@ -45,46 +102,118 @@
     <div class="input__section">
       <div class="section__header">Experience</div>
       <div>
-
-        <ng-container *ngFor="let experience of formExperiences$ | async; let i = index; trackBy:handleSkillTrackBy">
+        <ng-container
+          *ngFor="
+            let experience of formExperiences$ | async;
+            let i = index;
+            trackBy: handleSkillTrackBy
+          "
+        >
           <div class="section__content">
             <ng-template [ngIf]="i > 0">
-              <div class="section__content-remove" (click)="onExperienceDelete(i)" (keyup.enter)="onExperienceDelete(i)" tabindex="0">
+              <div
+                class="section__content-remove"
+                (click)="onExperienceDelete(i)"
+                (keyup.enter)="onExperienceDelete(i)"
+                tabindex="0"
+              >
                 <div class="section__content-remove-icon">&times;</div>
               </div>
             </ng-template>
-            <label for="experienceTitle{{i}}">Title</label>
-            <input type="text" name="experienceTitle{{i}}" placeholder="Title" [value]="experience.title" (input)="onExperienceTitleInput(i, $event)" />
-            <label for="experienceOrganization{{i}}">Organization</label>
-            <input type="text" name="experienceOrganization{{i}}" placeholder="Organization" [value]="experience.organization" (input)="onExperienceOrganizationInput(i, $event)" />
-            <label for="experienceDuration{{i}}">Duration</label>
-            <input type="text" name="experienceDuration{{i}}" placeholder="Duration" [value]="experience.duration" (input)="onExperienceDurationInput(i, $event)"/>
-            <label for="experienceLocation{{i}}">Location</label>
-            <input type="text" name="experienceLocation{{i}}" placeholder="Location" [value]="experience.location" (input)="onExperienceLocationInput(i, $event)"/>
-            <label for="experienceDescription{{i}}">Description</label>
-            <textarea name="experienceDescription{{i}}" placeholder="Description" [value]="experience.description" (input)="onExperienceDescriptionInput(i, $event)"></textarea>
-            <label for="experienceSkills{{i}}">Skills</label>
-            <input type="text" name="experienceSkills{{i}}" placeholder="Skills" [value]="experience.skills" (input)="onExperienceSkillsInput(i, $event)"/>
+            <label for="experienceTitle{{ i }}">Title</label>
+            <input
+              type="text"
+              name="experienceTitle{{ i }}"
+              placeholder="Title"
+              [value]="experience.title"
+              (input)="onExperienceTitleInput(i, $event)"
+            />
+            <label for="experienceOrganization{{ i }}">Organization</label>
+            <input
+              type="text"
+              name="experienceOrganization{{ i }}"
+              placeholder="Organization"
+              [value]="experience.organization"
+              (input)="onExperienceOrganizationInput(i, $event)"
+            />
+            <label for="experienceDuration{{ i }}">Duration</label>
+            <input
+              type="text"
+              name="experienceDuration{{ i }}"
+              placeholder="Duration"
+              [value]="experience.duration"
+              (input)="onExperienceDurationInput(i, $event)"
+            />
+            <label for="experienceLocation{{ i }}">Location</label>
+            <input
+              type="text"
+              name="experienceLocation{{ i }}"
+              placeholder="Location"
+              [value]="experience.location"
+              (input)="onExperienceLocationInput(i, $event)"
+            />
+            <label for="experienceDescription{{ i }}">Description</label>
+            <textarea
+              name="experienceDescription{{ i }}"
+              placeholder="Description"
+              [value]="experience.description"
+              (input)="onExperienceDescriptionInput(i, $event)"
+            ></textarea>
+            <label for="experienceSkills{{ i }}">Skills</label>
+            <input
+              type="text"
+              name="experienceSkills{{ i }}"
+              placeholder="Skills"
+              [value]="experience.skills"
+              (input)="onExperienceSkillsInput(i, $event)"
+            />
           </div>
         </ng-container>
       </div>
-      <button type="button" (click)="onExperienceCreate()">+ Add Experience</button>
+      <button type="button" (click)="onExperienceCreate()">
+        + Add Experience
+      </button>
     </div>
     <!-- Skills Section -->
     <div class="input__section">
       <div class="section__header">Skills</div>
       <div>
-        <ng-container *ngFor="let skill of formSkills$ | async; let i = index; trackBy:handleSkillTrackBy">
+        <ng-container
+          *ngFor="
+            let skill of formSkills$ | async;
+            let i = index;
+            trackBy: handleSkillTrackBy
+          "
+        >
           <div class="section__content">
             <ng-template [ngIf]="i > 0">
-              <div class="section__content-remove" (click)="onSkillDelete(i)" (keyup.enter)="onSkillDelete(i)" tabindex="0">
+              <div
+                class="section__content-remove"
+                (click)="onSkillDelete(i)"
+                (keyup.enter)="onSkillDelete(i)"
+                tabindex="0"
+              >
                 <div class="section__content-remove-icon">&times;</div>
               </div>
             </ng-template>
-            <label for="skillName{{i}}">Name</label>
-            <input type="text" name="skillName{{i}}" placeholder="Name" [value]="skill.name" (input)="onSkillNameInput(i, $event)"/>
-            <label for="skillProficiency{{i}}">Proficiency</label>
-            <input type="range" name="skillProficiency{{i}}" placeholder="Proficiency" minx="0" max="5" [value]="skill.proficiency" (input)="onSkillProficiencyInput(i, $event)"/>
+            <label for="skillName{{ i }}">Name</label>
+            <input
+              type="text"
+              name="skillName{{ i }}"
+              placeholder="Name"
+              [value]="skill.name"
+              (input)="onSkillNameInput(i, $event)"
+            />
+            <label for="skillProficiency{{ i }}">Proficiency</label>
+            <input
+              type="range"
+              name="skillProficiency{{ i }}"
+              placeholder="Proficiency"
+              minx="0"
+              max="5"
+              [value]="skill.proficiency"
+              (input)="onSkillProficiencyInput(i, $event)"
+            />
           </div>
         </ng-container>
         <button type="button" (click)="onSkillCreate()">+ Add Skill</button>
@@ -94,25 +223,62 @@
     <div class="input__section">
       <div class="section__header">Certifications</div>
       <div>
-        <ng-container *ngFor="let certification of formCertifications$ | async; let i = index; trackBy:handleCertificationTrackBy">
+        <ng-container
+          *ngFor="
+            let certification of formCertifications$ | async;
+            let i = index;
+            trackBy: handleCertificationTrackBy
+          "
+        >
           <div class="section__content">
             <ng-template [ngIf]="i > 0">
-              <div class="section__content-remove" (click)="onCertificationDelete(i)" (keyup.enter)="onCertificationDelete(i)" tabindex="0">
+              <div
+                class="section__content-remove"
+                (click)="onCertificationDelete(i)"
+                (keyup.enter)="onCertificationDelete(i)"
+                tabindex="0"
+              >
                 <div class="section__content-remove-icon">&times;</div>
               </div>
             </ng-template>
-            <label for="certificationTitle{{i}}">Title</label>
-            <input type="text" name="certificationTitle{{i}}" placeholder="Title" [value]="certification.title" (input)="onCertificationTitleInput(i, $event)"/>
-            <label for="certificationOrganization{{i}}">Organization</label>
-            <input type="text" name="certificationOrganization{{i}}" placeholder="Organization" [value]="certification.organization" (input)="onCertificationOrganizationInput(i, $event)"/>
-            <label for="certificationYear{{i}}">Year</label>
-            <input type="text" name="certificationYear{{i}}" placeholder="Year" [value]="certification.year" (input)="onCertificationYearInput(i, $event)"/>
-            <label for="certificationLocation{{i}}">Location</label>
-            <input type="text" name="certificationLocation{{i}}" placeholder="Location" [value]="certification.location" (input)="onCertificationLocationInput(i, $event)"/>
+            <label for="certificationTitle{{ i }}">Title</label>
+            <input
+              type="text"
+              name="certificationTitle{{ i }}"
+              placeholder="Title"
+              [value]="certification.title"
+              (input)="onCertificationTitleInput(i, $event)"
+            />
+            <label for="certificationOrganization{{ i }}">Organization</label>
+            <input
+              type="text"
+              name="certificationOrganization{{ i }}"
+              placeholder="Organization"
+              [value]="certification.organization"
+              (input)="onCertificationOrganizationInput(i, $event)"
+            />
+            <label for="certificationYear{{ i }}">Year</label>
+            <input
+              type="text"
+              name="certificationYear{{ i }}"
+              placeholder="Year"
+              [value]="certification.year"
+              (input)="onCertificationYearInput(i, $event)"
+            />
+            <label for="certificationLocation{{ i }}">Location</label>
+            <input
+              type="text"
+              name="certificationLocation{{ i }}"
+              placeholder="Location"
+              [value]="certification.location"
+              (input)="onCertificationLocationInput(i, $event)"
+            />
           </div>
         </ng-container>
       </div>
-      <button type="button" (click)="onCertificationCreate()">+ Add Certifiation</button>
+      <button type="button" (click)="onCertificationCreate()">
+        + Add Certifiation
+      </button>
     </div>
   </div>
   <div class="content">
