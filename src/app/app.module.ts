@@ -15,7 +15,7 @@ import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
 import { ContactComponent } from './pages/template/contact/contact.component';
-import { SocialComponent } from './pages/template/social/social.component';
+import { SocialsComponent } from './pages/template/socials/socials.component';
 import { ExperienceComponent } from './pages/template/experience/experience.component';
 
 @NgModule({
@@ -25,7 +25,7 @@ import { ExperienceComponent } from './pages/template/experience/experience.comp
     NameComponent,
     SummaryComponent,
     ContactComponent,
-    SocialComponent,
+    SocialsComponent,
     ExperienceComponent,
   ],
   imports: [

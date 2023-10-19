@@ -4,11 +4,11 @@ import { Store } from '@ngxs/store';
 import { ResumeSocialModel } from './../../../resume.state';
 
 @Component({
-  selector: 'app-social',
-  templateUrl: './social.component.html',
-  styleUrls: ['./social.component.scss'],
+  selector: 'app-socials',
+  templateUrl: './socials.component.html',
+  styleUrls: ['./socials.component.scss'],
 })
-export class SocialComponent {
+export class SocialsComponent {
   socials$: Observable<Array<ResumeSocialModel>>;
 
   constructor(private store: Store) {
