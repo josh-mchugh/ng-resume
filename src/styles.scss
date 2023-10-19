@@ -202,6 +202,33 @@ flex-auto w-64 px-7 my-16
 /* Section - Header */
 .section__header {
   display: flex;
+
+  /* flex-auto font-bold whitespace-nowrap */
+  .title {
+    flex: 1 1 auto;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* flex-auto w-full ml-2 */
+  .divider {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    margin-left: 0.5rem;
+  }
+
+  /* h-0 mt-3 border-b border-${props.color} */
+  .divider__line {
+    height: 0px;
+    margin-top: 0.75rem;
+    border-bottom: 1px solid var(--gray-700);
+  }
+
+  .divider__line--white {
+    border-bottom-color: var(--white);
+  }
 }
 
 .section__header--summary,
@@ -218,32 +245,6 @@ flex-auto w-64 px-7 my-16
 .section__header--project,
 .section__header--skill {
   margin-top: 1.5rem;
-}
-
-/* flex-auto font-bold whitespace-nowrap */
-.section__header .title {
-  flex: 1 1 auto;
-  font-weight: 700;
-  white-space: nowrap;
-}
-/* flex-auto w-full ml-2 */
-.section__header .divider {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  width: 100%;
-  margin-left: 0.5rem;
-}
-
-/* h-0 mt-3 border-b border-${props.color} */
-.section__header .divider__line {
-  height: 0px;
-  margin-top: 0.75rem;
-  border-bottom: 1px solid var(--gray-700);
-}
-
-.section__header .divider__line--white {
-  border-bottom-color: var(--white);
 }
 
 /* Section - Name */
