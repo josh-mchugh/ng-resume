@@ -16,6 +16,7 @@ import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
 import { ContactComponent } from './pages/template/contact/contact.component';
 import { SocialComponent } from './pages/template/social/social.component';
+import { ExperienceComponent } from './pages/template/experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SocialComponent } from './pages/template/social/social.component';
     SummaryComponent,
     ContactComponent,
     SocialComponent,
+    ExperienceComponent,
   ],
   imports: [
     BrowserModule,
