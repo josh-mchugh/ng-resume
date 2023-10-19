@@ -14,7 +14,6 @@ import {
   styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent {
-  summary$: Observable<string>;
   phone$: Observable<string>;
   email$: Observable<string>;
   location$: Observable<string>;
@@ -24,7 +23,6 @@ export class PagesComponent {
   certifications$: Observable<Array<ResumeCertificationModel>>;
 
   constructor(private store: Store) {
-    this.summary$ = this.store.select((state) => state.resume.summary);
     this.phone$ = this.store.select((state) => state.resume.phone);
     this.email$ = this.store.select((state) => state.resume.email);
     this.location$ = this.store.select((state) => state.resume.location);

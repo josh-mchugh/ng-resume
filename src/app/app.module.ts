@@ -13,9 +13,10 @@ import { ResumeState } from './resume.state';
 import { FormState } from './form.state';
 import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
+import { SummaryComponent } from './pages/template/summary/summary.component';
 
 @NgModule({
-  declarations: [AppComponent, PagesComponent, NameComponent],
+  declarations: [AppComponent, PagesComponent, NameComponent, SummaryComponent],
   imports: [
     BrowserModule,
     FormsModule,
