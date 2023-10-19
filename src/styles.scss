@@ -280,33 +280,33 @@ flex-auto w-64 px-7 my-16
 .section__contact {
   display: flex;
   margin: 1rem 0 0 1rem;
-}
 
-/* list-none text-sm */
-.section__contact .list {
-  list-style-type: none;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
+  /* list-none text-sm */
+  .list {
+    list-style-type: none;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 
-/* mt-2 */
-.section__contact .list__item:not(:first-child) {
-  margin-top: 0.5rem;
-}
+  /* mt-2 */
+  .list__item:not(:first-child) {
+    margin-top: 0.5rem;
+  }
 
-/* text-accent */
-.section__contact .list__item_icon {
-  color: var(--accent);
-}
+  /* text-accent */
+  .list__item_icon {
+    color: var(--accent);
+  }
 
-/* ml-2 */
-.section__contact .list__item_text {
-  margin-left: 0.5rem;
-}
+  /* ml-2 */
+  .list__item_text {
+    margin-left: 0.5rem;
+  }
 
-.section__contact .list__item_text--email {
-  color: var(--white);
-  text-decoration-line: none;
+  .list__item_text--email {
+    color: var(--white);
+    text-decoration-line: none;
+  }
 }
 
 /* Section - Social */
