@@ -266,13 +266,13 @@ flex-auto w-64 px-7 my-16
 /* Section - Summary */
 .section__summary {
   display: flex;
-}
 
-.section__summary .summary {
-  margin: 1.5rem 0 0 1.5rem;
-  padding-right: 1rem;
-  font-size: 0.75rem;
-  line-height: 1rem;
+  .summary {
+    margin: 1.5rem 0 0 1.5rem;
+    padding-right: 1rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
 }
 
 /* Section - Contact */
