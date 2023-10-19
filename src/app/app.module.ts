@@ -14,9 +14,16 @@ import { FormState } from './form.state';
 import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
+import { ContactComponent } from './pages/template/contact/contact.component';
 
 @NgModule({
-  declarations: [AppComponent, PagesComponent, NameComponent, SummaryComponent],
+  declarations: [
+    AppComponent,
+    PagesComponent,
+    NameComponent,
+    SummaryComponent,
+    ContactComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,
