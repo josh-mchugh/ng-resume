@@ -1,32 +1,7 @@
 <div class="main">
   <div class="sidebar">
     <!-- Your Details Section -->
-    <div class="input__section">
-      <div class="section__header">Your Details</div>
-      <label for="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        [value]="formName$ | async"
-        (input)="onNameInput($event)"
-      />
-      <label for="title">Title</label>
-      <input
-        type="text"
-        name="title"
-        placeholder="Title"
-        [value]="formTitle$ | async"
-        (input)="onTitleInput($event)"
-      />
-      <label for="summary">Summary</label>
-      <textarea
-        name="summary"
-        placeholder="Summary"
-        [value]="formSummary$ | async"
-        (input)="onSummaryInput($event)"
-      ></textarea>
-    </div>
+    <app-details-input></app-details-input>
     <!-- Contact Details Section -->
     <div class="input__section">
       <div class="section__header">Contact Details</div>

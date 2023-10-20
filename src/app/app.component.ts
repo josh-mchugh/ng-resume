@@ -15,9 +15,6 @@ import { Form } from './form.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  formName$: Observable<string>;
-  formTitle$: Observable<string>;
-  formSummary$: Observable<string>;
   formPhone$: Observable<string>;
   formEmail$: Observable<string>;
   formLocation$: Observable<string>;
@@ -27,9 +24,6 @@ export class AppComponent {
   formCertifications$: Observable<Array<FormCertificationModel>>;
 
   constructor(private store: Store) {
-    this.formName$ = this.store.select((state) => state.form.name);
-    this.formTitle$ = this.store.select((state) => state.form.title);
-    this.formSummary$ = this.store.select((state) => state.form.summary);
     this.formPhone$ = this.store.select((state) => state.form.phone);
     this.formEmail$ = this.store.select((state) => state.form.email);
     this.formLocation$ = this.store.select((state) => state.form.location);
@@ -41,21 +35,6 @@ export class AppComponent {
     this.formCertifications$ = this.store.select(
       (state) => state.form.certifications,
     );
-  }
-
-  public onNameInput(event: Event): void {
-    const name = this.getInputValue(event);
-    this.store.dispatch(new Form.NameUpdate(name));
-  }
-
-  public onTitleInput(event: Event): void {
-    const title = this.getInputValue(event);
-    this.store.dispatch(new Form.TitleUpdate(title));
-  }
-
-  public onSummaryInput(event: Event): void {
-    const summary = this.getInputValue(event);
-    this.store.dispatch(new Form.SummaryUpdate(summary));
   }
 
   public onPhoneInput(event: Event): void {

@@ -19,6 +19,7 @@ import { SocialsComponent } from './pages/template/socials/socials.component';
 import { ExperiencesComponent } from './pages/template/experiences/experiences.component';
 import { SkillsComponent } from './pages/template/skills/skills.component';
 import { CertificationsComponent } from './pages/template/certifications/certifications.component';
+import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CertificationsComponent } from './pages/template/certifications/certifi
     ExperiencesComponent,
     SkillsComponent,
     CertificationsComponent,
+    DetailsInputComponent,
   ],
   imports: [
     BrowserModule,
