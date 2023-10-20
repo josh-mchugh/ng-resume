@@ -17,6 +17,7 @@ import { SummaryComponent } from './pages/template/summary/summary.component';
 import { ContactComponent } from './pages/template/contact/contact.component';
 import { SocialsComponent } from './pages/template/socials/socials.component';
 import { ExperiencesComponent } from './pages/template/experiences/experiences.component';
+import { SkillsComponent } from './pages/template/skills/skills.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ExperiencesComponent } from './pages/template/experiences/experiences.c
     ContactComponent,
     SocialsComponent,
     ExperiencesComponent,
+    SkillsComponent,
   ],
   imports: [
     BrowserModule,

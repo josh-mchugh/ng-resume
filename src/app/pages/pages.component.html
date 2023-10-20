@@ -22,46 +22,7 @@
           <!-- Experiences Section -->
           <app-experiences></app-experiences>
           <!-- Skills Section -->
-          <div class="section__header section__header--skill">
-            <div class="title">PROFESSIONAL SKILLS</div>
-            <div class="divider">
-              <div class="divider__line"></div>
-            </div>
-          </div>
-          <div class="section__skill">
-            <div class="list">
-              <!-- Skills -->
-              <ng-container *ngFor="let skill of skills$ | async">
-                <div class="item">
-                  <ng-template [ngIf]="skill.name">
-                    <div>{{ skill.name }}</div>
-                    <div class="rating">
-                      <div
-                        class="block"
-                        [class.block--active]="skill.proficiency > 0"
-                      ></div>
-                      <div
-                        class="block"
-                        [class.block--active]="skill.proficiency > 1"
-                      ></div>
-                      <div
-                        class="block"
-                        [class.block--active]="skill.proficiency > 2"
-                      ></div>
-                      <div
-                        class="block"
-                        [class.block--active]="skill.proficiency > 3"
-                      ></div>
-                      <div
-                        class="block"
-                        [class.block--active]="skill.proficiency > 4"
-                      ></div>
-                    </div>
-                  </ng-template>
-                </div>
-              </ng-container>
-            </div>
-          </div>
+          <app-skills></app-skills>
           <!-- Certifications Section -->
           <div class="section__header section__header--certification">
             <div class="title">EDUCATION</div>
