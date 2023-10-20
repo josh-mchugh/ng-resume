@@ -4,11 +4,11 @@ import { Store } from '@ngxs/store';
 import { ResumeExperienceModel } from './../../../resume.state';
 
 @Component({
-  selector: 'app-experience',
-  templateUrl: './experience.component.html',
-  styleUrls: ['./experience.component.scss'],
+  selector: 'app-experiences',
+  templateUrl: './experiences.component.html',
+  styleUrls: ['./experiences.component.scss'],
 })
-export class ExperienceComponent {
+export class ExperiencesComponent {
   experiences$: Observable<Array<ResumeExperienceModel>>;
 
   constructor(private store: Store) {
