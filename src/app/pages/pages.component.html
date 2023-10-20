@@ -24,27 +24,7 @@
           <!-- Skills Section -->
           <app-skills></app-skills>
           <!-- Certifications Section -->
-          <div class="section__header section__header--certification">
-            <div class="title">EDUCATION</div>
-            <div class="divider">
-              <div class="divider__line"></div>
-            </div>
-          </div>
-          <div class="section__certification">
-            <!-- Certifications -->
-            <ng-container *ngFor="let certification of certifications$ | async">
-              <div class="certification">
-                <div class="header">
-                  <div class="title">{{ certification.title }}</div>
-                  <div>{{ certification.year }}</div>
-                </div>
-                <div class="header">
-                  <div>{{ certification.organization }}</div>
-                  <div>{{ certification.location }}</div>
-                </div>
-              </div>
-            </ng-container>
-          </div>
+          <app-certifications></app-certifications>
         </div>
       </div>
     </div>
