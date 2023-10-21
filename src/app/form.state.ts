@@ -239,6 +239,9 @@ export class FormState {
       ...state,
       experiences: updatedExperiences,
     });
+    const resumeExperiences =
+      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
+    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
   }
 
   @Action(Form.Experience.TitleUpdate)
