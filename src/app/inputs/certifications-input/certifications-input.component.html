@@ -1,0 +1,60 @@
+<div class="input__section">
+  <div class="section__header">Certifications</div>
+  <div>
+    <ng-container
+      *ngFor="
+        let certification of formCertifications$ | async;
+        let i = index;
+        trackBy: handleCertificationTrackBy
+      "
+    >
+      <div class="section__content">
+        <ng-template [ngIf]="i > 0">
+          <div
+            class="section__content-remove"
+            (click)="onCertificationDelete(i)"
+            (keyup.enter)="onCertificationDelete(i)"
+            tabindex="0"
+          >
+            <div class="section__content-remove-icon">&times;</div>
+          </div>
+        </ng-template>
+        <label for="certificationTitle{{ i }}">Title</label>
+        <input
+          type="text"
+          name="certificationTitle{{ i }}"
+          placeholder="Title"
+          [value]="certification.title"
+          (input)="onCertificationTitleInput(i, $event)"
+        />
+        <label for="certificationOrganization{{ i }}">Organization</label>
+        <input
+          type="text"
+          name="certificationOrganization{{ i }}"
+          placeholder="Organization"
+          [value]="certification.organization"
+          (input)="onCertificationOrganizationInput(i, $event)"
+        />
+        <label for="certificationYear{{ i }}">Year</label>
+        <input
+          type="text"
+          name="certificationYear{{ i }}"
+          placeholder="Year"
+          [value]="certification.year"
+          (input)="onCertificationYearInput(i, $event)"
+        />
+        <label for="certificationLocation{{ i }}">Location</label>
+        <input
+          type="text"
+          name="certificationLocation{{ i }}"
+          placeholder="Location"
+          [value]="certification.location"
+          (input)="onCertificationLocationInput(i, $event)"
+        />
+      </div>
+    </ng-container>
+  </div>
+  <button type="button" (click)="onCertificationCreate()">
+    + Add Certifiation
+  </button>
+</div>
