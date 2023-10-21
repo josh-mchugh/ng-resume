@@ -14,4 +14,16 @@ export class ExperiencesComponent {
   constructor(private store: Store) {
     this.experiences$ = this.store.select((state) => state.resume.experiences);
   }
+
+  public handleExperienceTrackBy(index: number): number {
+    return index;
+  }
+
+  public handleExpereinceDescriptionTrackBy(index: number): number {
+    return index;
+  }
+
+  public handleExperienceSkillTrackBy(index: number): number {
+    return index;
+  }
 }

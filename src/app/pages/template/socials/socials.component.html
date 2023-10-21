@@ -8,11 +8,7 @@
   <ul class="list">
     <!-- Socials -->
     <ng-container
-      *ngFor="
-        let social of socials$ | async;
-        let i = index;
-        trackBy: handleSocialTrackBy
-      "
+      *ngFor="let social of socials$ | async; trackBy: handleSocialTrackBy"
     >
       <li class="list__item">
         <div>

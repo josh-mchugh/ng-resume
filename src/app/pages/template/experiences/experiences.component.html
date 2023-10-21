@@ -5,7 +5,12 @@
   </div>
 </div>
 <!-- Experiences -->
-<ng-container *ngFor="let experience of experiences$ | async">
+<ng-container
+  *ngFor="
+    let experience of experiences$ | async;
+    trackBy: handleExperienceTrackBy
+  "
+>
   <div class="section__experience">
     <div class="header">
       <div class="header__title">{{ experience.title }}</div>
@@ -17,7 +22,12 @@
     </div>
     <ul class="description_list">
       <!-- Descriptions -->
-      <ng-container *ngFor="let description of experience.descriptions">
+      <ng-container
+        *ngFor="
+          let description of experience.descriptions;
+          trackBy: handleExpereinceDescriptionTrackBy
+        "
+      >
         <li class="description_list__item">
           <div class="description_list__item_icon">
             <i class="fa-solid fa-chevron-right"></i>
@@ -30,7 +40,12 @@
     </ul>
     <div class="skill_list">
       <!-- Skills -->
-      <ng-container *ngFor="let skill of experience.skills">
+      <ng-container
+        *ngFor="
+          let skill of experience.skills;
+          trackBy: handleExperienceSkillTrackBy
+        "
+      >
         <div class="skill_list__item">
           <div class="skill_list__item_text">{{ skill }}</div>
         </div>
