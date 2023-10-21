@@ -15,18 +15,12 @@ import { Form } from './form.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  formPhone$: Observable<string>;
-  formEmail$: Observable<string>;
-  formLocation$: Observable<string>;
   formSocials$: Observable<Array<FormSocialModel>>;
   formExperiences$: Observable<Array<FormExperienceModel>>;
   formSkills$: Observable<Array<FormSkillModel>>;
   formCertifications$: Observable<Array<FormCertificationModel>>;
 
   constructor(private store: Store) {
-    this.formPhone$ = this.store.select((state) => state.form.phone);
-    this.formEmail$ = this.store.select((state) => state.form.email);
-    this.formLocation$ = this.store.select((state) => state.form.location);
     this.formSocials$ = this.store.select((state) => state.form.socials);
     this.formExperiences$ = this.store.select(
       (state) => state.form.experiences,
@@ -35,21 +29,6 @@ export class AppComponent {
     this.formCertifications$ = this.store.select(
       (state) => state.form.certifications,
     );
-  }
-
-  public onPhoneInput(event: Event): void {
-    const phone = this.getInputValue(event);
-    this.store.dispatch(new Form.PhoneUpdate(phone));
-  }
-
-  public onEmailInput(event: Event): void {
-    const email = this.getInputValue(event);
-    this.store.dispatch(new Form.EmailUpdate(email));
-  }
-
-  public onLocationInput(event: Event): void {
-    const location = this.getInputValue(event);
-    this.store.dispatch(new Form.LocationUpdate(location));
   }
 
   public handleSocialTrackBy(index: number): number {

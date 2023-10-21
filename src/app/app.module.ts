@@ -20,6 +20,7 @@ import { ExperiencesComponent } from './pages/template/experiences/experiences.c
 import { SkillsComponent } from './pages/template/skills/skills.component';
 import { CertificationsComponent } from './pages/template/certifications/certifications.component';
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
+import { ContactInputComponent } from './inputs/contact-input/contact-input.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { DetailsInputComponent } from './inputs/details-input/details-input.comp
     SkillsComponent,
     CertificationsComponent,
     DetailsInputComponent,
+    ContactInputComponent,
   ],
   imports: [
     BrowserModule,
