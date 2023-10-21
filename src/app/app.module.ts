@@ -22,6 +22,7 @@ import { CertificationsComponent } from './pages/template/certifications/certifi
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 import { ContactInputComponent } from './inputs/contact-input/contact-input.component';
 import { SocialsInputComponent } from './inputs/socials-input/socials-input.component';
+import { ExperiencesInputComponent } from './inputs/experiences-input/experiences-input.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SocialsInputComponent } from './inputs/socials-input/socials-input.comp
     DetailsInputComponent,
     ContactInputComponent,
     SocialsInputComponent,
+    ExperiencesInputComponent,
   ],
   imports: [
     BrowserModule,
