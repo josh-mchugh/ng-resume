@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { FormCertificationModel, FormSkillModel } from './form.state';
+import { FormCertificationModel } from './form.state';
 import { Form } from './form.actions';
 
 @Component({
@@ -10,38 +10,12 @@ import { Form } from './form.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  formSkills$: Observable<Array<FormSkillModel>>;
   formCertifications$: Observable<Array<FormCertificationModel>>;
 
   constructor(private store: Store) {
-    this.formSkills$ = this.store.select((state) => state.form.skills);
     this.formCertifications$ = this.store.select(
       (state) => state.form.certifications,
     );
-  }
-
-  public handleSkillTrackBy(index: number): number {
-    return index;
-  }
-
-  public onSkillCreate(): boolean {
-    this.store.dispatch(new Form.Skill.Create());
-    return false;
-  }
-
-  public onSkillDelete(index: number): boolean {
-    this.store.dispatch(new Form.Skill.Delete(index));
-    return false;
-  }
-
-  public onSkillNameInput(index: number, event: Event): void {
-    const name = this.getInputValue(event);
-    this.store.dispatch(new Form.Skill.NameUpdate(index, name));
-  }
-
-  public onSkillProficiencyInput(index: number, event: Event): void {
-    const proficiency = parseInt(this.getInputValue(event), 10);
-    this.store.dispatch(new Form.Skill.ProficiencyUpdate(index, proficiency));
   }
 
   public handleCertificationTrackBy(index: number): number {

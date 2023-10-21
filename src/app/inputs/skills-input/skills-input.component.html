@@ -1,0 +1,44 @@
+<div class="input__section">
+  <div class="section__header">Skills</div>
+  <div>
+    <ng-container
+      *ngFor="
+        let skill of formSkills$ | async;
+        let i = index;
+        trackBy: handleSkillTrackBy
+      "
+    >
+      <div class="section__content">
+        <ng-template [ngIf]="i > 0">
+          <div
+            class="section__content-remove"
+            (click)="onSkillDelete(i)"
+            (keyup.enter)="onSkillDelete(i)"
+            tabindex="0"
+          >
+            <div class="section__content-remove-icon">&times;</div>
+          </div>
+        </ng-template>
+        <label for="skillName{{ i }}">Name</label>
+        <input
+          type="text"
+          name="skillName{{ i }}"
+          placeholder="Name"
+          [value]="skill.name"
+          (input)="onSkillNameInput(i, $event)"
+        />
+        <label for="skillProficiency{{ i }}">Proficiency</label>
+        <input
+          type="range"
+          name="skillProficiency{{ i }}"
+          placeholder="Proficiency"
+          minx="0"
+          max="5"
+          [value]="skill.proficiency"
+          (input)="onSkillProficiencyInput(i, $event)"
+        />
+      </div>
+    </ng-container>
+    <button type="button" (click)="onSkillCreate()">+ Add Skill</button>
+  </div>
+</div>
