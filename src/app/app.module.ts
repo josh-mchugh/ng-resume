@@ -21,6 +21,7 @@ import { SkillsComponent } from './pages/template/skills/skills.component';
 import { CertificationsComponent } from './pages/template/certifications/certifications.component';
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 import { ContactInputComponent } from './inputs/contact-input/contact-input.component';
+import { SocialsInputComponent } from './inputs/socials-input/socials-input.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ContactInputComponent } from './inputs/contact-input/contact-input.comp
     CertificationsComponent,
     DetailsInputComponent,
     ContactInputComponent,
+    SocialsInputComponent,
   ],
   imports: [
     BrowserModule,

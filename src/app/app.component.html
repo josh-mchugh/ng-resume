@@ -5,48 +5,7 @@
     <!-- Contact Details Section -->
     <app-contact-input></app-contact-input>
     <!-- Social Section -->
-    <div class="input__section">
-      <div class="section__header">Social</div>
-      <div>
-        <ng-container
-          *ngFor="
-            let social of formSocials$ | async;
-            let i = index;
-            trackBy: handleSocialTrackBy
-          "
-        >
-          <div class="section__content">
-            <ng-template [ngIf]="i > 0">
-              <div
-                class="section__content-remove"
-                (click)="onSocialDelete(i)"
-                (keyup.enter)="onSocialDelete(i)"
-                tabindex="0"
-              >
-                <div class="section__content-remove-icon">&times;</div>
-              </div>
-            </ng-template>
-            <label for="socialName{{ i }}">Name</label>
-            <input
-              type="text"
-              name="socialName{{ i }}"
-              placeholder="Name"
-              [value]="social.name"
-              (input)="onSocialNameInput(i, $event)"
-            />
-            <label for="socialUrl{{ i }}">URL</label>
-            <input
-              type="text"
-              name="socialUrl{{ i }}"
-              placeholder="URL"
-              [value]="social.url"
-              (input)="onSocialUrlInput(i, $event)"
-            />
-          </div>
-        </ng-container>
-        <button type="button" (click)="onSocialCreate()">+ Add Another</button>
-      </div>
-    </div>
+    <app-socials-input></app-socials-input>
     <!-- Experiences Section -->
     <div class="input__section">
       <div class="section__header">Experience</div>

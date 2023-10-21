@@ -5,7 +5,6 @@ import {
   FormCertificationModel,
   FormExperienceModel,
   FormSkillModel,
-  FormSocialModel,
 } from './form.state';
 import { Form } from './form.actions';
 
@@ -15,13 +14,11 @@ import { Form } from './form.actions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  formSocials$: Observable<Array<FormSocialModel>>;
   formExperiences$: Observable<Array<FormExperienceModel>>;
   formSkills$: Observable<Array<FormSkillModel>>;
   formCertifications$: Observable<Array<FormCertificationModel>>;
 
   constructor(private store: Store) {
-    this.formSocials$ = this.store.select((state) => state.form.socials);
     this.formExperiences$ = this.store.select(
       (state) => state.form.experiences,
     );
@@ -29,30 +26,6 @@ export class AppComponent {
     this.formCertifications$ = this.store.select(
       (state) => state.form.certifications,
     );
-  }
-
-  public handleSocialTrackBy(index: number): number {
-    return index;
-  }
-
-  public onSocialCreate(): boolean {
-    this.store.dispatch(new Form.Social.Create());
-    return false;
-  }
-
-  public onSocialDelete(index: number): boolean {
-    this.store.dispatch(new Form.Social.Delete(index));
-    return false;
-  }
-
-  public onSocialNameInput(index: number, event: Event): void {
-    const name = this.getInputValue(event);
-    this.store.dispatch(new Form.Social.NameUpdate(index, name));
-  }
-
-  public onSocialUrlInput(index: number, event: Event): void {
-    const url = this.getInputValue(event);
-    this.store.dispatch(new Form.Social.UrlUpdate(index, url));
   }
 
   public handleExperienceTrackBy(index: number): number {
