@@ -16,4 +16,8 @@ export class CertificationsComponent {
       (state) => state.resume.certifications,
     );
   }
+
+  public handleCertificationTrackBy(index: number): number {
+    return index;
+  }
 }

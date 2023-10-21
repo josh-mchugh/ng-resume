@@ -6,7 +6,12 @@
 </div>
 <div class="section__certification">
   <!-- Certifications -->
-  <ng-container *ngFor="let certification of certifications$ | async">
+  <ng-container
+    *ngFor="
+      let certification of certifications$ | async;
+      handle: handleCertificationTrackBy
+    "
+  >
     <div class="certification">
       <div class="header">
         <div class="title">{{ certification.title }}</div>
