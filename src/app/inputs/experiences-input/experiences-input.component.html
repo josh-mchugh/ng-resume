@@ -1,73 +1,71 @@
-<div class="input__section">
-  <div class="section__header">Experience</div>
-  <div>
-    <ng-container
-      *ngFor="
-        let experience of formExperiences$ | async;
-        let i = index;
-        trackBy: handeExperiencesTrackBy
-      "
-    >
-      <div class="section__content">
-        <ng-template [ngIf]="i > 0">
-          <div
-            class="section__content-remove"
-            (click)="onExperienceDelete(i)"
-            (keyup.enter)="onExperienceDelete(i)"
-            tabindex="0"
-          >
-            <div class="section__content-remove-icon">&times;</div>
-          </div>
-        </ng-template>
-        <label for="experienceTitle{{ i }}">Title</label>
-        <input
-          type="text"
-          name="experienceTitle{{ i }}"
-          placeholder="Title"
-          [value]="experience.title"
-          (input)="onExperienceTitleInput(i, $event)"
-        />
-        <label for="experienceOrganization{{ i }}">Organization</label>
-        <input
-          type="text"
-          name="experienceOrganization{{ i }}"
-          placeholder="Organization"
-          [value]="experience.organization"
-          (input)="onExperienceOrganizationInput(i, $event)"
-        />
-        <label for="experienceDuration{{ i }}">Duration</label>
-        <input
-          type="text"
-          name="experienceDuration{{ i }}"
-          placeholder="Duration"
-          [value]="experience.duration"
-          (input)="onExperienceDurationInput(i, $event)"
-        />
-        <label for="experienceLocation{{ i }}">Location</label>
-        <input
-          type="text"
-          name="experienceLocation{{ i }}"
-          placeholder="Location"
-          [value]="experience.location"
-          (input)="onExperienceLocationInput(i, $event)"
-        />
-        <label for="experienceDescription{{ i }}">Description</label>
-        <textarea
-          name="experienceDescription{{ i }}"
-          placeholder="Description"
-          [value]="experience.description"
-          (input)="onExperienceDescriptionInput(i, $event)"
-        ></textarea>
-        <label for="experienceSkills{{ i }}">Skills</label>
-        <input
-          type="text"
-          name="experienceSkills{{ i }}"
-          placeholder="Skills"
-          [value]="experience.skills"
-          (input)="onExperienceSkillsInput(i, $event)"
-        />
-      </div>
-    </ng-container>
-  </div>
-  <button type="button" (click)="onExperienceCreate()">+ Add Experience</button>
+<div class="section__header">Experience</div>
+<div>
+  <ng-container
+    *ngFor="
+      let experience of formExperiences$ | async;
+      let i = index;
+      trackBy: handeExperiencesTrackBy
+    "
+  >
+    <div class="section__content">
+      <ng-template [ngIf]="i > 0">
+        <div
+          class="section__content-remove"
+          (click)="onExperienceDelete(i)"
+          (keyup.enter)="onExperienceDelete(i)"
+          tabindex="0"
+        >
+          <div class="section__content-remove-icon">&times;</div>
+        </div>
+      </ng-template>
+      <label for="experienceTitle{{ i }}">Title</label>
+      <input
+        type="text"
+        name="experienceTitle{{ i }}"
+        placeholder="Title"
+        [value]="experience.title"
+        (input)="onExperienceTitleInput(i, $event)"
+      />
+      <label for="experienceOrganization{{ i }}">Organization</label>
+      <input
+        type="text"
+        name="experienceOrganization{{ i }}"
+        placeholder="Organization"
+        [value]="experience.organization"
+        (input)="onExperienceOrganizationInput(i, $event)"
+      />
+      <label for="experienceDuration{{ i }}">Duration</label>
+      <input
+        type="text"
+        name="experienceDuration{{ i }}"
+        placeholder="Duration"
+        [value]="experience.duration"
+        (input)="onExperienceDurationInput(i, $event)"
+      />
+      <label for="experienceLocation{{ i }}">Location</label>
+      <input
+        type="text"
+        name="experienceLocation{{ i }}"
+        placeholder="Location"
+        [value]="experience.location"
+        (input)="onExperienceLocationInput(i, $event)"
+      />
+      <label for="experienceDescription{{ i }}">Description</label>
+      <textarea
+        name="experienceDescription{{ i }}"
+        placeholder="Description"
+        [value]="experience.description"
+        (input)="onExperienceDescriptionInput(i, $event)"
+      ></textarea>
+      <label for="experienceSkills{{ i }}">Skills</label>
+      <input
+        type="text"
+        name="experienceSkills{{ i }}"
+        placeholder="Skills"
+        [value]="experience.skills"
+        (input)="onExperienceSkillsInput(i, $event)"
+      />
+    </div>
+  </ng-container>
 </div>
+<button type="button" (click)="onExperienceCreate()">+ Add Experience</button>
