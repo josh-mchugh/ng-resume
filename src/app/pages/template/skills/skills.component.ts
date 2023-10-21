@@ -14,4 +14,8 @@ export class SkillsComponent {
   constructor(private store: Store) {
     this.skills$ = this.store.select((state) => state.resume.skills);
   }
+
+  public handleSkillTrackBy(index: number): number {
+    return index;
+  }
 }

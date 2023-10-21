@@ -7,7 +7,9 @@
 <div class="section__skill">
   <div class="list">
     <!-- Skills -->
-    <ng-container *ngFor="let skill of skills$ | async">
+    <ng-container
+      *ngFor="let skill of skills$ | async; trackBy: handleSkillTrackBy"
+    >
       <div class="item">
         <ng-template [ngIf]="skill.name">
           <div>{{ skill.name }}</div>
