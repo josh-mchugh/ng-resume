@@ -14,4 +14,8 @@ export class SocialsComponent {
   constructor(private store: Store) {
     this.socials$ = this.store.select((state) => state.resume.socials);
   }
+
+  public handleSocialTrackBy(index: number): number {
+    return index;
+  }
 }
