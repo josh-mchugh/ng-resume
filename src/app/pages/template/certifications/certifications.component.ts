@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { ResumeCertificationModel } from './../../../resume.state';
+import { ResumeCertificationModel } from './../../../shared/state/resume.state';
 
 @Component({
   selector: 'app-certifications',

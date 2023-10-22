@@ -9,8 +9,8 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppComponent } from './app.component';
 
 import { environment } from './../environments/environment';
-import { ResumeState } from './resume.state';
-import { FormState } from './form.state';
+import { ResumeState } from './shared/state/resume.state';
+import { FormState } from './shared/state/form.state';
 import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';

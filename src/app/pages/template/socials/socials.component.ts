@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { ResumeSocialModel } from './../../../resume.state';
+import { ResumeSocialModel } from './../../../shared/state/resume.state';
 
 @Component({
   selector: 'app-socials',
