@@ -1,28 +1,32 @@
 <!-- Sheet -->
-<ng-container *ngIf="(layout$ | async) as layout">
-<div class="sheet">
-  <div [ngClass]="layout.class">
-    <ng-container *ngFor="let row of layout.rows">
-      <div [class]="row.class">
-        <ng-container *ngFor="let column of row.columns">
-          <div [class]="column.class">
-            <div style="height: auto">
-              <ng-container *ngFor="let section of column.sections">
-                <ng-container [ngSwitch]="section.type">
-                  <app-name *ngSwitchCase="'NAME'"></app-name>
-                  <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
-                  <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
-                  <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
-                  <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>
-                  <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
-                  <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
+<ng-container *ngIf="layout$ | async as layout">
+  <div class="sheet">
+    <div [ngClass]="layout.class">
+      <ng-container *ngFor="let row of layout.rows">
+        <div [class]="row.class">
+          <ng-container *ngFor="let column of row.columns">
+            <div [class]="column.class">
+              <div style="height: auto">
+                <ng-container *ngFor="let section of column.sections">
+                  <ng-container [ngSwitch]="section.type">
+                    <app-name *ngSwitchCase="'NAME'"></app-name>
+                    <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
+                    <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
+                    <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
+                    <app-experiences
+                      *ngSwitchCase="'EXPERIENCES'"
+                    ></app-experiences>
+                    <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
+                    <app-certifications
+                      *ngSwitchCase="'CERTIFICATIONS'"
+                    ></app-certifications>
+                  </ng-container>
                 </ng-container>
-              </ng-container>
+              </div>
             </div>
-          </div>
-        </ng-container>
-      </div>
-    </ng-container>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
   </div>
-</div>
 </ng-container>
