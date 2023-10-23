@@ -1,32 +1,28 @@
 <!-- Sheet -->
+<ng-container *ngIf="(layout$ | async) as layout">
 <div class="sheet">
-  <div class="sheet--full-height">
-    <!-- Row -->
-    <div class="row">
-      <!-- Left Column -->
-      <div class="column__left">
-        <div style="height: auto">
-          <!-- Name & Title Section -->
-          <app-name></app-name>
-          <!-- Summary Section -->
-          <app-summary></app-summary>
-          <!-- Contact Section -->
-          <app-contact></app-contact>
-          <!-- Social Section -->
-          <app-socials></app-socials>
-        </div>
+  <div [ngClass]="layout.class">
+    <ng-container *ngFor="let row of layout.rows">
+      <div [class]="row.class">
+        <ng-container *ngFor="let column of row.columns">
+          <div [class]="column.class">
+            <div style="height: auto">
+              <ng-container *ngFor="let section of column.sections">
+                <ng-container [ngSwitch]="section.type">
+                  <app-name *ngSwitchCase="'NAME'"></app-name>
+                  <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
+                  <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
+                  <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
+                  <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>
+                  <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
+                  <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
       </div>
-      <!-- Right -->
-      <div class="column__right">
-        <div style="height: auto">
-          <!-- Experiences Section -->
-          <app-experiences></app-experiences>
-          <!-- Skills Section -->
-          <app-skills></app-skills>
-          <!-- Certifications Section -->
-          <app-certifications></app-certifications>
-        </div>
-      </div>
-    </div>
+    </ng-container>
   </div>
 </div>
+</ng-container>

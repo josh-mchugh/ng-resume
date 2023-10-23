@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
 import { ResumeState } from './shared/state/resume.state';
 import { FormState } from './shared/state/form.state';
+import { LayoutState } from './shared/state/layout.state';
 import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
@@ -47,7 +48,7 @@ import { CertificationsInputComponent } from './inputs/certifications-input/cert
   imports: [
     BrowserModule,
     FormsModule,
-    NgxsModule.forRoot([FormState, ResumeState], {
+    NgxsModule.forRoot([FormState, ResumeState, LayoutState], {
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot({
