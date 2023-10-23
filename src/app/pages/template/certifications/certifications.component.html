@@ -9,7 +9,7 @@
   <ng-container
     *ngFor="
       let certification of certifications$ | async;
-      handle: handleCertificationTrackBy
+      trackBy: handleCertificationTrackBy
     "
   >
     <div class="certification">
