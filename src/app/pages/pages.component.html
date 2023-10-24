@@ -3,11 +3,7 @@
   <div class="sheet">
     <div [ngClass]="layout.class">
       <ng-container *ngFor="let row of layout.rows">
-        <div [class]="row.class">
-          <ng-container *ngFor="let column of row.columns">
-            <app-column [class]="column.class" [column]="column"></app-column>
-          </ng-container>
-        </div>
+        <app-row [class]="row.class" [row]="row"></app-row>
       </ng-container>
     </div>
   </div>

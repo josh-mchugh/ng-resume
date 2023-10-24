@@ -28,6 +28,7 @@ import { SkillsInputComponent } from './inputs/skills-input/skills-input.compone
 import { CertificationsInputComponent } from './inputs/certifications-input/certifications-input.component';
 import { SectionComponent } from './pages/section/section.component';
 import { ColumnComponent } from './pages/column/column.component';
+import { RowComponent } from './pages/row/row.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ColumnComponent } from './pages/column/column.component';
     CertificationsInputComponent,
     SectionComponent,
     ColumnComponent,
+    RowComponent,
   ],
   imports: [
     BrowserModule,
