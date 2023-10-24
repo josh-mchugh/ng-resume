@@ -5,13 +5,7 @@
       <ng-container *ngFor="let row of layout.rows">
         <div [class]="row.class">
           <ng-container *ngFor="let column of row.columns">
-            <div [class]="column.class">
-              <div style="height: auto">
-                <ng-container *ngFor="let section of column.sections">
-                  <app-section [section]="section"></app-section>
-                </ng-container>
-              </div>
-            </div>
+            <app-column [class]="column.class" [column]="column"></app-column>
           </ng-container>
         </div>
       </ng-container>
