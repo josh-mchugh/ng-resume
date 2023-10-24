@@ -8,19 +8,7 @@
             <div [class]="column.class">
               <div style="height: auto">
                 <ng-container *ngFor="let section of column.sections">
-                  <ng-container [ngSwitch]="section.type">
-                    <app-name *ngSwitchCase="'NAME'"></app-name>
-                    <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
-                    <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
-                    <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
-                    <app-experiences
-                      *ngSwitchCase="'EXPERIENCES'"
-                    ></app-experiences>
-                    <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
-                    <app-certifications
-                      *ngSwitchCase="'CERTIFICATIONS'"
-                    ></app-certifications>
-                  </ng-container>
+                  <app-section [section]="section"></app-section>
                 </ng-container>
               </div>
             </div>
