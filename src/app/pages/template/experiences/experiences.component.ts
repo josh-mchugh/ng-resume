@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { ResumeExperienceModel } from './../../../shared/state/resume.state';
+import { ResumeExperienceModel } from '@shared/state/resume.state';
 
 @Component({
   selector: 'app-experiences',

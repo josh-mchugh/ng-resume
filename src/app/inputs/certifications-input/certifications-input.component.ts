@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { FormCertificationModel } from './../../shared/state/form.state';
-import { Form } from './../../shared/state/form.actions';
+import { FormCertificationModel } from '@shared/state/form.state';
+import { Form } from '@shared/state/form.actions';
 
 @Component({
   selector: 'app-certifications-input',

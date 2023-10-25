@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { FormSocialModel } from './../../shared/state/form.state';
-import { Form } from './../../shared/state/form.actions';
+import { FormSocialModel } from '@shared/state/form.state';
+import { Form } from '@shared/state/form.actions';
 
 @Component({
   selector: 'app-socials-input',

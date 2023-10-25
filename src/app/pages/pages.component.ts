@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { LayoutModel } from './../shared/state/layout.state';
+import { LayoutModel } from '@shared/state/layout.state';
 
 @Component({
   selector: 'app-pages',
