@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxResizeObserverModule } from 'ngx-resize-observer';
 
 import { AppComponent } from './app.component';
 
@@ -26,9 +27,6 @@ import { SocialsInputComponent } from './inputs/socials-input/socials-input.comp
 import { ExperiencesInputComponent } from './inputs/experiences-input/experiences-input.component';
 import { SkillsInputComponent } from './inputs/skills-input/skills-input.component';
 import { CertificationsInputComponent } from './inputs/certifications-input/certifications-input.component';
-import { SectionComponent } from './pages/section/section.component';
-import { ColumnComponent } from './pages/column/column.component';
-import { RowComponent } from './pages/row/row.component';
 
 @NgModule({
   declarations: [
@@ -47,9 +45,6 @@ import { RowComponent } from './pages/row/row.component';
     ExperiencesInputComponent,
     SkillsInputComponent,
     CertificationsInputComponent,
-    SectionComponent,
-    ColumnComponent,
-    RowComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +58,7 @@ import { RowComponent } from './pages/row/row.component';
     NgxsLoggerPluginModule.forRoot({
       disabled: environment.production,
     }),
+    NgxResizeObserverModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

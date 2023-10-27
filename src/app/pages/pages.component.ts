@@ -14,4 +14,8 @@ export class PagesComponent {
   constructor(private store: Store) {
     this.layout$ = this.store.select((state) => state.layout);
   }
+
+  public onColumnResize(event: ResizeObserverEntry): void {
+    console.log("Resized column: " + new Date());
+  }
 }
