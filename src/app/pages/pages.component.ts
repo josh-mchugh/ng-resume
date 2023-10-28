@@ -15,7 +15,18 @@ export class PagesComponent {
     this.layout$ = this.store.select((state) => state.layout);
   }
 
-  public onColumnResize(event: ResizeObserverEntry): void {
-    console.log("Resized column: " + new Date());
+  public onRowResize(rowIndex: number, event: ResizeObserverEntry): void {
+    console.log(`Row[${rowIndex}] resized: ${new Date()}`);
+  }
+
+  public onColumnResize(columnIndex: number, event: ResizeObserverEntry): void {
+    console.log(`Column[${columnIndex}] resized: ${new Date()}`);
+  }
+
+  public onSectionResize(
+    sectionIndex: number,
+    event: ResizeObserverEntry,
+  ): void {
+    console.log(`Section[${sectionIndex}] resized: ${new Date()}`);
   }
 }

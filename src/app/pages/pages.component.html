@@ -2,25 +2,47 @@
 <ng-container *ngIf="layout$ | async as layout">
   <div class="sheet">
     <div [ngClass]="layout.class">
-      <ng-container *ngFor="let row of layout.rows">
-        <div [class]="row.class">
-          <ng-container *ngFor="let column of row.columns">
+      <ng-container *ngFor="let row of layout.rows; let rowIndex = index">
+        <div
+          [class]="row.class"
+          (onResize)="onRowResize(rowIndex, $event)"
+          resizeBoxModel="border-box"
+        >
+          >
+          <ng-container
+            *ngFor="let column of row.columns; let columnIndex = index"
+          >
             <div [class]="column.class">
-              <div style="height: auto" (onResize)="onColumnResize($event)" resizeBoxModel="border-box">
-                <ng-container *ngFor="let section of column.sections">
-                  <ng-container [ngSwitch]="section.type">
-                    <app-name *ngSwitchCase="'NAME'"></app-name>
-                    <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
-                    <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
-                    <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
-                    <app-experiences
-                      *ngSwitchCase="'EXPERIENCES'"
-                    ></app-experiences>
-                    <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
-                    <app-certifications
-                      *ngSwitchCase="'CERTIFICATIONS'"
-                    ></app-certifications>
-                  </ng-container>
+              <div
+                style="height: auto"
+                (onResize)="onColumnResize(columnIndex, $event)"
+                resizeBoxModel="border-box"
+              >
+                <ng-container
+                  *ngFor="
+                    let section of column.sections;
+                    let sectionIndex = index
+                  "
+                >
+                  <div
+                    style="height: auto"
+                    (onResize)="onSectionResize(sectionIndex, $event)"
+                    resizeBoxModel="border-box"
+                  >
+                    <ng-container [ngSwitch]="section.type">
+                      <app-name *ngSwitchCase="'NAME'"></app-name>
+                      <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
+                      <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
+                      <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
+                      <app-experiences
+                        *ngSwitchCase="'EXPERIENCES'"
+                      ></app-experiences>
+                      <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
+                      <app-certifications
+                        *ngSwitchCase="'CERTIFICATIONS'"
+                      ></app-certifications>
+                    </ng-container>
+                  </div>
                 </ng-container>
               </div>
             </div>
