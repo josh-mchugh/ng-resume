@@ -2,7 +2,13 @@
 <ng-container *ngIf="layout$ | async as layout">
   <div class="sheet">
     <div [ngClass]="layout.class">
-      <ng-container *ngFor="let row of layout.rows; let rowIndex = index">
+      <ng-container
+        *ngFor="
+          let row of layout.rows;
+          let rowIndex = index;
+          trackBy: handleRowTrackBy
+        "
+      >
         <div
           [class]="row.class"
           (onResize)="onRowResize(rowIndex, $event)"
@@ -10,7 +16,11 @@
         >
           >
           <ng-container
-            *ngFor="let column of row.columns; let columnIndex = index"
+            *ngFor="
+              let column of row.columns;
+              let columnIndex = index;
+              trackBy: handleColumnTrackBy
+            "
           >
             <div [class]="column.class">
               <div
@@ -21,7 +31,8 @@
                 <ng-container
                   *ngFor="
                     let section of column.sections;
-                    let sectionIndex = index
+                    let sectionIndex = index;
+                    trackBy: handleSectionTrackBy
                   "
                 >
                   <div

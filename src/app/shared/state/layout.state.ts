@@ -1,23 +1,28 @@
 import { Injectable } from '@angular/core';
-import { State } from '@ngxs/store';
+import { State, Action, StateContext } from '@ngxs/store';
+import { Layout } from './layout.actions';
 
-export interface LayoutModel {
+export interface LayoutStateModel {
   class: string;
+  dimension: Dimension;
   rows: Array<RowModel>;
 }
 
 export interface RowModel {
   class: string;
+  dimension: Dimension;
   columns: Array<ColumnModel>;
 }
 
 export interface ColumnModel {
   class: string;
+  dimension: Dimension;
   sections: Array<SectionModel>;
 }
 
 export interface SectionModel {
   type: SectionType;
+  dimension: Dimension;
 }
 
 export enum SectionType {
@@ -30,29 +35,74 @@ export enum SectionType {
   CERTIFICATIONS = 'CERTIFICATIONS',
 }
 
-@State<LayoutModel>({
+export interface Dimension {
+  x: number;
+  y: number;
+  right: number;
+  bottom: number;
+  height: number;
+  width: number;
+}
+
+function initDimension(): Dimension {
+  return {
+    x: 0,
+    y: 0,
+    right: 0,
+    bottom: 0,
+    height: 0,
+    width: 0,
+  };
+}
+
+@State<LayoutStateModel>({
   name: 'layout',
   defaults: {
     class: 'sheet--full-height',
+    dimension: initDimension(),
     rows: [
       {
         class: 'row',
+        dimension: initDimension(),
         columns: [
           {
             class: 'column__left',
+            dimension: initDimension(),
             sections: [
-              { type: SectionType.NAME },
-              { type: SectionType.SUMMARY },
-              { type: SectionType.CONTACT },
-              { type: SectionType.SOCIALS },
+              {
+                type: SectionType.NAME,
+                dimension: initDimension(),
+              },
+              {
+                type: SectionType.SUMMARY,
+                dimension: initDimension(),
+              },
+              {
+                type: SectionType.CONTACT,
+                dimension: initDimension(),
+              },
+              {
+                type: SectionType.SOCIALS,
+                dimension: initDimension(),
+              },
             ],
           },
           {
             class: 'column__right',
+            dimension: initDimension(),
             sections: [
-              { type: SectionType.EXPERIENCES },
-              { type: SectionType.SKILLS },
-              { type: SectionType.CERTIFICATIONS },
+              {
+                type: SectionType.EXPERIENCES,
+                dimension: initDimension(),
+              },
+              {
+                type: SectionType.SKILLS,
+                dimension: initDimension(),
+              },
+              {
+                type: SectionType.CERTIFICATIONS,
+                dimension: initDimension(),
+              },
             ],
           },
         ],
@@ -61,4 +111,19 @@ export enum SectionType {
   },
 })
 @Injectable()
-export class LayoutState {}
+export class LayoutState {
+  @Action(Layout.DimensionRowUpdate)
+  dimensionRowUpdate(
+    ctx: StateContext<LayoutStateModel>,
+    action: Layout.DimensionRowUpdate,
+  ) {
+    const state = ctx.getState();
+    const updatedRows = state.rows.map((row, index) =>
+      index === action.index ? { ...row, dimension: action.dimension } : row,
+    );
+    ctx.setState({
+      ...state,
+      rows: updatedRows,
+    });
+  }
+}
