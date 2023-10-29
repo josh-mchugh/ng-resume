@@ -49,9 +49,19 @@ export class PagesComponent {
   }
 
   public onSectionResize(
+    rowIndex: number,
+    columnIndex: number,
     sectionIndex: number,
     event: ResizeObserverEntry,
   ): void {
-    console.log(`Section[${sectionIndex}] resized: ${new Date()}`);
+    const dimension = this.dimensionService.createDimension(event.target);
+    this.store.dispatch(
+      new Layout.DimensionSectionUpdate(
+        rowIndex,
+        columnIndex,
+        sectionIndex,
+        dimension,
+      ),
+    );
   }
 }

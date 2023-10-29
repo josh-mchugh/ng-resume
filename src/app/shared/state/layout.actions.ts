@@ -17,4 +17,14 @@ export namespace Layout {
       public dimension: Dimension,
     ) {}
   }
+
+  export class DimensionSectionUpdate {
+    static readonly type = '[Dimension] Section Update';
+    constructor(
+      public rowIndex: number,
+      public columnIndex: number,
+      public sectionIndex: number,
+      public dimension: Dimension,
+    ) {}
+  }
 }

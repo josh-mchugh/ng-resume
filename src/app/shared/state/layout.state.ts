@@ -150,4 +150,37 @@ export class LayoutState {
       rows: updatedRows,
     });
   }
+
+  @Action(Layout.DimensionSectionUpdate)
+  dimensionSectionUpdate(
+    ctx: StateContext<LayoutStateModel>,
+    action: Layout.DimensionSectionUpdate,
+  ) {
+    const state = ctx.getState();
+    const updatedRows = state.rows.map((row, rowIndex) => {
+      if (rowIndex === action.rowIndex) {
+        const updatedColumns = row.columns.map((column, columnIndex) => {
+          if (columnIndex === action.columnIndex) {
+            const updatedSections = column.sections.map(
+              (section, sectionIndex) =>
+                sectionIndex === action.sectionIndex
+                  ? { ...section, dimension: action.dimension }
+                  : section,
+            );
+            return { ...column, sections: updatedSections };
+          } else {
+            return column;
+          }
+        });
+        return { ...row, columns: updatedColumns };
+      } else {
+        return row;
+      }
+    });
+
+    ctx.setState({
+      ...state,
+      rows: updatedRows,
+    });
+  }
 }

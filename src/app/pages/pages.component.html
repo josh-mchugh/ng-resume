@@ -36,7 +36,14 @@
                 >
                   <div
                     style="height: auto"
-                    (onResize)="onSectionResize(sectionIndex, $event)"
+                    (onResize)="
+                      onSectionResize(
+                        rowIndex,
+                        columnIndex,
+                        sectionIndex,
+                        $event
+                      )
+                    "
                     resizeBoxModel="border-box"
                   >
                     <ng-container [ngSwitch]="section.type">
