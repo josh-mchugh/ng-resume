@@ -119,8 +119,32 @@ export class LayoutState {
   ) {
     const state = ctx.getState();
     const updatedRows = state.rows.map((row, index) =>
-      index === action.index ? { ...row, dimension: action.dimension } : row,
+      index === action.rowIndex ? { ...row, dimension: action.dimension } : row,
     );
+    ctx.setState({
+      ...state,
+      rows: updatedRows,
+    });
+  }
+
+  @Action(Layout.DimensionColumnUpdate)
+  dimensionColumnUpdate(
+    ctx: StateContext<LayoutStateModel>,
+    action: Layout.DimensionColumnUpdate,
+  ) {
+    const state = ctx.getState();
+    const updatedRows = state.rows.map((row, rowIndex) => {
+      if (rowIndex === action.rowIndex) {
+        const updatedColumns = row.columns.map((column, columnIndex) =>
+          columnIndex === action.columnIndex
+            ? { ...column, dimension: action.dimension }
+            : column,
+        );
+        return { ...row, columns: updatedColumns };
+      } else {
+        return row;
+      }
+    });
     ctx.setState({
       ...state,
       rows: updatedRows,

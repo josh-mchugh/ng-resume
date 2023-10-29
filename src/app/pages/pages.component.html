@@ -24,7 +24,7 @@
             <div [class]="column.class">
               <div
                 style="height: auto"
-                (onResize)="onColumnResize(columnIndex, $event)"
+                (onResize)="onColumnResize(rowIndex, columnIndex, $event)"
                 resizeBoxModel="border-box"
               >
                 <ng-container

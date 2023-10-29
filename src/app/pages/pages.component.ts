@@ -25,7 +25,6 @@ export class PagesComponent {
   }
 
   public onRowResize(rowIndex: number, event: ResizeObserverEntry): void {
-    console.log(`Row[${rowIndex}] resized: ${new Date()}`);
     const dimension = this.dimensionService.createDimension(event.target);
     this.store.dispatch(new Layout.DimensionRowUpdate(rowIndex, dimension));
   }
@@ -34,8 +33,15 @@ export class PagesComponent {
     return index;
   }
 
-  public onColumnResize(columnIndex: number, event: ResizeObserverEntry): void {
-    console.log(`Column[${columnIndex}] resized: ${new Date()}`);
+  public onColumnResize(
+    rowIndex: number,
+    columnIndex: number,
+    event: ResizeObserverEntry,
+  ): void {
+    const dimension = this.dimensionService.createDimension(event.target);
+    this.store.dispatch(
+      new Layout.DimensionColumnUpdate(rowIndex, columnIndex, dimension),
+    );
   }
 
   public handleSectionTrackBy(index: number): number {
