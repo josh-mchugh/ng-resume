@@ -56,6 +56,9 @@
                       />
                       <app-summary
                         *ngSwitchCase="'SUMMARY'"
+                        [rowIndex]="rowIndex"
+                        [columnIndex]="columnIndex"
+                        [sectionIndex]="sectionIndex"
                         [segments]="section.segments"
                       />
                       <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
