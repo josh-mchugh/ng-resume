@@ -30,7 +30,7 @@ export enum SectionType {
   NAME = 'NAME',
   SUMMARY = 'SUMMARY',
   CONTACT = 'CONTACT',
-  SOCIALS = 'SOCIAL',
+  SOCIALS = 'SOCIALS',
   EXPERIENCES = 'EXPERIENCES',
   SKILLS = 'SKILLS',
   CERTIFICATIONS = 'CERTIFICATIONS',
@@ -95,7 +95,18 @@ function initDimension(): Dimension {
               {
                 type: SectionType.SUMMARY,
                 dimension: initDimension(),
-                segments: [],
+                segments: [
+                  {
+                    name: 'HEADER',
+                    type: SegmentType.COMPONENT,
+                    dimension: initDimension(),
+                  },
+                  {
+                    name: 'SUMMARY',
+                    type: SegmentType.COMPONENT,
+                    dimension: initDimension(),
+                  },
+                ],
               },
               {
                 type: SectionType.CONTACT,

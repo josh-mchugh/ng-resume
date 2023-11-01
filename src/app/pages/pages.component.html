@@ -50,8 +50,11 @@
                       <app-name
                         *ngSwitchCase="'NAME'"
                         [segments]="section.segments"
-                      ></app-name>
-                      <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
+                      />
+                      <app-summary
+                        *ngSwitchCase="'SUMMARY'"
+                        [segments]="section.segments"
+                      />
                       <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
                       <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
                       <app-experiences
@@ -61,6 +64,10 @@
                       <app-certifications
                         *ngSwitchCase="'CERTIFICATIONS'"
                       ></app-certifications>
+                      <ng-container *ngSwitchDefault>
+                        Section should have a valid type. Current Type:
+                        {{ section.type }}
+                      </ng-container>
                     </ng-container>
                   </div>
                 </ng-container>

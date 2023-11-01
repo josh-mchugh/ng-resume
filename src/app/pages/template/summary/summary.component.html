@@ -1,11 +1,23 @@
-<div class="section__header section__header--summary">
-  <div class="title">SUMMARY</div>
-  <div class="divider">
-    <div class="divider__container">
-      <div class="divider__line divider__line--white"></div>
-    </div>
-  </div>
-</div>
-<div class="section__summary">
-  <div class="summary">{{ summary$ | async }}</div>
-</div>
+<ng-container *ngFor="let segment of segments">
+  <ng-container [ngSwitch]="segment.name">
+    <ng-container *ngSwitchCase="'HEADER'">
+      <div class="section__header section__header--summary">
+        <div class="title">SUMMARY</div>
+        <div class="divider">
+          <div class="divider__container">
+            <div class="divider__line divider__line--white"></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'SUMMARY'">
+      <div class="section__summary">
+        <div class="summary">{{ summary$ | async }}</div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      Error occured. This should have not happened with this value:
+      {{ segment.name }}.
+    </ng-container>
+  </ng-container>
+</ng-container>
