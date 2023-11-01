@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
+import { SegmentModel } from '@shared/state/layout.state';
 
 @Component({
   selector: 'app-name',
@@ -8,6 +9,8 @@ import { Store } from '@ngxs/store';
   styleUrls: ['./name.component.scss'],
 })
 export class NameComponent {
+  @Input() segments!: Array<SegmentModel>;
+
   name$: Observable<string>;
   title$: Observable<string>;
 

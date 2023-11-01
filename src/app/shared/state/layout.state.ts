@@ -23,6 +23,7 @@ export interface ColumnModel {
 export interface SectionModel {
   type: SectionType;
   dimension: Dimension;
+  segments: Array<SegmentModel>;
 }
 
 export enum SectionType {
@@ -33,6 +34,17 @@ export enum SectionType {
   EXPERIENCES = 'EXPERIENCES',
   SKILLS = 'SKILLS',
   CERTIFICATIONS = 'CERTIFICATIONS',
+}
+
+export interface SegmentModel {
+  name: string;
+  type: SegmentType;
+  dimension: Dimension;
+}
+
+export enum SegmentType {
+  COMPONENT = 'COMPONENT',
+  LIST = 'LIST',
 }
 
 export interface Dimension {
@@ -72,18 +84,28 @@ function initDimension(): Dimension {
               {
                 type: SectionType.NAME,
                 dimension: initDimension(),
+                segments: [
+                  {
+                    name: 'NAME',
+                    type: SegmentType.COMPONENT,
+                    dimension: initDimension(),
+                  },
+                ],
               },
               {
                 type: SectionType.SUMMARY,
                 dimension: initDimension(),
+                segments: [],
               },
               {
                 type: SectionType.CONTACT,
                 dimension: initDimension(),
+                segments: [],
               },
               {
                 type: SectionType.SOCIALS,
                 dimension: initDimension(),
+                segments: [],
               },
             ],
           },
@@ -94,14 +116,17 @@ function initDimension(): Dimension {
               {
                 type: SectionType.EXPERIENCES,
                 dimension: initDimension(),
+                segments: [],
               },
               {
                 type: SectionType.SKILLS,
                 dimension: initDimension(),
+                segments: [],
               },
               {
                 type: SectionType.CERTIFICATIONS,
                 dimension: initDimension(),
+                segments: [],
               },
             ],
           },

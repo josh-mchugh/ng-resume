@@ -47,7 +47,10 @@
                     resizeBoxModel="border-box"
                   >
                     <ng-container [ngSwitch]="section.type">
-                      <app-name *ngSwitchCase="'NAME'"></app-name>
+                      <app-name
+                        *ngSwitchCase="'NAME'"
+                        [segments]="section.segments"
+                      ></app-name>
                       <app-summary *ngSwitchCase="'SUMMARY'"></app-summary>
                       <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
                       <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
