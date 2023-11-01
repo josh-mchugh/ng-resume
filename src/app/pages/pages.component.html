@@ -49,6 +49,9 @@
                     <ng-container [ngSwitch]="section.type">
                       <app-name
                         *ngSwitchCase="'NAME'"
+                        [rowIndex]="rowIndex"
+                        [columnIndex]="columnIndex"
+                        [sectionIndex]="sectionIndex"
                         [segments]="section.segments"
                       />
                       <app-summary

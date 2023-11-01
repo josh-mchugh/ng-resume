@@ -1,7 +1,13 @@
-<ng-container *ngFor="let segment of segments">
+<ng-container
+  *ngFor="let segment of segments; let i = index; trackBy: handleTrackBy"
+>
   <ng-container [ngSwitch]="segment.name">
     <ng-container *ngSwitchCase="'NAME'">
-      <div class="section__name">
+      <div
+        class="section__name"
+        (onResize)="onResize(i, $event)"
+        resizeBoxModel="border-box"
+      >
         <div class="name">{{ name$ | async }}</div>
         <div class="title">{{ title$ | async }}</div>
       </div>

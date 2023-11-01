@@ -219,4 +219,49 @@ export class LayoutState {
       rows: updatedRows,
     });
   }
+
+  @Action(Layout.DimensionSegmentUpdate)
+  dimensionSegmentUpdate(
+    ctx: StateContext<LayoutStateModel>,
+    action: Layout.DimensionSegmentUpdate,
+  ) {
+    const state = ctx.getState();
+    const updatedRows = state.rows.map((row, rowIndex) => {
+      if (rowIndex === action.rowIndex) {
+        const updatedColumns = row.columns.map((column, columnIndex) => {
+          if (columnIndex === action.columnIndex) {
+            const updatedSections = column.sections.map(
+              (section, sectionIndex) => {
+                if (sectionIndex === action.sectionIndex) {
+                  const updatedSegements = section.segments.map(
+                    (segment, segmentIndex) => {
+                      if (segmentIndex === action.segmentIndex) {
+                        return { ...segment, dimension: action.dimension };
+                      } else {
+                        return segment;
+                      }
+                    },
+                  );
+                  return { ...section, segments: updatedSegements };
+                } else {
+                  return section;
+                }
+              },
+            );
+            return { ...column, sections: updatedSections };
+          } else {
+            return column;
+          }
+        });
+        return { ...row, columns: updatedColumns };
+      } else {
+        return row;
+      }
+    });
+
+    ctx.setState({
+      ...state,
+      rows: updatedRows,
+    });
+  }
 }

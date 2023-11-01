@@ -27,4 +27,15 @@ export namespace Layout {
       public dimension: Dimension,
     ) {}
   }
+
+  export class DimensionSegmentUpdate {
+    static readonly type = '[Dimension] Segment Update';
+    constructor(
+      public rowIndex: number,
+      public columnIndex: number,
+      public sectionIndex: number,
+      public segmentIndex: number,
+      public dimension: Dimension,
+    ) {}
+  }
 }
