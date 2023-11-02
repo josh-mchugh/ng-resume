@@ -1,8 +1,8 @@
 <ng-container
-  *ngFor="let segment of segments; let i = index; trackBy: handleTrackBy"
+  *ngFor="let section of sections; let i = index; trackBy: handleTrackBy"
 >
-  <ng-container [ngSwitch]="segment.name">
-    <ng-container *ngSwitchCase="'NAME'">
+  <ng-container [ngSwitch]="section.type">
+    <ng-container *ngSwitchCase="'NAME_CONTENT'">
       <div
         class="section__name"
         (onResize)="onResize(i, $event)"

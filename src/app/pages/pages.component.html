@@ -4,7 +4,7 @@
     <div [ngClass]="layout.class">
       <ng-container
         *ngFor="
-          let row of layout.rows;
+          let row of layout.sections;
           let rowIndex = index;
           trackBy: handleRowTrackBy
         "
@@ -16,7 +16,7 @@
         >
           <ng-container
             *ngFor="
-              let column of row.columns;
+              let column of row.children;
               let columnIndex = index;
               trackBy: handleColumnTrackBy
             "
@@ -29,7 +29,7 @@
               >
                 <ng-container
                   *ngFor="
-                    let section of column.sections;
+                    let section of column.children;
                     let sectionIndex = index;
                     trackBy: handleSectionTrackBy
                   "
@@ -52,14 +52,14 @@
                         [rowIndex]="rowIndex"
                         [columnIndex]="columnIndex"
                         [sectionIndex]="sectionIndex"
-                        [segments]="section.segments"
+                        [sections]="section.children"
                       />
                       <app-summary
                         *ngSwitchCase="'SUMMARY'"
                         [rowIndex]="rowIndex"
                         [columnIndex]="columnIndex"
                         [sectionIndex]="sectionIndex"
-                        [segments]="section.segments"
+                        [sections]="section.children"
                       />
                       <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
                       <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>

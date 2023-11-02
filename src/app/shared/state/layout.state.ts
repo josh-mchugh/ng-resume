@@ -5,46 +5,33 @@ import { Layout } from './layout.actions';
 export interface LayoutStateModel {
   class: string;
   dimension: Dimension;
-  rows: Array<RowModel>;
-}
-
-export interface RowModel {
-  class: string;
-  dimension: Dimension;
-  columns: Array<ColumnModel>;
-}
-
-export interface ColumnModel {
-  class: string;
-  dimension: Dimension;
   sections: Array<SectionModel>;
 }
 
 export interface SectionModel {
   type: SectionType;
+  class: string;
   dimension: Dimension;
-  segments: Array<SegmentModel>;
+  children: Array<SectionModel>;
 }
 
 export enum SectionType {
-  NAME = 'NAME',
-  SUMMARY = 'SUMMARY',
+  //ROW
+  ROW = 'ROW',
+  // COLUMN
+  COLUMN = 'COLUMN',
+  // NAME COMPONENT
+  NAME_COMPONENT = 'NAME_COMPONENT',
+  NAME_CONTENT = 'NAME_CONTENT',
+  // SUMMARY COMPONENT
+  SUMMARY_COMPONENT = 'SUMMARY_COMPONENT',
+  SUMMARY_HEADER = 'SUMMARY_HEADER',
+  SUMMARY_CONTENT = 'SUMMARY_CONTENT',
   CONTACT = 'CONTACT',
   SOCIALS = 'SOCIALS',
   EXPERIENCES = 'EXPERIENCES',
   SKILLS = 'SKILLS',
   CERTIFICATIONS = 'CERTIFICATIONS',
-}
-
-export interface SegmentModel {
-  name: string;
-  type: SegmentType;
-  dimension: Dimension;
-}
-
-export enum SegmentType {
-  COMPONENT = 'COMPONENT',
-  LIST = 'LIST',
 }
 
 export interface Dimension {
@@ -72,72 +59,85 @@ function initDimension(): Dimension {
   defaults: {
     class: 'sheet--full-height',
     dimension: initDimension(),
-    rows: [
+    sections: [
       {
+        type: SectionType.ROW,
         class: 'row',
         dimension: initDimension(),
-        columns: [
+        children: [
           {
+            type: SectionType.COLUMN,
             class: 'column__left',
             dimension: initDimension(),
-            sections: [
+            children: [
               {
-                type: SectionType.NAME,
+                type: SectionType.NAME_COMPONENT,
+                class: '',
                 dimension: initDimension(),
-                segments: [
+                children: [
                   {
-                    name: 'NAME',
-                    type: SegmentType.COMPONENT,
+                    type: SectionType.NAME_CONTENT,
+                    class: '',
                     dimension: initDimension(),
+                    children: []
                   },
                 ],
               },
               {
-                type: SectionType.SUMMARY,
+                type: SectionType.SUMMARY_COMPONENT,
+                class: '',
                 dimension: initDimension(),
-                segments: [
+                children: [
                   {
-                    name: 'HEADER',
-                    type: SegmentType.COMPONENT,
+                    type: SectionType.SUMMARY_HEADER,
+                    class: '',
                     dimension: initDimension(),
+                    children: []
                   },
                   {
-                    name: 'SUMMARY',
-                    type: SegmentType.COMPONENT,
+                    type: SectionType.SUMMARY_CONTENT,
+                    class: '',
                     dimension: initDimension(),
+                    children: []
                   },
                 ],
               },
               {
                 type: SectionType.CONTACT,
+                class: '',
                 dimension: initDimension(),
-                segments: [],
+                children: [],
               },
               {
                 type: SectionType.SOCIALS,
+                class: '',
                 dimension: initDimension(),
-                segments: [],
+                children: [],
               },
             ],
           },
           {
+            type: SectionType.COLUMN,
             class: 'column__right',
             dimension: initDimension(),
-            sections: [
+            children: [
               {
                 type: SectionType.EXPERIENCES,
+                class: '',
                 dimension: initDimension(),
-                segments: [],
+                children: [],
               },
               {
                 type: SectionType.SKILLS,
+                class: '',
                 dimension: initDimension(),
-                segments: [],
+                children: [],
               },
               {
                 type: SectionType.CERTIFICATIONS,
+                class: '',
                 dimension: initDimension(),
-                segments: [],
+                children: [],
               },
             ],
           },
@@ -154,12 +154,12 @@ export class LayoutState {
     action: Layout.DimensionRowUpdate,
   ) {
     const state = ctx.getState();
-    const updatedRows = state.rows.map((row, index) =>
+    const updatedRows = state.sections.map((row, index) =>
       index === action.rowIndex ? { ...row, dimension: action.dimension } : row,
     );
     ctx.setState({
       ...state,
-      rows: updatedRows,
+      sections: updatedRows,
     });
   }
 
@@ -169,21 +169,21 @@ export class LayoutState {
     action: Layout.DimensionColumnUpdate,
   ) {
     const state = ctx.getState();
-    const updatedRows = state.rows.map((row, rowIndex) => {
+    const updatedRows = state.sections.map((row, rowIndex) => {
       if (rowIndex === action.rowIndex) {
-        const updatedColumns = row.columns.map((column, columnIndex) =>
+        const updatedColumns = row.children.map((column, columnIndex) =>
           columnIndex === action.columnIndex
             ? { ...column, dimension: action.dimension }
             : column,
         );
-        return { ...row, columns: updatedColumns };
+        return { ...row, children: updatedColumns };
       } else {
         return row;
       }
     });
     ctx.setState({
       ...state,
-      rows: updatedRows,
+      sections: updatedRows,
     });
   }
 
@@ -193,22 +193,22 @@ export class LayoutState {
     action: Layout.DimensionSectionUpdate,
   ) {
     const state = ctx.getState();
-    const updatedRows = state.rows.map((row, rowIndex) => {
+    const updatedRows = state.sections.map((row, rowIndex) => {
       if (rowIndex === action.rowIndex) {
-        const updatedColumns = row.columns.map((column, columnIndex) => {
+        const updatedColumns = row.children.map((column, columnIndex) => {
           if (columnIndex === action.columnIndex) {
-            const updatedSections = column.sections.map(
+            const updatedSections = column.children.map(
               (section, sectionIndex) =>
                 sectionIndex === action.sectionIndex
                   ? { ...section, dimension: action.dimension }
                   : section,
             );
-            return { ...column, sections: updatedSections };
+            return { ...column, children: updatedSections };
           } else {
             return column;
           }
         });
-        return { ...row, columns: updatedColumns };
+        return { ...row, children: updatedColumns };
       } else {
         return row;
       }
@@ -216,7 +216,7 @@ export class LayoutState {
 
     ctx.setState({
       ...state,
-      rows: updatedRows,
+      sections: updatedRows,
     });
   }
 
@@ -226,14 +226,14 @@ export class LayoutState {
     action: Layout.DimensionSegmentUpdate,
   ) {
     const state = ctx.getState();
-    const updatedRows = state.rows.map((row, rowIndex) => {
+    const updatedRows = state.sections.map((row, rowIndex) => {
       if (rowIndex === action.rowIndex) {
-        const updatedColumns = row.columns.map((column, columnIndex) => {
+        const updatedColumns = row.children.map((column, columnIndex) => {
           if (columnIndex === action.columnIndex) {
-            const updatedSections = column.sections.map(
+            const updatedSections = column.children.map(
               (section, sectionIndex) => {
                 if (sectionIndex === action.sectionIndex) {
-                  const updatedSegements = section.segments.map(
+                  const updatedSegements = section.children.map(
                     (segment, segmentIndex) => {
                       if (segmentIndex === action.segmentIndex) {
                         return { ...segment, dimension: action.dimension };
@@ -242,18 +242,18 @@ export class LayoutState {
                       }
                     },
                   );
-                  return { ...section, segments: updatedSegements };
+                  return { ...section, children: updatedSegements };
                 } else {
                   return section;
                 }
               },
             );
-            return { ...column, sections: updatedSections };
+            return { ...column, children: updatedSections };
           } else {
             return column;
           }
         });
-        return { ...row, columns: updatedColumns };
+        return { ...row, children: updatedColumns };
       } else {
         return row;
       }
@@ -261,7 +261,7 @@ export class LayoutState {
 
     ctx.setState({
       ...state,
-      rows: updatedRows,
+      sections: updatedRows,
     });
   }
 }

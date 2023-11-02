@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { DimensionService } from '@shared/service/dimension.service';
 import { Layout } from '@shared/state/layout.actions';
-import { SegmentModel } from '@shared/state/layout.state';
+import { SectionModel } from '@shared/state/layout.state';
 
 @Component({
   selector: 'app-summary',
@@ -14,7 +14,7 @@ export class SummaryComponent {
   @Input() rowIndex!: number;
   @Input() columnIndex!: number;
   @Input() sectionIndex!: number;
-  @Input() segments!: Array<SegmentModel>;
+  @Input() sections!: Array<SectionModel>;
 
   summary$: Observable<string>;
 

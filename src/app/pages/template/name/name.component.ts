@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { DimensionService } from '@shared/service/dimension.service';
-import { SegmentModel } from '@shared/state/layout.state';
+import { SectionModel } from '@shared/state/layout.state';
 import { Layout } from '@shared/state/layout.actions';
 
 @Component({
@@ -14,7 +14,7 @@ export class NameComponent {
   @Input() rowIndex!: number;
   @Input() columnIndex!: number;
   @Input() sectionIndex!: number;
-  @Input() segments!: Array<SegmentModel>;
+  @Input() sections!: Array<SectionModel>;
 
   name$: Observable<string>;
   title$: Observable<string>;

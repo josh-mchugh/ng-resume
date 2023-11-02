@@ -1,8 +1,8 @@
 <ng-container
-  *ngFor="let segment of segments; let i = index; trackBy: handleTrackBy"
+  *ngFor="let section of sections; let i = index; trackBy: handleTrackBy"
 >
-  <ng-container [ngSwitch]="segment.name">
-    <ng-container *ngSwitchCase="'HEADER'">
+  <ng-container [ngSwitch]="section.type">
+    <ng-container *ngSwitchCase="'SUMMARY_HEADER'">
       <div
         class="section__header section__header--summary"
         (onResize)="onResize(i, $event)"
@@ -16,7 +16,7 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngSwitchCase="'SUMMARY'">
+    <ng-container *ngSwitchCase="'SUMMARY_CONTENT'">
       <div
         class="section__summary"
         (onResize)="onResize(i, $event)"
@@ -27,7 +27,7 @@
     </ng-container>
     <ng-container *ngSwitchDefault>
       Error occured. This should have not happened with this value:
-      {{ segment.name }}.
+      {{ section.type }}.
     </ng-container>
   </ng-container>
 </ng-container>
