@@ -48,14 +48,14 @@
                   >
                     <ng-container [ngSwitch]="section.type">
                       <app-name
-                        *ngSwitchCase="'NAME'"
+                        *ngSwitchCase="'NAME_COMPONENT'"
                         [rowIndex]="rowIndex"
                         [columnIndex]="columnIndex"
                         [sectionIndex]="sectionIndex"
                         [sections]="section.children"
                       />
                       <app-summary
-                        *ngSwitchCase="'SUMMARY'"
+                        *ngSwitchCase="'SUMMARY_COMPONENT'"
                         [rowIndex]="rowIndex"
                         [columnIndex]="columnIndex"
                         [sectionIndex]="sectionIndex"
