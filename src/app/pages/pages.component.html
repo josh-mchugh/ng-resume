@@ -1,86 +1,15 @@
 <!-- Sheet -->
 <ng-container *ngIf="layout$ | async as layout">
   <div class="sheet">
-    <div [ngClass]="layout.class">
+    <div [class]="layout.class">
       <ng-container
         *ngFor="
-          let row of layout.sections;
-          let rowIndex = index;
-          trackBy: handleRowTrackBy
+          let section of layout.sections;
+          let index = index;
+          trackBy: handleTrackBy
         "
       >
-        <div
-          [class]="row.class"
-          (onResize)="onRowResize(rowIndex, $event)"
-          resizeBoxModel="border-box"
-        >
-          <ng-container
-            *ngFor="
-              let column of row.children;
-              let columnIndex = index;
-              trackBy: handleColumnTrackBy
-            "
-          >
-            <div [class]="column.class">
-              <div
-                style="height: auto"
-                (onResize)="onColumnResize(rowIndex, columnIndex, $event)"
-                resizeBoxModel="border-box"
-              >
-                <ng-container
-                  *ngFor="
-                    let section of column.children;
-                    let sectionIndex = index;
-                    trackBy: handleSectionTrackBy
-                  "
-                >
-                  <div
-                    style="height: auto"
-                    (onResize)="
-                      onSectionResize(
-                        rowIndex,
-                        columnIndex,
-                        sectionIndex,
-                        $event
-                      )
-                    "
-                    resizeBoxModel="border-box"
-                  >
-                    <ng-container [ngSwitch]="section.type">
-                      <app-name
-                        *ngSwitchCase="'NAME_COMPONENT'"
-                        [rowIndex]="rowIndex"
-                        [columnIndex]="columnIndex"
-                        [sectionIndex]="sectionIndex"
-                        [sections]="section.children"
-                      />
-                      <app-summary
-                        *ngSwitchCase="'SUMMARY_COMPONENT'"
-                        [rowIndex]="rowIndex"
-                        [columnIndex]="columnIndex"
-                        [sectionIndex]="sectionIndex"
-                        [sections]="section.children"
-                      />
-                      <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
-                      <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
-                      <app-experiences
-                        *ngSwitchCase="'EXPERIENCES'"
-                      ></app-experiences>
-                      <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
-                      <app-certifications
-                        *ngSwitchCase="'CERTIFICATIONS'"
-                      ></app-certifications>
-                      <ng-container *ngSwitchDefault>
-                        Section should have a valid type. Current Type:
-                        {{ section.type }}
-                      </ng-container>
-                    </ng-container>
-                  </div>
-                </ng-container>
-              </div>
-            </div>
-          </ng-container>
-        </div>
+        <app-section [class]="section.class" [section]="section" />
       </ng-container>
     </div>
   </div>

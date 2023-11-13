@@ -79,7 +79,7 @@ function initDimension(): Dimension {
                     type: SectionType.NAME_CONTENT,
                     class: '',
                     dimension: initDimension(),
-                    children: []
+                    children: [],
                   },
                 ],
               },
@@ -92,13 +92,13 @@ function initDimension(): Dimension {
                     type: SectionType.SUMMARY_HEADER,
                     class: '',
                     dimension: initDimension(),
-                    children: []
+                    children: [],
                   },
                   {
                     type: SectionType.SUMMARY_CONTENT,
                     class: '',
                     dimension: initDimension(),
-                    children: []
+                    children: [],
                   },
                 ],
               },
