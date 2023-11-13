@@ -6,20 +6,6 @@
   "
 >
   <ng-container [ngSwitch]="child.type">
-    <app-section
-      *ngSwitchCase="'ROW'"
-      [class]="child.class"
-      [section]="child"
-      (onResize)="onResize($event)"
-      resizeBoxModel="border-box"
-    />
-    <app-section
-      *ngSwitchCase="'COLUMN'"
-      [class]="child.class"
-      [section]="child"
-      (onResize)="onResize($event)"
-      resizeBoxModel="border-box"
-    />
     <app-name
       *ngSwitchCase="'NAME_COMPONENT'"
       [rowIndex]="1"
@@ -40,8 +26,7 @@
     <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
     <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
     <ng-container *ngSwitchDefault>
-      Section should have a valid type. Current Type:
-      {{ section.type }}
+      <app-section [class]="child.class" [section]="child" />
     </ng-container>
   </ng-container>
 </ng-container>
