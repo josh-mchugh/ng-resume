@@ -26,7 +26,7 @@
     <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
     <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
     <ng-container *ngSwitchDefault>
-      <app-section [class]="child.class" [section]="child" />
+      <app-section [section]="child" />
     </ng-container>
   </ng-container>
 </ng-container>

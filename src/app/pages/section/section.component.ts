@@ -1,12 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  NgZone,
-  OnChanges,
-  OnDestroy,
-} from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { DimensionService } from '@shared/service/dimension.service';
 import { SectionModel } from '@shared/state/layout.state';
 
@@ -18,10 +10,12 @@ import { SectionModel } from '@shared/state/layout.state';
 export class SectionComponent {
   @Input() section!: SectionModel;
 
-  public constructor(
-    private readonly elementRef: ElementRef,
-    private dimensionService: DimensionService,
-  ) {}
+  public constructor(private dimensionService: DimensionService) {}
+
+  @HostBinding('class')
+  get hostClass(): string {
+    return this.section.class;
+  }
 
   public handleTrackBy(index: number): number {
     return index;
