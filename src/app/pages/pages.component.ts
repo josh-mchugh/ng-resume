@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { LayoutStateModel } from '@shared/state/layout.state';
@@ -9,6 +9,8 @@ import { LayoutStateModel } from '@shared/state/layout.state';
   styleUrls: ['./pages.component.scss'],
 })
 export class PagesComponent {
+  @HostBinding('style.width') attrStyleWidth = '100%';
+
   layout$: Observable<LayoutStateModel>;
 
   constructor(private store: Store) {

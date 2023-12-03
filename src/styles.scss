@@ -5,11 +5,14 @@
 @import "@fortawesome/fontawesome-free/css/brands.css";
 
 :root {
-  --primary: rgb(17, 33, 47);
-  --accent: rgb(43, 176, 225);
   --white: rgb(255, 255, 255);
   --gray-300: rgb(209, 213, 219);
   --gray-700: rgb(55, 65, 81);
+
+  --content-background: rgba(224, 224, 224, 1);
+  --page-background-shadow: rgba(0, 0, 0, 0.3);
+  --primary: rgb(17, 33, 47);
+  --accent: rgb(43, 176, 225);
 }
 
 html {
@@ -45,20 +48,8 @@ menu {
   overflow-y: scroll;
 }
 
-.content {
-  display: flex;
-  width: 100%;
-  overflow-y: scroll;
-}
-
 .pages__container {
   width: 100%;
-}
-
-@media screen {
-  .content {
-    background: #e0e0e0;
-  }
 }
 
 /* Sidebar */
@@ -141,31 +132,6 @@ input:not([type]) {
 textarea {
   height: 5rem;
   resize: vertical;
-}
-
-/* Sheet Styles */
-
-.sheet {
-  width: 210mm;
-  height: 296mm;
-  margin: 0;
-  overflow: hidden;
-  box-sizing: border-box;
-  page-break-after: always;
-}
-
-/* flex h-full font-['Roboto'] text-gray-700 */
-.sheet--full-height {
-  display: flex;
-  height: 100%;
-}
-
-@media screen {
-  .sheet {
-    background: white;
-    background-shadow: 0 0.5mm 2mm rgba(0, 0, 0, 0.3);
-    margin: 5mm auto;
-  }
 }
 
 .row {
@@ -560,4 +526,47 @@ flex-auto w-64 px-7 my-16
     background-color: var(--primary);
     color: var(--white);
   }
+}
+
+/* New Styles */
+.content {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.artboard {
+  display: flex;
+  width: 100%;
+  overflow-y: scroll;
+  font-family: "Roboto";
+  color: var(--gray-700);
+}
+
+@media screen {
+  .artboard {
+    background: var(--content-background);
+  }
+}
+
+.page {
+  width: 210mm;
+  height: 296mm;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  page-break-after: always;
+}
+
+@media screen {
+  .page {
+    background: var(--white);
+    background-shadow: 0 0.5mm 2mm var(--page-background-shadow);
+    margin: 5mm auto;
+  }
+}
+
+.page__content {
+  display: flex;
+  height: 100%;
 }

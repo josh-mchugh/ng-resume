@@ -1,7 +1,7 @@
 <!-- Sheet -->
 <ng-container *ngIf="layout$ | async as layout">
-  <div class="sheet">
-    <div [class]="layout.class">
+  <div class="page">
+    <div class="page__content">
       <ng-container
         *ngFor="
           let section of layout.sections;
