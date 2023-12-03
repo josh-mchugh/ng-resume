@@ -3,16 +3,27 @@ import { State, Action, StateContext } from '@ngxs/store';
 import { Layout } from './layout.actions';
 
 export interface LayoutStateModel {
-  class: string;
   dimension: Dimension;
   sections: Array<SectionModel>;
 }
 
 export interface SectionModel {
   type: SectionType;
-  class: string;
+  classes: SectionClasses;
   dimension: Dimension;
   children: Array<SectionModel>;
+}
+
+export interface SectionClasses {
+  root: string,
+  content: string
+}
+
+function emptyClasses() {
+  return {
+    root: '',
+    content: ''
+  }
 }
 
 export enum SectionType {
@@ -57,27 +68,29 @@ function initDimension(): Dimension {
 @State<LayoutStateModel>({
   name: 'layout',
   defaults: {
-    class: 'sheet--full-height',
     dimension: initDimension(),
     sections: [
       {
         type: SectionType.ROW,
-        class: 'row',
+        classes: emptyClasses(),
         dimension: initDimension(),
         children: [
           {
             type: SectionType.COLUMN,
-            class: 'column__left',
+            classes: {
+              root: 'section--column-left',
+              content: 'section__content--column'
+            },
             dimension: initDimension(),
             children: [
               {
                 type: SectionType.NAME_COMPONENT,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [
                   {
                     type: SectionType.NAME_CONTENT,
-                    class: '',
+                    classes: emptyClasses(),
                     dimension: initDimension(),
                     children: [],
                   },
@@ -85,18 +98,18 @@ function initDimension(): Dimension {
               },
               {
                 type: SectionType.SUMMARY_COMPONENT,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [
                   {
                     type: SectionType.SUMMARY_HEADER,
-                    class: '',
+                    classes: emptyClasses(),
                     dimension: initDimension(),
                     children: [],
                   },
                   {
                     type: SectionType.SUMMARY_CONTENT,
-                    class: '',
+                    classes: emptyClasses(),
                     dimension: initDimension(),
                     children: [],
                   },
@@ -104,13 +117,13 @@ function initDimension(): Dimension {
               },
               {
                 type: SectionType.CONTACT,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [],
               },
               {
                 type: SectionType.SOCIALS,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [],
               },
@@ -118,24 +131,27 @@ function initDimension(): Dimension {
           },
           {
             type: SectionType.COLUMN,
-            class: 'column__right',
+            classes: {
+              root: 'section--column-right',
+              content: 'section__content--column'
+            },
             dimension: initDimension(),
             children: [
               {
                 type: SectionType.EXPERIENCES,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [],
               },
               {
                 type: SectionType.SKILLS,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [],
               },
               {
                 type: SectionType.CERTIFICATIONS,
-                class: '',
+                classes: emptyClasses(),
                 dimension: initDimension(),
                 children: [],
               },

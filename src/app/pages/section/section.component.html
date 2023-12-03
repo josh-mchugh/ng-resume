@@ -1,32 +1,34 @@
-<ng-container
-  *ngFor="
-    let child of section.children;
-    let index = index;
-    trackBy: handleTrackBy
-  "
->
-  <ng-container [ngSwitch]="child.type">
-    <app-name
-      *ngSwitchCase="'NAME_COMPONENT'"
-      [rowIndex]="1"
-      [columnIndex]="1"
-      [sectionIndex]="1"
-      [sections]="child.children"
-    />
-    <app-summary
-      *ngSwitchCase="'SUMMARY_COMPONENT'"
-      [rowIndex]="1"
-      [columnIndex]="1"
-      [sectionIndex]="1"
-      [sections]="child.children"
-    />
-    <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
-    <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
-    <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>
-    <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
-    <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
-    <ng-container *ngSwitchDefault>
-      <app-section [section]="child" />
+<div [class]="'section__content ' + section.classes.content">
+  <ng-container
+    *ngFor="
+      let child of section.children;
+      let index = index;
+      trackBy: handleTrackBy
+    "
+  >
+    <ng-container [ngSwitch]="child.type">
+      <app-name
+        *ngSwitchCase="'NAME_COMPONENT'"
+        [rowIndex]="1"
+        [columnIndex]="1"
+        [sectionIndex]="1"
+        [sections]="child.children"
+      />
+      <app-summary
+        *ngSwitchCase="'SUMMARY_COMPONENT'"
+        [rowIndex]="1"
+        [columnIndex]="1"
+        [sectionIndex]="1"
+        [sections]="child.children"
+      />
+      <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
+      <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
+      <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>
+      <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
+      <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
+      <ng-container *ngSwitchDefault>
+        <app-section [section]="child" />
+      </ng-container>
     </ng-container>
   </ng-container>
-</ng-container>
+</div>
