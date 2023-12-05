@@ -28,6 +28,7 @@ import { ExperiencesInputComponent } from './inputs/experiences-input/experience
 import { SkillsInputComponent } from './inputs/skills-input/skills-input.component';
 import { CertificationsInputComponent } from './inputs/certifications-input/certifications-input.component';
 import { SectionComponent } from './pages/section/section.component';
+import { TitleComponent } from './pages/template/title/title.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SectionComponent } from './pages/section/section.component';
     SkillsInputComponent,
     CertificationsInputComponent,
     SectionComponent,
+    TitleComponent,
   ],
   imports: [
     BrowserModule,

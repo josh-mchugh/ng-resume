@@ -15,25 +15,21 @@ export interface SectionModel {
 }
 
 export interface SectionClasses {
-  root: string,
-  content: string
+  root: string;
+  content: string;
 }
 
 function emptyClasses() {
   return {
     root: '',
-    content: ''
-  }
+    content: '',
+  };
 }
 
 export enum SectionType {
-  //ROW
-  ROW = 'ROW',
-  // COLUMN
-  COLUMN = 'COLUMN',
-  // NAME COMPONENT
-  NAME_COMPONENT = 'NAME_COMPONENT',
-  NAME_CONTENT = 'NAME_CONTENT',
+  SECTION = 'SECTION',
+  NAME = 'NAME',
+  TITLE = 'TITLE',
   // SUMMARY COMPONENT
   SUMMARY_COMPONENT = 'SUMMARY_COMPONENT',
   SUMMARY_HEADER = 'SUMMARY_HEADER',
@@ -71,25 +67,34 @@ function initDimension(): Dimension {
     dimension: initDimension(),
     sections: [
       {
-        type: SectionType.ROW,
+        type: SectionType.SECTION,
         classes: emptyClasses(),
         dimension: initDimension(),
         children: [
           {
-            type: SectionType.COLUMN,
+            type: SectionType.SECTION,
             classes: {
               root: 'section--column-left',
-              content: 'section__content--column'
+              content: 'section__content--column',
             },
             dimension: initDimension(),
             children: [
               {
-                type: SectionType.NAME_COMPONENT,
-                classes: emptyClasses(),
+                type: SectionType.SECTION,
+                classes: {
+                  root: '',
+                  content: 'section__content--column',
+                },
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.NAME_CONTENT,
+                    type: SectionType.NAME,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [],
+                  },
+                  {
+                    type: SectionType.TITLE,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     children: [],
@@ -130,10 +135,10 @@ function initDimension(): Dimension {
             ],
           },
           {
-            type: SectionType.COLUMN,
+            type: SectionType.SECTION,
             classes: {
               root: 'section--column-right',
-              content: 'section__content--column'
+              content: 'section__content--column',
             },
             dimension: initDimension(),
             children: [

@@ -14,7 +14,7 @@ export class SectionComponent {
 
   @HostBinding('class')
   get hostClass(): string {
-    return "section " + this.section.classes.root;
+    return 'section ' + this.section.classes.root;
   }
 
   public handleTrackBy(index: number): number {

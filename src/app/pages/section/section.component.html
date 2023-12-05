@@ -7,13 +7,8 @@
     "
   >
     <ng-container [ngSwitch]="child.type">
-      <app-name
-        *ngSwitchCase="'NAME_COMPONENT'"
-        [rowIndex]="1"
-        [columnIndex]="1"
-        [sectionIndex]="1"
-        [sections]="child.children"
-      />
+      <app-name *ngSwitchCase="'NAME'" />
+      <app-title *ngSwitchCase="'TITLE'" />
       <app-summary
         *ngSwitchCase="'SUMMARY_COMPONENT'"
         [rowIndex]="1"
