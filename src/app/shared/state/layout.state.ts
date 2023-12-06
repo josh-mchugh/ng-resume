@@ -88,16 +88,30 @@ function initDimension(): Dimension {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.NAME,
+                    type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [],
+                    children: [
+                      {
+                        type: SectionType.NAME,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
                   },
                   {
-                    type: SectionType.TITLE,
+                    type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [],
+                    children: [
+                      {
+                        type: SectionType.TITLE,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
                   },
                 ],
               },
