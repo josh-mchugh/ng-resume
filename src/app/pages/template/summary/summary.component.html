@@ -1,33 +1,3 @@
-<ng-container
-  *ngFor="let section of sections; let i = index; trackBy: handleTrackBy"
->
-  <ng-container [ngSwitch]="section.type">
-    <ng-container *ngSwitchCase="'SUMMARY_HEADER'">
-      <div
-        class="section__header section__header--summary"
-        (onResize)="onResize(i, $event)"
-        resizeBoxModel="border-box"
-      >
-        <div class="title">SUMMARY</div>
-        <div class="divider">
-          <div class="divider__container">
-            <div class="divider__line divider__line--white"></div>
-          </div>
-        </div>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchCase="'SUMMARY_CONTENT'">
-      <div
-        class="section__summary"
-        (onResize)="onResize(i, $event)"
-        resizeBoxModel="border-box"
-      >
-        <div class="summary">{{ summary$ | async }}</div>
-      </div>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      Error occured. This should have not happened with this value:
-      {{ section.type }}.
-    </ng-container>
-  </ng-container>
-</ng-container>
+<div class="summary">
+  {{ summary$ | async }}
+</div>

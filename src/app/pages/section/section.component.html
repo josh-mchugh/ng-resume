@@ -9,13 +9,8 @@
     <ng-container [ngSwitch]="child.type">
       <app-name *ngSwitchCase="'NAME'" />
       <app-title *ngSwitchCase="'TITLE'" />
-      <app-summary
-        *ngSwitchCase="'SUMMARY_COMPONENT'"
-        [rowIndex]="1"
-        [columnIndex]="1"
-        [sectionIndex]="1"
-        [sections]="child.children"
-      />
+      <app-header-summary *ngSwitchCase="'HEADER_SUMMARY'" />
+      <app-summary *ngSwitchCase="'SUMMARY'" />
       <app-contact *ngSwitchCase="'CONTACT'"></app-contact>
       <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
       <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>

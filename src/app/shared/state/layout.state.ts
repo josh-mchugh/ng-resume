@@ -30,10 +30,8 @@ export enum SectionType {
   SECTION = 'SECTION',
   NAME = 'NAME',
   TITLE = 'TITLE',
-  // SUMMARY COMPONENT
-  SUMMARY_COMPONENT = 'SUMMARY_COMPONENT',
-  SUMMARY_HEADER = 'SUMMARY_HEADER',
-  SUMMARY_CONTENT = 'SUMMARY_CONTENT',
+  HEADER_SUMMARY = 'HEADER_SUMMARY',
+  SUMMARY = 'SUMMARY',
   CONTACT = 'CONTACT',
   SOCIALS = 'SOCIALS',
   EXPERIENCES = 'EXPERIENCES',
@@ -116,21 +114,38 @@ function initDimension(): Dimension {
                 ],
               },
               {
-                type: SectionType.SUMMARY_COMPONENT,
-                classes: emptyClasses(),
+                type: SectionType.SECTION,
+                classes: {
+                  root: '',
+                  content: 'section__content--column',
+                },
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SUMMARY_HEADER,
+                    type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [],
+                    children: [
+                      {
+                        type: SectionType.HEADER_SUMMARY,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
                   },
                   {
-                    type: SectionType.SUMMARY_CONTENT,
+                    type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [],
+                    children: [
+                      {
+                        type: SectionType.SUMMARY,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
                   },
                 ],
               },
