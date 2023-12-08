@@ -587,6 +587,11 @@ textarea {
   margin-bottom: 1.5rem;
 }
 
+.header--contact {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
 .header__title {
   flex: 1 1 auto;
   font-weight: 700;
@@ -623,4 +628,20 @@ textarea {
   padding-right: 1rem;
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.contact {
+  margin: 0.75rem 0 0 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.contact__icon {
+  margin-right: 0.5rem;
+  color: var(--accent);
+}
+
+.contact__email {
+  color: var(--white);
+  text-decoration-line: none;
 }

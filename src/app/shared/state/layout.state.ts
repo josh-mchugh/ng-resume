@@ -32,7 +32,10 @@ export enum SectionType {
   TITLE = 'TITLE',
   HEADER_SUMMARY = 'HEADER_SUMMARY',
   SUMMARY = 'SUMMARY',
-  CONTACT = 'CONTACT',
+  HEADER_CONTACT = 'HEADER_CONTACT',
+  CONTACT_PHONE = 'CONTACT_PHONE',
+  CONTACT_EMAIL = 'CONTACT_EMAIL',
+  CONTACT_LOCATION = 'CONTACT_LOCATION',
   SOCIALS = 'SOCIALS',
   EXPERIENCES = 'EXPERIENCES',
   SKILLS = 'SKILLS',
@@ -150,10 +153,66 @@ function initDimension(): Dimension {
                 ],
               },
               {
-                type: SectionType.CONTACT,
-                classes: emptyClasses(),
+                type: SectionType.SECTION,
+                classes: {
+                  root: '',
+                  content: 'section__content--column',
+                },
                 dimension: initDimension(),
-                children: [],
+                children: [
+                  {
+                    type: SectionType.SECTION,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [
+                      {
+                        type: SectionType.HEADER_CONTACT,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: SectionType.SECTION,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [
+                      {
+                        type: SectionType.CONTACT_PHONE,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: SectionType.SECTION,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [
+                      {
+                        type: SectionType.CONTACT_EMAIL,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: SectionType.SECTION,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [
+                      {
+                        type: SectionType.CONTACT_LOCATION,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
               },
               {
                 type: SectionType.SOCIALS,

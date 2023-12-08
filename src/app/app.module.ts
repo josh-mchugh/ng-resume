@@ -16,7 +16,6 @@ import { LayoutState } from '@shared/state/layout.state';
 import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
-import { ContactComponent } from './pages/template/contact/contact.component';
 import { SocialsComponent } from './pages/template/socials/socials.component';
 import { ExperiencesComponent } from './pages/template/experiences/experiences.component';
 import { SkillsComponent } from './pages/template/skills/skills.component';
@@ -30,6 +29,10 @@ import { CertificationsInputComponent } from './inputs/certifications-input/cert
 import { SectionComponent } from './pages/section/section.component';
 import { TitleComponent } from './pages/template/title/title.component';
 import { HeaderSummaryComponent } from './pages/template/header-summary/header-summary.component';
+import { HeaderContactComponent } from './pages/template/header-contact/header-contact.component';
+import { ContactPhoneComponent } from './pages/template/contact-phone/contact-phone.component';
+import { ContactLocationComponent } from './pages/template/contact-location/contact-location.component';
+import { ContactEmailComponent } from './pages/template/contact-email/contact-email.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,6 @@ import { HeaderSummaryComponent } from './pages/template/header-summary/header-s
     PagesComponent,
     NameComponent,
     SummaryComponent,
-    ContactComponent,
     SocialsComponent,
     ExperiencesComponent,
     SkillsComponent,
@@ -51,6 +53,10 @@ import { HeaderSummaryComponent } from './pages/template/header-summary/header-s
     SectionComponent,
     TitleComponent,
     HeaderSummaryComponent,
+    HeaderContactComponent,
+    ContactPhoneComponent,
+    ContactLocationComponent,
+    ContactEmailComponent,
   ],
   imports: [
     BrowserModule,
