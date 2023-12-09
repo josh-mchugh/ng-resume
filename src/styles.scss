@@ -384,12 +384,14 @@ textarea {
 }
 
 /* New Styles */
+/* CONTENT STYLES */
 .content {
   display: flex;
   height: 100vh;
   width: 100%;
 }
 
+/* ARTBOARD STYLES */
 .artboard {
   display: flex;
   width: 100%;
@@ -404,6 +406,7 @@ textarea {
   }
 }
 
+/* PAGE STYLES */
 .page {
   width: 210mm;
   height: 296mm;
@@ -426,6 +429,7 @@ textarea {
   height: 100%;
 }
 
+/* SECTION STYLES */
 .section {
   display: flex;
   width: 100%;
@@ -454,6 +458,7 @@ textarea {
   padding: 0 1.75rem 0 1.75rem;
 }
 
+/* SECTION CONTENT STYLES */
 .section__content {
   display: flex;
   width: 100%;
@@ -469,18 +474,21 @@ textarea {
   flex-wrap: wrap;
 }
 
+/* NAME SECTION STYLES */
 .name {
   font-weight: 700;
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
 
+/* TITLE SECTION STYLES */
 .title {
   font-size: 0.875rem;
   line-height: 1.25rem;
   letter-spacing: 0.05rem;
 }
 
+/* HEADER SECTION STYLES */
 .header {
   display: flex;
   width: 100%;
@@ -531,6 +539,7 @@ textarea {
   border-bottom: 1px solid var(--white);
 }
 
+/* SUMMARY SECTION STYLES */
 .summary {
   display: flex;
   margin-left: 1.5rem;
@@ -539,6 +548,7 @@ textarea {
   line-height: 1rem;
 }
 
+/* CONTACT SECTION STYLES */
 .contact {
   margin: 0.75rem 0 0 1.5rem;
   font-size: 0.875rem;
@@ -555,6 +565,7 @@ textarea {
   text-decoration-line: none;
 }
 
+/* SOCIAL SECTION STYLES */
 .social {
   display: flex;
   flex-direction: column;
