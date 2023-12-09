@@ -591,3 +591,24 @@ textarea {
   color: var(--white);
   text-decoration-line: none;
 }
+
+.social {
+  display: flex;
+  flex-direction: column;
+  margin: 1.25rem 0 0 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1rem;
+}
+
+.social__icon {
+  margin-right: 0.5rem;
+  color: var(--accent);
+}
+
+.social__link {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: var(--white);
+}

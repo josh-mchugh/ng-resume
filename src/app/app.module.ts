@@ -34,6 +34,8 @@ import { ContactPhoneComponent } from './pages/template/contact-phone/contact-ph
 import { ContactLocationComponent } from './pages/template/contact-location/contact-location.component';
 import { ContactEmailComponent } from './pages/template/contact-email/contact-email.component';
 import { HeaderSocialComponent } from './pages/template/header-social/header-social.component';
+import { SocialListComponent } from './pages/template/social-list/social-list.component';
+import { SocialComponent } from './pages/template/social-list/social/social.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { HeaderSocialComponent } from './pages/template/header-social/header-soc
     ContactLocationComponent,
     ContactEmailComponent,
     HeaderSocialComponent,
+    SocialListComponent,
+    SocialComponent,
   ],
   imports: [
     BrowserModule,

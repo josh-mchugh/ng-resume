@@ -1,7 +1,7 @@
-<div [class]="'section__content ' + section.classes.content">
+<div [class]="getContentClass()">
   <ng-container
     *ngFor="
-      let child of section.children;
+      let child of getChildren();
       let index = index;
       trackBy: handleTrackBy
     "
@@ -16,7 +16,7 @@
       <app-contact-email *ngSwitchCase="'CONTACT_EMAIL'" />
       <app-contact-location *ngSwitchCase="'CONTACT_LOCATION'" />
       <app-header-social *ngSwitchCase="'HEADER_SOCIAL'" />
-      <app-socials *ngSwitchCase="'SOCIALS'"></app-socials>
+      <app-social-list *ngSwitchCase="'SOCIAL_LIST'" />
       <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>
       <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
       <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
@@ -25,4 +25,5 @@
       </ng-container>
     </ng-container>
   </ng-container>
+  <ng-content></ng-content>
 </div>

@@ -14,7 +14,17 @@ export class SectionComponent {
 
   @HostBinding('class')
   get hostClass(): string {
-    return 'section ' + this.section.classes.root;
+    return this.section ? 'section ' + this.section.classes.root : 'section';
+  }
+
+  getContentClass(): string {
+    return this.section
+      ? 'section__content ' + this.section.classes.content
+      : 'section__content';
+  }
+
+  getChildren(): SectionModel[] {
+    return this.section ? this.section.children : [];
   }
 
   public handleTrackBy(index: number): number {
