@@ -16,7 +16,6 @@ import { LayoutState } from '@shared/state/layout.state';
 import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
-import { SocialsComponent } from './pages/template/socials/socials.component';
 import { ExperiencesComponent } from './pages/template/experiences/experiences.component';
 import { SkillsComponent } from './pages/template/skills/skills.component';
 import { CertificationsComponent } from './pages/template/certifications/certifications.component';
@@ -43,7 +42,6 @@ import { SocialComponent } from './pages/template/social-list/social/social.comp
     PagesComponent,
     NameComponent,
     SummaryComponent,
-    SocialsComponent,
     ExperiencesComponent,
     SkillsComponent,
     CertificationsComponent,
