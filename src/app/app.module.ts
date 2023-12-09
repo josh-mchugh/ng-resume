@@ -33,6 +33,7 @@ import { HeaderContactComponent } from './pages/template/header-contact/header-c
 import { ContactPhoneComponent } from './pages/template/contact-phone/contact-phone.component';
 import { ContactLocationComponent } from './pages/template/contact-location/contact-location.component';
 import { ContactEmailComponent } from './pages/template/contact-email/contact-email.component';
+import { HeaderSocialComponent } from './pages/template/header-social/header-social.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ContactEmailComponent } from './pages/template/contact-email/contact-em
     ContactPhoneComponent,
     ContactLocationComponent,
     ContactEmailComponent,
+    HeaderSocialComponent,
   ],
   imports: [
     BrowserModule,

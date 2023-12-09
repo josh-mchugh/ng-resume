@@ -36,6 +36,7 @@ export enum SectionType {
   CONTACT_PHONE = 'CONTACT_PHONE',
   CONTACT_EMAIL = 'CONTACT_EMAIL',
   CONTACT_LOCATION = 'CONTACT_LOCATION',
+  HEADER_SOCIAL = 'HEADER_SOCIAL',
   SOCIALS = 'SOCIALS',
   EXPERIENCES = 'EXPERIENCES',
   SKILLS = 'SKILLS',
@@ -215,10 +216,40 @@ function initDimension(): Dimension {
                 ],
               },
               {
-                type: SectionType.SOCIALS,
-                classes: emptyClasses(),
+                type: SectionType.SECTION,
+                classes: {
+                  root: '',
+                  content: 'section__content--column',
+                },
                 dimension: initDimension(),
-                children: [],
+                children: [
+                  {
+                    type: SectionType.SECTION,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [
+                      {
+                        type: SectionType.HEADER_SOCIAL,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: SectionType.SECTION,
+                    classes: emptyClasses(),
+                    dimension: initDimension(),
+                    children: [
+                      {
+                        type: SectionType.SOCIALS,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },

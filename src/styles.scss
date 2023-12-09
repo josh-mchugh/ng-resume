@@ -160,19 +160,6 @@ textarea {
     margin-top: 0.75rem;
     border-bottom: 1px solid var(--gray-700);
   }
-
-  .divider__line--white {
-    border-bottom-color: var(--white);
-  }
-}
-
-.section__header--summary,
-.section__header--contact {
-  margin-top: 2.5rem;
-}
-
-.section__header--social {
-  margin-top: 3rem;
 }
 
 .section__header--certification,
@@ -180,52 +167,6 @@ textarea {
 .section__header--project,
 .section__header--skill {
   margin-top: 1.5rem;
-}
-
-/* Section - Summary */
-.section__summary {
-  display: flex;
-
-  .summary {
-    margin: 1.5rem 0 0 1.5rem;
-    padding-right: 1rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-}
-
-/* Section - Contact */
-/* flex mt-4 ml-4 */
-.section__contact {
-  display: flex;
-  margin: 1rem 0 0 1rem;
-
-  /* list-none text-sm */
-  .list {
-    list-style-type: none;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-
-  /* mt-2 */
-  .list__item:not(:first-child) {
-    margin-top: 0.5rem;
-  }
-
-  /* text-accent */
-  .list__item_icon {
-    color: var(--accent);
-  }
-
-  /* ml-2 */
-  .list__item_text {
-    margin-left: 0.5rem;
-  }
-
-  .list__item_text--email {
-    color: var(--white);
-    text-decoration-line: none;
-  }
 }
 
 /* Section - Social */
@@ -590,6 +531,11 @@ textarea {
 .header--contact {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
+}
+
+.header--social {
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
 }
 
 .header__title {
