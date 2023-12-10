@@ -35,6 +35,7 @@ import { ContactEmailComponent } from './pages/template/contact-email/contact-em
 import { HeaderSocialComponent } from './pages/template/header-social/header-social.component';
 import { SocialListComponent } from './pages/template/social-list/social-list.component';
 import { SocialComponent } from './pages/template/social-list/social/social.component';
+import { HeaderExperienceComponent } from './pages/template/header-experience/header-experience.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SocialComponent } from './pages/template/social-list/social/social.comp
     HeaderSocialComponent,
     SocialListComponent,
     SocialComponent,
+    HeaderExperienceComponent,
   ],
   imports: [
     BrowserModule,
