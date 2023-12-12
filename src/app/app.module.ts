@@ -36,6 +36,12 @@ import { HeaderSocialComponent } from './pages/template/header-social/header-soc
 import { SocialListComponent } from './pages/template/social-list/social-list.component';
 import { SocialComponent } from './pages/template/social-list/social/social.component';
 import { HeaderExperienceComponent } from './pages/template/header-experience/header-experience.component';
+import { ExperienceListComponent } from './pages/template/experience-list/experience-list.component';
+import { ExperienceComponent } from './pages/template/experience-list/experience/experience.component';
+import { ExperiencePositionComponent } from './pages/template/experience-list/experience/experience-position/experience-position.component';
+import { ExperienceOrganizationComponent } from './pages/template/experience-list/experience/experience-organization/experience-organization.component';
+import { ExperienceDescriptionComponent } from './pages/template/experience-list/experience/experience-description/experience-description.component';
+import { ExperienceSkillComponent } from './pages/template/experience-list/experience/experience-skill/experience-skill.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +69,12 @@ import { HeaderExperienceComponent } from './pages/template/header-experience/he
     SocialListComponent,
     SocialComponent,
     HeaderExperienceComponent,
+    ExperienceListComponent,
+    ExperienceComponent,
+    ExperiencePositionComponent,
+    ExperienceOrganizationComponent,
+    ExperienceDescriptionComponent,
+    ExperienceSkillComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,24 @@
+<app-section>
+  <app-experience-position
+    [title]="experience.title"
+    [duration]="experience.duration"
+  />
+</app-section>
+<app-section>
+  <app-experience-organization
+    [organization]="experience.organization"
+    [location]="experience.location"
+  />
+</app-section>
+<app-section>
+  <ng-container
+    *ngFor="let description of experience.descriptions; trackBy: handleTrackBy"
+  >
+    <app-experience-description [description]="description" />
+  </ng-container>
+</app-section>
+<app-section>
+  <ng-container *ngFor="let skill of experience.skills; trackBy: handleTrackBy">
+    <app-experience-skill [skill]="skill" />
+  </ng-container>
+</app-section>

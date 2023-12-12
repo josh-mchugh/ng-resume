@@ -18,7 +18,9 @@
       <app-header-social *ngSwitchCase="'HEADER_SOCIAL'" />
       <app-social-list *ngSwitchCase="'SOCIAL_LIST'" />
       <app-header-experience *ngSwitchCase="'HEADER_EXPERIENCE'" />
-      <app-experiences *ngSwitchCase="'EXPERIENCES'"></app-experiences>
+      <app-experience-list
+        *ngSwitchCase="'EXPERIENCE_LIST'"
+      ></app-experience-list>
       <app-skills *ngSwitchCase="'SKILLS'"></app-skills>
       <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
       <ng-container *ngSwitchDefault>
