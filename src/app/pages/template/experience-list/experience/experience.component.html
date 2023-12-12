@@ -10,15 +10,19 @@
     [location]="experience.location"
   />
 </app-section>
-<app-section>
+<app-section [contentClass]="'section__content--column'">
   <ng-container
     *ngFor="let description of experience.descriptions; trackBy: handleTrackBy"
   >
-    <app-experience-description [description]="description" />
+    <app-section>
+      <app-experience-description [description]="description" />
+    </app-section>
   </ng-container>
 </app-section>
-<app-section>
+<app-section [contentClass]="'section__content--wrap'">
   <ng-container *ngFor="let skill of experience.skills; trackBy: handleTrackBy">
-    <app-experience-skill [skill]="skill" />
+    <app-section>
+      <app-experience-skill [skill]="skill" />
+    </app-section>
   </ng-container>
 </app-section>

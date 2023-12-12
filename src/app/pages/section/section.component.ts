@@ -9,18 +9,32 @@ import { SectionModel } from '@shared/state/layout.state';
 })
 export class SectionComponent {
   @Input() section!: SectionModel;
+  @Input() rootClass!: string;
+  @Input() contentClass!: string;
 
   public constructor(private dimensionService: DimensionService) {}
 
   @HostBinding('class')
   get hostClass(): string {
-    return this.section ? 'section ' + this.section.classes.root : 'section';
+    const blockClass = 'section';
+    if(this.section) {
+      return `${blockClass}  ${this.section.classes.root}`;
+    }
+    if(this.rootClass) {
+      return `${blockClass} ${this.rootClass}`;
+    }
+    return blockClass;
   }
 
   getContentClass(): string {
-    return this.section
-      ? 'section__content ' + this.section.classes.content
-      : 'section__content';
+    const blockClass = 'section__content';
+    if(this.section) {
+      return `${blockClass} ${this.section.classes.content}`;
+    }
+    if(this.contentClass) {
+      return `${blockClass}  ${this.contentClass}`;
+    }
+    return blockClass;
   }
 
   getChildren(): SectionModel[] {
