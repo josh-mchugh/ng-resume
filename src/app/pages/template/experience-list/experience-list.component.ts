@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { ResumeExperienceModel } from '@shared/state/resume.state';
@@ -9,6 +9,7 @@ import { ResumeExperienceModel } from '@shared/state/resume.state';
   styleUrls: ['./experience-list.component.scss'],
 })
 export class ExperienceListComponent {
+  @HostBinding('style.width') width = '100%';
   experiences$: Observable<ResumeExperienceModel[]>;
 
   constructor(private store: Store) {

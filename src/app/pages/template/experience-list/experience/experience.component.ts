@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { ResumeExperienceModel } from '@shared/state/resume.state';
 
 @Component({
@@ -7,6 +7,7 @@ import { ResumeExperienceModel } from '@shared/state/resume.state';
   styleUrls: ['./experience.component.scss'],
 })
 export class ExperienceComponent {
+  @HostBinding('style.width') width = '100%';
   @Input() experience!: ResumeExperienceModel;
 
   public handleTrackBy(index: number): number {
