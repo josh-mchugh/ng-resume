@@ -21,7 +21,7 @@
 </app-section>
 <app-section [contentClass]="'section__content--wrap'">
   <ng-container *ngFor="let skill of experience.skills; trackBy: handleTrackBy">
-    <app-section>
+    <app-section [rootClass]="'section--w-auto'">
       <app-experience-skill [skill]="skill" />
     </app-section>
   </ng-container>

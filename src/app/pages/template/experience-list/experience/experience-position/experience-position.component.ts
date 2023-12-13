@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'app-experience-position',
@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./experience-position.component.scss'],
 })
 export class ExperiencePositionComponent {
+  @HostBinding('style.width') width = '100%';
   @Input() title!: string;
   @Input() duration!: string;
 }

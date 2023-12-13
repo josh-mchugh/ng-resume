@@ -17,10 +17,10 @@ export class SectionComponent {
   @HostBinding('class')
   get hostClass(): string {
     const blockClass = 'section';
-    if(this.section) {
+    if (this.section) {
       return `${blockClass}  ${this.section.classes.root}`;
     }
-    if(this.rootClass) {
+    if (this.rootClass) {
       return `${blockClass} ${this.rootClass}`;
     }
     return blockClass;
@@ -28,10 +28,10 @@ export class SectionComponent {
 
   getContentClass(): string {
     const blockClass = 'section__content';
-    if(this.section) {
+    if (this.section) {
       return `${blockClass} ${this.section.classes.content}`;
     }
-    if(this.contentClass) {
+    if (this.contentClass) {
       return `${blockClass}  ${this.contentClass}`;
     }
     return blockClass;
