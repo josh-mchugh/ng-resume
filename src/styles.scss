@@ -162,8 +162,7 @@ textarea {
   }
 }
 
-.section__header--certification,
-.section__header--skill {
+.section__header--certification {
   margin-top: 1.5rem;
 }
 
@@ -436,6 +435,11 @@ textarea {
 
 .header--experience {
   margin-bottom: 0.25rem;
+}
+
+.header--skill {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .header__title {
