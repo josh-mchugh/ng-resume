@@ -43,6 +43,8 @@ import { ExperienceOrganizationComponent } from './pages/template/experience-lis
 import { ExperienceDescriptionComponent } from './pages/template/experience-list/experience/experience-description/experience-description.component';
 import { ExperienceSkillComponent } from './pages/template/experience-list/experience/experience-skill/experience-skill.component';
 import { HeaderSkillComponent } from './pages/template/header-skill/header-skill.component';
+import { SkillListComponent } from './pages/template/skill-list/skill-list.component';
+import { SkillComponent } from './pages/template/skill-list/skill/skill.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { HeaderSkillComponent } from './pages/template/header-skill/header-skill
     ExperienceDescriptionComponent,
     ExperienceSkillComponent,
     HeaderSkillComponent,
+    SkillListComponent,
+    SkillComponent,
   ],
   imports: [
     BrowserModule,

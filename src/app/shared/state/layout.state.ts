@@ -41,7 +41,7 @@ export enum SectionType {
   HEADER_EXPERIENCE = 'HEADER_EXPERIENCE',
   EXPERIENCE_LIST = 'EXPERIENCE_LIST',
   HEADER_SKILL = 'HEADER_SKILL',
-  SKILLS = 'SKILLS',
+  SKILL_LIST = 'SKILL_LIST',
   CERTIFICATIONS = 'CERTIFICATIONS',
 }
 
@@ -311,16 +311,30 @@ function initDimension(): Dimension {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.HEADER_SKILL,
+                    type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [],
+                    children: [
+                      {
+                        type: SectionType.HEADER_SKILL,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
                   },
                   {
-                    type: SectionType.SKILLS,
+                    type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [],
+                    children: [
+                      {
+                        type: SectionType.SKILL_LIST,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        children: [],
+                      },
+                    ],
                   },
                 ],
               },
