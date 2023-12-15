@@ -17,7 +17,6 @@ import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
 import { ExperiencesComponent } from './pages/template/experiences/experiences.component';
-import { SkillsComponent } from './pages/template/skills/skills.component';
 import { CertificationsComponent } from './pages/template/certifications/certifications.component';
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 import { ContactInputComponent } from './inputs/contact-input/contact-input.component';
@@ -53,7 +52,6 @@ import { SkillComponent } from './pages/template/skill-list/skill/skill.componen
     NameComponent,
     SummaryComponent,
     ExperiencesComponent,
-    SkillsComponent,
     CertificationsComponent,
     DetailsInputComponent,
     ContactInputComponent,
