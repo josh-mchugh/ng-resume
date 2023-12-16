@@ -44,6 +44,7 @@ import { ExperienceSkillComponent } from './pages/template/experience-list/exper
 import { HeaderSkillComponent } from './pages/template/header-skill/header-skill.component';
 import { SkillListComponent } from './pages/template/skill-list/skill-list.component';
 import { SkillComponent } from './pages/template/skill-list/skill/skill.component';
+import { HeaderCertificationComponent } from './pages/template/header-certification/header-certification.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { SkillComponent } from './pages/template/skill-list/skill/skill.componen
     HeaderSkillComponent,
     SkillListComponent,
     SkillComponent,
+    HeaderCertificationComponent,
   ],
   imports: [
     BrowserModule,

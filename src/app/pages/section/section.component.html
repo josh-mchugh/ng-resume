@@ -23,7 +23,8 @@
       ></app-experience-list>
       <app-header-skill *ngSwitchCase="'HEADER_SKILL'" />
       <app-skill-list *ngSwitchCase="'SKILL_LIST'"></app-skill-list>
-      <app-certifications *ngSwitchCase="'CERTIFICATIONS'"></app-certifications>
+      <app-header-certification *ngSwitchCase="'HEADER_CERTIFICATION'" />
+      <app-certifications *ngSwitchCase="'CERTIFICATIONS'" />
       <ng-container *ngSwitchDefault>
         <app-section [section]="child" />
       </ng-container>

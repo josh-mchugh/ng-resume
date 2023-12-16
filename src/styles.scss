@@ -134,38 +134,6 @@ textarea {
   resize: vertical;
 }
 
-/* Section - Header */
-.section__header {
-  display: flex;
-
-  /* flex-auto font-bold whitespace-nowrap */
-  .title {
-    flex: 1 1 auto;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-
-  /* flex-auto w-full ml-2 */
-  .divider {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    width: 100%;
-    margin-left: 0.5rem;
-  }
-
-  /* h-0 mt-3 border-b border-${props.color} */
-  .divider__line {
-    height: 0px;
-    margin-top: 0.75rem;
-    border-bottom: 1px solid var(--gray-700);
-  }
-}
-
-.section__header--certification {
-  margin-top: 1.5rem;
-}
-
 /* Section - Certification */
 /* flex flex-col mt-6 */
 .section__certification {
@@ -329,6 +297,11 @@ textarea {
 .header--skill {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.header--certification {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .header__title {
