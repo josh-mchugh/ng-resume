@@ -1,4 +1,4 @@
-<div [class]="getContentClass()">
+<div [class]="getContentClass()" (onResize)="onResize($event)">
   <ng-container
     *ngFor="
       let child of getChildren();
