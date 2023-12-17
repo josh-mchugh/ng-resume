@@ -17,7 +17,6 @@ import { PagesComponent } from './pages/pages.component';
 import { NameComponent } from './pages/template/name/name.component';
 import { SummaryComponent } from './pages/template/summary/summary.component';
 import { ExperiencesComponent } from './pages/template/experiences/experiences.component';
-import { CertificationsComponent } from './pages/template/certifications/certifications.component';
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 import { ContactInputComponent } from './inputs/contact-input/contact-input.component';
 import { SocialsInputComponent } from './inputs/socials-input/socials-input.component';
@@ -56,7 +55,6 @@ import { CertificationOrganizationComponent } from './pages/template/certificati
     NameComponent,
     SummaryComponent,
     ExperiencesComponent,
-    CertificationsComponent,
     DetailsInputComponent,
     ContactInputComponent,
     SocialsInputComponent,
