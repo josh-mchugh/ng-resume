@@ -43,7 +43,7 @@ export enum SectionType {
   HEADER_SKILL = 'HEADER_SKILL',
   SKILL_LIST = 'SKILL_LIST',
   HEADER_CERTIFICATION = 'HEADER_CERTIFICATION',
-  CERTIFICATIONS = 'CERTIFICATIONS',
+  CERTIFICATION_LIST = 'CERTIFICATION_LIST',
 }
 
 export interface Dimension {
@@ -366,7 +366,7 @@ function initDimension(): Dimension {
                     dimension: initDimension(),
                     children: [
                       {
-                        type: SectionType.CERTIFICATIONS,
+                        type: SectionType.CERTIFICATION_LIST,
                         classes: emptyClasses(),
                         dimension: initDimension(),
                         children: [],

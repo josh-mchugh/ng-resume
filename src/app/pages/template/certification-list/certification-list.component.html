@@ -1,0 +1,22 @@
+<ng-container *ngIf="certifications$ | async as certifications">
+  <ng-container
+    *ngFor="
+      let certification of certifications;
+      let index = index;
+      trackBy: handleTrackBy
+    "
+  >
+    <app-section>
+      <app-certification-degree
+        [title]="certification.title"
+        [year]="certification.year"
+      />
+    </app-section>
+    <app-section>
+      <app-certification-organization
+        [organization]="certification.organization"
+        [location]="certification.location"
+      />
+    </app-section>
+  </ng-container>
+</ng-container>

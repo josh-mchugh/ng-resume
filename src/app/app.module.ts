@@ -45,6 +45,9 @@ import { HeaderSkillComponent } from './pages/template/header-skill/header-skill
 import { SkillListComponent } from './pages/template/skill-list/skill-list.component';
 import { SkillComponent } from './pages/template/skill-list/skill/skill.component';
 import { HeaderCertificationComponent } from './pages/template/header-certification/header-certification.component';
+import { CertificationListComponent } from './pages/template/certification-list/certification-list.component';
+import { CertificationDegreeComponent } from './pages/template/certification-list/certification-degree/certification-degree.component';
+import { CertificationOrganizationComponent } from './pages/template/certification-list/certification-organization/certification-organization.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +84,9 @@ import { HeaderCertificationComponent } from './pages/template/header-certificat
     SkillListComponent,
     SkillComponent,
     HeaderCertificationComponent,
+    CertificationListComponent,
+    CertificationDegreeComponent,
+    CertificationOrganizationComponent,
   ],
   imports: [
     BrowserModule,
