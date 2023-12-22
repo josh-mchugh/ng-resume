@@ -30,7 +30,6 @@ function emptyClasses() {
 
 export enum SectionType {
   SECTION = 'SECTION',
-  CONTACT_PHONE = 'CONTACT_PHONE',
   CONTACT_EMAIL = 'CONTACT_EMAIL',
   CONTACT_LOCATION = 'CONTACT_LOCATION',
   HEADER_SOCIAL = 'HEADER_SOCIAL',
@@ -153,14 +152,9 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [
-                      {
-                        type: SectionType.CONTACT_PHONE,
-                        classes: emptyClasses(),
-                        dimension: initDimension(),
-                        children: [],
-                      },
-                    ],
+                    selector: 'phone',
+                    template: '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
+                    children: [],
                   },
                   {
                     type: SectionType.SECTION,

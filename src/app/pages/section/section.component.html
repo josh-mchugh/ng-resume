@@ -12,7 +12,6 @@
       "
     >
       <ng-container [ngSwitch]="child.type">
-        <app-contact-phone *ngSwitchCase="'CONTACT_PHONE'" />
         <app-contact-email *ngSwitchCase="'CONTACT_EMAIL'" />
         <app-contact-location *ngSwitchCase="'CONTACT_LOCATION'" />
         <app-header-social *ngSwitchCase="'HEADER_SOCIAL'" />
