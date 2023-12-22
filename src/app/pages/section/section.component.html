@@ -12,7 +12,6 @@
       "
     >
       <ng-container [ngSwitch]="child.type">
-        <app-title *ngSwitchCase="'TITLE'" />
         <app-header-summary *ngSwitchCase="'HEADER_SUMMARY'" />
         <app-summary *ngSwitchCase="'SUMMARY'" />
         <app-header-contact *ngSwitchCase="'HEADER_CONTACT'" />
