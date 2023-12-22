@@ -30,7 +30,6 @@ function emptyClasses() {
 
 export enum SectionType {
   SECTION = 'SECTION',
-  SUMMARY = 'SUMMARY',
   HEADER_CONTACT = 'HEADER_CONTACT',
   CONTACT_PHONE = 'CONTACT_PHONE',
   CONTACT_EMAIL = 'CONTACT_EMAIL',
@@ -129,14 +128,9 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [
-                      {
-                        type: SectionType.SUMMARY,
-                        classes: emptyClasses(),
-                        dimension: initDimension(),
-                        children: [],
-                      },
-                    ],
+                    selector: 'summary',
+                    template: '<div class="summary">{{ summary }}</div>',
+                    children: [],
                   },
                 ],
               },
