@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext } from '@ngxs/store';
-import { Layout } from './layout.actions';
+import { State } from '@ngxs/store';
 
 export interface LayoutStateModel {
   dimension: Dimension;

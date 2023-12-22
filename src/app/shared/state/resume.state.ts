@@ -170,9 +170,13 @@ export interface ResumeCertificationModel {
 })
 @Injectable()
 export class ResumeState {
+  // Need to use any for the property selector to retrieve values dynamically from
+  // the store. Currently easier to just ignore the es-line rule than make it work
+  // nicely with a string type.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static selectorValue(selectorValue: any) {
     console.log('Selector Value: ' + selectorValue);
-    const propertyName: keyof ResumeStateModel = selectorValue;
+    const propertyName: keyof ResumeStateModel  = selectorValue;
     const selector = createSelector([ResumeState], (state: ResumeStateModel) => {
       console.log(state);
       return state[propertyName];

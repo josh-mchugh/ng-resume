@@ -1,5 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DimensionService } from '@shared/service/dimension.service';
 import { Store } from '@ngxs/store';
 import { SectionModel } from '@shared/state/layout.state';
@@ -12,11 +11,11 @@ import Mustache from 'mustache';
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
 })
-export class SectionComponent {
+export class SectionComponent implements OnInit {
   @Input() section!: SectionModel;
   @Input() rootClass!: string;
   @Input() contentClass!: string;
-  selector$!: Observable<any>;
+  selector$!: Observable<string>;
   htmlContent$!: Observable<string>;
 
   public constructor(
@@ -45,10 +44,6 @@ export class SectionComponent {
         this.htmlContent$ = of(template);
       }
     }
-  }
-
-  ngOnDestroy() {
-//    this.selector$.unsubscribe();
   }
 
   @HostBinding('class')
@@ -82,8 +77,11 @@ export class SectionComponent {
     return index;
   }
 
+  // Commenting our function body and disabling rule on unused var in parameter.
+  // Will come back later to this function and build it out.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public onResize(event: ResizeObserverEntry): void {
-    const dimension = this.dimensionService.createDimension(event.target);
+    //const dimension = this.dimensionService.createDimension(event.target);
     //console.log('dimension: ' + JSON.stringify(dimension));
   }
 }
