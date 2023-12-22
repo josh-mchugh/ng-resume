@@ -22,22 +22,28 @@ export class SectionComponent implements OnInit {
     private store: Store,
     private dimensionService: DimensionService,
   ) {
-    if(this.section && this.section.selector) {
+    if (this.section && this.section.selector) {
       console.log('section constructor');
     }
   }
 
   ngOnInit() {
     console.log('section on init');
-    if(this.section && (this.section.selector || this.section.template)){
-      if(this.section.selector) {
-        this.htmlContent$ = this.store.select(ResumeState.selectorValue(this.section.selector))
-          .pipe(map(value => {
-            const entries = [[this.section.selector, value]];
-            console.log(entries);
-            return Mustache.render(this.section.template as string, Object.fromEntries(entries));
-          }));
-      } else if(this.section.template) {
+    if (this.section && (this.section.selector || this.section.template)) {
+      if (this.section.selector) {
+        this.htmlContent$ = this.store
+          .select(ResumeState.selectorValue(this.section.selector))
+          .pipe(
+            map((value) => {
+              const entries = [[this.section.selector, value]];
+              console.log(entries);
+              return Mustache.render(
+                this.section.template as string,
+                Object.fromEntries(entries),
+              );
+            }),
+          );
+      } else if (this.section.template) {
         console.log('rendering template without selector');
         const template = Mustache.render(this.section.template as string, {});
         console.log(template);

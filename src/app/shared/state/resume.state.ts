@@ -176,11 +176,14 @@ export class ResumeState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static selectorValue(selectorValue: any) {
     console.log('Selector Value: ' + selectorValue);
-    const propertyName: keyof ResumeStateModel  = selectorValue;
-    const selector = createSelector([ResumeState], (state: ResumeStateModel) => {
-      console.log(state);
-      return state[propertyName];
-    });
+    const propertyName: keyof ResumeStateModel = selectorValue;
+    const selector = createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => {
+        console.log(state);
+        return state[propertyName];
+      },
+    );
     return selector;
   }
 

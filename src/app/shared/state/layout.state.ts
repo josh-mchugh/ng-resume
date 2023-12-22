@@ -115,7 +115,8 @@ function initDimension(): Dimension {
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: '',
-                    template: '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+                    template:
+                      '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
                   },
                   {
@@ -141,7 +142,8 @@ function initDimension(): Dimension {
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: '',
-                    template: '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+                    template:
+                      '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
                   },
                   {
@@ -149,7 +151,8 @@ function initDimension(): Dimension {
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: 'phone',
-                    template: '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
+                    template:
+                      '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
                     children: [],
                   },
                   {
@@ -157,7 +160,8 @@ function initDimension(): Dimension {
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: 'email',
-                    template: '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
+                    template:
+                      '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
                     children: [],
                   },
                   {
@@ -165,7 +169,8 @@ function initDimension(): Dimension {
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: 'location',
-                    template: '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
+                    template:
+                      '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
                     children: [],
                   },
                 ],
@@ -183,7 +188,8 @@ function initDimension(): Dimension {
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: '',
-                    template: '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+                    template:
+                      '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
                   },
                   {

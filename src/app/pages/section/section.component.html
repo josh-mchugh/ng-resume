@@ -1,6 +1,9 @@
 <ng-container *ngIf="section && (section.selector || section.template)">
-  <div [class]="getContentClass()" (onResize)="onResize($event)" [innerHtml]="htmlContent$ | async">
-  </div>
+  <div
+    [class]="getContentClass()"
+    (onResize)="onResize($event)"
+    [innerHtml]="htmlContent$ | async"
+  ></div>
 </ng-container>
 <ng-container *ngIf="!section || !section?.selector">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
