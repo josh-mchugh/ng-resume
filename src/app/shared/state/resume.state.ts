@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext } from '@ngxs/store';
+import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
 
 export interface ResumeStateModel {
@@ -170,6 +170,16 @@ export interface ResumeCertificationModel {
 })
 @Injectable()
 export class ResumeState {
+  static selectorValue(selectorValue: any) {
+    console.log('Selector Value: ' + selectorValue);
+    const propertyName: keyof ResumeStateModel = selectorValue;
+    const selector = createSelector([ResumeState], (state: ResumeStateModel) => {
+      console.log(state);
+      return state[propertyName];
+    });
+    return selector;
+  }
+
   @Action(Resume.NameUpdate)
   nameUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.NameUpdate) {
     ctx.setState({

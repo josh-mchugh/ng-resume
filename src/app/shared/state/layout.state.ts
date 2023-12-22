@@ -12,6 +12,8 @@ export interface SectionModel {
   classes: SectionClasses;
   dimension: Dimension;
   children: Array<SectionModel>;
+  selector?: string;
+  template?: string;
 }
 
 export interface SectionClasses {
@@ -28,7 +30,6 @@ function emptyClasses() {
 
 export enum SectionType {
   SECTION = 'SECTION',
-  NAME = 'NAME',
   TITLE = 'TITLE',
   HEADER_SUMMARY = 'HEADER_SUMMARY',
   SUMMARY = 'SUMMARY',
@@ -96,14 +97,9 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [
-                      {
-                        type: SectionType.NAME,
-                        classes: emptyClasses(),
-                        dimension: initDimension(),
-                        children: [],
-                      },
-                    ],
+                    selector: 'name',
+                    template: '<div class="name">{{ name }}</div>',
+                    children: [],
                   },
                   {
                     type: SectionType.SECTION,
@@ -383,121 +379,4 @@ function initDimension(): Dimension {
   },
 })
 @Injectable()
-export class LayoutState {
-  @Action(Layout.DimensionRowUpdate)
-  dimensionRowUpdate(
-    ctx: StateContext<LayoutStateModel>,
-    action: Layout.DimensionRowUpdate,
-  ) {
-    const state = ctx.getState();
-    const updatedRows = state.sections.map((row, index) =>
-      index === action.rowIndex ? { ...row, dimension: action.dimension } : row,
-    );
-    ctx.setState({
-      ...state,
-      sections: updatedRows,
-    });
-  }
-
-  @Action(Layout.DimensionColumnUpdate)
-  dimensionColumnUpdate(
-    ctx: StateContext<LayoutStateModel>,
-    action: Layout.DimensionColumnUpdate,
-  ) {
-    const state = ctx.getState();
-    const updatedRows = state.sections.map((row, rowIndex) => {
-      if (rowIndex === action.rowIndex) {
-        const updatedColumns = row.children.map((column, columnIndex) =>
-          columnIndex === action.columnIndex
-            ? { ...column, dimension: action.dimension }
-            : column,
-        );
-        return { ...row, children: updatedColumns };
-      } else {
-        return row;
-      }
-    });
-    ctx.setState({
-      ...state,
-      sections: updatedRows,
-    });
-  }
-
-  @Action(Layout.DimensionSectionUpdate)
-  dimensionSectionUpdate(
-    ctx: StateContext<LayoutStateModel>,
-    action: Layout.DimensionSectionUpdate,
-  ) {
-    const state = ctx.getState();
-    const updatedRows = state.sections.map((row, rowIndex) => {
-      if (rowIndex === action.rowIndex) {
-        const updatedColumns = row.children.map((column, columnIndex) => {
-          if (columnIndex === action.columnIndex) {
-            const updatedSections = column.children.map(
-              (section, sectionIndex) =>
-                sectionIndex === action.sectionIndex
-                  ? { ...section, dimension: action.dimension }
-                  : section,
-            );
-            return { ...column, children: updatedSections };
-          } else {
-            return column;
-          }
-        });
-        return { ...row, children: updatedColumns };
-      } else {
-        return row;
-      }
-    });
-
-    ctx.setState({
-      ...state,
-      sections: updatedRows,
-    });
-  }
-
-  @Action(Layout.DimensionSegmentUpdate)
-  dimensionSegmentUpdate(
-    ctx: StateContext<LayoutStateModel>,
-    action: Layout.DimensionSegmentUpdate,
-  ) {
-    const state = ctx.getState();
-    const updatedRows = state.sections.map((row, rowIndex) => {
-      if (rowIndex === action.rowIndex) {
-        const updatedColumns = row.children.map((column, columnIndex) => {
-          if (columnIndex === action.columnIndex) {
-            const updatedSections = column.children.map(
-              (section, sectionIndex) => {
-                if (sectionIndex === action.sectionIndex) {
-                  const updatedSegements = section.children.map(
-                    (segment, segmentIndex) => {
-                      if (segmentIndex === action.segmentIndex) {
-                        return { ...segment, dimension: action.dimension };
-                      } else {
-                        return segment;
-                      }
-                    },
-                  );
-                  return { ...section, children: updatedSegements };
-                } else {
-                  return section;
-                }
-              },
-            );
-            return { ...column, children: updatedSections };
-          } else {
-            return column;
-          }
-        });
-        return { ...row, children: updatedColumns };
-      } else {
-        return row;
-      }
-    });
-
-    ctx.setState({
-      ...state,
-      sections: updatedRows,
-    });
-  }
-}
+export class LayoutState {}
