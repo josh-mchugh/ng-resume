@@ -22,7 +22,6 @@ import { SkillsInputComponent } from './inputs/skills-input/skills-input.compone
 import { CertificationsInputComponent } from './inputs/certifications-input/certifications-input.component';
 import { SectionComponent } from './pages/section/section.component';
 import { ContactLocationComponent } from './pages/template/contact-location/contact-location.component';
-import { ContactEmailComponent } from './pages/template/contact-email/contact-email.component';
 import { HeaderSocialComponent } from './pages/template/header-social/header-social.component';
 import { SocialListComponent } from './pages/template/social-list/social-list.component';
 import { SocialComponent } from './pages/template/social-list/social/social.component';
@@ -53,7 +52,6 @@ import { CertificationOrganizationComponent } from './pages/template/certificati
     CertificationsInputComponent,
     SectionComponent,
     ContactLocationComponent,
-    ContactEmailComponent,
     HeaderSocialComponent,
     SocialListComponent,
     SocialComponent,
