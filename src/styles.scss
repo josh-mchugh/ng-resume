@@ -212,6 +212,7 @@ textarea {
 /* SECTION CONTENT STYLES */
 .section__content {
   display: flex;
+  flex: 0 0 auto;
   width: 100%;
   height: inherit;
 }

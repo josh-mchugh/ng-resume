@@ -4,7 +4,7 @@ import { DimensionService } from '@shared/service/dimension.service';
 import { Store } from '@ngxs/store';
 import { SectionModel } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
-import { Observable, map } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import Mustache from 'mustache';
 
 @Component({
@@ -29,19 +29,26 @@ export class SectionComponent {
   }
 
   ngOnInit() {
-    if(this.section && this.section.selector){
-      console.log('section on init');
-      this.htmlContent$ = this.store.select(ResumeState.selectorValue(this.section.selector))
-        .pipe(map(value => {
-          const entries = [[this.section.selector, value]];
-          console.log(entries);
-          return Mustache.render(this.section.template as string, Object.fromEntries(entries));
-        }));
+    console.log('section on init');
+    if(this.section && (this.section.selector || this.section.template)){
+      if(this.section.selector) {
+        this.htmlContent$ = this.store.select(ResumeState.selectorValue(this.section.selector))
+          .pipe(map(value => {
+            const entries = [[this.section.selector, value]];
+            console.log(entries);
+            return Mustache.render(this.section.template as string, Object.fromEntries(entries));
+          }));
+      } else if(this.section.template) {
+        console.log('rendering template without selector');
+        const template = Mustache.render(this.section.template as string, {});
+        console.log(template);
+        this.htmlContent$ = of(template);
+      }
     }
   }
 
   ngOnDestroy() {
-//    this.selector$.destroy();
+//    this.selector$.unsubscribe();
   }
 
   @HostBinding('class')

@@ -1,4 +1,4 @@
-<ng-container *ngIf="section && section.selector">
+<ng-container *ngIf="section && (section.selector || section.template)">
   <div [class]="getContentClass()" (onResize)="onResize($event)" [innerHtml]="htmlContent$ | async">
   </div>
 </ng-container>
@@ -12,7 +12,6 @@
       "
     >
       <ng-container [ngSwitch]="child.type">
-        <app-header-summary *ngSwitchCase="'HEADER_SUMMARY'" />
         <app-summary *ngSwitchCase="'SUMMARY'" />
         <app-header-contact *ngSwitchCase="'HEADER_CONTACT'" />
         <app-contact-phone *ngSwitchCase="'CONTACT_PHONE'" />

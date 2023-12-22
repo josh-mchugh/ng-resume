@@ -23,7 +23,6 @@ import { ExperiencesInputComponent } from './inputs/experiences-input/experience
 import { SkillsInputComponent } from './inputs/skills-input/skills-input.component';
 import { CertificationsInputComponent } from './inputs/certifications-input/certifications-input.component';
 import { SectionComponent } from './pages/section/section.component';
-import { HeaderSummaryComponent } from './pages/template/header-summary/header-summary.component';
 import { HeaderContactComponent } from './pages/template/header-contact/header-contact.component';
 import { ContactPhoneComponent } from './pages/template/contact-phone/contact-phone.component';
 import { ContactLocationComponent } from './pages/template/contact-location/contact-location.component';
@@ -59,7 +58,6 @@ import { CertificationOrganizationComponent } from './pages/template/certificati
     SkillsInputComponent,
     CertificationsInputComponent,
     SectionComponent,
-    HeaderSummaryComponent,
     HeaderContactComponent,
     ContactPhoneComponent,
     ContactLocationComponent,
