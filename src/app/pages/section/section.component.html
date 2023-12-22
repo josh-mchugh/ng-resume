@@ -12,7 +12,6 @@
       "
     >
       <ng-container [ngSwitch]="child.type">
-        <app-header-social *ngSwitchCase="'HEADER_SOCIAL'" />
         <app-social-list *ngSwitchCase="'SOCIAL_LIST'" />
         <app-header-experience *ngSwitchCase="'HEADER_EXPERIENCE'" />
         <app-experience-list
