@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
+import { empty } from 'rxjs';
 
 export interface ResumeStateModel {
   name: string;
@@ -40,6 +41,16 @@ export interface ResumeCertificationModel {
   organization: string;
   year: string;
   location: string;
+}
+
+export enum SelectorType {
+  NAME = 'NAME',
+  TITLE = 'TITLE',
+  SUMMARY = 'SUMMARY',
+  EMAIL = 'EMAIL',
+  LOCATION = 'LOCATION',
+  PHONE = 'PHONE',
+  NONE = 'NONE',
 }
 
 @State<ResumeStateModel>({
@@ -170,21 +181,67 @@ export interface ResumeCertificationModel {
 })
 @Injectable()
 export class ResumeState {
-  // Need to use any for the property selector to retrieve values dynamically from
-  // the store. Currently easier to just ignore the es-line rule than make it work
-  // nicely with a string type.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  static selectorValue(selectorValue: any) {
-    console.log('Selector Value: ' + selectorValue);
-    const propertyName: keyof ResumeStateModel = selectorValue;
-    const selector = createSelector(
+
+  static selectorValue(selectorType: SelectorType) {
+    console.log('Selector Type: ' + selectorType);
+    switch (selectorType) {
+      case SelectorType.NAME:
+        return this.selectorName();
+      case SelectorType.TITLE:
+        return this.selectorTitle();
+      case SelectorType.SUMMARY:
+        return this.selectorSummary();
+      case SelectorType.EMAIL:
+        return this.selectorEmail();
+      case SelectorType.LOCATION:
+        return this.selectorLocation();
+      case SelectorType.PHONE:
+        return this.selectorPhone();;
+      default:
+        throw new Error('Unknow selector type: ' + selectorType);
+    }
+  }
+
+  private static selectorName() {
+    return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => {
-        console.log(state);
-        return state[propertyName];
-      },
+      (state: ResumeStateModel) =>  state.name,
     );
-    return selector;
+  }
+
+  private static selectorTitle() {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  state.title,
+    );
+  }
+
+  private static selectorSummary() {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  state.summary,
+    );
+  }
+
+  private static selectorEmail() {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  state.email,
+    );
+  }
+
+  private static selectorLocation() {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  state.location,
+    );
+  }
+
+  private static selectorPhone() {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  state.phone,
+    );
   }
 
   @Action(Resume.NameUpdate)

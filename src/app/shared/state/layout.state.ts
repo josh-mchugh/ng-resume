@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State } from '@ngxs/store';
+import { SelectorType } from '@shared/state/resume.state';
 
 export interface LayoutStateModel {
   dimension: Dimension;
@@ -11,7 +12,8 @@ export interface SectionModel {
   classes: SectionClasses;
   dimension: Dimension;
   children: Array<SectionModel>;
-  selector?: string;
+  selector?: SelectorType;
+  selectorKey?: string,
   template?: string;
 }
 
@@ -88,7 +90,8 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: 'name',
+                    selector: SelectorType.NAME,
+                    selectorKey: 'name',
                     template: '<div class="name">{{ name }}</div>',
                     children: [],
                   },
@@ -96,7 +99,8 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: 'title',
+                    selector: SelectorType.TITLE,
+                    selectorKey: 'title',
                     template: '<div class="title">{{ title }}</div>',
                     children: [],
                   },
@@ -114,7 +118,7 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: '',
+                    selector: SelectorType.NONE,
                     template:
                       '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
@@ -123,7 +127,8 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: 'summary',
+                    selector: SelectorType.SUMMARY,
+                    selectorKey: 'summary',
                     template: '<div class="summary">{{ summary }}</div>',
                     children: [],
                   },
@@ -141,7 +146,7 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: '',
+                    selector: SelectorType.NONE,
                     template:
                       '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
@@ -150,7 +155,8 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: 'phone',
+                    selector: SelectorType.PHONE,
+                    selectorKey: 'phone',
                     template:
                       '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
                     children: [],
@@ -159,7 +165,8 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: 'email',
+                    selector: SelectorType.EMAIL,
+                    selectorKey: 'email',
                     template:
                       '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
                     children: [],
@@ -168,7 +175,8 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: 'location',
+                    selector: SelectorType.LOCATION,
+                    selectorKey: 'location',
                     template:
                       '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
                     children: [],
@@ -187,7 +195,7 @@ function initDimension(): Dimension {
                     type: SectionType.SECTION,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: '',
+                    selector: SelectorType.NONE,
                     template:
                       '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],

@@ -2,7 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DimensionService } from '@shared/service/dimension.service';
 import { Store } from '@ngxs/store';
 import { SectionModel } from '@shared/state/layout.state';
-import { ResumeState } from '@shared/state/resume.state';
+import { ResumeState, SelectorType } from '@shared/state/resume.state';
 import { Observable, of, map } from 'rxjs';
 import Mustache from 'mustache';
 
@@ -30,12 +30,12 @@ export class SectionComponent implements OnInit {
   ngOnInit() {
     console.log('section on init');
     if (this.section && (this.section.selector || this.section.template)) {
-      if (this.section.selector) {
+      if (this.section.selector && this.section.selector !== SelectorType.NONE) {
         this.htmlContent$ = this.store
           .select(ResumeState.selectorValue(this.section.selector))
           .pipe(
             map((value) => {
-              const entries = [[this.section.selector, value]];
+              const entries = [[this.section.selectorKey, value]];
               console.log(entries);
               return Mustache.render(
                 this.section.template as string,
