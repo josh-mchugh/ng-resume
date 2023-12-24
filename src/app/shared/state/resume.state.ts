@@ -50,6 +50,8 @@ export enum SelectorType {
   EMAIL = 'EMAIL',
   LOCATION = 'LOCATION',
   PHONE = 'PHONE',
+  SOCIAL_LIST = 'SOCIAL_LIST',
+  SOCIAL = 'SOCIAL',
   NONE = 'NONE',
 }
 
@@ -182,7 +184,7 @@ export enum SelectorType {
 @Injectable()
 export class ResumeState {
 
-  static selectorValue(selectorType: SelectorType) {
+  static selectorValue(selectorType: SelectorType, index: number = 0): any {
     console.log('Selector Type: ' + selectorType);
     switch (selectorType) {
       case SelectorType.NAME:
@@ -196,7 +198,11 @@ export class ResumeState {
       case SelectorType.LOCATION:
         return this.selectorLocation();
       case SelectorType.PHONE:
-        return this.selectorPhone();;
+        return this.selectorPhone();
+      case SelectorType.SOCIAL_LIST:
+        return this.selectorSocialList();
+      case SelectorType.SOCIAL:
+        return this.selectorSocial(index);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -241,6 +247,20 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>  state.phone,
+    );
+  }
+
+  private static selectorSocialList() {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  [...Array(state.socials.length).keys()],
+    );
+  }
+
+  private static selectorSocial(index: number) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>  state.socials[index],
     );
   }
 

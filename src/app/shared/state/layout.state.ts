@@ -30,6 +30,8 @@ function emptyClasses() {
 }
 
 export enum SectionType {
+  CONTENT = 'CONTENT',
+  LIST = 'LIST',
   SECTION = 'SECTION',
   SOCIAL_LIST = 'SOCIAL_LIST',
   HEADER_EXPERIENCE = 'HEADER_EXPERIENCE',
@@ -66,12 +68,12 @@ function initDimension(): Dimension {
     dimension: initDimension(),
     sections: [
       {
-        type: SectionType.SECTION,
+        type: SectionType.LIST,
         classes: emptyClasses(),
         dimension: initDimension(),
         children: [
           {
-            type: SectionType.SECTION,
+            type: SectionType.LIST,
             classes: {
               root: 'section--column-left',
               content: 'section__content--column',
@@ -79,7 +81,7 @@ function initDimension(): Dimension {
             dimension: initDimension(),
             children: [
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -87,7 +89,7 @@ function initDimension(): Dimension {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.NAME,
@@ -96,7 +98,7 @@ function initDimension(): Dimension {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.TITLE,
@@ -107,7 +109,7 @@ function initDimension(): Dimension {
                 ],
               },
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -115,7 +117,7 @@ function initDimension(): Dimension {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.NONE,
@@ -124,7 +126,7 @@ function initDimension(): Dimension {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.SUMMARY,
@@ -135,7 +137,7 @@ function initDimension(): Dimension {
                 ],
               },
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -143,7 +145,7 @@ function initDimension(): Dimension {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.NONE,
@@ -152,7 +154,7 @@ function initDimension(): Dimension {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.PHONE,
@@ -162,7 +164,7 @@ function initDimension(): Dimension {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.EMAIL,
@@ -172,7 +174,7 @@ function initDimension(): Dimension {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.LOCATION,
@@ -184,7 +186,7 @@ function initDimension(): Dimension {
                 ],
               },
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -192,7 +194,7 @@ function initDimension(): Dimension {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selector: SelectorType.NONE,
@@ -201,17 +203,22 @@ function initDimension(): Dimension {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.LIST,
                     classes: {
                       root: '',
                       content: 'section__content--column',
                     },
                     dimension: initDimension(),
+                    selector: SelectorType.SOCIAL_LIST,
                     children: [
                       {
-                        type: SectionType.SOCIAL_LIST,
+                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
+                        selector: SelectorType.SOCIAL,
+                        selectorKey: 'social',
+                        template:
+                        '<div class="social"><div><span class="social__icon"><i class="{{ social.icon }}"></i></span>{{ social.name }}</div><a class="social__link" href=" {{ social.url }}"> {{ social.url }} </a></div>',
                         children: [],
                       },
                     ],
