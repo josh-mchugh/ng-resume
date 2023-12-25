@@ -23,7 +23,6 @@ import { CertificationsInputComponent } from './inputs/certifications-input/cert
 import { SectionComponent } from './pages/section/section.component';
 import { ExperienceListComponent } from './pages/template/experience-list/experience-list.component';
 import { ExperienceComponent } from './pages/template/experience-list/experience/experience.component';
-import { ExperienceOrganizationComponent } from './pages/template/experience-list/experience/experience-organization/experience-organization.component';
 import { ExperienceDescriptionComponent } from './pages/template/experience-list/experience/experience-description/experience-description.component';
 import { ExperienceSkillComponent } from './pages/template/experience-list/experience/experience-skill/experience-skill.component';
 import { HeaderSkillComponent } from './pages/template/header-skill/header-skill.component';
@@ -47,7 +46,6 @@ import { CertificationOrganizationComponent } from './pages/template/certificati
     SectionComponent,
     ExperienceListComponent,
     ExperienceComponent,
-    ExperienceOrganizationComponent,
     ExperienceDescriptionComponent,
     ExperienceSkillComponent,
     HeaderSkillComponent,
