@@ -21,8 +21,6 @@ import { ExperiencesInputComponent } from './inputs/experiences-input/experience
 import { SkillsInputComponent } from './inputs/skills-input/skills-input.component';
 import { CertificationsInputComponent } from './inputs/certifications-input/certifications-input.component';
 import { SectionComponent } from './pages/section/section.component';
-import { SocialListComponent } from './pages/template/social-list/social-list.component';
-import { SocialComponent } from './pages/template/social-list/social/social.component';
 import { HeaderExperienceComponent } from './pages/template/header-experience/header-experience.component';
 import { ExperienceListComponent } from './pages/template/experience-list/experience-list.component';
 import { ExperienceComponent } from './pages/template/experience-list/experience/experience.component';
@@ -49,8 +47,6 @@ import { CertificationOrganizationComponent } from './pages/template/certificati
     SkillsInputComponent,
     CertificationsInputComponent,
     SectionComponent,
-    SocialListComponent,
-    SocialComponent,
     HeaderExperienceComponent,
     ExperienceListComponent,
     ExperienceComponent,

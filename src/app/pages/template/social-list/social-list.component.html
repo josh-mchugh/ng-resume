@@ -1,9 +1,0 @@
-<ng-container *ngIf="socials$ | async as socials">
-  <ng-container
-    *ngFor="let social of socials; let index = index; trackBy: handleTrackBy"
-  >
-    <app-section>
-      <app-social [social]="social" />
-    </app-section>
-  </ng-container>
-</ng-container>
