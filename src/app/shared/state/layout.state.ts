@@ -296,15 +296,43 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.LIST,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     children: [
                       {
-                        type: SectionType.EXPERIENCE_LIST,
-                        classes: emptyClasses(),
+                        type: SectionType.LIST,
+                        classes: {
+                          root: '',
+                          content: 'section__content--column',
+                        },
                         dimension: initDimension(),
-                        children: [],
+                        selectors: [
+                          {
+                            type: SelectorType.EXPERIENCE_LIST,
+                            key: ''
+                          },
+                        ],
+                        children: [
+                          {
+                            type: SectionType.CONTENT,
+                            classes: emptyClasses(),
+                            dimension: initDimension(),
+                            selectors: [
+                              {
+                                type: SelectorType.EXPERIENCE_TITLE,
+                                key: 'title',
+                              },
+                              {
+                                type: SelectorType.EXPERIENCE_DURATION,
+                                key: 'duration',
+                              }
+                            ],
+                            template:
+                            '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
+                            children: [],
+                          }
+                        ],
                       },
                     ],
                   },

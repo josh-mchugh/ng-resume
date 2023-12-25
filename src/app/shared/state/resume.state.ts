@@ -53,6 +53,9 @@ export enum SelectorType {
   SOCIAL_ICON = 'SOCIAL_ICON',
   SOCIAL_NAME = 'SOCIAL_NAME',
   SOCIAL_URL = 'SOCIAL_URL',
+  EXPERIENCE_LIST = 'EXPERIENCE_LIST',
+  EXPERIENCE_TITLE = 'EXPERIENCE_TITLE',
+  EXPERIENCE_DURATION = 'EXPERIENCE_DURATION',
   NONE = 'NONE',
 }
 
@@ -209,6 +212,12 @@ export class ResumeState {
         return this.selectorSocialName(index);
       case SelectorType.SOCIAL_URL:
         return this.selectorSocialUrl(index);
+      case SelectorType.EXPERIENCE_LIST:
+        return this.selectorExperienceList();
+      case SelectorType.EXPERIENCE_TITLE:
+        return this.selectorExperienceTitle(index);
+      case SelectorType.EXPERIENCE_DURATION:
+        return this.selectorExperienceDuration(index);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -280,6 +289,26 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) => state.socials[index].url,
+    );
+  }
+
+  private static selectorExperienceList() {
+    return createSelector([ResumeState], (state: ResumeStateModel) => [
+      ...Array(state.experiences.length).keys(),
+    ]);
+  }
+
+  private static selectorExperienceTitle(index: number) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.experiences[index].title,
+    );
+  }
+
+  private static selectorExperienceDuration(index: number) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.experiences[index].duration,
     );
   }
 
