@@ -331,6 +331,24 @@ export interface Selector {
                             template:
                             '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
                             children: [],
+                          },
+                          {
+                            type: SectionType.CONTENT,
+                            classes: emptyClasses(),
+                            dimension: initDimension(),
+                            selectors: [
+                              {
+                                type: SelectorType.EXPERIENCE_ORGANIZATION,
+                                key: 'organization',
+                              },
+                              {
+                                type: SelectorType.EXPERIENCE_LOCATION,
+                                key: 'location',
+                              }
+                            ],
+                            template:
+                            '<div class="experience-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+                            children: [],
                           }
                         ],
                       },

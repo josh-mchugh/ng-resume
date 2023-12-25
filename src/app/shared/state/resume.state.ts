@@ -56,6 +56,8 @@ export enum SelectorType {
   EXPERIENCE_LIST = 'EXPERIENCE_LIST',
   EXPERIENCE_TITLE = 'EXPERIENCE_TITLE',
   EXPERIENCE_DURATION = 'EXPERIENCE_DURATION',
+  EXPERIENCE_ORGANIZATION = 'EXPERIENCE_ORGANIZATION',
+  EXPERIENCE_LOCATION = 'EXPERIENCE_LOCATION',
   NONE = 'NONE',
 }
 
@@ -218,6 +220,10 @@ export class ResumeState {
         return this.selectorExperienceTitle(index);
       case SelectorType.EXPERIENCE_DURATION:
         return this.selectorExperienceDuration(index);
+      case SelectorType.EXPERIENCE_ORGANIZATION:
+        return this.selectorExperienceOrganization(index);
+      case SelectorType.EXPERIENCE_LOCATION:
+        return this.selectorExperienceLocation(index);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -309,6 +315,20 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) => state.experiences[index].duration,
+    );
+  }
+
+  private static selectorExperienceOrganization(index: number) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.experiences[index].organization,
+    );
+  }
+
+  private static selectorExperienceLocation(index: number) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.experiences[index].location,
     );
   }
 
