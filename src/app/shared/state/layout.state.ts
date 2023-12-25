@@ -12,21 +12,8 @@ export interface SectionModel {
   classes: SectionClasses;
   dimension: Dimension;
   children: Array<SectionModel>;
-  selector?: SelectorType;
-  selectorKey?: string,
+  selectors?: Selector[];
   template?: string;
-}
-
-export interface SectionClasses {
-  root: string;
-  content: string;
-}
-
-function emptyClasses() {
-  return {
-    root: '',
-    content: '',
-  };
 }
 
 export enum SectionType {
@@ -40,6 +27,18 @@ export enum SectionType {
   SKILL_LIST = 'SKILL_LIST',
   HEADER_CERTIFICATION = 'HEADER_CERTIFICATION',
   CERTIFICATION_LIST = 'CERTIFICATION_LIST',
+}
+
+export interface SectionClasses {
+  root: string;
+  content: string;
+}
+
+function emptyClasses() {
+  return {
+    root: '',
+    content: '',
+  };
 }
 
 export interface Dimension {
@@ -60,6 +59,11 @@ function initDimension(): Dimension {
     height: 0,
     width: 0,
   };
+}
+
+export interface Selector {
+  type: SelectorType;
+  key: string;
 }
 
 @State<LayoutStateModel>({
@@ -92,8 +96,12 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.NAME,
-                    selectorKey: 'name',
+                    selectors: [
+                      {
+                        type: SelectorType.NAME,
+                        key: 'name',
+                      },
+                    ],
                     template: '<div class="name">{{ name }}</div>',
                     children: [],
                   },
@@ -101,8 +109,12 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.TITLE,
-                    selectorKey: 'title',
+                    selectors: [
+                      {
+                        type: SelectorType.TITLE,
+                        key: 'title',
+                      },
+                    ],
                     template: '<div class="title">{{ title }}</div>',
                     children: [],
                   },
@@ -120,7 +132,7 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.NONE,
+                    selectors: [],
                     template:
                       '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
@@ -129,8 +141,12 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.SUMMARY,
-                    selectorKey: 'summary',
+                    selectors: [
+                      {
+                        type: SelectorType.SUMMARY,
+                        key: 'summary',
+                      },
+                    ],
                     template: '<div class="summary">{{ summary }}</div>',
                     children: [],
                   },
@@ -148,7 +164,7 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.NONE,
+                    selectors: [],
                     template:
                       '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
@@ -157,8 +173,12 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.PHONE,
-                    selectorKey: 'phone',
+                    selectors: [
+                      {
+                        type: SelectorType.PHONE,
+                        key: 'phone',
+                      },
+                    ],
                     template:
                       '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
                     children: [],
@@ -167,8 +187,12 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.EMAIL,
-                    selectorKey: 'email',
+                    selectors: [
+                      {
+                        type: SelectorType.EMAIL,
+                        key: 'email',
+                      },
+                    ],
                     template:
                       '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
                     children: [],
@@ -177,8 +201,12 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.LOCATION,
-                    selectorKey: 'location',
+                    selectors: [
+                      {
+                        type: SelectorType.LOCATION,
+                        key: 'location',
+                      },
+                    ],
                     template:
                       '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
                     children: [],
@@ -197,7 +225,7 @@ function initDimension(): Dimension {
                     type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    selector: SelectorType.NONE,
+                    selectors: [],
                     template:
                       '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
                     children: [],
@@ -209,16 +237,33 @@ function initDimension(): Dimension {
                       content: 'section__content--column',
                     },
                     dimension: initDimension(),
-                    selector: SelectorType.SOCIAL_LIST,
+                    selectors: [
+                      {
+                        type: SelectorType.SOCIAL_LIST,
+                        key: '',
+                      },
+                    ],
                     children: [
                       {
                         type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
-                        selector: SelectorType.SOCIAL,
-                        selectorKey: 'social',
+                        selectors: [
+                          {
+                            type: SelectorType.SOCIAL_NAME,
+                            key: 'name',
+                          },
+                          {
+                            type: SelectorType.SOCIAL_ICON,
+                            key: 'icon',
+                          },
+                          {
+                            type: SelectorType.SOCIAL_URL,
+                            key: 'url',
+                          },
+                        ],
                         template:
-                        '<div class="social"><div><span class="social__icon"><i class="{{ social.icon }}"></i></span>{{ social.name }}</div><a class="social__link" href=" {{ social.url }}"> {{ social.url }} </a></div>',
+                          '<div class="social"><div><span class="social__icon"><i class="{{ icon }}"></i></span>{{ name }}</div><a class="social__link" href=" {{ url }}"> {{ url }} </a></div>',
                         children: [],
                       },
                     ],

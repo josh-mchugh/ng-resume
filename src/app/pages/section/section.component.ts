@@ -4,7 +4,7 @@ import { DimensionService } from '@shared/service/dimension.service';
 import { Store } from '@ngxs/store';
 import { SectionModel, SectionType } from '@shared/state/layout.state';
 import { ResumeState, SelectorType } from '@shared/state/resume.state';
-import { Observable, of, map } from 'rxjs';
+import { combineLatest, Observable, of, map } from 'rxjs';
 import Mustache from 'mustache';
 
 @Component({
@@ -29,9 +29,9 @@ export class SectionComponent implements OnInit {
   public constructor(
     private store: Store,
     private dimensionService: DimensionService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
   ) {
-    if (this.section && this.section.selector) {
+    if (this.section && this.section.selectors) {
       console.log('section constructor');
     }
   }
@@ -39,31 +39,37 @@ export class SectionComponent implements OnInit {
   ngOnInit() {
     console.log('section on init');
     if (this.section && this.section.type === SectionType.CONTENT) {
-      if (this.section.selector && this.section.selector !== SelectorType.NONE) {
-        console.log("index: " + this.index);
-        this.htmlContent$ = this.store
-          .select(ResumeState.selectorValue(this.section.selector, this.index))
-          .pipe(
-            map((value) => {
-              const entries = [[this.section.selectorKey, value]];
-              console.log(entries);
-              const template = Mustache.render(
-                this.section.template as string,
-                Object.fromEntries(entries),
-              );
-              return this.domSanitizer.bypassSecurityTrustHtml(template);
-            }),
-          );
+      if (
+        this.section.selectors &&
+        this.section.selectors.length &&
+        !this.section.selectors.find(
+          (selector) => selector.type === SelectorType.NONE,
+        )
+      ) {
+        const observables = this.section.selectors.map((selector) =>
+          this.store
+            .select(ResumeState.selectorValue(selector.type, this.index))
+            .pipe(map((value) => [selector.key, value])),
+        );
+        this.htmlContent$ = combineLatest(observables).pipe(
+          map((values) => {
+            const template = Mustache.render(
+              this.section.template as string,
+              Object.fromEntries(values),
+            );
+            return this.domSanitizer.bypassSecurityTrustHtml(template);
+          }),
+        );
       } else if (this.section?.template) {
-        console.log('rendering template without selector');
         const template = Mustache.render(this.section.template as string, {});
-        console.log(template);
-        this.htmlContent$ = of(template);
+        const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
+        this.htmlContent$ = of(safeHtml);
       }
     } else if (this.section && this.section.type === SectionType.LIST) {
-      if(this.section.selector) {
-        this.contentListLength$ = this.store
-          .select(ResumeState.selectorValue(this.section.selector));
+      if (this.section.selectors) {
+        this.contentListLength$ = this.store.select(
+          ResumeState.selectorValue(this.section.selectors[0].type, this.index),
+        );
       }
     }
   }

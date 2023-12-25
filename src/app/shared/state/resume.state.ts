@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
-import { empty } from 'rxjs';
 
 export interface ResumeStateModel {
   name: string;
@@ -51,7 +50,9 @@ export enum SelectorType {
   LOCATION = 'LOCATION',
   PHONE = 'PHONE',
   SOCIAL_LIST = 'SOCIAL_LIST',
-  SOCIAL = 'SOCIAL',
+  SOCIAL_ICON = 'SOCIAL_ICON',
+  SOCIAL_NAME = 'SOCIAL_NAME',
+  SOCIAL_URL = 'SOCIAL_URL',
   NONE = 'NONE',
 }
 
@@ -183,8 +184,9 @@ export enum SelectorType {
 })
 @Injectable()
 export class ResumeState {
-
-  static selectorValue(selectorType: SelectorType, index: number = 0): any {
+  // Ignore until refactoring out generic type any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static selectorValue(selectorType: SelectorType, index = 0): any {
     console.log('Selector Type: ' + selectorType);
     switch (selectorType) {
       case SelectorType.NAME:
@@ -201,8 +203,12 @@ export class ResumeState {
         return this.selectorPhone();
       case SelectorType.SOCIAL_LIST:
         return this.selectorSocialList();
-      case SelectorType.SOCIAL:
-        return this.selectorSocial(index);
+      case SelectorType.SOCIAL_ICON:
+        return this.selectorSocialIcon(index);
+      case SelectorType.SOCIAL_NAME:
+        return this.selectorSocialName(index);
+      case SelectorType.SOCIAL_URL:
+        return this.selectorSocialUrl(index);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -211,56 +217,69 @@ export class ResumeState {
   private static selectorName() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.name,
+      (state: ResumeStateModel) => state.name,
     );
   }
 
   private static selectorTitle() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.title,
+      (state: ResumeStateModel) => state.title,
     );
   }
 
   private static selectorSummary() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.summary,
+      (state: ResumeStateModel) => state.summary,
     );
   }
 
   private static selectorEmail() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.email,
+      (state: ResumeStateModel) => state.email,
     );
   }
 
   private static selectorLocation() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.location,
+      (state: ResumeStateModel) => state.location,
     );
   }
 
   private static selectorPhone() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.phone,
+      (state: ResumeStateModel) => state.phone,
     );
   }
 
   private static selectorSocialList() {
+    return createSelector([ResumeState], (state: ResumeStateModel) => [
+      ...Array(state.socials.length).keys(),
+    ]);
+  }
+
+  private static selectorSocialIcon(index: number) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  [...Array(state.socials.length).keys()],
+      (state: ResumeStateModel) => state.socials[index].icon,
     );
   }
 
-  private static selectorSocial(index: number) {
+  private static selectorSocialName(index: number) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) =>  state.socials[index],
+      (state: ResumeStateModel) => state.socials[index].name,
+    );
+  }
+
+  private static selectorSocialUrl(index: number) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.socials[index].url,
     );
   }
 
