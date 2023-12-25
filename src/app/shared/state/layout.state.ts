@@ -273,7 +273,7 @@ export interface Selector {
             ],
           },
           {
-            type: SectionType.SECTION,
+            type: SectionType.LIST,
             classes: {
               root: 'section--column-right',
               content: 'section__content--column',
@@ -281,7 +281,7 @@ export interface Selector {
             dimension: initDimension(),
             children: [
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -289,17 +289,13 @@ export interface Selector {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [
-                      {
-                        type: SectionType.HEADER_EXPERIENCE,
-                        classes: emptyClasses(),
-                        dimension: initDimension(),
-                        children: [],
-                      },
-                    ],
+                    selectors: [],
+                    template:
+                      '<div class="header header--experience"><div class="header__title">WORK EXPERIENCE</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+                    children: [],
                   },
                   {
                     type: SectionType.SECTION,
