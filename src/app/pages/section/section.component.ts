@@ -23,8 +23,14 @@ export class SectionComponent implements OnInit {
   // child length for SectionType.List
   contentListLength$!: Observable<number[]>;
 
-  // Index for section
-  @Input() index!: number;
+  // Components current index in list for coordinates
+  @Input() coordIndex!: number;
+
+  // Parent's coordinates in section tree
+  @Input() parentCoord!: number[];
+
+  // Components coordinates in section tree
+  coord: number[] = [];
 
   public constructor(
     private store: Store,
@@ -37,7 +43,16 @@ export class SectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('section on init');
+    console.log('section on init: ' + this.section?.type);
+
+    //Set componets coordinates
+    if (this.parentCoord && this.parentCoord.length) {
+      this.coord = [...this.parentCoord, this.coordIndex];
+    } else {
+      this.coord = [this.coordIndex];
+    }
+    console.log('coordinate: ' + this.coord);
+
     if (this.section && this.section.type === SectionType.CONTENT) {
       if (
         this.section.selectors &&
@@ -48,7 +63,7 @@ export class SectionComponent implements OnInit {
       ) {
         const observables = this.section.selectors.map((selector) =>
           this.store
-            .select(ResumeState.selectorValue(selector.type, this.index))
+            .select(ResumeState.selectorValue(selector.type, this.coord))
             .pipe(map((value) => [selector.key, value])),
         );
         this.htmlContent$ = combineLatest(observables).pipe(
@@ -68,7 +83,7 @@ export class SectionComponent implements OnInit {
     } else if (this.section && this.section.type === SectionType.LIST) {
       if (this.section.selectors) {
         this.contentListLength$ = this.store.select(
-          ResumeState.selectorValue(this.section.selectors[0].type, this.index),
+          ResumeState.selectorValue(this.section.selectors[0].type, this.coord),
         );
       }
     }

@@ -5,11 +5,11 @@
       <ng-container
         *ngFor="
           let section of layout.sections;
-          let index = index;
+          let i = index;
           trackBy: handleTrackBy
         "
       >
-        <app-section [section]="section" />
+        <app-section [section]="section" [coordIndex]="i" />
       </ng-container>
     </div>
   </div>

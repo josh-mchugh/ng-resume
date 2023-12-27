@@ -16,8 +16,18 @@
         trackBy: handleTrackBy
       "
     >
-      <ng-container *ngFor="let child of getChildren(); trackBy: handleTrackBy">
-        <app-section [section]="child" [index]="childIndex" />
+      <ng-container
+        *ngFor="
+          let child of getChildren();
+          let i = index;
+          trackBy: handleTrackBy
+        "
+      >
+        <app-section
+          [section]="child"
+          [parentCoord]="coord"
+          [coordIndex]="childIndex"
+        />
       </ng-container>
     </ng-container>
   </div>
@@ -26,11 +36,7 @@
 <ng-container *ngIf="!section || !section?.selectors">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
-      *ngFor="
-        let child of getChildren();
-        let index = index;
-        trackBy: handleTrackBy
-      "
+      *ngFor="let child of getChildren(); let i = index; trackBy: handleTrackBy"
     >
       <ng-container [ngSwitch]="child.type">
         <app-experience-list
@@ -40,8 +46,13 @@
         <app-skill-list *ngSwitchCase="'SKILL_LIST'"></app-skill-list>
         <app-header-certification *ngSwitchCase="'HEADER_CERTIFICATION'" />
         <app-certification-list *ngSwitchCase="'CERTIFICATION_LIST'" />
+        <!-- this default block handles section lists without selectors for resume data -->
         <ng-container *ngSwitchDefault>
-          <app-section [section]="child" />
+          <app-section
+            [section]="child"
+            [parentCoord]="coord"
+            [coordIndex]="i"
+          />
         </ng-container>
       </ng-container>
     </ng-container>

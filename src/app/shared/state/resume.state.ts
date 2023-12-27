@@ -58,6 +58,8 @@ export enum SelectorType {
   EXPERIENCE_DURATION = 'EXPERIENCE_DURATION',
   EXPERIENCE_ORGANIZATION = 'EXPERIENCE_ORGANIZATION',
   EXPERIENCE_LOCATION = 'EXPERIENCE_LOCATION',
+  EXPERIENCE_DESCRIPTION_LIST = 'EXPERIENCE_DESCRIPTION_LIST',
+  EXPERIENCE_DESCRIPTION = 'EXPERIENCE_DESCRIPTION',
   NONE = 'NONE',
 }
 
@@ -191,7 +193,7 @@ export enum SelectorType {
 export class ResumeState {
   // Ignore until refactoring out generic type any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  static selectorValue(selectorType: SelectorType, index = 0): any {
+  static selectorValue(selectorType: SelectorType, coord: number[] = []): any {
     console.log('Selector Type: ' + selectorType);
     switch (selectorType) {
       case SelectorType.NAME:
@@ -209,21 +211,25 @@ export class ResumeState {
       case SelectorType.SOCIAL_LIST:
         return this.selectorSocialList();
       case SelectorType.SOCIAL_ICON:
-        return this.selectorSocialIcon(index);
+        return this.selectorSocialIcon(coord);
       case SelectorType.SOCIAL_NAME:
-        return this.selectorSocialName(index);
+        return this.selectorSocialName(coord);
       case SelectorType.SOCIAL_URL:
-        return this.selectorSocialUrl(index);
+        return this.selectorSocialUrl(coord);
       case SelectorType.EXPERIENCE_LIST:
         return this.selectorExperienceList();
       case SelectorType.EXPERIENCE_TITLE:
-        return this.selectorExperienceTitle(index);
+        return this.selectorExperienceTitle(coord);
       case SelectorType.EXPERIENCE_DURATION:
-        return this.selectorExperienceDuration(index);
+        return this.selectorExperienceDuration(coord);
       case SelectorType.EXPERIENCE_ORGANIZATION:
-        return this.selectorExperienceOrganization(index);
+        return this.selectorExperienceOrganization(coord);
       case SelectorType.EXPERIENCE_LOCATION:
-        return this.selectorExperienceLocation(index);
+        return this.selectorExperienceLocation(coord);
+      case SelectorType.EXPERIENCE_DESCRIPTION_LIST:
+        return this.selectorExperienceDescriptionList(coord);
+      case SelectorType.EXPERIENCE_DESCRIPTION:
+        return this.selectorExperienceDescription(coord);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -277,24 +283,24 @@ export class ResumeState {
     ]);
   }
 
-  private static selectorSocialIcon(index: number) {
+  private static selectorSocialIcon(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.socials[index].icon,
+      (state: ResumeStateModel) => state.socials[coord[coord.length - 1]].icon,
     );
   }
 
-  private static selectorSocialName(index: number) {
+  private static selectorSocialName(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.socials[index].name,
+      (state: ResumeStateModel) => state.socials[coord[coord.length - 1]].name,
     );
   }
 
-  private static selectorSocialUrl(index: number) {
+  private static selectorSocialUrl(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.socials[index].url,
+      (state: ResumeStateModel) => state.socials[coord[coord.length - 1]].url,
     );
   }
 
@@ -304,31 +310,53 @@ export class ResumeState {
     ]);
   }
 
-  private static selectorExperienceTitle(index: number) {
+  private static selectorExperienceTitle(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experiences[index].title,
+      (state: ResumeStateModel) =>
+        state.experiences[coord[coord.length - 1]].title,
     );
   }
 
-  private static selectorExperienceDuration(index: number) {
+  private static selectorExperienceDuration(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experiences[index].duration,
+      (state: ResumeStateModel) =>
+        state.experiences[coord[coord.length - 1]].duration,
     );
   }
 
-  private static selectorExperienceOrganization(index: number) {
+  private static selectorExperienceOrganization(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experiences[index].organization,
+      (state: ResumeStateModel) =>
+        state.experiences[coord[coord.length - 1]].organization,
     );
   }
 
-  private static selectorExperienceLocation(index: number) {
+  private static selectorExperienceLocation(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experiences[index].location,
+      (state: ResumeStateModel) =>
+        state.experiences[coord[coord.length - 1]].location,
+    );
+  }
+
+  private static selectorExperienceDescriptionList(coord: number[]) {
+    return createSelector([ResumeState], (state: ResumeStateModel) => [
+      ...Array(
+        state.experiences[coord[coord.length - 1]].descriptions.length,
+      ).keys(),
+    ]);
+  }
+
+  private static selectorExperienceDescription(coord: number[]) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>
+        state.experiences[coord[coord.length - 2]].descriptions[
+          coord[coord.length - 1]
+        ],
     );
   }
 

@@ -297,9 +297,54 @@ export interface Selector {
                   },
                   {
                     type: SectionType.LIST,
-                    classes: emptyClasses(),
+                    classes: {
+                      root: '',
+                      content: 'section__content--column',
+                    },
                     dimension: initDimension(),
+                    selectors: [
+                      {
+                        type: SelectorType.EXPERIENCE_LIST,
+                        key: '',
+                      },
+                    ],
                     children: [
+                      {
+                        type: SectionType.CONTENT,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        selectors: [
+                          {
+                            type: SelectorType.EXPERIENCE_TITLE,
+                            key: 'title',
+                          },
+                          {
+                            type: SelectorType.EXPERIENCE_DURATION,
+                            key: 'duration',
+                          },
+                        ],
+                        template:
+                          '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
+                        children: [],
+                      },
+                      {
+                        type: SectionType.CONTENT,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        selectors: [
+                          {
+                            type: SelectorType.EXPERIENCE_ORGANIZATION,
+                            key: 'organization',
+                          },
+                          {
+                            type: SelectorType.EXPERIENCE_LOCATION,
+                            key: 'location',
+                          },
+                        ],
+                        template:
+                          '<div class="experience-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+                        children: [],
+                      },
                       {
                         type: SectionType.LIST,
                         classes: {
@@ -309,8 +354,8 @@ export interface Selector {
                         dimension: initDimension(),
                         selectors: [
                           {
-                            type: SelectorType.EXPERIENCE_LIST,
-                            key: ''
+                            type: SelectorType.EXPERIENCE_DESCRIPTION_LIST,
+                            key: '',
                           },
                         ],
                         children: [
@@ -320,36 +365,14 @@ export interface Selector {
                             dimension: initDimension(),
                             selectors: [
                               {
-                                type: SelectorType.EXPERIENCE_TITLE,
-                                key: 'title',
+                                type: SelectorType.EXPERIENCE_DESCRIPTION,
+                                key: 'description',
                               },
-                              {
-                                type: SelectorType.EXPERIENCE_DURATION,
-                                key: 'duration',
-                              }
                             ],
                             template:
-                            '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
+                              '<div class="experience-description"><span class="experience-description__icon"><i class="fa-solid fa-chevron-right"></i></span>{{ description }}</div>',
                             children: [],
                           },
-                          {
-                            type: SectionType.CONTENT,
-                            classes: emptyClasses(),
-                            dimension: initDimension(),
-                            selectors: [
-                              {
-                                type: SelectorType.EXPERIENCE_ORGANIZATION,
-                                key: 'organization',
-                              },
-                              {
-                                type: SelectorType.EXPERIENCE_LOCATION,
-                                key: 'location',
-                              }
-                            ],
-                            template:
-                            '<div class="experience-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
-                            children: [],
-                          }
                         ],
                       },
                     ],
