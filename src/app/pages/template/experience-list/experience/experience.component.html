@@ -1,12 +1,3 @@
-<app-section [contentClass]="'section__content--column'">
-  <ng-container
-    *ngFor="let description of experience.descriptions; trackBy: handleTrackBy"
-  >
-    <app-section>
-      <app-experience-description [description]="description" />
-    </app-section>
-  </ng-container>
-</app-section>
 <app-section [contentClass]="'section__content--wrap'">
   <ng-container *ngFor="let skill of experience.skills; trackBy: handleTrackBy">
     <app-section [rootClass]="'section--w-auto'">
