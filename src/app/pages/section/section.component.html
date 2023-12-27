@@ -39,9 +39,6 @@
       *ngFor="let child of getChildren(); let i = index; trackBy: handleTrackBy"
     >
       <ng-container [ngSwitch]="child.type">
-        <app-experience-list
-          *ngSwitchCase="'EXPERIENCE_LIST'"
-        ></app-experience-list>
         <app-header-skill *ngSwitchCase="'HEADER_SKILL'" />
         <app-skill-list *ngSwitchCase="'SKILL_LIST'"></app-skill-list>
         <app-header-certification *ngSwitchCase="'HEADER_CERTIFICATION'" />
