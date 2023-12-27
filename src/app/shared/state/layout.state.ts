@@ -375,6 +375,39 @@ export interface Selector {
                           },
                         ],
                       },
+                      {
+                        type: SectionType.LIST,
+                        classes: {
+                          root: '',
+                          content: 'section__content--wrap',
+                        },
+                        dimension: initDimension(),
+                        selectors: [
+                          {
+                            type: SelectorType.EXPERIENCE_SKILL_LIST,
+                            key: '',
+                          },
+                        ],
+                        children: [
+                          {
+                            type: SectionType.CONTENT,
+                            classes: {
+                              root: 'section--w-auto',
+                              content: '',
+                            },
+                            dimension: initDimension(),
+                            selectors: [
+                              {
+                                type: SelectorType.EXPERIENCE_SKILL,
+                                key: 'skill',
+                              },
+                            ],
+                            template:
+                              '<div class="experience-skill">{{ skill }}</div>',
+                            children: [],
+                          },
+                        ],
+                      },
                     ],
                   },
                 ],
