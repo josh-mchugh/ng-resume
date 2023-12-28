@@ -402,9 +402,8 @@ textarea {
 .skill {
   display: flex;
   justify-content: space-between;
-  column-gap: 2rem;
   width: 100%;
-  margin: 0 1rem 0.5rem 1rem;
+  margin: 0 auto 0.5rem auto;
   font-size: 0.75rem;
 }
 
@@ -413,7 +412,7 @@ textarea {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   align-content: center;
   width: 6rem;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 .gauge-block {

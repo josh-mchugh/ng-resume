@@ -62,6 +62,8 @@ export enum SelectorType {
   EXPERIENCE_DESCRIPTION = 'EXPERIENCE_DESCRIPTION',
   EXPERIENCE_SKILL_LIST = 'EXPERIENCE_SKILL_LIST',
   EXPERIENCE_SKILL = 'EXPERIENCE_SKILL',
+  SKILL_LIST = 'SKILL_LIST',
+  SKILL_NAME = 'SKILL_NAME',
   NONE = 'NONE',
 }
 
@@ -236,6 +238,10 @@ export class ResumeState {
         return this.selectorExperienceSkillList(coord);
       case SelectorType.EXPERIENCE_SKILL:
         return this.selectorExperienceSkill(coord);
+      case SelectorType.SKILL_LIST:
+        return this.selectorSkillList();
+      case SelectorType.SKILL_NAME:
+        return this.selectorSkillName(coord);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -379,6 +385,19 @@ export class ResumeState {
         state.experiences[coord[coord.length - 2]].skills[
           coord[coord.length - 1]
         ],
+    );
+  }
+
+  private static selectorSkillList() {
+    return createSelector([ResumeState], (state: ResumeStateModel) => [
+      ...Array(state.skills.length).keys(),
+    ]);
+  }
+
+  private static selectorSkillName(coord: number[]) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.skills[coord[coord.length - 1]].name,
     );
   }
 

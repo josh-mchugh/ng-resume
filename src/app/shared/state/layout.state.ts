@@ -433,14 +433,35 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
-                    classes: emptyClasses(),
+                    type: SectionType.LIST,
+                    classes: {
+                      root: '',
+                      content: 'section__content--wrap',
+                    },
                     dimension: initDimension(),
+                    selectors: [
+                      {
+                        type: SelectorType.SKILL_LIST,
+                        key: '',
+                      },
+                    ],
+                    template: '',
                     children: [
                       {
-                        type: SectionType.SKILL_LIST,
-                        classes: emptyClasses(),
+                        type: SectionType.CONTENT,
+                        classes: {
+                          root: 'section--w-50',
+                          content: '',
+                        },
                         dimension: initDimension(),
+                        selectors: [
+                          {
+                            type: SelectorType.SKILL_NAME,
+                            key: 'name',
+                          },
+                        ],
+                        template:
+                          '<div class="skill"><div>{{ name }}</div><div class="skill__gauge"><div class="gauge-block"></div><div class="gauge-block"></div><div class="gauge-block"></div><div class="gauge-block"></div><div class="gauge-block"></div></div></div>',
                         children: [],
                       },
                     ],
