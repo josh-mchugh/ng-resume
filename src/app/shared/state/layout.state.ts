@@ -19,7 +19,6 @@ export interface SectionModel {
 export enum SectionType {
   CONTENT = 'CONTENT',
   LIST = 'LIST',
-  SECTION = 'SECTION',
 }
 
 export interface SectionClasses {
@@ -408,7 +407,7 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -470,7 +469,7 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.SECTION,
+                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',

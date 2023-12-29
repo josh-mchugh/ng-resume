@@ -38,17 +38,11 @@
     <ng-container
       *ngFor="let child of getChildren(); let i = index; trackBy: handleTrackBy"
     >
-      <ng-container [ngSwitch]="child.type">
-        <app-certification-list *ngSwitchCase="'CERTIFICATION_LIST'" />
-        <!-- this default block handles section lists without selectors for resume data -->
-        <ng-container *ngSwitchDefault>
-          <app-section
-            [section]="child"
-            [parentCoord]="coord"
-            [coordIndex]="i"
-          />
-        </ng-container>
-      </ng-container>
+      <app-section
+        [section]="child"
+        [parentCoord]="coord"
+        [coordIndex]="i"
+      />
     </ng-container>
     <ng-content></ng-content>
   </div>
