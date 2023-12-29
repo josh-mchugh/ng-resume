@@ -1,9 +1,0 @@
-<ng-container *ngIf="skills$ | async as skills">
-  <ng-container
-    *ngFor="let skill of skills; let index = index; trackBy: handleTrackBy"
-  >
-    <app-section [rootClass]="'section--w-50'">
-      <app-skill [skill]="skill" />
-    </app-section>
-  </ng-container>
-</ng-container>
