@@ -459,9 +459,13 @@ export interface Selector {
                             type: SelectorType.SKILL_NAME,
                             key: 'name',
                           },
+                          {
+                            type: SelectorType.SKILL_BLOCKS,
+                            key: 'blocks',
+                          }
                         ],
                         template:
-                          '<div class="skill"><div>{{ name }}</div><div class="skill__gauge"><div class="gauge-block"></div><div class="gauge-block"></div><div class="gauge-block"></div><div class="gauge-block"></div><div class="gauge-block"></div></div></div>',
+                        '<div class="skill"><div>{{ name }}</div><div class="skill__gauge">{{ #blocks }}<div class="gauge-block {{ #active }} gauge-block--active {{ /active }}"></div>{{ /blocks }}</div>',
                         children: [],
                       },
                     ],
