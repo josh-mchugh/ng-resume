@@ -204,7 +204,6 @@ export class ResumeState {
   // Ignore until refactoring out generic type any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static selectorValue(selectorType: SelectorType, coord: number[] = []): any {
-    console.log('Selector Type: ' + selectorType);
     switch (selectorType) {
       case SelectorType.NAME:
         return this.selectorName();
