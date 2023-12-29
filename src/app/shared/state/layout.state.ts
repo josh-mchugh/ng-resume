@@ -458,10 +458,10 @@ export interface Selector {
                           {
                             type: SelectorType.SKILL_BLOCKS,
                             key: 'blocks',
-                          }
+                          },
                         ],
                         template:
-                        '<div class="skill"><div>{{ name }}</div><div class="skill__gauge">{{ #blocks }}<div class="gauge-block {{ #active }} gauge-block--active {{ /active }}"></div>{{ /blocks }}</div>',
+                          '<div class="skill"><div>{{ name }}</div><div class="skill__gauge">{{ #blocks }}<div class="gauge-block {{ #active }} gauge-block--active {{ /active }}"></div>{{ /blocks }}</div>',
                         children: [],
                       },
                     ],
@@ -484,9 +484,10 @@ export interface Selector {
                       {
                         type: SelectorType.NONE,
                         key: '',
-                      }
+                      },
                     ],
-                    template: '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+                    template:
+                      '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
                     children: [],
                   },
                   {
@@ -516,10 +517,10 @@ export interface Selector {
                           {
                             type: SelectorType.CERTIFICATION_YEAR,
                             key: 'year',
-                          }
+                          },
                         ],
                         template:
-                        '<div class="certification-degree"><div class="certification-degree__title">{{ title }}</div><div>{{ year }}</div></div>',
+                          '<div class="certification-degree"><div class="certification-degree__title">{{ title }}</div><div>{{ year }}</div></div>',
                         children: [],
                       },
                       {
@@ -534,10 +535,10 @@ export interface Selector {
                           {
                             type: SelectorType.CERTIFICATION_LOCATION,
                             key: 'location',
-                          }
+                          },
                         ],
                         template:
-                        '<div class="certification-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+                          '<div class="certification-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
                         children: [],
                       },
                     ],

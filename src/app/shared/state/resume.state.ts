@@ -419,10 +419,12 @@ export class ResumeState {
   }
 
   private static selectorSkillBlocks(coord: number[]) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => [...Array(5).keys()].map(value => {
-        return { active: state.skills[coord[coord.length - 1]].proficiency >= value + 1 }
+    return createSelector([ResumeState], (state: ResumeStateModel) =>
+      [...Array(5).keys()].map((value) => {
+        return {
+          active:
+            state.skills[coord[coord.length - 1]].proficiency >= value + 1,
+        };
       }),
     );
   }
@@ -436,28 +438,32 @@ export class ResumeState {
   private static selectorCertificationTitle(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].title,
+      (state: ResumeStateModel) =>
+        state.certifications[coord[coord.length - 1]].title,
     );
   }
 
   private static selectorCertificationYear(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].year,
+      (state: ResumeStateModel) =>
+        state.certifications[coord[coord.length - 1]].year,
     );
   }
 
   private static selectorCertificationOrganization(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].organization,
+      (state: ResumeStateModel) =>
+        state.certifications[coord[coord.length - 1]].organization,
     );
   }
 
   private static selectorCertificationLocation(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].location,
+      (state: ResumeStateModel) =>
+        state.certifications[coord[coord.length - 1]].location,
     );
   }
 

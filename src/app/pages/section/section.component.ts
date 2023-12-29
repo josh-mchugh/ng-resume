@@ -43,7 +43,6 @@ export class SectionComponent implements OnInit {
   }
 
   ngOnInit() {
-
     //Set componets coordinates
     if (this.parentCoord && this.parentCoord.length) {
       this.coord = [...this.parentCoord, this.coordIndex];
@@ -123,6 +122,11 @@ export class SectionComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    console.log('coord: ' + JSON.stringify(this.coord) + ', dimension: ' + JSON.stringify(dimension));
+    console.log(
+      'coord: ' +
+        JSON.stringify(this.coord) +
+        ', dimension: ' +
+        JSON.stringify(dimension),
+    );
   }
 }

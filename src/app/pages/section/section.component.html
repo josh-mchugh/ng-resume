@@ -38,11 +38,7 @@
     <ng-container
       *ngFor="let child of getChildren(); let i = index; trackBy: handleTrackBy"
     >
-      <app-section
-        [section]="child"
-        [parentCoord]="coord"
-        [coordIndex]="i"
-      />
+      <app-section [section]="child" [parentCoord]="coord" [coordIndex]="i" />
     </ng-container>
     <ng-content></ng-content>
   </div>
