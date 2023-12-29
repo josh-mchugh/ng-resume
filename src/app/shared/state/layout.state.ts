@@ -20,7 +20,6 @@ export enum SectionType {
   CONTENT = 'CONTENT',
   LIST = 'LIST',
   SECTION = 'SECTION',
-  CERTIFICATION_LIST = 'CERTIFICATION_LIST',
 }
 
 export interface SectionClasses {
@@ -492,14 +491,54 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.SECTION,
-                    classes: emptyClasses(),
+                    type: SectionType.LIST,
+                    classes: {
+                      root: '',
+                      content: 'section__content--column',
+                    },
                     dimension: initDimension(),
+                    selectors: [
+                      {
+                        type: SelectorType.CERTIFICATION_LIST,
+                        key: '',
+                      },
+                    ],
+                    template: '',
                     children: [
                       {
-                        type: SectionType.CERTIFICATION_LIST,
+                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
+                        selectors: [
+                          {
+                            type: SelectorType.CERTIFICATION_TITLE,
+                            key: 'title',
+                          },
+                          {
+                            type: SelectorType.CERTIFICATION_YEAR,
+                            key: 'year',
+                          }
+                        ],
+                        template:
+                        '<div class="certification-degree"><div class="certification-degree__title">{{ title }}</div><div>{{ year }}</div></div>',
+                        children: [],
+                      },
+                      {
+                        type: SectionType.CONTENT,
+                        classes: emptyClasses(),
+                        dimension: initDimension(),
+                        selectors: [
+                          {
+                            type: SelectorType.CERTIFICATION_ORGANIZATION,
+                            key: 'organization',
+                          },
+                          {
+                            type: SelectorType.CERTIFICATION_LOCATION,
+                            key: 'location',
+                          }
+                        ],
+                        template:
+                        '<div class="certification-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
                         children: [],
                       },
                     ],

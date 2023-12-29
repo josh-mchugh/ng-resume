@@ -65,6 +65,11 @@ export enum SelectorType {
   SKILL_LIST = 'SKILL_LIST',
   SKILL_NAME = 'SKILL_NAME',
   SKILL_BLOCKS = 'SKILL_BLOCKS',
+  CERTIFICATION_LIST = 'CERTIFICATION_LIST',
+  CERTIFICATION_TITLE = 'CERTIFICATION_TITLE',
+  CERTIFICATION_YEAR = 'CERTIFICATION_YEAR',
+  CERTIFICATION_ORGANIZATION = 'CERTIFICATION_ORGANIZATION',
+  CERTIFICATION_LOCATION = 'CERTIFICATION_LOCATION',
   NONE = 'NONE',
 }
 
@@ -245,6 +250,16 @@ export class ResumeState {
         return this.selectorSkillName(coord);
       case SelectorType.SKILL_BLOCKS:
         return this.selectorSkillBlocks(coord);
+      case SelectorType.CERTIFICATION_LIST:
+        return this.selectorCertificationList();
+      case SelectorType.CERTIFICATION_TITLE:
+        return this.selectorCertificationTitle(coord);
+      case SelectorType.CERTIFICATION_YEAR:
+        return this.selectorCertificationYear(coord);
+      case SelectorType.CERTIFICATION_ORGANIZATION:
+        return this.selectorCertificationOrganization(coord);
+      case SelectorType.CERTIFICATION_LOCATION:
+        return this.selectorCertificationLocation(coord);
       default:
         throw new Error('Unknow selector type: ' + selectorType);
     }
@@ -410,6 +425,40 @@ export class ResumeState {
       (state: ResumeStateModel) => [...Array(5).keys()].map(value => {
         return { active: state.skills[coord[coord.length - 1]].proficiency >= value + 1 }
       }),
+    );
+  }
+
+  private static selectorCertificationList() {
+    return createSelector([ResumeState], (state: ResumeStateModel) => [
+      ...Array(state.certifications.length).keys(),
+    ]);
+  }
+
+  private static selectorCertificationTitle(coord: number[]) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].title,
+    );
+  }
+
+  private static selectorCertificationYear(coord: number[]) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].year,
+    );
+  }
+
+  private static selectorCertificationOrganization(coord: number[]) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].organization,
+    );
+  }
+
+  private static selectorCertificationLocation(coord: number[]) {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) => state.certifications[coord[coord.length - 1]].location,
     );
   }
 

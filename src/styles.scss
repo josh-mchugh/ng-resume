@@ -429,6 +429,7 @@ textarea {
 .certification-degree {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   margin-top: 0.5rem;
   font-size: 0.75rem;
   line-height: 1rem;
@@ -442,6 +443,7 @@ textarea {
 .certification-organization {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   font-size: 0.75rem;
   line-height: 1rem;
 }
