@@ -20,8 +20,6 @@ export enum SectionType {
   CONTENT = 'CONTENT',
   LIST = 'LIST',
   SECTION = 'SECTION',
-  SKILL_LIST = 'SKILL_LIST',
-  HEADER_CERTIFICATION = 'HEADER_CERTIFICATION',
   CERTIFICATION_LIST = 'CERTIFICATION_LIST',
 }
 
@@ -481,17 +479,17 @@ export interface Selector {
                 dimension: initDimension(),
                 children: [
                   {
-                    type: SectionType.SECTION,
+                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
-                    children: [
+                    selectors: [
                       {
-                        type: SectionType.HEADER_CERTIFICATION,
-                        classes: emptyClasses(),
-                        dimension: initDimension(),
-                        children: [],
-                      },
+                        type: SelectorType.NONE,
+                        key: '',
+                      }
                     ],
+                    template: '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+                    children: [],
                   },
                   {
                     type: SectionType.SECTION,
