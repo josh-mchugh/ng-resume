@@ -1,14 +1,13 @@
 <!-- Section with Content to be rendered -->
-<ng-container *ngIf="section && section.type === 'CONTENT'">
+<ng-container *ngIf="section.type === 'CONTENT'">
   <div
     [class]="getContentClass()"
     (onResize)="onResize($event)"
     [innerHtml]="htmlContent$ | async"
   ></div>
 </ng-container>
-<!-- Section that is a list for content to then be rendered in -->
-<!-- this will most likely be refactored into a seperate component -->
-<ng-container *ngIf="section && section.type === 'LIST' && section.selectors">
+<!-- Section which is a list that has selectors for rendering it's child content based on resume data length from the selector -->
+<ng-container *ngIf="section.type === 'LIST' && section.selectors">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
@@ -32,14 +31,17 @@
     </ng-container>
   </div>
 </ng-container>
-<!-- old way which is being refactored out where section is not initializaed or section does not have a selector -->
-<ng-container *ngIf="!section || !section?.selectors">
+<!-- Section which is a list without selectors for rendering children describe in the layout section -->
+<ng-container *ngIf="section.type === 'LIST' && !section.selectors">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
-      *ngFor="let child of getChildren(); let i = index; trackBy: handleTrackBy"
+      *ngFor="
+        let child of getChildren();
+        let i = index;
+        trackBy: handleTrackBy
+      "
     >
       <app-section [section]="child" [parentCoord]="coord" [coordIndex]="i" />
     </ng-container>
-    <ng-content></ng-content>
   </div>
 </ng-container>
