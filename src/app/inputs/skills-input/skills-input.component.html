@@ -7,15 +7,15 @@
       trackBy: handleSkillTrackBy
     "
   >
-    <div class="section__content">
+    <div class="form-group">
       <ng-template [ngIf]="i > 0">
         <div
-          class="section__content-remove"
+          class="form-group-remove"
           (click)="onSkillDelete(i)"
           (keyup.enter)="onSkillDelete(i)"
           tabindex="0"
         >
-          <div class="section__content-remove-icon">&times;</div>
+          <div class="form-group-remove-icon">&times;</div>
         </div>
       </ng-template>
       <label for="skillName{{ i }}">Name</label>

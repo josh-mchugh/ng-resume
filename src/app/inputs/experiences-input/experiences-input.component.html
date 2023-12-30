@@ -7,15 +7,15 @@
       trackBy: handeExperiencesTrackBy
     "
   >
-    <div class="section__content">
+    <div class="form-group">
       <ng-template [ngIf]="i > 0">
         <div
-          class="section__content-remove"
+          class="form-group-remove"
           (click)="onExperienceDelete(i)"
           (keyup.enter)="onExperienceDelete(i)"
           tabindex="0"
         >
-          <div class="section__content-remove-icon">&times;</div>
+          <div class="form-group-remove-icon">&times;</div>
         </div>
       </ng-template>
       <label for="experienceTitle{{ i }}">Title</label>

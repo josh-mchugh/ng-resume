@@ -73,7 +73,7 @@ menu {
   margin-bottom: 0.75rem;
 }
 
-.input__section .section__content {
+.input__section .form-group {
   padding-bottom: 0.5rem;
 
   &:not(:first-child) {
@@ -82,13 +82,13 @@ menu {
   }
 }
 
-.input__section .section__content-remove {
+.input__section .form-group-remove {
   display: flex;
   width: 100%;
   justify-content: flex-end;
 }
 
-.input__section .section__content-remove-icon {
+.input__section .form-group-remove-icon {
   padding: 0.2rem;
   cursor: pointer;
 }
