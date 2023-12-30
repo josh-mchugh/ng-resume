@@ -35,11 +35,7 @@
 <ng-container *ngIf="section.type === 'LIST' && !section.selectors">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
-      *ngFor="
-        let child of getChildren();
-        let i = index;
-        trackBy: handleTrackBy
-      "
+      *ngFor="let child of getChildren(); let i = index; trackBy: handleTrackBy"
     >
       <app-section [section]="child" [parentCoord]="coord" [coordIndex]="i" />
     </ng-container>
