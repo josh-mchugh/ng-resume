@@ -1,13 +1,13 @@
-<!-- Section with Content to be rendered -->
-<ng-container *ngIf="section.type === 'CONTENT'">
+<!-- Render section with template data available -->
+<ng-container *ngIf="section.template">
   <div
     [class]="getContentClass()"
     (onResize)="onResize($event)"
     [innerHtml]="htmlContent$ | async"
   ></div>
 </ng-container>
-<!-- Section which is a list that has selectors for rendering it's child content based on resume data length from the selector -->
-<ng-container *ngIf="section.type === 'LIST' && section.selectors">
+<!-- Render section which does not have template but children which require selectors for nested resume data -->
+<ng-container *ngIf="!section.template && section.selectors.length">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
@@ -31,8 +31,8 @@
     </ng-container>
   </div>
 </ng-container>
-<!-- Section which is a list without selectors for rendering children describe in the layout section -->
-<ng-container *ngIf="section.type === 'LIST' && !section.selectors">
+<!-- Render section which has children and does not require selectors for nested resume data -->
+<ng-container *ngIf="!section.template && !section.selectors.length">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="

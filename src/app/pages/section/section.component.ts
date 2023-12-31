@@ -45,14 +45,8 @@ export class SectionComponent implements OnInit {
       this.coord = [this.coordIndex];
     }
 
-    if (this.section && this.section.type === SectionType.CONTENT) {
-      if (
-        this.section.selectors &&
-        this.section.selectors.length &&
-        !this.section.selectors.find(
-          (selector) => selector.type === SelectorType.NONE,
-        )
-      ) {
+    if (this.section.template) {
+      if (this.section.selectors.length) {
         const observables = this.section.selectors.map((selector) =>
           this.store
             .select(ResumeState.selectorValue(selector.type, this.coord))
@@ -67,13 +61,13 @@ export class SectionComponent implements OnInit {
             return this.domSanitizer.bypassSecurityTrustHtml(template);
           }),
         );
-      } else if (this.section?.template) {
+      } else {
         const template = Mustache.render(this.section.template as string, {});
         const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
         this.htmlContent$ = of(safeHtml);
       }
-    } else if (this.section && this.section.type === SectionType.LIST) {
-      if (this.section.selectors) {
+    } else if (this.section.children.length) {
+      if (this.section.selectors.length) {
         this.contentListLength$ = this.store.select(
           ResumeState.selectorValue(this.section.selectors[0].type, this.coord),
         );
