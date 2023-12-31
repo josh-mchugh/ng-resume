@@ -14,8 +14,6 @@ import Mustache from 'mustache';
 })
 export class SectionComponent implements OnInit {
   @Input() section!: SectionModel;
-  @Input() rootClass!: string;
-  @Input() contentClass!: string;
 
   // htmlContent for SectionType.Content
   htmlContent$!: Observable<SafeHtml>;
@@ -88,38 +86,17 @@ export class SectionComponent implements OnInit {
 
   @HostBinding('class')
   get hostClass(): string {
-    const blockClass = 'section';
-    if (this.section) {
-      return `${blockClass}  ${this.section.classes.root}`;
-    }
-    if (this.rootClass) {
-      return `${blockClass} ${this.rootClass}`;
-    }
-    return blockClass;
+    return `section  ${this.section.classes.root}`;
   }
 
   getContentClass(): string {
-    const blockClass = 'section__content';
-    if (this.section) {
-      return `${blockClass} ${this.section.classes.content}`;
-    }
-    if (this.contentClass) {
-      return `${blockClass}  ${this.contentClass}`;
-    }
-    return blockClass;
-  }
-
-  getChildren(): SectionModel[] {
-    return this.section ? this.section.children : [];
+    return `section__content ${this.section.classes.content}`;
   }
 
   public handleTrackBy(index: number): number {
     return index;
   }
 
-  // Commenting our function body and disabling rule on unused var in parameter.
-  // Will come back later to this function and build it out.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
     console.log(
