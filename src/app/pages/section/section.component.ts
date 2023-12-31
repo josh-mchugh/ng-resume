@@ -13,32 +13,29 @@ import Mustache from 'mustache';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit {
-  @Input() section!: SectionModel;
-
-  // htmlContent for SectionType.Content
-  htmlContent$!: Observable<SafeHtml>;
-
-  // child length for SectionType.List
-  contentListLength$!: Observable<number[]>;
-
   // Components current index in list for coordinates
   @Input() coordIndex!: number;
 
   // Parent's coordinates in section tree
   @Input() parentCoord!: number[];
 
+  // section data model for component
+  @Input() section!: SectionModel;
+
+  // child length for SectionType.List
+  contentListLength$!: Observable<number[]>;
+
+  // htmlContent for SectionType.Content
+  htmlContent$!: Observable<SafeHtml>;
+
   // Components coordinates in section tree
   coord: number[] = [];
 
   public constructor(
-    private store: Store,
     private dimensionService: DimensionService,
     private domSanitizer: DomSanitizer,
-  ) {
-    if (this.section && this.section.selectors) {
-      console.log('section constructor');
-    }
-  }
+    private store: Store,
+  ) {}
 
   ngOnInit() {
     //Set componets coordinates
