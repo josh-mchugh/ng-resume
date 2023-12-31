@@ -1,12 +1,11 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Store } from '@ngxs/store';
+import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
 import { SectionModel } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
-
-import Mustache from 'mustache';
 
 @Component({
   selector: 'app-section',
@@ -65,7 +64,7 @@ export class SectionComponent implements OnInit {
     return combineLatest(observables).pipe(
       map((values) => {
         const template = Mustache.render(
-          this.section.template as string,
+          this.section.template,
           Object.fromEntries(values),
         );
         return this.domSanitizer.bypassSecurityTrustHtml(template);
@@ -74,7 +73,7 @@ export class SectionComponent implements OnInit {
   }
 
   private renderHTMLWithoutSelectors(): Observable<SafeHtml> {
-    const template = Mustache.render(this.section.template as string, {});
+    const template = Mustache.render(this.section.template, {});
     const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
     return of(safeHtml);
   }
