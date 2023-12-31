@@ -1,10 +1,11 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { DimensionService } from '@shared/service/dimension.service';
 import { Store } from '@ngxs/store';
-import { SectionModel, SectionType } from '@shared/state/layout.state';
-import { ResumeState, SelectorType } from '@shared/state/resume.state';
 import { combineLatest, Observable, of, map } from 'rxjs';
+import { DimensionService } from '@shared/service/dimension.service';
+import { SectionModel } from '@shared/state/layout.state';
+import { ResumeState } from '@shared/state/resume.state';
+
 import Mustache from 'mustache';
 
 @Component({

@@ -8,17 +8,11 @@ export interface LayoutStateModel {
 }
 
 export interface SectionModel {
-  type: SectionType;
   classes: SectionClasses;
   dimension: Dimension;
   children: Array<SectionModel>;
   selectors: Selector[];
   template: string;
-}
-
-export enum SectionType {
-  CONTENT = 'CONTENT',
-  LIST = 'LIST',
 }
 
 export interface SectionClasses {
@@ -64,14 +58,12 @@ export interface Selector {
     dimension: initDimension(),
     sections: [
       {
-        type: SectionType.LIST,
         classes: emptyClasses(),
         dimension: initDimension(),
         selectors: [],
         template: '',
         children: [
           {
-            type: SectionType.LIST,
             classes: {
               root: 'section--column-left',
               content: 'section__content--column',
@@ -81,7 +73,6 @@ export interface Selector {
             template: '',
             children: [
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -91,7 +82,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [
@@ -104,7 +94,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [
@@ -119,7 +108,6 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -129,7 +117,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [],
@@ -138,7 +125,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [
@@ -153,7 +139,6 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -163,7 +148,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [],
@@ -172,7 +156,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [
@@ -186,7 +169,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [
@@ -200,7 +182,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [
@@ -216,7 +197,6 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -226,7 +206,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [],
@@ -235,7 +214,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.LIST,
                     classes: {
                       root: '',
                       content: 'section__content--column',
@@ -250,7 +228,6 @@ export interface Selector {
                     template: '',
                     children: [
                       {
-                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
                         selectors: [
@@ -278,7 +255,6 @@ export interface Selector {
             ],
           },
           {
-            type: SectionType.LIST,
             classes: {
               root: 'section--column-right',
               content: 'section__content--column',
@@ -288,7 +264,6 @@ export interface Selector {
             template: '',
             children: [
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -298,7 +273,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [],
@@ -307,7 +281,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.LIST,
                     classes: {
                       root: '',
                       content: 'section__content--column',
@@ -322,7 +295,6 @@ export interface Selector {
                     template: '',
                     children: [
                       {
-                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
                         selectors: [
@@ -340,7 +312,6 @@ export interface Selector {
                         children: [],
                       },
                       {
-                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
                         selectors: [
@@ -358,7 +329,6 @@ export interface Selector {
                         children: [],
                       },
                       {
-                        type: SectionType.LIST,
                         classes: {
                           root: '',
                           content: 'section__content--column',
@@ -373,7 +343,6 @@ export interface Selector {
                         template: '',
                         children: [
                           {
-                            type: SectionType.CONTENT,
                             classes: emptyClasses(),
                             dimension: initDimension(),
                             selectors: [
@@ -389,7 +358,6 @@ export interface Selector {
                         ],
                       },
                       {
-                        type: SectionType.LIST,
                         classes: {
                           root: '',
                           content: 'section__content--wrap',
@@ -404,7 +372,6 @@ export interface Selector {
                         template: '',
                         children: [
                           {
-                            type: SectionType.CONTENT,
                             classes: {
                               root: 'section--w-auto',
                               content: '',
@@ -427,7 +394,6 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -437,7 +403,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [],
@@ -446,7 +411,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.LIST,
                     classes: {
                       root: '',
                       content: 'section__content--wrap',
@@ -461,7 +425,6 @@ export interface Selector {
                     template: '',
                     children: [
                       {
-                        type: SectionType.CONTENT,
                         classes: {
                           root: 'section--w-50',
                           content: '',
@@ -486,7 +449,6 @@ export interface Selector {
                 ],
               },
               {
-                type: SectionType.LIST,
                 classes: {
                   root: '',
                   content: 'section__content--column',
@@ -496,7 +458,6 @@ export interface Selector {
                 template: '',
                 children: [
                   {
-                    type: SectionType.CONTENT,
                     classes: emptyClasses(),
                     dimension: initDimension(),
                     selectors: [],
@@ -505,7 +466,6 @@ export interface Selector {
                     children: [],
                   },
                   {
-                    type: SectionType.LIST,
                     classes: {
                       root: '',
                       content: 'section__content--column',
@@ -520,7 +480,6 @@ export interface Selector {
                     template: '',
                     children: [
                       {
-                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
                         selectors: [
@@ -538,7 +497,6 @@ export interface Selector {
                         children: [],
                       },
                       {
-                        type: SectionType.CONTENT,
                         classes: emptyClasses(),
                         dimension: initDimension(),
                         selectors: [
