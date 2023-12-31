@@ -39,41 +39,50 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //Set componets coordinates
+    // Set section coordinates
     if (this.parentCoord && this.parentCoord.length) {
       this.coord = [...this.parentCoord, this.coordIndex];
     } else {
       this.coord = [this.coordIndex];
     }
 
+    // Build observables for template rendering
     if (this.section.template) {
-      if (this.section.selectors.length) {
-        const observables = this.section.selectors.map((selector) =>
-          this.store
-            .select(ResumeState.selectorValue(selector.type, this.coord))
-            .pipe(map((value) => [selector.key, value])),
-        );
-        this.htmlContent$ = combineLatest(observables).pipe(
-          map((values) => {
-            const template = Mustache.render(
-              this.section.template as string,
-              Object.fromEntries(values),
-            );
-            return this.domSanitizer.bypassSecurityTrustHtml(template);
-          }),
-        );
-      } else {
-        const template = Mustache.render(this.section.template as string, {});
-        const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
-        this.htmlContent$ = of(safeHtml);
-      }
-    } else if (this.section.children.length) {
-      if (this.section.selectors.length) {
-        this.contentListLength$ = this.store.select(
-          ResumeState.selectorValue(this.section.selectors[0].type, this.coord),
-        );
-      }
+      this.htmlContent$ = this.section.selectors.length
+        ? this.renderHTMLWithSelectors()
+        : this.renderHTMLWithoutSelectors();
+    } else if (this.section.children.length && this.section.selectors.length) {
+      this.contentListLength$ = this.buildChildListLengthObservable();
     }
+  }
+
+  private renderHTMLWithSelectors(): Observable<SafeHtml> {
+    const observables = this.section.selectors.map((selector) =>
+      this.store
+        .select(ResumeState.selectorValue(selector.type, this.coord))
+        .pipe(map((value) => [selector.key, value])),
+    );
+    return combineLatest(observables).pipe(
+      map((values) => {
+        const template = Mustache.render(
+          this.section.template as string,
+          Object.fromEntries(values),
+        );
+        return this.domSanitizer.bypassSecurityTrustHtml(template);
+      }),
+    );
+  }
+
+  private renderHTMLWithoutSelectors(): Observable<SafeHtml> {
+    const template = Mustache.render(this.section.template as string, {});
+    const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
+    return of(safeHtml);
+  }
+
+  private buildChildListLengthObservable(): Observable<number[]> {
+    return this.store.select(
+      ResumeState.selectorValue(this.section.selectors[0].type, this.coord),
+    );
   }
 
   @HostBinding('class')
