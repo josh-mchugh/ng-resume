@@ -4,6 +4,7 @@ import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
+import { DisplayStructure } from '@shared/state/display-structure.actions';
 import { SectionModel } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
 
@@ -44,6 +45,7 @@ export class SectionComponent implements OnInit {
     } else {
       this.coord = [this.coordIndex];
     }
+    this.store.dispatch(new DisplayStructure.AddCoordinate(this.coord));
 
     // Build observables for template rendering
     if (this.section.template) {

@@ -13,6 +13,7 @@ import { environment } from './../environments/environment';
 import { ResumeState } from '@shared/state/resume.state';
 import { FormState } from '@shared/state/form.state';
 import { LayoutState } from '@shared/state/layout.state';
+import { DisplayStructureState } from '@shared/state/display-structure.state';
 import { PagesComponent } from './pages/pages.component';
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 import { ContactInputComponent } from './inputs/contact-input/contact-input.component';
@@ -37,7 +38,7 @@ import { SectionComponent } from './pages/section/section.component';
   imports: [
     BrowserModule,
     FormsModule,
-    NgxsModule.forRoot([FormState, ResumeState, LayoutState], {
+    NgxsModule.forRoot([DisplayStructureState, FormState, LayoutState, ResumeState], {
       developmentMode: !environment.production,
     }),
     NgxsReduxDevtoolsPluginModule.forRoot({

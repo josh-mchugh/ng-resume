@@ -3,13 +3,11 @@ import { State } from '@ngxs/store';
 import { SelectorType } from '@shared/state/resume.state';
 
 export interface LayoutStateModel {
-  dimension: Dimension;
   sections: Array<SectionModel>;
 }
 
 export interface SectionModel {
   classes: SectionClasses;
-  dimension: Dimension;
   children: Array<SectionModel>;
   selectors: Selector[];
   template: string;
@@ -27,26 +25,6 @@ function emptyClasses() {
   };
 }
 
-export interface Dimension {
-  x: number;
-  y: number;
-  right: number;
-  bottom: number;
-  height: number;
-  width: number;
-}
-
-function initDimension(): Dimension {
-  return {
-    x: 0,
-    y: 0,
-    right: 0,
-    bottom: 0,
-    height: 0,
-    width: 0,
-  };
-}
-
 export interface Selector {
   type: SelectorType;
   key: string;
@@ -55,11 +33,9 @@ export interface Selector {
 @State<LayoutStateModel>({
   name: 'layout',
   defaults: {
-    dimension: initDimension(),
     sections: [
       {
         classes: emptyClasses(),
-        dimension: initDimension(),
         selectors: [],
         template: '',
         children: [
@@ -68,7 +44,6 @@ export interface Selector {
               root: 'section--column-left',
               content: 'section__content--column',
             },
-            dimension: initDimension(),
             selectors: [],
             template: '',
             children: [
@@ -77,13 +52,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.NAME,
@@ -95,7 +68,6 @@ export interface Selector {
                   },
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.TITLE,
@@ -112,13 +84,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [],
                     template:
                       '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
@@ -126,7 +96,6 @@ export interface Selector {
                   },
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.SUMMARY,
@@ -143,13 +112,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [],
                     template:
                       '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
@@ -157,7 +124,6 @@ export interface Selector {
                   },
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.PHONE,
@@ -170,7 +136,6 @@ export interface Selector {
                   },
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.EMAIL,
@@ -183,7 +148,6 @@ export interface Selector {
                   },
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.LOCATION,
@@ -201,13 +165,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [],
                     template:
                       '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
@@ -218,7 +180,6 @@ export interface Selector {
                       root: '',
                       content: 'section__content--column',
                     },
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.SOCIAL_LIST,
@@ -229,7 +190,6 @@ export interface Selector {
                     children: [
                       {
                         classes: emptyClasses(),
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.SOCIAL_NAME,
@@ -259,7 +219,6 @@ export interface Selector {
               root: 'section--column-right',
               content: 'section__content--column',
             },
-            dimension: initDimension(),
             selectors: [],
             template: '',
             children: [
@@ -268,13 +227,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [],
                     template:
                       '<div class="header header--experience"><div class="header__title">WORK EXPERIENCE</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
@@ -285,7 +242,6 @@ export interface Selector {
                       root: '',
                       content: 'section__content--column',
                     },
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.EXPERIENCE_LIST,
@@ -296,7 +252,6 @@ export interface Selector {
                     children: [
                       {
                         classes: emptyClasses(),
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.EXPERIENCE_TITLE,
@@ -313,7 +268,6 @@ export interface Selector {
                       },
                       {
                         classes: emptyClasses(),
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.EXPERIENCE_ORGANIZATION,
@@ -333,7 +287,6 @@ export interface Selector {
                           root: '',
                           content: 'section__content--column',
                         },
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.EXPERIENCE_DESCRIPTION_LIST,
@@ -344,7 +297,6 @@ export interface Selector {
                         children: [
                           {
                             classes: emptyClasses(),
-                            dimension: initDimension(),
                             selectors: [
                               {
                                 type: SelectorType.EXPERIENCE_DESCRIPTION,
@@ -362,7 +314,6 @@ export interface Selector {
                           root: '',
                           content: 'section__content--wrap',
                         },
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.EXPERIENCE_SKILL_LIST,
@@ -376,7 +327,6 @@ export interface Selector {
                               root: 'section--w-auto',
                               content: '',
                             },
-                            dimension: initDimension(),
                             selectors: [
                               {
                                 type: SelectorType.EXPERIENCE_SKILL,
@@ -398,13 +348,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [],
                     template:
                       '<div class="header header--skill"><div class="header__title">PROFESSIONAL SKILLS</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
@@ -415,7 +363,6 @@ export interface Selector {
                       root: '',
                       content: 'section__content--wrap',
                     },
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.SKILL_LIST,
@@ -429,7 +376,6 @@ export interface Selector {
                           root: 'section--w-50',
                           content: '',
                         },
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.SKILL_NAME,
@@ -453,13 +399,11 @@ export interface Selector {
                   root: '',
                   content: 'section__content--column',
                 },
-                dimension: initDimension(),
                 selectors: [],
                 template: '',
                 children: [
                   {
                     classes: emptyClasses(),
-                    dimension: initDimension(),
                     selectors: [],
                     template:
                       '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
@@ -470,7 +414,6 @@ export interface Selector {
                       root: '',
                       content: 'section__content--column',
                     },
-                    dimension: initDimension(),
                     selectors: [
                       {
                         type: SelectorType.CERTIFICATION_LIST,
@@ -481,7 +424,6 @@ export interface Selector {
                     children: [
                       {
                         classes: emptyClasses(),
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.CERTIFICATION_TITLE,
@@ -498,7 +440,6 @@ export interface Selector {
                       },
                       {
                         classes: emptyClasses(),
-                        dimension: initDimension(),
                         selectors: [
                           {
                             type: SelectorType.CERTIFICATION_ORGANIZATION,
