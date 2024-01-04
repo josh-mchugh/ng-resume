@@ -15,7 +15,7 @@ import { ResumeState } from '@shared/state/resume.state';
 })
 export class SectionComponent implements OnInit {
   // Components current index in list for coordinates
-  @Input() coordIndex!: number;
+  @Input() coordIndex!: number[];
 
   // Parent's coordinates in section tree
   @Input() parentCoord!: number[];
@@ -41,11 +41,16 @@ export class SectionComponent implements OnInit {
   ngOnInit() {
     // Set section coordinates
     if (this.parentCoord && this.parentCoord.length) {
-      this.coord = [...this.parentCoord, this.coordIndex];
+      this.coord = [...this.parentCoord, ...this.coordIndex];
     } else {
-      this.coord = [this.coordIndex];
+      this.coord = [...this.coordIndex];
     }
-    this.store.dispatch(new DisplayStructure.AddCoordinate(this.coord));
+    this.store.dispatch(
+      new DisplayStructure.AddCoordinate(
+        this.coord.toString(),
+        this.parentCoord.toString(),
+      ),
+    );
 
     // Build observables for template rendering
     if (this.section.template) {
@@ -101,11 +106,8 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    console.log(
-      'coord: ' +
-        JSON.stringify(this.coord) +
-        ', dimension: ' +
-        JSON.stringify(dimension),
+    this.store.dispatch(
+      new DisplayStructure.UpdateCoordinate(this.coord.toString(), dimension),
     );
   }
 }

@@ -1,9 +1,10 @@
 <!-- Pages -->
 <ng-container *ngIf="layout$ | async as layout">
-  <ng-container *ngFor="
+  <ng-container
+    *ngFor="
       let coordinate of coordinates$ | async;
       let parentIndex = index;
-      trackBy: handleTrackBy;
+      trackBy: handleTrackBy
     "
   >
     <div class="page">
@@ -15,7 +16,11 @@
             trackBy: handleTrackBy
           "
         >
-          <app-section [section]="section" [parentCoord]="[parentIndex]"  [coordIndex]="i" />
+          <app-section
+            [section]="section"
+            [parentCoord]="[parentIndex]"
+            [coordIndex]="[i]"
+          />
         </ng-container>
       </div>
     </div>

@@ -1,3 +1,1 @@
-export namespace Layout {
-
-}
+export namespace Layout {}

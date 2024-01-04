@@ -3,12 +3,14 @@ import { Action, State, StateContext } from '@ngxs/store';
 import { DisplayStructure } from '@shared/state/display-structure.actions';
 
 export interface DisplayStructureModel {
-  coordinates: Coordinate[];
+  byId: { [id: string]: Coordinate };
+  allIds: string[];
 }
 
 export interface Coordinate {
+  id: string;
+  parentId: string;
   dimension: Dimension;
-  children: Coordinate[];
 }
 
 export interface Dimension {
@@ -34,60 +36,37 @@ function initDimension(): Dimension {
 @State<DisplayStructureModel>({
   name: 'displayStructure',
   defaults: {
-    coordinates: [
-      {
-        dimension: initDimension(),
-        children: []
-      }
-    ]
-  }
+    byId: {},
+    allIds: [],
+  },
 })
 @Injectable()
 export class DisplayStructureState {
   @Action(DisplayStructure.AddCoordinate)
-  certificationsUpdate(
+  coordinateAdd(
     ctx: StateContext<DisplayStructureModel>,
     action: DisplayStructure.AddCoordinate,
   ) {
-    const state = ctx.getState();
-
-    const copyCoordinates = state.coordinates;
-    console.log("copyCoordinates before: " + JSON.stringify(copyCoordinates));
-
-    const child = {
-      dimension: initDimension(),
-      children: []
-    };
-
-    const recursion = (coordinate: Coordinate, coords: number[], newChild: Coordinate): Coordinate => {
-      console.log("Coordinate: " + JSON.stringify(coordinate));
-      console.log("Coords: " + coords);
-      if(coords.length === 1) {
-        return {
-          ...coordinate,
-          children: [...coordinate.children, newChild ]
-        };
-      }
-      return {
-        ...coordinate,
-        children: coordinate.children
-          .map((childCoord, index) => {
-            if (index === coords[0]) {
-              return recursion(childCoord, coords.slice(1), newChild)
-            }
-            return childCoord;
-          })
-      };
-    };
-
-    const newCoordinates = state.coordinates.map(coordinate => {
-      return recursion(coordinate, action.coordinate.slice(1), child);
-    });
-
-    console.log("New Coordinates: " + JSON.stringify(newCoordinates));
     ctx.setState({
-      ...state,
-      coordinates: newCoordinates
+      ...ctx.getState(),
+      byId: {
+        ...ctx.getState().byId,
+        [action.id]: { ...action, dimension: initDimension() },
+      },
+      allIds: [...ctx.getState().allIds, action.id],
+    });
+  }
+
+  @Action(DisplayStructure.UpdateCoordinate)
+  coordinateUpdate(
+    ctx: StateContext<DisplayStructureModel>,
+    action: DisplayStructure.UpdateCoordinate,
+  ) {
+    let coordinate = ctx.getState().byId[action.id];
+    coordinate = { ...coordinate, dimension: action.dimension };
+    ctx.setState({
+      ...ctx.getState(),
+      byId: { ...ctx.getState().byId, [action.id]: { ...coordinate } },
     });
   }
 }

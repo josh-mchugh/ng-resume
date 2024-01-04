@@ -38,9 +38,12 @@ import { SectionComponent } from './pages/section/section.component';
   imports: [
     BrowserModule,
     FormsModule,
-    NgxsModule.forRoot([DisplayStructureState, FormState, LayoutState, ResumeState], {
-      developmentMode: !environment.production,
-    }),
+    NgxsModule.forRoot(
+      [DisplayStructureState, FormState, LayoutState, ResumeState],
+      {
+        developmentMode: !environment.production,
+      },
+    ),
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production,
     }),
