@@ -1,28 +1,22 @@
 <!-- Pages -->
-<ng-container *ngIf="layout$ | async as layout">
-  <ng-container
-    *ngFor="
-      let coordinate of coordinates$ | async;
-      let parentIndex = index;
-      trackBy: handleTrackBy
-    "
-  >
-    <div class="page">
-      <div class="page__content">
-        <ng-container
-          *ngFor="
-            let section of layout.sections;
-            let i = index;
-            trackBy: handleTrackBy
-          "
-        >
-          <app-section
-            [section]="section"
-            [parentCoord]="[parentIndex]"
-            [coordIndex]="[i]"
-          />
-        </ng-container>
-      </div>
+<ng-container
+  *ngFor="
+    let coordinate of coordinates$ | async;
+    let parentIndex = index;
+    trackBy: handleTrackBy
+  "
+>
+  <div class="page">
+    <div class="page__content">
+      <ng-container
+        *ngFor="
+          let section of sections$ | async;
+          let i = index;
+          trackBy: handleTrackBy
+        "
+      >
+        <app-section [section]="section" />
+      </ng-container>
     </div>
-  </ng-container>
+  </div>
 </ng-container>

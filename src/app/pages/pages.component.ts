@@ -1,7 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { LayoutStateModel } from '@shared/state/layout.state';
+import { LayoutState, SectionModel } from '@shared/state/layout.state';
 
 @Component({
   selector: 'app-pages',
@@ -12,10 +12,10 @@ export class PagesComponent {
   @HostBinding('style.width') attrStyleWidth = '100%';
 
   coordinates$: Observable<number[]>;
-  layout$: Observable<LayoutStateModel>;
+  sections$: Observable<SectionModel[]>;
 
   constructor(private store: Store) {
-    this.layout$ = this.store.select((state) => state.layout);
+    this.sections$ = this.store.select(LayoutState.rootSections());
     this.coordinates$ = of([0]);
   }
 

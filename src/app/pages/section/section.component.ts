@@ -5,7 +5,7 @@ import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
 import { DisplayStructure } from '@shared/state/display-structure.actions';
-import { SectionModel } from '@shared/state/layout.state';
+import { LayoutState, SectionModel } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
 
 @Component({
@@ -14,17 +14,11 @@ import { ResumeState } from '@shared/state/resume.state';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit {
-  // Components current index in list for coordinates
-  @Input() coordIndex!: number[];
-
-  // Parent's coordinates in section tree
-  @Input() parentCoord!: number[];
-
   // section data model for component
   @Input() section!: SectionModel;
 
-  // child length for SectionType.List
-  contentListLength$!: Observable<number[]>;
+  // TODO comment description
+  childSections$!: Observable<SectionModel[]>;
 
   // htmlContent for SectionType.Content
   htmlContent$!: Observable<SafeHtml>;
@@ -39,26 +33,21 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Set section coordinates
-    if (this.parentCoord && this.parentCoord.length) {
-      this.coord = [...this.parentCoord, ...this.coordIndex];
-    } else {
-      this.coord = [...this.coordIndex];
-    }
-    this.store.dispatch(
-      new DisplayStructure.AddCoordinate(
-        this.coord.toString(),
-        this.parentCoord.toString(),
-      ),
-    );
+    //this.store.dispatch(
+    //  new DisplayStructure.AddCoordinate(
+    //    this.coord.toString(),
+    //    this.parentCoord.toString(),
+    //  ),
+    //);
 
     // Build observables for template rendering
     if (this.section.template) {
       this.htmlContent$ = this.section.selectors.length
         ? this.renderHTMLWithSelectors()
         : this.renderHTMLWithoutSelectors();
-    } else if (this.section.children.length && this.section.selectors.length) {
-      this.contentListLength$ = this.buildChildListLengthObservable();
+    }
+    if (!this.section.template && !this.section.selectors.length) {
+      this.childSections$ = this.buildChildSections();
     }
   }
 
@@ -85,10 +74,20 @@ export class SectionComponent implements OnInit {
     return of(safeHtml);
   }
 
-  private buildChildListLengthObservable(): Observable<number[]> {
+  private buildChildSections(): Observable<SectionModel[]> {
     return this.store.select(
-      ResumeState.selectorValue(this.section.selectors[0].type, this.coord),
+      LayoutState.childSections(this.section.id),
     );
+  }
+
+  @HostBinding('attr.id')
+  get id(): string {
+    return this.section.id;
+  }
+
+  @HostBinding('attr.parentId')
+  get parentId(): string {
+    return this.section.parentId;
   }
 
   @HostBinding('class')
