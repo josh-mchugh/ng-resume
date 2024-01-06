@@ -564,14 +564,14 @@ export interface Selector {
 })
 @Injectable()
 export class LayoutState {
-  static rootSections(): any {
+  static rootSections(): (state: LayoutStateModel) => SectionModel[] {
     return createSelector(
       [LayoutState],
       (state: LayoutStateModel) => Object.values(state.byId).filter(section => section.parentId === '0'),
     );
   }
 
-  static childSections(id: string): any {
+  static childSections(id: string): (state: LayoutStateModel) => SectionModel[] {
     return createSelector(
       [LayoutState],
       (state: LayoutStateModel) => Object.values(state.byId).filter(section=> section.parentId === id),

@@ -42,12 +42,12 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.store.dispatch(
-    //  new DisplayStructure.AddCoordinate(
-    //    this.coord.toString(),
-    //    this.parentCoord.toString(),
-    //  ),
-    //);
+    this.store.dispatch(
+      new DisplayStructure.AddCoordinate(
+        this.section.id,
+        this.section.parentId,
+      ),
+    );
 
     // Build observables for template rendering
     if (this.section.template) {
@@ -124,8 +124,8 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    //this.store.dispatch(
-    //  new DisplayStructure.UpdateCoordinate(this.coord.toString(), dimension),
-    //);
+    this.store.dispatch(
+      new DisplayStructure.UpdateCoordinate(this.section.id, dimension),
+    );
   }
 }
