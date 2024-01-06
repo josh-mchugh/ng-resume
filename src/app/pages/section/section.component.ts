@@ -67,7 +67,12 @@ export class SectionComponent implements OnInit {
   private renderHTMLWithSelectors(): Observable<SafeHtml> {
     const observables = this.section.selectors.map((selector) =>
       this.store
-        .select(ResumeState.selectorValue(selector.type, [this.contentIndex, this.position]))
+        .select(
+          ResumeState.selectorValue(selector.type, [
+            this.contentIndex,
+            this.position,
+          ]),
+        )
         .pipe(map((value) => [selector.key, value])),
     );
     return combineLatest(observables).pipe(
@@ -89,14 +94,14 @@ export class SectionComponent implements OnInit {
 
   private buildContentLength(): Observable<number[]> {
     return this.store.select(
-      ResumeState.selectorValue(this.section.selectors[0].type, [this.contentIndex])
+      ResumeState.selectorValue(this.section.selectors[0].type, [
+        this.contentIndex,
+      ]),
     );
   }
 
   private buildChildSections(): Observable<SectionModel[]> {
-    return this.store.select(
-      LayoutState.childSections(this.section.id),
-    );
+    return this.store.select(LayoutState.childSections(this.section.id));
   }
 
   @HostBinding('attr.id')

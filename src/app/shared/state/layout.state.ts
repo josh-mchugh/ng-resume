@@ -111,7 +111,7 @@ export interface Selector {
         classes: emptyClasses(),
         selectors: [],
         template:
-        '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+          '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
       },
       '0,0,1,1': {
         id: '0,0,1,1',
@@ -144,7 +144,7 @@ export interface Selector {
         classes: emptyClasses(),
         selectors: [],
         template:
-        '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+          '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
       },
       '0,0,2,1': {
         id: '0,0,2,1',
@@ -158,7 +158,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
+          '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
       },
       '0,0,2,2': {
         id: '0,0,2,2',
@@ -172,7 +172,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
+          '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
       },
       '0,0,2,3': {
         id: '0,0,2,3',
@@ -186,7 +186,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
+          '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
       },
       '0,0,3': {
         id: '0,0,3',
@@ -206,7 +206,7 @@ export interface Selector {
         classes: emptyClasses(),
         selectors: [],
         template:
-        '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+          '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
       },
       '0,0,3,1': {
         id: '0,0,3,1',
@@ -244,7 +244,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="social"><div><span class="social__icon"><i class="{{ icon }}"></i></span>{{ name }}</div><a class="social__link" href=" {{ url }}"> {{ url }} </a></div>',
+          '<div class="social"><div><span class="social__icon"><i class="{{ icon }}"></i></span>{{ name }}</div><a class="social__link" href=" {{ url }}"> {{ url }} </a></div>',
       },
       '0,1': {
         id: '0,1',
@@ -275,7 +275,7 @@ export interface Selector {
         classes: emptyClasses(),
         selectors: [],
         template:
-        '<div class="header header--experience"><div class="header__title">WORK EXPERIENCE</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+          '<div class="header header--experience"><div class="header__title">WORK EXPERIENCE</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
       },
       '0,1,0,1': {
         id: '0,1,0,1',
@@ -309,7 +309,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
+          '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
       },
       '0,1,0,1,1': {
         id: '0,1,0,1,1',
@@ -327,12 +327,12 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="experience-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+          '<div class="experience-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
       },
       '0,1,0,1,2': {
         id: '0,1,0,1,2',
         parentId: '0,1,0,1',
-        name: "Experience Description Section",
+        name: 'Experience Description Section',
         classes: {
           root: '',
           content: 'section__content--column',
@@ -357,7 +357,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="experience-description"><span class="experience-description__icon"><i class="fa-solid fa-chevron-right"></i></span>{{ description }}</div>',
+          '<div class="experience-description"><span class="experience-description__icon"><i class="fa-solid fa-chevron-right"></i></span>{{ description }}</div>',
       },
       '0,1,0,1,3': {
         id: '0,1,0,1,3',
@@ -389,8 +389,7 @@ export interface Selector {
             key: 'skill',
           },
         ],
-        template:
-        '<div class="experience-skill">{{ skill }}</div>',
+        template: '<div class="experience-skill">{{ skill }}</div>',
       },
       '0,1,1': {
         id: '0,1,1',
@@ -410,7 +409,7 @@ export interface Selector {
         classes: emptyClasses(),
         selectors: [],
         template:
-        '<div class="header header--skill"><div class="header__title">PROFESSIONAL SKILLS</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+          '<div class="header header--skill"><div class="header__title">PROFESSIONAL SKILLS</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
       },
       '0,1,1,1': {
         id: '0,1,1,1',
@@ -447,7 +446,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="skill"><div>{{ name }}</div><div class="skill__gauge">{{ #blocks }}<div class="gauge-block {{ #active }} gauge-block--active {{ /active }}"></div>{{ /blocks }}</div>',
+          '<div class="skill"><div>{{ name }}</div><div class="skill__gauge">{{ #blocks }}<div class="gauge-block {{ #active }} gauge-block--active {{ /active }}"></div>{{ /blocks }}</div>',
       },
       '0,1,2': {
         id: '0,1,2',
@@ -467,7 +466,7 @@ export interface Selector {
         classes: emptyClasses(),
         selectors: [],
         template:
-        '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+          '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
       },
       '0,1,2,1': {
         id: '0,1,2,1',
@@ -501,7 +500,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="certification-degree"><div class="certification-degree__title">{{ title }}</div><div>{{ year }}</div></div>',
+          '<div class="certification-degree"><div class="certification-degree__title">{{ title }}</div><div>{{ year }}</div></div>',
       },
       '0,1,2,1,1': {
         id: '0,1,2,1,1',
@@ -519,7 +518,7 @@ export interface Selector {
           },
         ],
         template:
-        '<div class="certification-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+          '<div class="certification-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
       },
     },
     allIds: [
@@ -558,23 +557,23 @@ export interface Selector {
       '0,1,2,0',
       '0,1,2,1',
       '0,1,2,1,0',
-      '0,1,2,1,1'
-    ]
+      '0,1,2,1,1',
+    ],
   },
 })
 @Injectable()
 export class LayoutState {
   static rootSections(): (state: LayoutStateModel) => SectionModel[] {
-    return createSelector(
-      [LayoutState],
-      (state: LayoutStateModel) => Object.values(state.byId).filter(section => section.parentId === '0'),
+    return createSelector([LayoutState], (state: LayoutStateModel) =>
+      Object.values(state.byId).filter((section) => section.parentId === '0'),
     );
   }
 
-  static childSections(id: string): (state: LayoutStateModel) => SectionModel[] {
-    return createSelector(
-      [LayoutState],
-      (state: LayoutStateModel) => Object.values(state.byId).filter(section=> section.parentId === id),
+  static childSections(
+    id: string,
+  ): (state: LayoutStateModel) => SectionModel[] {
+    return createSelector([LayoutState], (state: LayoutStateModel) =>
+      Object.values(state.byId).filter((section) => section.parentId === id),
     );
   }
 }
