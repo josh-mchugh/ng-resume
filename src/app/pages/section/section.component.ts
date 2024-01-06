@@ -26,8 +26,11 @@ export class SectionComponent implements OnInit {
   // htmlContent for SectionType.Content
   htmlContent$!: Observable<SafeHtml>;
 
-  // Components coordinates in section tree
-  coord: number[] = [];
+  // TODO index id
+  @Input() index!: number[];
+
+  // TODO parent index id
+  @Input() parentIndex!: number[];
 
   // TODO comment description
   @Input() contentIndex!: number;
@@ -44,8 +47,8 @@ export class SectionComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(
       new DisplayStructure.AddCoordinate(
-        this.section.id,
-        this.section.parentId,
+        this.index.toString(),
+        this.parentIndex.toString(),
       ),
     );
 
@@ -109,6 +112,11 @@ export class SectionComponent implements OnInit {
     return this.section.id;
   }
 
+  @HostBinding('attr.index')
+  get attrIndex(): string {
+    return this.index.toString();
+  }
+
   @HostBinding('attr.parentId')
   get parentId(): string {
     return this.section.parentId;
@@ -123,6 +131,10 @@ export class SectionComponent implements OnInit {
     return `section__content ${this.section.classes.content}`;
   }
 
+  createIndex(...args: number[]): number[] {
+    return [...this.index, ...args];
+  }
+
   public handleTrackBy(index: number): number {
     return index;
   }
@@ -130,7 +142,7 @@ export class SectionComponent implements OnInit {
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
     this.store.dispatch(
-      new DisplayStructure.UpdateCoordinate(this.section.id, dimension),
+      new DisplayStructure.UpdateCoordinate(this.index.toString(), dimension),
     );
   }
 }

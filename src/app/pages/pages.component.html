@@ -15,7 +15,11 @@
           trackBy: handleTrackBy
         "
       >
-        <app-section [section]="section" />
+        <app-section
+          [section]="section"
+          [parentIndex]="[parentIndex]"
+          [index]="[parentIndex, i]"
+        />
       </ng-container>
     </div>
   </div>

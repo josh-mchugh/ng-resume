@@ -26,6 +26,8 @@
           [section]="child"
           [contentIndex]="contentIndex"
           [position]="i"
+          [parentIndex]="index"
+          [index]="createIndex(i, contentIndex)"
         />
       </ng-container>
     </ng-container>
@@ -41,7 +43,11 @@
         trackBy: handleTrackBy
       "
     >
-      <app-section [section]="child" />
+      <app-section
+        [section]="child"
+        [parentIndex]="index"
+        [index]="createIndex(i)"
+      />
     </ng-container>
   </div>
 </ng-container>
