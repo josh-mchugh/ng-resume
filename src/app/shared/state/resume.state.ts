@@ -314,21 +314,21 @@ export class ResumeState {
   private static selectorSocialIcon(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.socials[coord[coord.length - 1]].icon,
+      (state: ResumeStateModel) => state.socials[coord[0]].icon,
     );
   }
 
   private static selectorSocialName(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.socials[coord[coord.length - 1]].name,
+      (state: ResumeStateModel) => state.socials[coord[0]].name,
     );
   }
 
   private static selectorSocialUrl(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.socials[coord[coord.length - 1]].url,
+      (state: ResumeStateModel) => state.socials[coord[0]].url,
     );
   }
 
@@ -342,7 +342,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.experiences[coord[coord.length - 1]].title,
+        state.experiences[coord[0]].title,
     );
   }
 
@@ -350,7 +350,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.experiences[coord[coord.length - 1]].duration,
+        state.experiences[coord[0]].duration,
     );
   }
 
@@ -358,7 +358,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.experiences[coord[coord.length - 1]].organization,
+        state.experiences[coord[0]].organization,
     );
   }
 
@@ -366,14 +366,14 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.experiences[coord[coord.length - 1]].location,
+        state.experiences[coord[0]].location,
     );
   }
 
   private static selectorExperienceDescriptionList(coord: number[]) {
     return createSelector([ResumeState], (state: ResumeStateModel) => [
       ...Array(
-        state.experiences[coord[coord.length - 1]].descriptions.length,
+        state.experiences[coord[0]].descriptions.length,
       ).keys(),
     ]);
   }
@@ -382,15 +382,13 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.experiences[coord[coord.length - 2]].descriptions[
-          coord[coord.length - 1]
-        ],
+        state.experiences[coord[1]].descriptions[coord[0]],
     );
   }
 
   private static selectorExperienceSkillList(coord: number[]) {
     return createSelector([ResumeState], (state: ResumeStateModel) => [
-      ...Array(state.experiences[coord[coord.length - 1]].skills.length).keys(),
+      ...Array(state.experiences[coord[0]].skills.length).keys(),
     ]);
   }
 
@@ -398,9 +396,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.experiences[coord[coord.length - 2]].skills[
-          coord[coord.length - 1]
-        ],
+        state.experiences[coord[1]].skills[coord[0]],
     );
   }
 
@@ -413,7 +409,7 @@ export class ResumeState {
   private static selectorSkillName(coord: number[]) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.skills[coord[coord.length - 1]].name,
+      (state: ResumeStateModel) => state.skills[coord[0]].name,
     );
   }
 
@@ -422,7 +418,7 @@ export class ResumeState {
       [...Array(5).keys()].map((value) => {
         return {
           active:
-            state.skills[coord[coord.length - 1]].proficiency >= value + 1,
+            state.skills[coord[0]].proficiency >= value + 1,
         };
       }),
     );
@@ -438,7 +434,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.certifications[coord[coord.length - 1]].title,
+        state.certifications[coord[0]].title,
     );
   }
 
@@ -446,7 +442,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.certifications[coord[coord.length - 1]].year,
+        state.certifications[coord[0]].year,
     );
   }
 
@@ -454,7 +450,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.certifications[coord[coord.length - 1]].organization,
+        state.certifications[coord[0]].organization,
     );
   }
 
@@ -462,7 +458,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        state.certifications[coord[coord.length - 1]].location,
+        state.certifications[coord[0]].location,
     );
   }
 

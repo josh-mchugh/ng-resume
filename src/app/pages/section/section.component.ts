@@ -20,11 +20,20 @@ export class SectionComponent implements OnInit {
   // TODO comment description
   childSections$!: Observable<SectionModel[]>;
 
+  // TODO comment description
+  contentLength$!: Observable<number[]>;
+
   // htmlContent for SectionType.Content
   htmlContent$!: Observable<SafeHtml>;
 
   // Components coordinates in section tree
   coord: number[] = [];
+
+  // TODO comment description
+  @Input() contentIndex!: number;
+
+  //TODO comment description
+  @Input() position!: number;
 
   public constructor(
     private dimensionService: DimensionService,
@@ -49,12 +58,16 @@ export class SectionComponent implements OnInit {
     if (!this.section.template && !this.section.selectors.length) {
       this.childSections$ = this.buildChildSections();
     }
+    if (!this.section.template && this.section.selectors.length) {
+      this.contentLength$ = this.buildContentLength();
+      this.childSections$ = this.buildChildSections();
+    }
   }
 
   private renderHTMLWithSelectors(): Observable<SafeHtml> {
     const observables = this.section.selectors.map((selector) =>
       this.store
-        .select(ResumeState.selectorValue(selector.type, this.coord))
+        .select(ResumeState.selectorValue(selector.type, [this.contentIndex, this.position]))
         .pipe(map((value) => [selector.key, value])),
     );
     return combineLatest(observables).pipe(
@@ -72,6 +85,12 @@ export class SectionComponent implements OnInit {
     const template = Mustache.render(this.section.template, {});
     const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
     return of(safeHtml);
+  }
+
+  private buildContentLength(): Observable<number[]> {
+    return this.store.select(
+      ResumeState.selectorValue(this.section.selectors[0].type, [this.contentIndex])
+    );
   }
 
   private buildChildSections(): Observable<SectionModel[]> {
@@ -105,8 +124,8 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    this.store.dispatch(
-      new DisplayStructure.UpdateCoordinate(this.coord.toString(), dimension),
-    );
+    //this.store.dispatch(
+    //  new DisplayStructure.UpdateCoordinate(this.coord.toString(), dimension),
+    //);
   }
 }

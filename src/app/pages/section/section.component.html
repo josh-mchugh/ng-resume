@@ -7,12 +7,11 @@
   ></div>
 </ng-container>
 <!-- Render section which does not have template but children which require selectors for nested resume data -->
-<!--
 <ng-container *ngIf="!section.template && section.selectors.length">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
-        let childIndex of contentListLength$ | async;
+        let contentIndex of contentLength$ | async;
         trackBy: handleTrackBy
       "
     >
@@ -23,12 +22,11 @@
           trackBy: handleTrackBy
         "
       >
-        <app-section [section]="child" />
+        <app-section [section]="child" [contentIndex]="contentIndex" [position]="i" />
       </ng-container>
     </ng-container>
   </div>
 </ng-container>
--->
 <!-- Render section which has children and does not require selectors for nested resume data -->
 <ng-container *ngIf="!section.template && !section.selectors.length">
   <div [class]="getContentClass()" (onResize)="onResize($event)">

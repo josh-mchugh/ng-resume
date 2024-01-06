@@ -428,9 +428,9 @@ export interface Selector {
         ],
         template: '',
       },
-      '0,1,1,2': {
-        id: '0,1,1,2',
-        parentId: '0,1,1',
+      '0,1,1,1,0': {
+        id: '0,1,1,1,0',
+        parentId: '0,1,1,1',
         name: 'Skill Template',
         classes: {
           root: 'section--w-50',
