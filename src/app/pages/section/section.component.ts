@@ -4,12 +4,8 @@ import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
-import { DisplayStructure } from '@shared/state/display-structure.actions';
-import {
-  LayoutState,
-  LayoutNode,
-  NodeType,
-} from '@shared/state/layout.state';
+import { Section } from '@shared/state/section.actions';
+import { LayoutState, LayoutNode, NodeType } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
 
 @Component({
@@ -50,9 +46,10 @@ export class SectionComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(
-      new DisplayStructure.AddCoordinate(
+      new Section.Add(
         this.index.toString(),
         this.parentIndex.toString(),
+        this.layoutNode.id,
       ),
     );
 
@@ -62,9 +59,7 @@ export class SectionComponent implements OnInit {
         : this.renderHTMLWithoutSelectors();
     }
     if (
-      [NodeType.CONTAINER, NodeType.STRUCTURAL].includes(
-        this.layoutNode.type,
-      )
+      [NodeType.CONTAINER, NodeType.STRUCTURAL].includes(this.layoutNode.type)
     ) {
       this.childLayoutNodes$ = this.getChildLayoutNodes();
     }
@@ -148,8 +143,6 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    this.store.dispatch(
-      new DisplayStructure.UpdateCoordinate(this.index.toString(), dimension),
-    );
+    this.store.dispatch(new Section.Update(this.index.toString(), dimension));
   }
 }

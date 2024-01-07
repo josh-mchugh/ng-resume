@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext } from '@ngxs/store';
-import { DisplayStructure } from '@shared/state/display-structure.actions';
+import { Section } from '@shared/state/section.actions';
 
-export interface DisplayStructureModel {
-  byId: { [id: string]: Coordinate };
+export interface SectionModel {
+  byId: { [id: string]: Section };
   allIds: string[];
 }
 
-export interface Coordinate {
+export interface Section {
   id: string;
   parentId: string;
+  layoutNodeId: string;
   dimension: Dimension;
 }
 
@@ -33,20 +34,17 @@ function initDimension(): Dimension {
   };
 }
 
-@State<DisplayStructureModel>({
-  name: 'displayStructure',
+@State<SectionModel>({
+  name: 'section',
   defaults: {
     byId: {},
     allIds: [],
   },
 })
 @Injectable()
-export class DisplayStructureState {
-  @Action(DisplayStructure.AddCoordinate)
-  coordinateAdd(
-    ctx: StateContext<DisplayStructureModel>,
-    action: DisplayStructure.AddCoordinate,
-  ) {
+export class SectionState {
+  @Action(Section.Add)
+  add(ctx: StateContext<SectionModel>, action: Section.Add) {
     ctx.setState({
       ...ctx.getState(),
       byId: {
@@ -57,16 +55,13 @@ export class DisplayStructureState {
     });
   }
 
-  @Action(DisplayStructure.UpdateCoordinate)
-  coordinateUpdate(
-    ctx: StateContext<DisplayStructureModel>,
-    action: DisplayStructure.UpdateCoordinate,
-  ) {
-    let coordinate = ctx.getState().byId[action.id];
-    coordinate = { ...coordinate, dimension: action.dimension };
+  @Action(Section.Update)
+  update(ctx: StateContext<SectionModel>, action: Section.Update) {
+    let section = ctx.getState().byId[action.id];
+    section = { ...section, dimension: action.dimension };
     ctx.setState({
       ...ctx.getState(),
-      byId: { ...ctx.getState().byId, [action.id]: { ...coordinate } },
+      byId: { ...ctx.getState().byId, [action.id]: { ...section } },
     });
   }
 }

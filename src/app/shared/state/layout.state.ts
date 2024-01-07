@@ -613,9 +613,7 @@ export class LayoutState {
     );
   }
 
-  static childNodes(
-    id: string,
-  ): (state: LayoutStateModel) => LayoutNode[] {
+  static childNodes(id: string): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
       Object.values(state.byId).filter((section) => section.parentId === id),
     );
