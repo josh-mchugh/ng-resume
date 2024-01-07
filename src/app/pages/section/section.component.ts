@@ -7,8 +7,8 @@ import { DimensionService } from '@shared/service/dimension.service';
 import { DisplayStructure } from '@shared/state/display-structure.actions';
 import {
   LayoutState,
-  SectionModel,
-  SectionType,
+  LayoutNode,
+  NodeType,
 } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
 
@@ -19,13 +19,13 @@ import { ResumeState } from '@shared/state/resume.state';
 })
 export class SectionComponent implements OnInit {
   // section data model for component
-  @Input() section!: SectionModel;
+  @Input() layoutNode!: LayoutNode;
 
   // TODO comment description
-  childSections$!: Observable<SectionModel[]>;
+  childLayoutNodes$!: Observable<LayoutNode[]>;
 
   // TODO comment description
-  contentLength$!: Observable<number[]>;
+  childContentLength$!: Observable<number[]>;
 
   // htmlContent for SectionType.Content
   htmlContent$!: Observable<SafeHtml>;
@@ -56,26 +56,26 @@ export class SectionComponent implements OnInit {
       ),
     );
 
-    if (SectionType.CONTENT === this.section.type) {
-      this.htmlContent$ = this.section.selectors.length
+    if (NodeType.CONTENT === this.layoutNode.type) {
+      this.htmlContent$ = this.layoutNode.selectors.length
         ? this.renderHTMLWithSelectors()
         : this.renderHTMLWithoutSelectors();
     }
     if (
-      [SectionType.CONTAINER, SectionType.STRUCTURAL].includes(
-        this.section.type,
+      [NodeType.CONTAINER, NodeType.STRUCTURAL].includes(
+        this.layoutNode.type,
       )
     ) {
-      this.childSections$ = this.buildChildSections();
+      this.childLayoutNodes$ = this.getChildLayoutNodes();
     }
-    if (SectionType.DYNAMIC_CONTAINER === this.section.type) {
-      this.contentLength$ = this.buildContentLength();
-      this.childSections$ = this.buildChildSections();
+    if (NodeType.DYNAMIC_CONTAINER === this.layoutNode.type) {
+      this.childContentLength$ = this.getChildContentLength();
+      this.childLayoutNodes$ = this.getChildLayoutNodes();
     }
   }
 
   private renderHTMLWithSelectors(): Observable<SafeHtml> {
-    const observables = this.section.selectors.map((selector) =>
+    const observables = this.layoutNode.selectors.map((selector) =>
       this.store
         .select(
           ResumeState.selectorValue(selector.type, [
@@ -88,7 +88,7 @@ export class SectionComponent implements OnInit {
     return combineLatest(observables).pipe(
       map((values) => {
         const template = Mustache.render(
-          this.section.template,
+          this.layoutNode.template,
           Object.fromEntries(values),
         );
         return this.domSanitizer.bypassSecurityTrustHtml(template);
@@ -97,26 +97,26 @@ export class SectionComponent implements OnInit {
   }
 
   private renderHTMLWithoutSelectors(): Observable<SafeHtml> {
-    const template = Mustache.render(this.section.template, {});
+    const template = Mustache.render(this.layoutNode.template, {});
     const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
     return of(safeHtml);
   }
 
-  private buildContentLength(): Observable<number[]> {
+  private getChildContentLength(): Observable<number[]> {
     return this.store.select(
-      ResumeState.selectorValue(this.section.selectors[0].type, [
+      ResumeState.selectorValue(this.layoutNode.selectors[0].type, [
         this.contentIndex,
       ]),
     );
   }
 
-  private buildChildSections(): Observable<SectionModel[]> {
-    return this.store.select(LayoutState.childSections(this.section.id));
+  private getChildLayoutNodes(): Observable<LayoutNode[]> {
+    return this.store.select(LayoutState.childNodes(this.layoutNode.id));
   }
 
   @HostBinding('attr.id')
   get id(): string {
-    return this.section.id;
+    return this.layoutNode.id;
   }
 
   @HostBinding('attr.index')
@@ -126,16 +126,16 @@ export class SectionComponent implements OnInit {
 
   @HostBinding('attr.parentId')
   get parentId(): string {
-    return this.section.parentId;
+    return this.layoutNode.parentId;
   }
 
   @HostBinding('class')
   get hostClass(): string {
-    return `section  ${this.section.classes.root}`;
+    return `section  ${this.layoutNode.classes.root}`;
   }
 
   getContentClass(): string {
-    return `section__content ${this.section.classes.content}`;
+    return `section__content ${this.layoutNode.classes.content}`;
   }
 
   createIndex(...args: number[]): number[] {

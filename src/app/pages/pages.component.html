@@ -10,13 +10,13 @@
     <div class="page__content">
       <ng-container
         *ngFor="
-          let section of sections$ | async;
+          let layoutNode of layoutNodes$ | async;
           let i = index;
           trackBy: handleTrackBy
         "
       >
         <app-section
-          [section]="section"
+          [layoutNode]="layoutNode"
           [parentIndex]="[parentIndex]"
           [index]="[parentIndex, i]"
         />

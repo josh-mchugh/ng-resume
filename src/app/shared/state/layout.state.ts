@@ -3,21 +3,28 @@ import { State, createSelector } from '@ngxs/store';
 import { SelectorType } from '@shared/state/resume.state';
 
 export interface LayoutStateModel {
-  byId: { [id: string]: SectionModel };
+  byId: { [id: string]: LayoutNode };
   allIds: string[];
 }
 
-export interface SectionModel {
+export interface LayoutNode {
   id: string;
   parentId: string;
   name: string;
-  type: SectionType;
-  classes: SectionClasses;
+  type: NodeType;
+  classes: Classes;
   selectors: Selector[];
   template: string;
 }
 
-export interface SectionClasses {
+export enum NodeType {
+  CONTENT = 'CONTENT',
+  CONTAINER = 'CONTAINER',
+  DYNAMIC_CONTAINER = 'DYNAMIC_CONTAINER',
+  STRUCTURAL = 'STRUCTURAL',
+}
+
+export interface Classes {
   root: string;
   content: string;
 }
@@ -34,13 +41,6 @@ export interface Selector {
   key: string;
 }
 
-export enum SectionType {
-  CONTENT = 'CONTENT',
-  CONTAINER = 'CONTAINER',
-  DYNAMIC_CONTAINER = 'DYNAMIC_CONTAINER',
-  STRUCTURAL = 'STRUCTURAL',
-}
-
 @State<LayoutStateModel>({
   name: 'layout',
   defaults: {
@@ -49,7 +49,7 @@ export enum SectionType {
         id: '0',
         parentId: '',
         name: 'Row Section',
-        type: SectionType.STRUCTURAL,
+        type: NodeType.STRUCTURAL,
         classes: emptyClasses(),
         selectors: [],
         template: '',
@@ -58,7 +58,7 @@ export enum SectionType {
         id: '0,0',
         parentId: '0',
         name: 'Left Column Section',
-        type: SectionType.STRUCTURAL,
+        type: NodeType.STRUCTURAL,
         classes: {
           root: 'section--column-left',
           content: 'section__content--column',
@@ -70,7 +70,7 @@ export enum SectionType {
         id: '0,0,0',
         parentId: '0,0',
         name: 'Name & Title Section',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -82,7 +82,7 @@ export enum SectionType {
         id: '0,0,0,0',
         parentId: '0,0,0',
         name: 'Name Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -96,7 +96,7 @@ export enum SectionType {
         id: '0,0,0,1',
         parentId: '0,0,0',
         name: 'Title Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -109,7 +109,7 @@ export enum SectionType {
       '0,0,1': {
         id: '0,0,1',
         parentId: '0,0',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         name: 'Summary Section',
         classes: {
           root: '',
@@ -122,7 +122,7 @@ export enum SectionType {
         id: '0,0,1,0',
         parentId: '0,0,1',
         name: 'Summary Header Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -132,7 +132,7 @@ export enum SectionType {
         id: '0,0,1,1',
         parentId: '0,0,1',
         name: 'Summary Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -146,7 +146,7 @@ export enum SectionType {
         id: '0,0,2',
         parentId: '0,0',
         name: 'Contact Section',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -158,7 +158,7 @@ export enum SectionType {
         id: '0,0,2,0',
         parentId: '0,0,2',
         name: 'Contact Header Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -167,7 +167,7 @@ export enum SectionType {
       '0,0,2,1': {
         id: '0,0,2,1',
         parentId: '0,0,2',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         name: 'Contact Phone Template',
         classes: emptyClasses(),
         selectors: [
@@ -183,7 +183,7 @@ export enum SectionType {
         id: '0,0,2,2',
         parentId: '0,0,2',
         name: 'Contact Email Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -197,7 +197,7 @@ export enum SectionType {
       '0,0,2,3': {
         id: '0,0,2,3',
         parentId: '0,0,2',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         name: 'Contact Location Template',
         classes: emptyClasses(),
         selectors: [
@@ -212,7 +212,7 @@ export enum SectionType {
       '0,0,3': {
         id: '0,0,3',
         parentId: '0,0',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         name: 'Social Section',
         classes: {
           root: '',
@@ -225,7 +225,7 @@ export enum SectionType {
         id: '0,0,3,0',
         parentId: '0,0,3',
         name: 'Social Header Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -235,7 +235,7 @@ export enum SectionType {
         id: '0,0,3,1',
         parentId: '0,0,3',
         name: 'Socials List Section',
-        type: SectionType.DYNAMIC_CONTAINER,
+        type: NodeType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -252,7 +252,7 @@ export enum SectionType {
         id: '0,0,3,1,0',
         parentId: '0,0,3,1',
         name: 'Social Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -275,7 +275,7 @@ export enum SectionType {
         id: '0,1',
         parentId: '0',
         name: 'Right Column Section',
-        type: SectionType.STRUCTURAL,
+        type: NodeType.STRUCTURAL,
         classes: {
           root: 'section--column-right',
           content: 'section__content--column',
@@ -287,7 +287,7 @@ export enum SectionType {
         id: '0,1,0',
         parentId: '0,1',
         name: 'Experience Section',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -299,7 +299,7 @@ export enum SectionType {
         id: '0,1,0,0',
         parentId: '0,1,0',
         name: 'Experience Header Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -309,7 +309,7 @@ export enum SectionType {
         id: '0,1,0,1',
         parentId: '0,1,0',
         name: 'Experience List Section',
-        type: SectionType.DYNAMIC_CONTAINER,
+        type: NodeType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -326,7 +326,7 @@ export enum SectionType {
         id: '0,1,0,1,0',
         parentId: '0,1,0,1',
         name: 'Experience Position Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -345,7 +345,7 @@ export enum SectionType {
         id: '0,1,0,1,1',
         parentId: '0,1,0,1',
         name: 'Experience Organization Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -364,7 +364,7 @@ export enum SectionType {
         id: '0,1,0,1,2',
         parentId: '0,1,0,1',
         name: 'Experience Description Section',
-        type: SectionType.DYNAMIC_CONTAINER,
+        type: NodeType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -381,7 +381,7 @@ export enum SectionType {
         id: '0,1,0,1,2,0',
         parentId: '0,1,0,1,2',
         name: 'Experience Description',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -396,7 +396,7 @@ export enum SectionType {
         id: '0,1,0,1,3',
         parentId: '0,1,0,1',
         name: 'Experience Skill Section',
-        type: SectionType.DYNAMIC_CONTAINER,
+        type: NodeType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -413,7 +413,7 @@ export enum SectionType {
         id: '0,1,0,1,3,0',
         parentId: '0,1,0,1,3',
         name: 'Experience Skill',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: {
           root: 'section--w-auto',
           content: '',
@@ -430,7 +430,7 @@ export enum SectionType {
         id: '0,1,1',
         parentId: '0,1',
         name: 'Skill Section',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -442,7 +442,7 @@ export enum SectionType {
         id: '0,1,1,0',
         parentId: '0,1,1',
         name: 'Skill Header Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -452,7 +452,7 @@ export enum SectionType {
         id: '0,1,1,1',
         parentId: '0,1,1',
         name: 'Skill List Section',
-        type: SectionType.DYNAMIC_CONTAINER,
+        type: NodeType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -469,7 +469,7 @@ export enum SectionType {
         id: '0,1,1,1,0',
         parentId: '0,1,1,1',
         name: 'Skill Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: {
           root: 'section--w-50',
           content: '',
@@ -491,7 +491,7 @@ export enum SectionType {
         id: '0,1,2',
         parentId: '0,1',
         name: 'Certification Section',
-        type: SectionType.CONTAINER,
+        type: NodeType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -503,7 +503,7 @@ export enum SectionType {
         id: '0,1,2,0',
         parentId: '0,1,2',
         name: 'Certification Header Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -513,7 +513,7 @@ export enum SectionType {
         id: '0,1,2,1',
         parentId: '0,1,2',
         name: 'Certification List Section',
-        type: SectionType.DYNAMIC_CONTAINER,
+        type: NodeType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -530,7 +530,7 @@ export enum SectionType {
         id: '0,1,2,1,0',
         parentId: '0,1,2,1',
         name: 'Certification Degree Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -549,7 +549,7 @@ export enum SectionType {
         id: '0,1,2,1,1',
         parentId: '0,1,2,1',
         name: 'Certification Organization Template',
-        type: SectionType.CONTENT,
+        type: NodeType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -607,15 +607,15 @@ export enum SectionType {
 })
 @Injectable()
 export class LayoutState {
-  static rootSections(): (state: LayoutStateModel) => SectionModel[] {
+  static rootNodes(): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
       Object.values(state.byId).filter((section) => section.parentId === '0'),
     );
   }
 
-  static childSections(
+  static childNodes(
     id: string,
-  ): (state: LayoutStateModel) => SectionModel[] {
+  ): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
       Object.values(state.byId).filter((section) => section.parentId === id),
     );

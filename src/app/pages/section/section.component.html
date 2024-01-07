@@ -1,5 +1,5 @@
 <!-- Render section with template data available -->
-<ng-container *ngIf="'CONTENT' === section.type">
+<ng-container *ngIf="'CONTENT' === layoutNode.type">
   <div
     [class]="getContentClass()"
     (onResize)="onResize($event)"
@@ -7,23 +7,23 @@
   ></div>
 </ng-container>
 <!-- Render section which does not have template but children which require selectors for nested resume data -->
-<ng-container *ngIf="'DYNAMIC_CONTAINER' === section.type">
+<ng-container *ngIf="'DYNAMIC_CONTAINER' === layoutNode.type">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
-        let contentIndex of contentLength$ | async;
+        let contentIndex of childContentLength$ | async;
         trackBy: handleTrackBy
       "
     >
       <ng-container
         *ngFor="
-          let child of childSections$ | async;
+          let childNode of childLayoutNodes$ | async;
           let i = index;
           trackBy: handleTrackBy
         "
       >
         <app-section
-          [section]="child"
+          [layoutNode]="childNode"
           [contentIndex]="contentIndex"
           [position]="i"
           [parentIndex]="index"
@@ -34,17 +34,17 @@
   </div>
 </ng-container>
 <!-- Render section which has children and does not require selectors for nested resume data -->
-<ng-container *ngIf="['CONTAINER', 'STRUCTURAL'].includes(section.type)">
+<ng-container *ngIf="['CONTAINER', 'STRUCTURAL'].includes(layoutNode.type)">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
-        let child of childSections$ | async;
+        let childNode of childLayoutNodes$ | async;
         let i = index;
         trackBy: handleTrackBy
       "
     >
       <app-section
-        [section]="child"
+        [layoutNode]="childNode"
         [parentIndex]="index"
         [index]="createIndex(i)"
       />
