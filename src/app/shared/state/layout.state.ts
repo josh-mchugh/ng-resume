@@ -11,6 +11,7 @@ export interface SectionModel {
   id: string;
   parentId: string;
   name: string;
+  type: SectionType;
   classes: SectionClasses;
   selectors: Selector[];
   template: string;
@@ -33,6 +34,12 @@ export interface Selector {
   key: string;
 }
 
+export enum SectionType {
+  CONTENT = 'CONTENT',
+  CONTAINER = 'CONTAINER',
+  STRUCTURAL = 'STRUCTURAL',
+}
+
 @State<LayoutStateModel>({
   name: 'layout',
   defaults: {
@@ -41,6 +48,7 @@ export interface Selector {
         id: '0',
         parentId: '',
         name: 'Row Section',
+        type: SectionType.STRUCTURAL,
         classes: emptyClasses(),
         selectors: [],
         template: '',
@@ -49,6 +57,7 @@ export interface Selector {
         id: '0,0',
         parentId: '0',
         name: 'Left Column Section',
+        type: SectionType.STRUCTURAL,
         classes: {
           root: 'section--column-left',
           content: 'section__content--column',
@@ -60,6 +69,7 @@ export interface Selector {
         id: '0,0,0',
         parentId: '0,0',
         name: 'Name & Title Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -71,6 +81,7 @@ export interface Selector {
         id: '0,0,0,0',
         parentId: '0,0,0',
         name: 'Name Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -84,6 +95,7 @@ export interface Selector {
         id: '0,0,0,1',
         parentId: '0,0,0',
         name: 'Title Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -96,6 +108,7 @@ export interface Selector {
       '0,0,1': {
         id: '0,0,1',
         parentId: '0,0',
+        type: SectionType.CONTAINER,
         name: 'Summary Section',
         classes: {
           root: '',
@@ -108,6 +121,7 @@ export interface Selector {
         id: '0,0,1,0',
         parentId: '0,0,1',
         name: 'Summary Header Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -117,6 +131,7 @@ export interface Selector {
         id: '0,0,1,1',
         parentId: '0,0,1',
         name: 'Summary Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -130,6 +145,7 @@ export interface Selector {
         id: '0,0,2',
         parentId: '0,0',
         name: 'Contact Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -141,6 +157,7 @@ export interface Selector {
         id: '0,0,2,0',
         parentId: '0,0,2',
         name: 'Contact Header Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -149,6 +166,7 @@ export interface Selector {
       '0,0,2,1': {
         id: '0,0,2,1',
         parentId: '0,0,2',
+        type: SectionType.CONTENT,
         name: 'Contact Phone Template',
         classes: emptyClasses(),
         selectors: [
@@ -164,6 +182,7 @@ export interface Selector {
         id: '0,0,2,2',
         parentId: '0,0,2',
         name: 'Contact Email Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -177,6 +196,7 @@ export interface Selector {
       '0,0,2,3': {
         id: '0,0,2,3',
         parentId: '0,0,2',
+        type: SectionType.CONTENT,
         name: 'Contact Location Template',
         classes: emptyClasses(),
         selectors: [
@@ -191,6 +211,7 @@ export interface Selector {
       '0,0,3': {
         id: '0,0,3',
         parentId: '0,0',
+        type: SectionType.CONTAINER,
         name: 'Social Section',
         classes: {
           root: '',
@@ -203,6 +224,7 @@ export interface Selector {
         id: '0,0,3,0',
         parentId: '0,0,3',
         name: 'Social Header Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -212,6 +234,7 @@ export interface Selector {
         id: '0,0,3,1',
         parentId: '0,0,3',
         name: 'Socials List Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -228,6 +251,7 @@ export interface Selector {
         id: '0,0,3,1,0',
         parentId: '0,0,3,1',
         name: 'Social Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -250,6 +274,7 @@ export interface Selector {
         id: '0,1',
         parentId: '0',
         name: 'Right Column Section',
+        type: SectionType.STRUCTURAL,
         classes: {
           root: 'section--column-right',
           content: 'section__content--column',
@@ -261,6 +286,7 @@ export interface Selector {
         id: '0,1,0',
         parentId: '0,1',
         name: 'Experience Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -272,6 +298,7 @@ export interface Selector {
         id: '0,1,0,0',
         parentId: '0,1,0',
         name: 'Experience Header Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -281,6 +308,7 @@ export interface Selector {
         id: '0,1,0,1',
         parentId: '0,1,0',
         name: 'Experience List Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -297,6 +325,7 @@ export interface Selector {
         id: '0,1,0,1,0',
         parentId: '0,1,0,1',
         name: 'Experience Position Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -315,6 +344,7 @@ export interface Selector {
         id: '0,1,0,1,1',
         parentId: '0,1,0,1',
         name: 'Experience Organization Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -333,6 +363,7 @@ export interface Selector {
         id: '0,1,0,1,2',
         parentId: '0,1,0,1',
         name: 'Experience Description Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -349,6 +380,7 @@ export interface Selector {
         id: '0,1,0,1,2,0',
         parentId: '0,1,0,1,2',
         name: 'Experience Description',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -363,6 +395,7 @@ export interface Selector {
         id: '0,1,0,1,3',
         parentId: '0,1,0,1',
         name: 'Experience Skill Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -379,6 +412,7 @@ export interface Selector {
         id: '0,1,0,1,3,0',
         parentId: '0,1,0,1,3',
         name: 'Experience Skill',
+        type: SectionType.CONTENT,
         classes: {
           root: 'section--w-auto',
           content: '',
@@ -395,6 +429,7 @@ export interface Selector {
         id: '0,1,1',
         parentId: '0,1',
         name: 'Skill Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -406,6 +441,7 @@ export interface Selector {
         id: '0,1,1,0',
         parentId: '0,1,1',
         name: 'Skill Header Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -415,6 +451,7 @@ export interface Selector {
         id: '0,1,1,1',
         parentId: '0,1,1',
         name: 'Skill List Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -431,6 +468,7 @@ export interface Selector {
         id: '0,1,1,1,0',
         parentId: '0,1,1,1',
         name: 'Skill Template',
+        type: SectionType.CONTENT,
         classes: {
           root: 'section--w-50',
           content: '',
@@ -452,6 +490,7 @@ export interface Selector {
         id: '0,1,2',
         parentId: '0,1',
         name: 'Certification Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -463,6 +502,7 @@ export interface Selector {
         id: '0,1,2,0',
         parentId: '0,1,2',
         name: 'Certification Header Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -472,6 +512,7 @@ export interface Selector {
         id: '0,1,2,1',
         parentId: '0,1,2',
         name: 'Certification List Section',
+        type: SectionType.CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -488,6 +529,7 @@ export interface Selector {
         id: '0,1,2,1,0',
         parentId: '0,1,2,1',
         name: 'Certification Degree Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {
@@ -506,6 +548,7 @@ export interface Selector {
         id: '0,1,2,1,1',
         parentId: '0,1,2,1',
         name: 'Certification Organization Template',
+        type: SectionType.CONTENT,
         classes: emptyClasses(),
         selectors: [
           {

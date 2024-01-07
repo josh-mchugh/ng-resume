@@ -5,7 +5,11 @@ import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
 import { DisplayStructure } from '@shared/state/display-structure.actions';
-import { LayoutState, SectionModel } from '@shared/state/layout.state';
+import {
+  LayoutState,
+  SectionModel,
+  SectionType,
+} from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
 
 @Component({
@@ -53,15 +57,23 @@ export class SectionComponent implements OnInit {
     );
 
     // Build observables for template rendering
-    if (this.section.template) {
+    if (SectionType.CONTENT === this.section.type) {
       this.htmlContent$ = this.section.selectors.length
         ? this.renderHTMLWithSelectors()
         : this.renderHTMLWithoutSelectors();
     }
-    if (!this.section.template && !this.section.selectors.length) {
+    if (
+      [SectionType.CONTAINER, SectionType.STRUCTURAL].includes(
+        this.section.type,
+      ) &&
+      !this.section.selectors.length
+    ) {
       this.childSections$ = this.buildChildSections();
     }
-    if (!this.section.template && this.section.selectors.length) {
+    if (
+      SectionType.CONTAINER === this.section.type &&
+      this.section.selectors.length
+    ) {
       this.contentLength$ = this.buildContentLength();
       this.childSections$ = this.buildChildSections();
     }
