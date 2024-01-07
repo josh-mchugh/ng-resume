@@ -7,7 +7,7 @@
   ></div>
 </ng-container>
 <!-- Render section which does not have template but children which require selectors for nested resume data -->
-<ng-container *ngIf="'CONTAINER' === section.type && section.selectors.length">
+<ng-container *ngIf="'DYNAMIC_CONTAINER' === section.type">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
@@ -34,12 +34,7 @@
   </div>
 </ng-container>
 <!-- Render section which has children and does not require selectors for nested resume data -->
-<ng-container
-  *ngIf="
-    ['CONTAINER', 'STRUCTURAL'].includes(section.type) &&
-    !section.selectors.length
-  "
->
+<ng-container *ngIf="['CONTAINER', 'STRUCTURAL'].includes(section.type)">
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="

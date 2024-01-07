@@ -56,7 +56,6 @@ export class SectionComponent implements OnInit {
       ),
     );
 
-    // Build observables for template rendering
     if (SectionType.CONTENT === this.section.type) {
       this.htmlContent$ = this.section.selectors.length
         ? this.renderHTMLWithSelectors()
@@ -65,15 +64,11 @@ export class SectionComponent implements OnInit {
     if (
       [SectionType.CONTAINER, SectionType.STRUCTURAL].includes(
         this.section.type,
-      ) &&
-      !this.section.selectors.length
+      )
     ) {
       this.childSections$ = this.buildChildSections();
     }
-    if (
-      SectionType.CONTAINER === this.section.type &&
-      this.section.selectors.length
-    ) {
+    if (SectionType.DYNAMIC_CONTAINER === this.section.type) {
       this.contentLength$ = this.buildContentLength();
       this.childSections$ = this.buildChildSections();
     }

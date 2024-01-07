@@ -37,6 +37,7 @@ export interface Selector {
 export enum SectionType {
   CONTENT = 'CONTENT',
   CONTAINER = 'CONTAINER',
+  DYNAMIC_CONTAINER = 'DYNAMIC_CONTAINER',
   STRUCTURAL = 'STRUCTURAL',
 }
 
@@ -234,7 +235,7 @@ export enum SectionType {
         id: '0,0,3,1',
         parentId: '0,0,3',
         name: 'Socials List Section',
-        type: SectionType.CONTAINER,
+        type: SectionType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -308,7 +309,7 @@ export enum SectionType {
         id: '0,1,0,1',
         parentId: '0,1,0',
         name: 'Experience List Section',
-        type: SectionType.CONTAINER,
+        type: SectionType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -363,7 +364,7 @@ export enum SectionType {
         id: '0,1,0,1,2',
         parentId: '0,1,0,1',
         name: 'Experience Description Section',
-        type: SectionType.CONTAINER,
+        type: SectionType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -395,7 +396,7 @@ export enum SectionType {
         id: '0,1,0,1,3',
         parentId: '0,1,0,1',
         name: 'Experience Skill Section',
-        type: SectionType.CONTAINER,
+        type: SectionType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -451,7 +452,7 @@ export enum SectionType {
         id: '0,1,1,1',
         parentId: '0,1,1',
         name: 'Skill List Section',
-        type: SectionType.CONTAINER,
+        type: SectionType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -512,7 +513,7 @@ export enum SectionType {
         id: '0,1,2,1',
         parentId: '0,1,2',
         name: 'Certification List Section',
-        type: SectionType.CONTAINER,
+        type: SectionType.DYNAMIC_CONTAINER,
         classes: {
           root: '',
           content: 'section__content--column',
