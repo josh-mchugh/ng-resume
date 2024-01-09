@@ -1,10 +1,3 @@
-import {
-  ResumeCertificationModel,
-  ResumeExperienceModel,
-  ResumeSkillModel,
-  ResumeSocialModel,
-} from './resume.state';
-
 export namespace Resume {
   export class NameUpdate {
     static readonly type = '[Resume] Name Update';
@@ -36,6 +29,7 @@ export namespace Resume {
     constructor(public location: string) {}
   }
 
+  /*
   export class SocialsUpdate {
     static readonly type = '[Resume] Socials Update';
     constructor(public socials: Array<ResumeSocialModel>) {}
@@ -55,4 +49,5 @@ export namespace Resume {
     static readonly type = '[Resume] Certifications Update';
     constructor(public certifications: Array<ResumeCertificationModel>) {}
   }
+  */
 }

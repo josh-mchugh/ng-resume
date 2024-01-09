@@ -2,12 +2,6 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
-import {
-  ResumeCertificationModel,
-  ResumeExperienceModel,
-  ResumeSkillModel,
-  ResumeSocialModel,
-} from './resume.state';
 
 export interface FormStateModel {
   name: string;
@@ -155,7 +149,7 @@ export class FormState {
     });
     ctx.dispatch(new Resume.LocationUpdate(action.location));
   }
-
+  /*
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
@@ -543,7 +537,7 @@ export class FormState {
     ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
 
-  /* Util Functions */
+  /* Util Functions
   mapFormSocialsToResumeSocials(
     formSocials: Array<FormSocialModel>,
   ): Array<ResumeSocialModel> {
@@ -576,4 +570,5 @@ export class FormState {
   ): Array<ResumeCertificationModel> {
     return formCertifications.map((certification) => ({ ...certification }));
   }
+  */
 }
