@@ -839,35 +839,21 @@ export class ResumeState {
     });
   }
 
-  @Action(Resume.SocialNameUpdate)
-  socialTitleUpdate(
+  @Action(Resume.SocialsUpdate)
+  socialsUpdate(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialNameUpdate,
+    action: Resume.SocialsUpdate,
   ) {
-    const socials = { ...ctx.getState().socials };
-    const social = socials[action.id]
-      ? { ...socials[action.id], name: action.name }
-      : { id: action.id, name: action.name, url: '', icon: '' };
-
-    socials[action.id] = social;
-
+    const socials = action.socials.reduce(
+      (acc, social) => ({ ...acc, [social.id]: { ...social, icon: '' } }),
+      {},
+    );
     ctx.setState({
       ...ctx.getState(),
       socials: socials,
     });
   }
   /*
-  @Action(Resume.SocialsUpdate)
-  socialsUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialsUpdate,
-  ) {
-    ctx.setState({
-      ...ctx.getState(),
-      socials: action.socials,
-    });
-  }
-
   @Action(Resume.ExperiencesUpdate)
   experiencesUpdate(
     ctx: StateContext<ResumeStateModel>,

@@ -150,26 +150,6 @@ export class FormState {
     ctx.dispatch(new Resume.LocationUpdate(action.location));
   }
 
-  @Action(Form.Social.NameUpdate)
-  socialCreate(
-    ctx: StateContext<FormStateModel>,
-    action: Form.Social.NameUpdate,
-  ) {
-    const state = ctx.getState();
-    const updatedSocials = state.socials.map((social, index) =>
-      index === action.index ? { ...social, name: action.name } : social,
-    );
-    ctx.setState({
-      ...state,
-      socials: updatedSocials,
-    });
-
-    ctx.dispatch(
-      new Resume.SocialNameUpdate(action.index.toString(), action.name),
-    );
-  }
-
-  /*
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
@@ -229,7 +209,7 @@ export class FormState {
     const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
     ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
   }
-
+  /*
   @Action(Form.Experience.Create)
   experienceCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
@@ -556,14 +536,16 @@ export class FormState {
       this.mapFormCertificationsToResumeCertifications(updatedCertifications);
     ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
-
-  /* Util Functions
+*/
+  /* Util Functions */
   mapFormSocialsToResumeSocials(
-    formSocials: Array<FormSocialModel>,
-  ): Array<ResumeSocialModel> {
-    return formSocials.map((social) => ({ ...social, icon: '' }));
+    formSocials: FormSocialModel[],
+  ): Resume.Social[] {
+    return formSocials.map((social, index) => {
+      return new Resume.Social(index.toString(), social.name, social.url);
+    });
   }
-
+  /*
   mapFormExperiencesToResumeExperiences(
     formExperiences: Array<FormExperienceModel>,
   ): Array<ResumeExperienceModel> {
