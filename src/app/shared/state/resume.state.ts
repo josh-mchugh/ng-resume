@@ -839,6 +839,23 @@ export class ResumeState {
     });
   }
 
+  @Action(Resume.SocialNameUpdate)
+  socialTitleUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.SocialNameUpdate,
+  ) {
+    const socials = { ...ctx.getState().socials };
+    const social = socials[action.id]
+      ? { ...socials[action.id], name: action.name }
+      : { id: action.id, name: action.name, url: '', icon: '' };
+
+    socials[action.id] = social;
+
+    ctx.setState({
+      ...ctx.getState(),
+      socials: socials,
+    });
+  }
   /*
   @Action(Resume.SocialsUpdate)
   socialsUpdate(

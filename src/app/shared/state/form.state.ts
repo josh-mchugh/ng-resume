@@ -149,6 +149,26 @@ export class FormState {
     });
     ctx.dispatch(new Resume.LocationUpdate(action.location));
   }
+
+  @Action(Form.Social.NameUpdate)
+  socialCreate(
+    ctx: StateContext<FormStateModel>,
+    action: Form.Social.NameUpdate,
+  ) {
+    const state = ctx.getState();
+    const updatedSocials = state.socials.map((social, index) =>
+      index === action.index ? { ...social, name: action.name } : social,
+    );
+    ctx.setState({
+      ...state,
+      socials: updatedSocials,
+    });
+
+    ctx.dispatch(
+      new Resume.SocialNameUpdate(action.index.toString(), action.name),
+    );
+  }
+
   /*
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
