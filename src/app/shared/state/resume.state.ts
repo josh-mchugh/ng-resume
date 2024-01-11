@@ -2,21 +2,6 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
 
-/*
-export interface ResumeState {
-  name: string;
-  title: string;
-  summary: string;
-  phone: string;
-  email: string;
-  location: string;
-  socials: Array<ResumeSocialModel>;
-  experiences: Array<ResumeExperienceModel>;
-  skills: Array<ResumeSkillModel>;
-  certifications: Array<ResumeCertificationModel>;
-}
-*/
-
 export interface ResumeStateModel {
   name: string;
   title: string;
@@ -72,35 +57,6 @@ export interface Certification {
   year: string;
   location: string;
 }
-
-/*
-export interface ResumeSocialModel {
-  icon: string;
-  name: string;
-  url: string;
-}
-
-export interface ResumeExperienceModel {
-  title: string;
-  organization: string;
-  duration: string;
-  location: string;
-  descriptions: Array<string>;
-  skills: Array<string>;
-}
-
-export interface ResumeSkillModel {
-  name: string;
-  proficiency: number;
-}
-
-export interface ResumeCertificationModel {
-  title: string;
-  organization: string;
-  year: string;
-  location: string;
-}
-*/
 
 export enum SelectorType {
   NAME = 'NAME',
@@ -402,133 +358,6 @@ export enum SelectorType {
       },
     },
   },
-  /*  defaults: {
-    name: 'John Doe',
-    title: 'Web and Graphic Designer',
-    summary:
-      'Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.',
-    phone: '(123) 456-8899',
-    email: 'info@youremail.com',
-    location: 'New York, New York',
-    socials: [
-      {
-        name: 'Facebook',
-        icon: 'fa-brands fa-facebook',
-        url: 'https://facebook.com/profile',
-      },
-      {
-        name: 'Twitter',
-        icon: 'fa-brands fa-twitter',
-        url: 'https://twitter.com/profile',
-      },
-      {
-        name: 'LinkedIn',
-        icon: 'fa-brands fa-linkedin',
-        url: 'https://linkedin.com/profile',
-      },
-    ],
-    experiences: [
-      {
-        organization: 'Cyberdyne System Corp.',
-        title: 'Web Developer',
-        duration: 'Jan 2023 - Present',
-        location: 'Remote',
-        descriptions: [
-          'Efficiently unleash cross-media information without cross-media value.',
-          'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
-          'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
-          'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
-          'Paradigm shift land it in region, design thinking.',
-        ],
-        skills: [
-          'Photoshop',
-          'HTML',
-          'CSS',
-          'Illustrator',
-          'PHP',
-          'JavaScript',
-        ],
-      },
-      {
-        organization: 'Very Big Corp. of America',
-        title: 'User Experience Expert',
-        duration: 'Jan 2022 – Dec 2022',
-        location: 'Remote',
-        descriptions: [
-          'Collaboratively administrate empowered markets via plug-and-play networks.',
-          'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
-          'Pursue scalable customer service through sustainable potentialities.',
-          'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
-        ],
-        skills: [
-          'Typography',
-          'Composition',
-          'Color Theory',
-          'Design',
-          'CMS',
-          'UX',
-          'Graphic Design'
-        ],
-      },
-      {
-        organization: 'MomCorp',
-        title: 'Database Developer',
-        duration: 'Jan 2021 – Dec 2021',
-        location: 'Remote',
-        descriptions: [
-          'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
-          'Envisioned multimedia based expertise and cross-media growth strategies.',
-          'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. ',
-        ],
-        skills: [
-          'SQL',
-          'NoSQL',
-          'MySQL',
-          'Postgres',
-          'MongoDB',
-          'Coachbase',
-        ],
-      },
-    ],
-    skills: [
-      {
-        name: 'Photoshop',
-        proficiency: 4,
-      },
-      {
-        name: 'Illustrator',
-        proficiency: 2,
-      },
-      {
-        name: 'PHP',
-        proficiency: 2,
-      },
-      {
-        name: 'HTML',
-        proficiency: 3,
-      },
-      {
-        name: 'WordPress',
-        proficiency: 3,
-      },
-      {
-        name: 'CSS',
-        proficiency: 3,
-      },
-      {
-        name: 'Joomla',
-        proficiency: 3,
-      },
-    ],
-    certifications: [
-      {
-        title: 'Master Degree in Studies',
-        organization: 'Name of University',
-        location: 'New York, New York',
-        year: '2012',
-      },
-    ],
-  },*/
 })
 @Injectable()
 export class ResumeState {
@@ -860,40 +689,58 @@ export class ResumeState {
     action: Resume.ExperiencesUpdate,
   ) {
     // Create Experience Object
-    const experiences = action.experiences.map((experience, index) => {
-      return {
-        id: experience.id,
-        title: experience.title,
-        organization: experience.organization,
-        duration: experience.duration,
-        location: experience.location,
-      }
-    })
-      .reduce((acc, experience) => ({ ...acc, [experience.id]: experience }), {});
+    const experiences = action.experiences
+      .map((experience) => {
+        return {
+          id: experience.id,
+          title: experience.title,
+          organization: experience.organization,
+          duration: experience.duration,
+          location: experience.location,
+        };
+      })
+      .reduce(
+        (acc, experience) => ({ ...acc, [experience.id]: experience }),
+        {},
+      );
 
     // Create ExperienceDescription Objects
-    const experienceDescriptions = action.experiences.map((experience, experienceIndex) => {
-      return experience.descriptions.map(description => {
-        return {
-          experienceId: experienceIndex.toString(),
-          description: description,
-        };
-      });
-    })
+    const experienceDescriptions = action.experiences
+      .map((experience, experienceIndex) => {
+        return experience.descriptions.map((description) => {
+          return {
+            experienceId: experienceIndex.toString(),
+            description: description,
+          };
+        });
+      })
       .flat()
-      .reduce((acc, description, index) => ({ ...acc, [index.toString()]: { ...description, id: index.toString() } }), {});
+      .reduce(
+        (acc, description, index) => ({
+          ...acc,
+          [index.toString()]: { ...description, id: index.toString() },
+        }),
+        {},
+      );
 
     // Create ExperienceSkill Objects
-    const experienceSkills = action.experiences.map((experience, experienceId) => {
-      return experience.skills.map(skill => {
-        return {
-          experienceId: experienceId.toString(),
-          skill: skill,
-        };
-      });
-    })
+    const experienceSkills = action.experiences
+      .map((experience, experienceId) => {
+        return experience.skills.map((skill) => {
+          return {
+            experienceId: experienceId.toString(),
+            skill: skill,
+          };
+        });
+      })
       .flat()
-      .reduce((acc, skill, index) => ({ ...acc, [index.toString()]: { ...skill, id: index.toString() } }), {});
+      .reduce(
+        (acc, skill, index) => ({
+          ...acc,
+          [index.toString()]: { ...skill, id: index.toString() },
+        }),
+        {},
+      );
 
     ctx.setState({
       ...ctx.getState(),
@@ -908,7 +755,10 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.SkillsUpdate,
   ) {
-    const skills = action.skills.reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+    const skills = action.skills.reduce(
+      (acc, skill) => ({ ...acc, [skill.id]: skill }),
+      {},
+    );
     ctx.setState({
       ...ctx.getState(),
       skills: skills,
@@ -920,7 +770,10 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.CertificationsUpdate,
   ) {
-    const certifications = action.certifications.reduce((acc, certification) => ({ ...acc, [certification.id]: certification }), {});
+    const certifications = action.certifications.reduce(
+      (acc, certification) => ({ ...acc, [certification.id]: certification }),
+      {},
+    );
     ctx.setState({
       ...ctx.getState(),
       certifications: certifications,

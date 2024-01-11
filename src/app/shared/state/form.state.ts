@@ -562,15 +562,19 @@ export class FormState {
     }));
   }
 
-  mapFormSkillsToResumeSkills(
-    formSkills: FormSkillModel[],
-  ): Resume.Skill[] {
-    return formSkills.map((skill, index) => ({ ...skill, id: index.toString() }));
+  mapFormSkillsToResumeSkills(formSkills: FormSkillModel[]): Resume.Skill[] {
+    return formSkills.map((skill, index) => ({
+      ...skill,
+      id: index.toString(),
+    }));
   }
 
   mapFormCertificationsToResumeCertifications(
     formCertifications: FormCertificationModel[],
   ): Resume.Certification[] {
-    return formCertifications.map((certification, index) => ({ ...certification, id: index.toString() }));
+    return formCertifications.map((certification, index) => ({
+      ...certification,
+      id: index.toString(),
+    }));
   }
 }
