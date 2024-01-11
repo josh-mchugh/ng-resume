@@ -902,18 +902,19 @@ export class ResumeState {
       experienceSkills: experienceSkills,
     });
   }
-/*
+
   @Action(Resume.SkillsUpdate)
   skillsUpdate(
     ctx: StateContext<ResumeStateModel>,
     action: Resume.SkillsUpdate,
   ) {
+    const skills = action.skills.reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
     ctx.setState({
       ...ctx.getState(),
-      skills: action.skills,
+      skills: skills,
     });
   }
-
+/*
   @Action(Resume.CertificationsUpdate)
   certificationsUpdate(
     ctx: StateContext<ResumeStateModel>,

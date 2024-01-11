@@ -58,12 +58,20 @@ export namespace Resume {
     static readonly type = '[Resume] Experiences Update';
     constructor(public experiences: Experience[]) {}
   }
-/*
-  export class SkillsUpdate {
-    static readonly type = '[Resume] Skills Update';
-    constructor(public skills: Array<ResumeSkillModel>) {}
+
+  export class Skill {
+    constructor(
+      public id: string,
+      public name: string,
+      public proficiency: number,
+    ) {}
   }
 
+  export class SkillsUpdate {
+    static readonly type = '[Resume] Skills Update';
+    constructor(public skills: Skill[]) {}
+  }
+/*
   export class CertificationsUpdate {
     static readonly type = '[Resume] Certifications Update';
     constructor(public certifications: Array<ResumeCertificationModel>) {}
