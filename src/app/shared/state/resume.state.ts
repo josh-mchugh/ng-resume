@@ -853,18 +853,56 @@ export class ResumeState {
       socials: socials,
     });
   }
-  /*
+
   @Action(Resume.ExperiencesUpdate)
   experiencesUpdate(
     ctx: StateContext<ResumeStateModel>,
     action: Resume.ExperiencesUpdate,
   ) {
+    // Create Experience Object
+    const experiences = action.experiences.map((experience, index) => {
+      return {
+        id: experience.id,
+        title: experience.title,
+        organization: experience.organization,
+        duration: experience.duration,
+        location: experience.location,
+      }
+    })
+      .reduce((acc, experience) => ({ ...acc, [experience.id]: experience }), {});
+
+    // Create ExperienceDescription Objects
+    const experienceDescriptions = action.experiences.map((experience, experienceIndex) => {
+      return experience.descriptions.map(description => {
+        return {
+          experienceId: experienceIndex.toString(),
+          description: description,
+        };
+      });
+    })
+      .flat()
+      .reduce((acc, description, index) => ({ ...acc, [index.toString()]: { ...description, id: index.toString() } }), {});
+
+    // Create ExperienceSkill Objects
+    const experienceSkills = action.experiences.map((experience, experienceId) => {
+      return experience.skills.map(skill => {
+        return {
+          experienceId: experienceId.toString(),
+          skill: skill,
+        };
+      });
+    })
+      .flat()
+      .reduce((acc, skill, index) => ({ ...acc, [index.toString()]: { ...skill, id: index.toString() } }), {});
+
     ctx.setState({
       ...ctx.getState(),
-      experiences: action.experiences,
+      experiences: experiences,
+      experienceDescriptions: experienceDescriptions,
+      experienceSkills: experienceSkills,
     });
   }
-
+/*
   @Action(Resume.SkillsUpdate)
   skillsUpdate(
     ctx: StateContext<ResumeStateModel>,
