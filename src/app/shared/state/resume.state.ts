@@ -914,15 +914,16 @@ export class ResumeState {
       skills: skills,
     });
   }
-/*
+
   @Action(Resume.CertificationsUpdate)
   certificationsUpdate(
     ctx: StateContext<ResumeStateModel>,
     action: Resume.CertificationsUpdate,
   ) {
+    const certifications = action.certifications.reduce((acc, certification) => ({ ...acc, [certification.id]: certification }), {});
     ctx.setState({
       ...ctx.getState(),
-      certifications: action.certifications,
+      certifications: certifications,
     });
-  }*/
+  }
 }

@@ -419,7 +419,7 @@ export class FormState {
     const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
     ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
   }
-/*
+
   @Action(Form.Certification.Create)
   certificationCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
@@ -536,7 +536,7 @@ export class FormState {
       this.mapFormCertificationsToResumeCertifications(updatedCertifications);
     ctx.dispatch(new Resume.CertificationsUpdate(resumeCertifications));
   }
-*/
+
   /* Util Functions */
   mapFormSocialsToResumeSocials(
     formSocials: FormSocialModel[],
@@ -567,11 +567,10 @@ export class FormState {
   ): Resume.Skill[] {
     return formSkills.map((skill, index) => ({ ...skill, id: index.toString() }));
   }
-/*
+
   mapFormCertificationsToResumeCertifications(
-    formCertifications: Array<FormCertificationModel>,
-  ): Array<ResumeCertificationModel> {
-    return formCertifications.map((certification) => ({ ...certification }));
+    formCertifications: FormCertificationModel[],
+  ): Resume.Certification[] {
+    return formCertifications.map((certification, index) => ({ ...certification, id: index.toString() }));
   }
-  */
 }
