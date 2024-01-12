@@ -11,8 +11,8 @@
   <div [class]="getContentClass()" (onResize)="onResize($event)">
     <ng-container
       *ngFor="
-        let contentId of childContentIds$ | async;
-        let contentIndex = index;
+        let resumeId of childResumeIds$ | async;
+        let resumeIndex = index;
         trackBy: handleTrackBy
       "
     >
@@ -25,10 +25,9 @@
       >
         <app-section
           [layoutNode]="childNode"
-          [contentId]="contentId"
-          [position]="i"
+          [resumeId]="resumeId"
           [parentIndex]="index"
-          [index]="createIndex(i, contentIndex)"
+          [index]="createIndex(resumeIndex, i)"
         />
       </ng-container>
     </ng-container>

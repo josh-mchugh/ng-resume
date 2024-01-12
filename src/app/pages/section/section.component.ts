@@ -14,29 +14,26 @@ import { ResumeState } from '@shared/state/resume.state';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit {
-  // section data model for component
+  // Layout not object for current section
   @Input() layoutNode!: LayoutNode;
 
-  // TODO comment description
-  childLayoutNodes$!: Observable<LayoutNode[]>;
+  // Resume Id for retieving resume data
+  @Input() resumeId!: string;
 
-  // TODO comment description
-  childContentIds$!: Observable<string[]>;
-
-  // htmlContent for SectionType.Content
-  htmlContent$!: Observable<SafeHtml>;
-
-  // TODO index id
+  // coordinate for current section
   @Input() index!: number[];
 
-  // TODO parent index id
+  // coordinate for parent section
   @Input() parentIndex!: number[];
 
-  // TODO comment description
-  @Input() contentId!: string;
+  // List of child layout nodes for current section
+  childLayoutNodes$!: Observable<LayoutNode[]>;
 
-  //TODO comment description
-  @Input() position!: number;
+  // List of ids child resume content
+  childResumeIds$!: Observable<string[]>;
+
+  // HTML content for section which renders content
+  htmlContent$!: Observable<SafeHtml>;
 
   public constructor(
     private dimensionService: DimensionService,
@@ -64,7 +61,7 @@ export class SectionComponent implements OnInit {
       this.childLayoutNodes$ = this.getChildLayoutNodes();
     }
     if (NodeType.DYNAMIC_CONTAINER === this.layoutNode.type) {
-      this.childContentIds$ = this.getChildContentIds();
+      this.childResumeIds$ = this.getChildResumeIds();
       this.childLayoutNodes$ = this.getChildLayoutNodes();
     }
   }
@@ -72,7 +69,7 @@ export class SectionComponent implements OnInit {
   private renderHTMLWithSelectors(): Observable<SafeHtml> {
     const observables = this.layoutNode.selectors.map((selector) =>
       this.store
-        .select(ResumeState.selectorValue(selector.type, this.contentId))
+        .select(ResumeState.selectorValue(selector.type, this.resumeId))
         .pipe(map((value) => [selector.key, value])),
     );
     return combineLatest(observables).pipe(
@@ -92,11 +89,11 @@ export class SectionComponent implements OnInit {
     return of(safeHtml);
   }
 
-  private getChildContentIds(): Observable<string[]> {
+  private getChildResumeIds(): Observable<string[]> {
     return this.store.select(
       ResumeState.selectorValue(
         this.layoutNode.selectors[0].type,
-        this.contentId,
+        this.resumeId,
       ),
     );
   }
@@ -105,19 +102,14 @@ export class SectionComponent implements OnInit {
     return this.store.select(LayoutState.childNodes(this.layoutNode.id));
   }
 
-  @HostBinding('attr.id')
-  get id(): string {
-    return this.layoutNode.id;
-  }
-
   @HostBinding('attr.index')
   get attrIndex(): string {
     return this.index.toString();
   }
 
-  @HostBinding('attr.parentId')
+  @HostBinding('attr.parent-index')
   get parentId(): string {
-    return this.layoutNode.parentId;
+    return this.parentIndex.toString();
   }
 
   @HostBinding('class')
