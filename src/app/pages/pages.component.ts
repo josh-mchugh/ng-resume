@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
 import { DisplayState, Page } from '@shared/state/display.state';

@@ -64,12 +64,14 @@ function initDimension(): Dimension {
       byId: {},
       allIds: [],
     },
-  }
+  },
 })
 @Injectable()
 export class DisplayState {
   static getPages(): (state: DisplayStateModel) => Page[] {
-    return createSelector([DisplayState], (state: DisplayStateModel) => Object.values(state.pages.byId))
+    return createSelector([DisplayState], (state: DisplayStateModel) =>
+      Object.values(state.pages.byId),
+    );
   }
 
   @Action(Section.Add)
