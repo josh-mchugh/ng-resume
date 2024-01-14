@@ -5,7 +5,12 @@ import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
 import { Section } from '@shared/state/section.actions';
-import { LayoutState, LayoutNode, NodeType } from '@shared/state/layout.state';
+import {
+  LayoutState,
+  LayoutNode,
+  NodeType,
+  NodeDataType,
+} from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
 
 @Component({
@@ -50,19 +55,42 @@ export class SectionComponent implements OnInit {
       ),
     );
 
-    if (NodeType.CONTENT === this.layoutNode.type) {
-      this.htmlContent$ = this.layoutNode.selectors.length
-        ? this.renderHTMLWithSelectors()
-        : this.renderHTMLWithoutSelectors();
+    switch (this.layoutNode.type) {
+      case NodeType.CONTENT:
+        this.handleRenderContentType();
+        break;
+      case NodeType.CONTAINER:
+        this.handleRenderContainerType();
+        break;
+      default:
+        throw Error(`Unknown layout node type: ${this.layoutNode.type}`);
     }
-    if (
-      [NodeType.CONTAINER, NodeType.STRUCTURAL].includes(this.layoutNode.type)
-    ) {
-      this.childLayoutNodes$ = this.getChildLayoutNodes();
+  }
+
+  private handleRenderContentType(): void {
+    switch (this.layoutNode.dataType) {
+      case NodeDataType.DYNAMIC:
+        this.htmlContent$ = this.renderHTMLWithSelectors();
+        break;
+      case NodeDataType.STATIC:
+        this.htmlContent$ = this.renderHTMLWithoutSelectors();
+        break;
+      default:
+        throw Error(`Unknown layout data type: ${this.layoutNode.dataType}`);
     }
-    if (NodeType.DYNAMIC_CONTAINER === this.layoutNode.type) {
-      this.childResumeIds$ = this.getChildResumeIds();
-      this.childLayoutNodes$ = this.getChildLayoutNodes();
+  }
+
+  private handleRenderContainerType(): void {
+    switch (this.layoutNode.dataType) {
+      case NodeDataType.DYNAMIC:
+        this.childResumeIds$ = this.getChildResumeIds();
+        this.childLayoutNodes$ = this.getChildLayoutNodes();
+        break;
+      case NodeDataType.STATIC:
+        this.childLayoutNodes$ = this.getChildLayoutNodes();
+        break;
+      default:
+        throw Error(`Unknown layout data type: ${this.layoutNode.dataType}`);
     }
   }
 

@@ -12,6 +12,7 @@ export interface LayoutNode {
   parentId: string;
   name: string;
   type: NodeType;
+  dataType: NodeDataType;
   classes: Classes;
   selectors: Selector[];
   template: string;
@@ -20,8 +21,11 @@ export interface LayoutNode {
 export enum NodeType {
   CONTENT = 'CONTENT',
   CONTAINER = 'CONTAINER',
-  DYNAMIC_CONTAINER = 'DYNAMIC_CONTAINER',
-  STRUCTURAL = 'STRUCTURAL',
+}
+
+export enum NodeDataType {
+  DYNAMIC = 'DYNAMIC',
+  STATIC = 'STATIC',
 }
 
 export interface Classes {
@@ -49,7 +53,8 @@ export interface Selector {
         id: '0',
         parentId: '',
         name: 'Row Section',
-        type: NodeType.STRUCTURAL,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template: '',
@@ -58,7 +63,8 @@ export interface Selector {
         id: '0,0',
         parentId: '0',
         name: 'Left Column Section',
-        type: NodeType.STRUCTURAL,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: 'section--column-left',
           content: 'section__content--column',
@@ -71,6 +77,7 @@ export interface Selector {
         parentId: '0,0',
         name: 'Name & Title Section',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -83,6 +90,7 @@ export interface Selector {
         parentId: '0,0,0',
         name: 'Name Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -97,6 +105,7 @@ export interface Selector {
         parentId: '0,0,0',
         name: 'Title Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -110,6 +119,7 @@ export interface Selector {
         id: '0,0,1',
         parentId: '0,0',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         name: 'Summary Section',
         classes: {
           root: '',
@@ -123,6 +133,7 @@ export interface Selector {
         parentId: '0,0,1',
         name: 'Summary Header Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -133,6 +144,7 @@ export interface Selector {
         parentId: '0,0,1',
         name: 'Summary Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -147,6 +159,7 @@ export interface Selector {
         parentId: '0,0',
         name: 'Contact Section',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -159,6 +172,7 @@ export interface Selector {
         parentId: '0,0,2',
         name: 'Contact Header Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -168,6 +182,7 @@ export interface Selector {
         id: '0,0,2,1',
         parentId: '0,0,2',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         name: 'Contact Phone Template',
         classes: emptyClasses(),
         selectors: [
@@ -184,6 +199,7 @@ export interface Selector {
         parentId: '0,0,2',
         name: 'Contact Email Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -198,6 +214,7 @@ export interface Selector {
         id: '0,0,2,3',
         parentId: '0,0,2',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         name: 'Contact Location Template',
         classes: emptyClasses(),
         selectors: [
@@ -213,6 +230,7 @@ export interface Selector {
         id: '0,0,3',
         parentId: '0,0',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         name: 'Social Section',
         classes: {
           root: '',
@@ -226,6 +244,7 @@ export interface Selector {
         parentId: '0,0,3',
         name: 'Social Header Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -235,7 +254,8 @@ export interface Selector {
         id: '0,0,3,1',
         parentId: '0,0,3',
         name: 'Socials List Section',
-        type: NodeType.DYNAMIC_CONTAINER,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -253,6 +273,7 @@ export interface Selector {
         parentId: '0,0,3,1',
         name: 'Social Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -275,7 +296,8 @@ export interface Selector {
         id: '0,1',
         parentId: '0',
         name: 'Right Column Section',
-        type: NodeType.STRUCTURAL,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: 'section--column-right',
           content: 'section__content--column',
@@ -288,6 +310,7 @@ export interface Selector {
         parentId: '0,1',
         name: 'Experience Section',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -300,6 +323,7 @@ export interface Selector {
         parentId: '0,1,0',
         name: 'Experience Header Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -309,7 +333,8 @@ export interface Selector {
         id: '0,1,0,1',
         parentId: '0,1,0',
         name: 'Experience List Section',
-        type: NodeType.DYNAMIC_CONTAINER,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -327,6 +352,7 @@ export interface Selector {
         parentId: '0,1,0,1',
         name: 'Experience Position Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -346,6 +372,7 @@ export interface Selector {
         parentId: '0,1,0,1',
         name: 'Experience Organization Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -364,7 +391,8 @@ export interface Selector {
         id: '0,1,0,1,2',
         parentId: '0,1,0,1',
         name: 'Experience Description Section',
-        type: NodeType.DYNAMIC_CONTAINER,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -382,6 +410,7 @@ export interface Selector {
         parentId: '0,1,0,1,2',
         name: 'Experience Description',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -396,7 +425,8 @@ export interface Selector {
         id: '0,1,0,1,3',
         parentId: '0,1,0,1',
         name: 'Experience Skill Section',
-        type: NodeType.DYNAMIC_CONTAINER,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -414,6 +444,7 @@ export interface Selector {
         parentId: '0,1,0,1,3',
         name: 'Experience Skill',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: 'section--w-auto',
           content: '',
@@ -431,6 +462,7 @@ export interface Selector {
         parentId: '0,1',
         name: 'Skill Section',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -443,6 +475,7 @@ export interface Selector {
         parentId: '0,1,1',
         name: 'Skill Header Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -452,7 +485,8 @@ export interface Selector {
         id: '0,1,1,1',
         parentId: '0,1,1',
         name: 'Skill List Section',
-        type: NodeType.DYNAMIC_CONTAINER,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: '',
           content: 'section__content--wrap',
@@ -470,6 +504,7 @@ export interface Selector {
         parentId: '0,1,1,1',
         name: 'Skill Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: 'section--w-50',
           content: '',
@@ -492,6 +527,7 @@ export interface Selector {
         parentId: '0,1',
         name: 'Certification Section',
         type: NodeType.CONTAINER,
+        dataType: NodeDataType.STATIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -504,6 +540,7 @@ export interface Selector {
         parentId: '0,1,2',
         name: 'Certification Header Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.STATIC,
         classes: emptyClasses(),
         selectors: [],
         template:
@@ -513,7 +550,8 @@ export interface Selector {
         id: '0,1,2,1',
         parentId: '0,1,2',
         name: 'Certification List Section',
-        type: NodeType.DYNAMIC_CONTAINER,
+        type: NodeType.CONTAINER,
+        dataType: NodeDataType.DYNAMIC,
         classes: {
           root: '',
           content: 'section__content--column',
@@ -531,6 +569,7 @@ export interface Selector {
         parentId: '0,1,2,1',
         name: 'Certification Degree Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
@@ -550,6 +589,7 @@ export interface Selector {
         parentId: '0,1,2,1',
         name: 'Certification Organization Template',
         type: NodeType.CONTENT,
+        dataType: NodeDataType.DYNAMIC,
         classes: emptyClasses(),
         selectors: [
           {
