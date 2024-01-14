@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action, createSelector, State, StateContext } from '@ngxs/store';
-import { Section } from '@shared/state/section.actions';
+import { Section } from '@shared/state/display.actions';
 
-export interface SectionStateModel {
+export interface DisplayStateModel {
   pages: Pages;
   sections: Sections;
 }
@@ -49,8 +49,8 @@ function initDimension(): Dimension {
   };
 }
 
-@State<SectionStateModel>({
-  name: 'section',
+@State<DisplayStateModel>({
+  name: 'display',
   defaults: {
     pages: {
       byId: {
@@ -67,13 +67,13 @@ function initDimension(): Dimension {
   }
 })
 @Injectable()
-export class SectionState {
-  static getPages(): (state: SectionStateModel) => Page[] {
-    return createSelector([SectionState], (state: SectionStateModel) => Object.values(state.pages.byId))
+export class DisplayState {
+  static getPages(): (state: DisplayStateModel) => Page[] {
+    return createSelector([DisplayState], (state: DisplayStateModel) => Object.values(state.pages.byId))
   }
 
   @Action(Section.Add)
-  add(ctx: StateContext<SectionStateModel>, action: Section.Add) {
+  add(ctx: StateContext<DisplayStateModel>, action: Section.Add) {
     let sections = ctx.getState().sections;
     sections = {
       byId: {
@@ -89,7 +89,7 @@ export class SectionState {
   }
 
   @Action(Section.Update)
-  update(ctx: StateContext<SectionStateModel>, action: Section.Update) {
+  update(ctx: StateContext<DisplayStateModel>, action: Section.Update) {
     const sections = ctx.getState().sections;
     let section = sections.byId[action.id];
     section = { ...section, dimension: action.dimension };

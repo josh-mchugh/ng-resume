@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
-import { SectionState, Page } from '@shared/state/section.state';
+import { DisplayState, Page } from '@shared/state/display.state';
 
 @Component({
   selector: 'app-pages',
@@ -17,7 +17,7 @@ export class PagesComponent {
 
   constructor(private store: Store) {
     this.layoutNodes$ = this.store.select(LayoutState.rootNodes());
-    this.pages$ = this.store.select(SectionState.getPages());
+    this.pages$ = this.store.select(DisplayState.getPages());
   }
 
   public handleTrackBy(index: number): number {

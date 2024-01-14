@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
 import { combineLatest, Observable, of, map } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
-import { Section } from '@shared/state/section.actions';
+import { Section } from '@shared/state/display.actions';
 import {
   LayoutState,
   LayoutNode,

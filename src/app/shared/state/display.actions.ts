@@ -1,4 +1,4 @@
-import { Dimension } from '@shared/state/section.state';
+import { Dimension } from '@shared/state/display.state';
 
 export namespace Section {
   export class Add {
@@ -10,6 +10,7 @@ export namespace Section {
       public pageId: string,
     ) {}
   }
+
   export class Update {
     static readonly type = '[Section] Update';
     constructor(
