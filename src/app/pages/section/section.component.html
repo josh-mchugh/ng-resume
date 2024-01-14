@@ -28,6 +28,7 @@
         <app-section
           [layoutNode]="childNode"
           [resumeId]="resumeId"
+          [pageId]="pageId"
           [parentIndex]="index"
           [index]="createIndex(resumeIndex, i)"
         />
@@ -50,6 +51,7 @@
       <app-section
         [layoutNode]="childNode"
         [parentIndex]="index"
+        [pageId]="pageId"
         [index]="createIndex(i)"
       />
     </ng-container>

@@ -2,6 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
+import { SectionState, Page } from '@shared/state/section.state';
 
 @Component({
   selector: 'app-pages',
@@ -11,12 +12,12 @@ import { LayoutState, LayoutNode } from '@shared/state/layout.state';
 export class PagesComponent {
   @HostBinding('style.width') attrStyleWidth = '100%';
 
-  coordinates$: Observable<number[]>;
   layoutNodes$: Observable<LayoutNode[]>;
+  pages$: Observable<Page[]>;
 
   constructor(private store: Store) {
     this.layoutNodes$ = this.store.select(LayoutState.rootNodes());
-    this.coordinates$ = of([0]);
+    this.pages$ = this.store.select(SectionState.getPages());
   }
 
   public handleTrackBy(index: number): number {

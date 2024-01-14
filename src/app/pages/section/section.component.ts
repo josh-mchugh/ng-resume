@@ -19,11 +19,14 @@ import { ResumeState } from '@shared/state/resume.state';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit {
-  // Layout not object for current section
+  // Layout node object for current section
   @Input() layoutNode!: LayoutNode;
 
   // Resume Id for retieving resume data
   @Input() resumeId!: string;
+
+  // Page Id for associating section to page
+  @Input() pageId!: string;
 
   // coordinate for current section
   @Input() index!: number[];
@@ -52,6 +55,7 @@ export class SectionComponent implements OnInit {
         this.index.toString(),
         this.parentIndex.toString(),
         this.layoutNode.id,
+        this.pageId,
       ),
     );
 

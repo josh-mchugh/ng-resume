@@ -7,6 +7,7 @@ export namespace Section {
       public id: string,
       public parentId: string,
       public layoutNodeId: string,
+      public pageId: string,
     ) {}
   }
   export class Update {
