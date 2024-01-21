@@ -647,15 +647,28 @@ export interface Selector {
 })
 @Injectable()
 export class LayoutState {
+  static allNodes(): (state: LayoutStateModel) => LayoutNode[] {
+    return createSelector([LayoutState], (state: LayoutStateModel) =>
+      Object.values(state.byId),
+    );
+  }
+
+  static layoutNode(id: string): (state: LayoutStateModel) => LayoutNode {
+    return createSelector(
+      [LayoutState],
+      (state: LayoutStateModel) => state.byId[id],
+    );
+  }
+
   static rootNodes(): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.byId).filter((section) => section.parentId === '0'),
+      Object.values(state.byId).filter((section) => '' === section.parentId),
     );
   }
 
   static childNodes(id: string): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.byId).filter((section) => section.parentId === id),
+      Object.values(state.byId).filter((section) => id === section.parentId),
     );
   }
 }

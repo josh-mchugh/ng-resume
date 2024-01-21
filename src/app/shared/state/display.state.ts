@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, createSelector, State, StateContext } from '@ngxs/store';
-import { Section } from '@shared/state/display.actions';
+import { Display } from '@shared/state/display.actions';
 
 export interface DisplayStateModel {
   pages: Pages;
@@ -74,15 +74,38 @@ export class DisplayState {
     );
   }
 
-  @Action(Section.Add)
-  add(ctx: StateContext<DisplayStateModel>, action: Section.Add) {
+  static rootSections(pageId: string): (state: DisplayStateModel) => Section[] {
+    return createSelector([DisplayState], (state: DisplayStateModel) =>
+      Object.values(state.sections.byId).filter(
+        (section) => '' === section.parentId && pageId === section.pageId,
+      ),
+    );
+  }
+
+  static section(id: string): (state: DisplayStateModel) => Section {
+    return createSelector(
+      [DisplayState],
+      (state: DisplayStateModel) => state.sections.byId[id],
+    );
+  }
+
+  static childSections(id: string): (state: DisplayStateModel) => Section[] {
+    return createSelector([DisplayState], (state: DisplayStateModel) =>
+      Object.values(state.sections.byId).filter(
+        (section) => section.parentId === id,
+      ),
+    );
+  }
+
+  @Action(Display.SectionAdd)
+  add(ctx: StateContext<DisplayStateModel>, action: Display.SectionAdd) {
     let sections = ctx.getState().sections;
     sections = {
       byId: {
         ...sections.byId,
-        [action.id]: { ...action, dimension: initDimension() },
+        [action.section.id]: { ...action.section, dimension: initDimension() },
       },
-      allIds: [...sections.allIds, action.id],
+      allIds: [...sections.allIds, action.section.id],
     };
     ctx.setState({
       ...ctx.getState(),
@@ -90,8 +113,33 @@ export class DisplayState {
     });
   }
 
-  @Action(Section.Update)
-  update(ctx: StateContext<DisplayStateModel>, action: Section.Update) {
+  @Action(Display.SectionAddAll)
+  addAll(ctx: StateContext<DisplayStateModel>, action: Display.SectionAddAll) {
+    let sections = ctx.getState().sections;
+    const newSectionIds = action.sections.map((section) => section.id);
+    const newSections = action.sections.reduce(
+      (acc, section) => ({
+        ...acc,
+        [section.id]: { ...section, dimension: initDimension() },
+      }),
+      {},
+    );
+    sections = {
+      byId: {
+        ...sections.byId,
+        ...newSections,
+      },
+      allIds: [...sections.allIds, ...newSectionIds],
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      sections: sections,
+    });
+  }
+
+  @Action(Display.SectionUpdate)
+  update(ctx: StateContext<DisplayStateModel>, action: Display.SectionUpdate) {
     const sections = ctx.getState().sections;
     let section = sections.byId[action.id];
     section = { ...section, dimension: action.dimension };

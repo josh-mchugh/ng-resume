@@ -2,9 +2,9 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
-import { combineLatest, Observable, of, map } from 'rxjs';
+import { combineLatest, Observable, of, map, tap } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
-import { Section } from '@shared/state/display.actions';
+import { Display } from '@shared/state/display.actions';
 import {
   LayoutState,
   LayoutNode,
@@ -12,6 +12,7 @@ import {
   NodeDataType,
 } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
+import { DisplayState, Section } from '@shared/state/display.state';
 
 @Component({
   selector: 'app-section',
@@ -19,20 +20,18 @@ import { ResumeState } from '@shared/state/resume.state';
   styleUrls: ['./section.component.scss'],
 })
 export class SectionComponent implements OnInit {
-  // Layout node object for current section
-  @Input() layoutNode!: LayoutNode;
+  // section id
+  @Input() id!: string;
+
+  // parent section id
+  @Input() parentId!: string;
 
   // Resume Id for retieving resume data
   @Input() resumeId!: string;
 
-  // Page Id for associating section to page
-  @Input() pageId!: string;
+  layoutNode$!: Observable<LayoutNode>;
 
-  // coordinate for current section
-  @Input() index!: number[];
-
-  // coordinate for parent section
-  @Input() parentIndex!: number[];
+  childSections$!: Observable<Section[]>;
 
   // List of child layout nodes for current section
   childLayoutNodes$!: Observable<LayoutNode[]>;
@@ -43,6 +42,10 @@ export class SectionComponent implements OnInit {
   // HTML content for section which renders content
   htmlContent$!: Observable<SafeHtml>;
 
+  rootClass = '';
+
+  contentClass = '';
+
   public constructor(
     private dimensionService: DimensionService,
     private domSanitizer: DomSanitizer,
@@ -50,56 +53,63 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(
-      new Section.Add(
-        this.index.toString(),
-        this.parentIndex.toString(),
-        this.layoutNode.id,
-        this.pageId,
-      ),
-    );
+    // Set the LayoutNode observable
+    this.store.select(DisplayState.section(this.id)).subscribe((section) => {
+      this.layoutNode$ = this.store.select(
+        LayoutState.layoutNode(section.layoutNodeId),
+      );
+    });
+    this.layoutNode$.subscribe((layoutNode) => {
+      this.rootClass = layoutNode.classes.root;
+      this.contentClass = layoutNode.classes.content;
+      this.handleLayoutNode(layoutNode);
+    });
+  }
 
-    switch (this.layoutNode.type) {
+  private handleLayoutNode(layoutNode: LayoutNode): void {
+    switch (layoutNode.type) {
       case NodeType.CONTENT:
-        this.handleRenderContentType();
+        this.handleRenderContentType(layoutNode);
         break;
       case NodeType.CONTAINER:
-        this.handleRenderContainerType();
+        this.handleRenderContainerType(layoutNode);
         break;
       default:
-        throw Error(`Unknown layout node type: ${this.layoutNode.type}`);
+        throw Error(`Unknown layout node type: ${layoutNode.type}`);
     }
   }
 
-  private handleRenderContentType(): void {
-    switch (this.layoutNode.dataType) {
+  private handleRenderContentType(layoutNode: LayoutNode): void {
+    switch (layoutNode.dataType) {
       case NodeDataType.DYNAMIC:
-        this.htmlContent$ = this.renderHTMLWithSelectors();
+        this.htmlContent$ = this.renderHTMLWithSelectors(layoutNode);
         break;
       case NodeDataType.STATIC:
-        this.htmlContent$ = this.renderHTMLWithoutSelectors();
+        this.htmlContent$ = this.renderHTMLWithoutSelectors(layoutNode);
         break;
       default:
-        throw Error(`Unknown layout data type: ${this.layoutNode.dataType}`);
+        throw Error(`Unknown layout data type: ${layoutNode.dataType}`);
     }
   }
 
-  private handleRenderContainerType(): void {
-    switch (this.layoutNode.dataType) {
+  private handleRenderContainerType(layoutNode: LayoutNode): void {
+    switch (layoutNode.dataType) {
       case NodeDataType.DYNAMIC:
-        this.childResumeIds$ = this.getChildResumeIds();
-        this.childLayoutNodes$ = this.getChildLayoutNodes();
+        this.childResumeIds$ = this.getChildResumeIds(layoutNode);
+        this.getChildLayoutNodes(layoutNode);
         break;
       case NodeDataType.STATIC:
-        this.childLayoutNodes$ = this.getChildLayoutNodes();
+        this.getChildLayoutNodes(layoutNode);
         break;
       default:
-        throw Error(`Unknown layout data type: ${this.layoutNode.dataType}`);
+        throw Error(`Unknown layout data type: ${layoutNode.dataType}`);
     }
   }
 
-  private renderHTMLWithSelectors(): Observable<SafeHtml> {
-    const observables = this.layoutNode.selectors.map((selector) =>
+  private renderHTMLWithSelectors(
+    layoutNode: LayoutNode,
+  ): Observable<SafeHtml> {
+    const observables = layoutNode.selectors.map((selector) =>
       this.store
         .select(ResumeState.selectorValue(selector.type, this.resumeId))
         .pipe(map((value) => [selector.key, value])),
@@ -107,7 +117,7 @@ export class SectionComponent implements OnInit {
     return combineLatest(observables).pipe(
       map((values) => {
         const template = Mustache.render(
-          this.layoutNode.template,
+          layoutNode.template,
           Object.fromEntries(values),
         );
         return this.domSanitizer.bypassSecurityTrustHtml(template);
@@ -115,46 +125,56 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  private renderHTMLWithoutSelectors(): Observable<SafeHtml> {
-    const template = Mustache.render(this.layoutNode.template, {});
+  private renderHTMLWithoutSelectors(
+    layoutNode: LayoutNode,
+  ): Observable<SafeHtml> {
+    const template = Mustache.render(layoutNode.template, {});
     const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
     return of(safeHtml);
   }
 
-  private getChildResumeIds(): Observable<string[]> {
+  private getChildResumeIds(layoutNode: LayoutNode): Observable<string[]> {
     return this.store.select(
-      ResumeState.selectorValue(
-        this.layoutNode.selectors[0].type,
-        this.resumeId,
-      ),
+      ResumeState.selectorValue(layoutNode.selectors[0].type, this.resumeId),
     );
   }
 
-  private getChildLayoutNodes(): Observable<LayoutNode[]> {
-    return this.store.select(LayoutState.childNodes(this.layoutNode.id));
-  }
-
-  @HostBinding('attr.index')
-  get attrIndex(): string {
-    return this.index.toString();
-  }
-
-  @HostBinding('attr.parent-index')
-  get parentId(): string {
-    return this.parentIndex.toString();
+  private getChildLayoutNodes(layoutNode: LayoutNode): void {
+    // get child sections for this section
+    this.childSections$ = this.store
+      .select(DisplayState.childSections(this.id))
+      .pipe(
+        tap((sections) => {
+          if (!sections.length) {
+            this.store
+              .select(LayoutState.childNodes(layoutNode.id))
+              .pipe(
+                map((nodes) =>
+                  nodes.map((node) => {
+                    return {
+                      id: Math.random().toString(),
+                      parentId: this.id,
+                      layoutNodeId: node.id,
+                      pageId: '0',
+                    };
+                  }),
+                ),
+              )
+              .subscribe((sections) =>
+                this.store.dispatch(new Display.SectionAddAll(sections)),
+              );
+          }
+        }),
+      );
   }
 
   @HostBinding('class')
   get hostClass(): string {
-    return `section  ${this.layoutNode.classes.root}`;
+    return `section  ${this.rootClass}`;
   }
 
   getContentClass(): string {
-    return `section__content ${this.layoutNode.classes.content}`;
-  }
-
-  createIndex(...args: number[]): number[] {
-    return [...this.index, ...args];
+    return `section__content ${this.contentClass}`;
   }
 
   public handleTrackBy(index: number): number {
@@ -163,6 +183,6 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    this.store.dispatch(new Section.Update(this.index.toString(), dimension));
+    this.store.dispatch(new Display.SectionUpdate(this.id, dimension));
   }
 }
