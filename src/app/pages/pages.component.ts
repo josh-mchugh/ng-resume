@@ -4,6 +4,7 @@ import { Store } from '@ngxs/store';
 import { LayoutState } from '@shared/state/layout.state';
 import { DisplayState, Page, Section } from '@shared/state/display.state';
 import { Display } from '@shared/state/display.actions';
+import { DisplayService } from '@shared/service/display.service';
 
 @Component({
   selector: 'app-pages',
@@ -15,7 +16,7 @@ export class PagesComponent {
 
   pages$: Observable<Page[]>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private displayService: DisplayService) {
     this.pages$ = this.store.select(DisplayState.getPages());
   }
 
@@ -26,16 +27,7 @@ export class PagesComponent {
           this.store
             .select(LayoutState.rootNodes())
             .pipe(
-              map((nodes) =>
-                nodes.map((node) => {
-                  return {
-                    id: Math.random().toString(),
-                    parentId: '',
-                    layoutNodeId: node.id,
-                    pageId: '0',
-                  };
-                }),
-              ),
+              map((nodes) => this.displayService.createSections(nodes, '')),
             )
             .subscribe((sections) =>
               this.store.dispatch(new Display.SectionAddAll(sections)),

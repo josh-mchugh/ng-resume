@@ -1,7 +1,7 @@
 import { Dimension } from '@shared/state/display.state';
 
 export namespace Display {
-  interface Section {
+  export interface Section {
     id: string;
     parentId: string;
     layoutNodeId: string;

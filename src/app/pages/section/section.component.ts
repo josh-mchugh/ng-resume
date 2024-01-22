@@ -4,6 +4,7 @@ import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
 import { combineLatest, Observable, of, map, tap } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
+import { DisplayService } from '@shared/service/display.service';
 import { Display } from '@shared/state/display.actions';
 import {
   LayoutState,
@@ -48,6 +49,7 @@ export class SectionComponent implements OnInit {
 
   public constructor(
     private dimensionService: DimensionService,
+    private displayService: DisplayService,
     private domSanitizer: DomSanitizer,
     private store: Store,
   ) {}
@@ -149,16 +151,7 @@ export class SectionComponent implements OnInit {
             this.store
               .select(LayoutState.childNodes(layoutNode.id))
               .pipe(
-                map((nodes) =>
-                  nodes.map((node) => {
-                    return {
-                      id: Math.random().toString(),
-                      parentId: this.id,
-                      layoutNodeId: node.id,
-                      pageId: '0',
-                    };
-                  }),
-                ),
+                map((nodes) => this.displayService.createSections(nodes, this.id)),
               )
               .subscribe((sections) =>
                 this.store.dispatch(new Display.SectionAddAll(sections)),

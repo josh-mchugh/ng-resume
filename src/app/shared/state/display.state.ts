@@ -145,7 +145,13 @@ export class DisplayState {
     section = { ...section, dimension: action.dimension };
     ctx.setState({
       ...ctx.getState(),
-      sections: { ...sections, [action.id]: { ...section } },
+      sections: {
+        ...ctx.getState().sections,
+        byId: {
+          ...sections.byId,
+          [action.id]: { ...section },
+        },
+      }
     });
   }
 }
