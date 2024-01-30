@@ -151,7 +151,7 @@ export class DisplayState {
           ...sections.byId,
           [action.id]: { ...section },
         },
-      }
+      },
     });
   }
 }

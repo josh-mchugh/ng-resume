@@ -29,6 +29,7 @@
           <app-section
             [id]="section.id"
             [parentId]="id"
+            [layoutId]="section.layoutNodeId"
             [resumeId]="resumeId"
           />
         </ng-container>
@@ -47,7 +48,11 @@
           trackBy: handleTrackBy
         "
       >
-        <app-section [id]="section.id" [parentId]="id" />
+        <app-section
+          [id]="section.id"
+          [parentId]="id"
+          [layoutId]="section.layoutNodeId"
+        />
       </ng-container>
     </div>
   </ng-container>

@@ -1,15 +1,21 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
-import { combineLatest, Observable, of, map, tap } from 'rxjs';
+import { combineLatest, map, mergeMap, Observable, of, tap } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 import { DimensionService } from '@shared/service/dimension.service';
 import { DisplayService } from '@shared/service/display.service';
 import { Display } from '@shared/state/display.actions';
 import {
   LayoutState,
   LayoutNode,
-  NodeType,
   NodeDataType,
 } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
@@ -19,10 +25,14 @@ import { DisplayState, Section } from '@shared/state/display.state';
   selector: 'app-section',
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SectionComponent implements OnInit {
   // section id
   @Input() id!: string;
+
+  // layout id
+  @Input() layoutId!: string;
 
   // parent section id
   @Input() parentId!: string;
@@ -30,12 +40,11 @@ export class SectionComponent implements OnInit {
   // Resume Id for retieving resume data
   @Input() resumeId!: string;
 
+  // layout node
   layoutNode$!: Observable<LayoutNode>;
 
+  // child sections for sections type container
   childSections$!: Observable<Section[]>;
-
-  // List of child layout nodes for current section
-  childLayoutNodes$!: Observable<LayoutNode[]>;
 
   // List of ids child resume content
   childResumeIds$!: Observable<string[]>;
@@ -43,8 +52,10 @@ export class SectionComponent implements OnInit {
   // HTML content for section which renders content
   htmlContent$!: Observable<SafeHtml>;
 
+  // section class from layout data
   rootClass = '';
 
+  // section content class from layout data
   contentClass = '';
 
   public constructor(
@@ -54,55 +65,35 @@ export class SectionComponent implements OnInit {
     private store: Store,
   ) {}
 
-  ngOnInit() {
-    // Set the LayoutNode observable
-    this.store.select(DisplayState.section(this.id)).subscribe((section) => {
-      this.layoutNode$ = this.store.select(
-        LayoutState.layoutNode(section.layoutNodeId),
+  ngOnInit(): void {
+    this.layoutNode$ = this.store
+      .select(LayoutState.layoutNode(this.layoutId))
+      .pipe(
+        tap((layoutNode) => {
+          this.rootClass = layoutNode.classes.root;
+          this.contentClass = layoutNode.classes.content;
+        }),
+        shareReplay(1),
       );
-    });
-    this.layoutNode$.subscribe((layoutNode) => {
-      this.rootClass = layoutNode.classes.root;
-      this.contentClass = layoutNode.classes.content;
-      this.handleLayoutNode(layoutNode);
-    });
+    this.htmlContent$ = this.layoutNode$.pipe(
+      mergeMap((layoutNode) => this.handleRenderContentType(layoutNode)),
+    );
+    this.childResumeIds$ = this.layoutNode$.pipe(
+      mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
+    );
+    this.childSections$ = this.layoutNode$.pipe(
+      mergeMap((layoutNode) => this.getChildLayoutNodes(layoutNode)),
+    );
   }
 
-  private handleLayoutNode(layoutNode: LayoutNode): void {
-    switch (layoutNode.type) {
-      case NodeType.CONTENT:
-        this.handleRenderContentType(layoutNode);
-        break;
-      case NodeType.CONTAINER:
-        this.handleRenderContainerType(layoutNode);
-        break;
-      default:
-        throw Error(`Unknown layout node type: ${layoutNode.type}`);
-    }
-  }
-
-  private handleRenderContentType(layoutNode: LayoutNode): void {
+  private handleRenderContentType(
+    layoutNode: LayoutNode,
+  ): Observable<SafeHtml> {
     switch (layoutNode.dataType) {
       case NodeDataType.DYNAMIC:
-        this.htmlContent$ = this.renderHTMLWithSelectors(layoutNode);
-        break;
+        return this.renderHTMLWithSelectors(layoutNode);
       case NodeDataType.STATIC:
-        this.htmlContent$ = this.renderHTMLWithoutSelectors(layoutNode);
-        break;
-      default:
-        throw Error(`Unknown layout data type: ${layoutNode.dataType}`);
-    }
-  }
-
-  private handleRenderContainerType(layoutNode: LayoutNode): void {
-    switch (layoutNode.dataType) {
-      case NodeDataType.DYNAMIC:
-        this.childResumeIds$ = this.getChildResumeIds(layoutNode);
-        this.getChildLayoutNodes(layoutNode);
-        break;
-      case NodeDataType.STATIC:
-        this.getChildLayoutNodes(layoutNode);
-        break;
+        return this.renderHTMLWithoutSelectors(layoutNode);
       default:
         throw Error(`Unknown layout data type: ${layoutNode.dataType}`);
     }
@@ -141,24 +132,24 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  private getChildLayoutNodes(layoutNode: LayoutNode): void {
+  private getChildLayoutNodes(layoutNode: LayoutNode): Observable<Section[]> {
     // get child sections for this section
-    this.childSections$ = this.store
-      .select(DisplayState.childSections(this.id))
-      .pipe(
-        tap((sections) => {
-          if (!sections.length) {
-            this.store
-              .select(LayoutState.childNodes(layoutNode.id))
-              .pipe(
-                map((nodes) => this.displayService.createSections(nodes, this.id)),
-              )
-              .subscribe((sections) =>
-                this.store.dispatch(new Display.SectionAddAll(sections)),
-              );
-          }
-        }),
-      );
+    return this.store.select(DisplayState.childSections(this.id)).pipe(
+      tap((sections) => {
+        if (!sections.length) {
+          this.store
+            .select(LayoutState.childNodes(layoutNode.id))
+            .pipe(
+              map((nodes) =>
+                this.displayService.createSections(nodes, this.id),
+              ),
+            )
+            .subscribe((sections) =>
+              this.store.dispatch(new Display.SectionAddAll(sections)),
+            );
+        }
+      }),
+    );
   }
 
   @HostBinding('class')
