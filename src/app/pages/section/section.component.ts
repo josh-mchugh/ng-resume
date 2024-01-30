@@ -11,6 +11,7 @@ import Mustache from 'mustache';
 import {
   combineLatest,
   filter,
+  iif,
   map,
   mergeMap,
   Observable,
@@ -64,9 +65,6 @@ export class SectionComponent implements OnInit {
   // section class from layout data
   rootClass = '';
 
-  // section content class from layout data
-  contentClass = '';
-
   public constructor(
     private dimensionService: DimensionService,
     private displayService: DisplayService,
@@ -86,7 +84,13 @@ export class SectionComponent implements OnInit {
     // Observable for layout HTML content
     this.htmlContent$ = this.layoutNode$.pipe(
       filter((layoutNode) => NodeType.CONTENT === layoutNode.type),
-      mergeMap((layoutNode) => this.handleRenderContentType(layoutNode)),
+      mergeMap((layoutNode) =>
+        iif(
+          () => NodeDataType.DYNAMIC === layoutNode.dataType,
+          this.renderDynamicHTML(layoutNode),
+          this.renderStaticHTML(layoutNode),
+        ),
+      ),
     );
     // Obervable for child sections for containers
     this.childSections$ = this.layoutNode$.pipe(
@@ -104,22 +108,7 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  private handleRenderContentType(
-    layoutNode: LayoutNode,
-  ): Observable<SafeHtml> {
-    switch (layoutNode.dataType) {
-      case NodeDataType.DYNAMIC:
-        return this.renderHTMLWithSelectors(layoutNode);
-      case NodeDataType.STATIC:
-        return this.renderHTMLWithoutSelectors(layoutNode);
-      default:
-        throw Error(`Unknown layout data type: ${layoutNode.dataType}`);
-    }
-  }
-
-  private renderHTMLWithSelectors(
-    layoutNode: LayoutNode,
-  ): Observable<SafeHtml> {
+  private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
     const observables = layoutNode.selectors.map((selector) =>
       this.store
         .select(ResumeState.selectorValue(selector.type, this.resumeId))
@@ -136,9 +125,7 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  private renderHTMLWithoutSelectors(
-    layoutNode: LayoutNode,
-  ): Observable<SafeHtml> {
+  private renderStaticHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
     const template = Mustache.render(layoutNode.template, {});
     const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
     return of(safeHtml);
