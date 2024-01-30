@@ -8,7 +8,15 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
-import { combineLatest, map, mergeMap, Observable, of, tap } from 'rxjs';
+import {
+  combineLatest,
+  filter,
+  map,
+  mergeMap,
+  Observable,
+  of,
+  tap,
+} from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { DimensionService } from '@shared/service/dimension.service';
 import { DisplayService } from '@shared/service/display.service';
@@ -16,6 +24,7 @@ import { Display } from '@shared/state/display.actions';
 import {
   LayoutState,
   LayoutNode,
+  NodeType,
   NodeDataType,
 } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';
@@ -66,23 +75,32 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Observable for section LayoutNode
     this.layoutNode$ = this.store
       .select(LayoutState.layoutNode(this.layoutId))
       .pipe(
-        tap((layoutNode) => {
-          this.rootClass = layoutNode.classes.root;
-          this.contentClass = layoutNode.classes.content;
-        }),
+        // Side effect for classes for @HostBinding cannot use Observables
+        tap((layoutNode) => (this.rootClass = layoutNode.classes.root)),
         shareReplay(1),
       );
+    // Observable for layout HTML content
     this.htmlContent$ = this.layoutNode$.pipe(
+      filter((layoutNode) => NodeType.CONTENT === layoutNode.type),
       mergeMap((layoutNode) => this.handleRenderContentType(layoutNode)),
     );
-    this.childResumeIds$ = this.layoutNode$.pipe(
-      mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
-    );
+    // Obervable for child sections for containers
     this.childSections$ = this.layoutNode$.pipe(
+      filter((layoutNode) => NodeType.CONTAINER === layoutNode.type),
       mergeMap((layoutNode) => this.getChildLayoutNodes(layoutNode)),
+    );
+    // Observable for child resume ids for dynamic containers
+    this.childResumeIds$ = this.layoutNode$.pipe(
+      filter(
+        (layoutNode) =>
+          NodeType.CONTAINER === layoutNode.type &&
+          NodeDataType.DYNAMIC === layoutNode.dataType,
+      ),
+      mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
     );
   }
 
@@ -157,8 +175,12 @@ export class SectionComponent implements OnInit {
     return `section  ${this.rootClass}`;
   }
 
-  getContentClass(): string {
-    return `section__content ${this.contentClass}`;
+  getContentClass(): Observable<string> {
+    return combineLatest(
+      of('section__content'),
+      this.layoutNode$,
+      (baseClass, layoutNode) => `${baseClass} ${layoutNode.classes.content}`,
+    );
   }
 
   public handleTrackBy(index: number): number {

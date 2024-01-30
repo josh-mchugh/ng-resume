@@ -2,7 +2,7 @@
   <!-- Render section with template data available -->
   <ng-container *ngIf="'CONTENT' === layoutNode.type">
     <div
-      [class]="getContentClass()"
+      [class]="getContentClass() | async"
       (onResize)="onResize($event)"
       [innerHtml]="htmlContent$ | async"
     ></div>
@@ -11,7 +11,7 @@
   <ng-container
     *ngIf="'CONTAINER' === layoutNode.type && 'DYNAMIC' === layoutNode.dataType"
   >
-    <div [class]="getContentClass()" (onResize)="onResize($event)">
+    <div [class]="getContentClass() | async" (onResize)="onResize($event)">
       <ng-container
         *ngFor="
           let resumeId of childResumeIds$ | async;
@@ -40,7 +40,7 @@
   <ng-container
     *ngIf="'CONTAINER' === layoutNode.type && 'STATIC' === layoutNode.dataType"
   >
-    <div [class]="getContentClass()" (onResize)="onResize($event)">
+    <div [class]="getContentClass() | async" (onResize)="onResize($event)">
       <ng-container
         *ngFor="
           let section of childSections$ | async;
