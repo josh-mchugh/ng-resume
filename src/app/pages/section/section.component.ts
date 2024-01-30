@@ -10,6 +10,7 @@ import { Store } from '@ngxs/store';
 import Mustache from 'mustache';
 import {
   combineLatest,
+  combineLatestWith,
   filter,
   iif,
   map,
@@ -106,15 +107,17 @@ export class SectionComponent implements OnInit {
       ),
       mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
     );
+    // Subscription to create child sections if they do not exist
+
   }
 
   private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
-    const observables = layoutNode.selectors.map((selector) =>
+    const observables$ = layoutNode.selectors.map((selector) =>
       this.store
         .select(ResumeState.selectorValue(selector.type, this.resumeId))
         .pipe(map((value) => [selector.key, value])),
     );
-    return combineLatest(observables).pipe(
+    return combineLatest(observables$).pipe(
       map((values) => {
         const template = Mustache.render(
           layoutNode.template,
@@ -163,10 +166,9 @@ export class SectionComponent implements OnInit {
   }
 
   getContentClass(): Observable<string> {
-    return combineLatest(
-      of('section__content'),
-      this.layoutNode$,
-      (baseClass, layoutNode) => `${baseClass} ${layoutNode.classes.content}`,
+    return of('section__content').pipe(
+      combineLatestWith(this.layoutNode$),
+      map(([baseClass, layoutNode]) => `${baseClass} ${layoutNode.classes.content}`),
     );
   }
 
