@@ -17,6 +17,7 @@ import {
   mergeMap,
   Observable,
   of,
+  take,
   tap,
 } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
@@ -96,7 +97,7 @@ export class SectionComponent implements OnInit {
     // Obervable for child sections for containers
     this.childSections$ = this.layoutNode$.pipe(
       filter((layoutNode) => NodeType.CONTAINER === layoutNode.type),
-      mergeMap((layoutNode) => this.getChildLayoutNodes(layoutNode)),
+      mergeMap(() => this.getChildSections()),
     );
     // Observable for child resume ids for dynamic containers
     this.childResumeIds$ = this.layoutNode$.pipe(
@@ -107,8 +108,24 @@ export class SectionComponent implements OnInit {
       ),
       mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
     );
-    // Subscription to create child sections if they do not exist
-
+    // Subscription to create child sections if they do not match layout nodes children length
+    this.store
+      .select(LayoutState.childNodes(this.layoutId))
+      .pipe(
+        combineLatestWith(
+          this.store.select(DisplayState.childSections(this.id)),
+        ),
+        filter(
+          ([layoutNodes, sections]) => sections.length < layoutNodes.length,
+        ),
+        map(([layoutNodes]) =>
+          this.displayService.createSections(layoutNodes, this.id),
+        ),
+        take(1),
+      )
+      .subscribe((sections) =>
+        this.store.dispatch(new Display.SectionAddAll(sections)),
+      );
   }
 
   private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
@@ -140,24 +157,8 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  private getChildLayoutNodes(layoutNode: LayoutNode): Observable<Section[]> {
-    // get child sections for this section
-    return this.store.select(DisplayState.childSections(this.id)).pipe(
-      tap((sections) => {
-        if (!sections.length) {
-          this.store
-            .select(LayoutState.childNodes(layoutNode.id))
-            .pipe(
-              map((nodes) =>
-                this.displayService.createSections(nodes, this.id),
-              ),
-            )
-            .subscribe((sections) =>
-              this.store.dispatch(new Display.SectionAddAll(sections)),
-            );
-        }
-      }),
-    );
+  private getChildSections(): Observable<Section[]> {
+    return this.store.select(DisplayState.childSections(this.id));
   }
 
   @HostBinding('class')
@@ -168,7 +169,10 @@ export class SectionComponent implements OnInit {
   getContentClass(): Observable<string> {
     return of('section__content').pipe(
       combineLatestWith(this.layoutNode$),
-      map(([baseClass, layoutNode]) => `${baseClass} ${layoutNode.classes.content}`),
+      map(
+        ([baseClass, layoutNode]) =>
+          `${baseClass} ${layoutNode.classes.content}`,
+      ),
     );
   }
 
