@@ -154,4 +154,25 @@ export class DisplayState {
       },
     });
   }
+
+  @Action(Display.SectionDelete)
+  delete(ctx: StateContext<DisplayStateModel>, action: Display.SectionDelete) {
+    const sections = Object.values(ctx.getState().sections.byId)
+      .filter((section) => section.id !== action.id)
+      .reduce((acc, section) => ({
+        ...acc,
+        [section.id]: {...section}
+      }), {} );
+
+    const allIds = ctx.getState().sections.allIds
+      .filter((id) => id !== action.id);
+
+    ctx.setState({
+      ...ctx.getState(),
+      sections: {
+        byId: sections,
+        allIds: allIds,
+      },
+    });
+  }
 }

@@ -3,6 +3,7 @@ import {
   Component,
   HostBinding,
   Input,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -17,10 +18,10 @@ import {
   mergeMap,
   Observable,
   of,
+  shareReplay,
   take,
   tap,
 } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { DimensionService } from '@shared/service/dimension.service';
 import { DisplayService } from '@shared/service/display.service';
 import { Display } from '@shared/state/display.actions';
@@ -39,7 +40,7 @@ import { DisplayState, Section } from '@shared/state/display.state';
   styleUrls: ['./section.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent implements OnInit, OnDestroy {
   // section id
   @Input() id!: string;
 
@@ -124,8 +125,12 @@ export class SectionComponent implements OnInit {
         take(1),
       )
       .subscribe((sections) =>
-        this.store.dispatch(new Display.SectionAddAll(sections)),
+        this.store.dispatch(new Display.SectionAddAll(sections))
       );
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new Display.SectionDelete(this.id));
   }
 
   private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {

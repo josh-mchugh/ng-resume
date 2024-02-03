@@ -25,4 +25,9 @@ export namespace Display {
       public dimension: Dimension,
     ) {}
   }
+
+  export class SectionDelete {
+    static readonly type = '[Display] Section Delete';
+    constructor(public id: string) {}
+  }
 }
