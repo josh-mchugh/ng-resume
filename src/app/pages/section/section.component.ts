@@ -23,7 +23,10 @@ import {
   tap,
 } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
-import { DisplayService } from '@shared/service/display.service';
+import {
+  DisplayService,
+  DisplayRequest,
+} from '@shared/service/display.service';
 import { Display } from '@shared/state/display.actions';
 import {
   LayoutState,
@@ -110,22 +113,65 @@ export class SectionComponent implements OnInit, OnDestroy {
       mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
     );
     // Subscription to create child sections if they do not match layout nodes children length
-    this.store
-      .select(LayoutState.childNodes(this.layoutId))
+    this.layoutNode$
       .pipe(
+        filter(
+          (layoutNode) =>
+            NodeType.CONTAINER === layoutNode.type &&
+            NodeDataType.STATIC === layoutNode.dataType,
+        ),
+        mergeMap((layoutNode) =>
+          this.store.select(LayoutState.childNodes(layoutNode.id)),
+        ),
         combineLatestWith(
           this.store.select(DisplayState.childSections(this.id)),
         ),
         filter(
           ([layoutNodes, sections]) => sections.length < layoutNodes.length,
         ),
-        map(([layoutNodes]) =>
-          this.displayService.createSections(layoutNodes, this.id),
-        ),
+        map(([layoutNodes]) => {
+          const request = new DisplayRequest.CreateStaticSections(
+            layoutNodes,
+            this.id,
+          );
+          return this.displayService.createStaticSections(request);
+        }),
         take(1),
       )
       .subscribe((sections) =>
-        this.store.dispatch(new Display.SectionAddAll(sections))
+        this.store.dispatch(new Display.SectionAddAll(sections)),
+      );
+    // Dynamic sections
+    this.layoutNode$
+      .pipe(
+        filter(
+          (layoutNode) =>
+            NodeType.CONTAINER === layoutNode.type &&
+            NodeDataType.DYNAMIC === layoutNode.dataType,
+        ),
+        mergeMap((layoutNode) =>
+          this.store.select(LayoutState.childNodes(layoutNode.id)),
+        ),
+        combineLatestWith(
+          this.store.select(DisplayState.childSections(this.id)),
+          this.childResumeIds$,
+        ),
+        filter(
+          ([layoutNodes, sections, resumeIds]) =>
+            sections.length < layoutNodes.length * resumeIds.length,
+        ),
+        map(([layoutNodes, sections, resumeIds]) => {
+          const request = new DisplayRequest.CreateDynamicSections(
+            layoutNodes,
+            this.id,
+            resumeIds,
+          );
+          return this.displayService.createDynamicSections(request);
+        }),
+        take(1),
+      )
+      .subscribe((sections) =>
+        this.store.dispatch(new Display.SectionAddAll(sections)),
       );
   }
 

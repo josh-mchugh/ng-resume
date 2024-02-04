@@ -25,6 +25,7 @@ export interface Section {
   id: string;
   parentId: string;
   layoutNodeId: string;
+  resumeId: string;
   pageId: string;
   dimension: Dimension;
 }
@@ -159,13 +160,17 @@ export class DisplayState {
   delete(ctx: StateContext<DisplayStateModel>, action: Display.SectionDelete) {
     const sections = Object.values(ctx.getState().sections.byId)
       .filter((section) => section.id !== action.id)
-      .reduce((acc, section) => ({
-        ...acc,
-        [section.id]: {...section}
-      }), {} );
+      .reduce(
+        (acc, section) => ({
+          ...acc,
+          [section.id]: { ...section },
+        }),
+        {},
+      );
 
-    const allIds = ctx.getState().sections.allIds
-      .filter((id) => id !== action.id);
+    const allIds = ctx
+      .getState()
+      .sections.allIds.filter((id) => id !== action.id);
 
     ctx.setState({
       ...ctx.getState(),

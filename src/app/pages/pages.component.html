@@ -7,30 +7,6 @@
 >
   <div class="page">
     <div class="page__content">
-      <!-- I can generate sections data types in constructor, and save them to redux
-           then when this gets render, is iterates over sections instead of layout nodes.
-      -->
-      <!-- A Section needs a reference to a page, parent, and layout node -->
-      <!-- this could remove a lot of logic out of the section component and into a
-           a service to generate the layout. That way the section is only worried about
-           laying out the template / children? possible.
-      -->
-      <!--
-      <ng-container
-        *ngFor="
-          let layoutNode of layoutNodes$ | async;
-          let i = index;
-          trackBy: handleTrackBy
-        "
-      >
-        <app-section
-          [layoutNode]="layoutNode"
-          [pageId]="page.id"
-          [parentIndex]="[pageIndex]"
-          [index]="[pageIndex, i]"
-        />
-      </ng-container>
-      -->
       <ng-container
         *ngFor="
           let section of sections(page.id) | async;

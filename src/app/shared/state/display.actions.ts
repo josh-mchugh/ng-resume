@@ -5,6 +5,7 @@ export namespace Display {
     id: string;
     parentId: string;
     layoutNodeId: string;
+    resumeId: string;
     pageId: string;
   }
 
