@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
+import { Display } from './display.actions';
 
 export interface ResumeStateModel {
   name: string;
@@ -677,10 +678,16 @@ export class ResumeState {
       (acc, social) => ({ ...acc, [social.id]: { ...social, icon: '' } }),
       {},
     );
+    const newKeys = Object.keys(socials);
+    const removedKeys = Object.keys(ctx.getState().socials)
+      .filter(key => !newKeys.includes(key));
     ctx.setState({
       ...ctx.getState(),
       socials: socials,
     });
+    if(removedKeys) {
+      ctx.dispatch(new Display.SectionDeleteByResumeId(removedKeys));
+    }
   }
 
   @Action(Resume.ExperiencesUpdate)

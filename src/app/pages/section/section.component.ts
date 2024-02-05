@@ -3,7 +3,6 @@ import {
   Component,
   HostBinding,
   Input,
-  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -43,7 +42,7 @@ import { DisplayState, Section } from '@shared/state/display.state';
   styleUrls: ['./section.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SectionComponent implements OnInit, OnDestroy {
+export class SectionComponent implements OnInit {
   // section id
   @Input() id!: string;
 
@@ -173,10 +172,6 @@ export class SectionComponent implements OnInit, OnDestroy {
       .subscribe((sections) =>
         this.store.dispatch(new Display.SectionAddAll(sections)),
       );
-  }
-
-  ngOnDestroy() {
-    this.store.dispatch(new Display.SectionDelete(this.id));
   }
 
   private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {

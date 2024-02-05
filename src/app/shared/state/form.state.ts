@@ -10,7 +10,7 @@ export interface FormStateModel {
   phone: string;
   email: string;
   location: string;
-  socials: Array<FormSocialModel>;
+  socials: FormSocialModel[];
   experiences: Array<FormExperienceModel>;
   skills: Array<FormSkillModel>;
   certifications: Array<FormCertificationModel>;
