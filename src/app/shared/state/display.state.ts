@@ -156,8 +156,11 @@ export class DisplayState {
     });
   }
 
-  @Action(Display.SectionDeleteByResumeId)
-  delete(ctx: StateContext<DisplayStateModel>, action: Display.SectionDeleteByResumeId) {
+  @Action(Display.SectionDeleteByResumeIds)
+  delete(
+    ctx: StateContext<DisplayStateModel>,
+    action: Display.SectionDeleteByResumeIds,
+  ) {
     const sections = Object.values(ctx.getState().sections.byId)
       .filter((section) => !action.resumeIds.includes(section.resumeId))
       .reduce(

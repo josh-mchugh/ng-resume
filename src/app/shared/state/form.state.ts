@@ -223,7 +223,9 @@ export class FormState {
   @Action(Form.Experience.Create)
   experienceCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
-    const updatedExperiences = state.experiences.concat(emptyExperience(uuid.rnd()));
+    const updatedExperiences = state.experiences.concat(
+      emptyExperience(uuid.rnd()),
+    );
     ctx.setState({
       ...state,
       experiences: updatedExperiences,

@@ -27,8 +27,8 @@ export namespace Display {
     ) {}
   }
 
-  export class SectionDeleteByResumeId {
-    static readonly type = '[Display] Section Delete By ResumeId';
+  export class SectionDeleteByResumeIds {
+    static readonly type = '[Display] Section Delete By ResumeIds';
     constructor(public resumeIds: string[]) {}
   }
 }

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Store } from '@ngxs/store';
 import ShortUniqueId from 'short-unique-id';
 import { LayoutNode } from '@shared/state/layout.state';
 import { Display } from '@shared/state/display.actions';
@@ -22,6 +24,13 @@ export namespace DisplayRequest {
       public resumeIds: string[],
     ) {}
   }
+
+  export class SocialSectionChangeRequest {
+    constructor(
+      public prevStateIds: string[],
+      public newStateIds: string[],
+    ) {}
+  }
 }
 
 @Injectable({
@@ -30,7 +39,7 @@ export namespace DisplayRequest {
 export class DisplayService {
   uuid: ShortUniqueId;
 
-  constructor() {
+  constructor(private store: Store) {
     this.uuid = new ShortUniqueId();
   }
 
@@ -59,7 +68,7 @@ export class DisplayService {
           this.createSection(layoutNode, request.parentId, resumeId),
         ),
       )
-      .flatMap((sections) => sections);
+      .flat();
   }
 
   public createSection(
@@ -74,5 +83,26 @@ export class DisplayService {
       resumeId: resumeId,
       pageId: '0',
     };
+  }
+
+  public socialSectionChange(
+    request: DisplayRequest.SocialSectionChangeRequest,
+  ): Observable<Display.SectionDeleteByResumeIds[]> {
+    const removedIds = request.prevStateIds.filter(
+      (id) => !request.newStateIds.includes(id),
+    );
+    const addedIds = request.newStateIds.filter(
+      (id) => !request.prevStateIds.includes(id),
+    );
+
+    const addSections = addedIds.map((id) => ({
+      id: this.uuid.rnd(),
+      parentId: '', // TODO
+      layoutNodeId: '', // TODO
+      resumeId: id,
+      pageId: '0',
+    }));
+
+    return of([new Display.SectionDeleteByResumeIds(removedIds)]);
   }
 }

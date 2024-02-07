@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { mergeMap } from 'rxjs';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
-import { Display } from './display.actions';
+import {
+  DisplayRequest,
+  DisplayService,
+} from '@shared/service/display.service';
 
 export interface ResumeStateModel {
   name: string;
@@ -100,19 +104,19 @@ export enum SelectorType {
     location: 'New York, New York',
     phone: '(123) 456-8899',
     socials: {
-      'hPjgs6': {
+      hPjgs6: {
         id: 'hPjgs6',
         name: 'Facebook',
         icon: 'fa-brands fa-facebook',
         url: 'https://facebook.com/profile',
       },
-      'TKGmg8': {
+      TKGmg8: {
         id: 'TKGmg8',
         name: 'Twitter',
         icon: 'fa-brands fa-twitter',
         url: 'https://twitter.com/profile',
       },
-      'Yle4N7': {
+      Yle4N7: {
         id: 'Yle4N7',
         name: 'LinkedIn',
         icon: 'fa-brands fa-linkedin',
@@ -362,6 +366,8 @@ export enum SelectorType {
 })
 @Injectable()
 export class ResumeState {
+  constructor(private displayService: DisplayService) {}
+
   // Ignore until refactoring out generic type any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static selectorValue(selectorType: SelectorType, id: string): any {
@@ -678,16 +684,22 @@ export class ResumeState {
       (acc, social) => ({ ...acc, [social.id]: { ...social, icon: '' } }),
       {},
     );
-    const newKeys = Object.keys(socials);
-    const removedKeys = Object.keys(ctx.getState().socials)
-      .filter(key => !newKeys.includes(key));
+
+    const prevSocialIds = Object.keys(ctx.getState().socials);
+    const newSocialIds = Object.keys(socials);
+
     ctx.setState({
       ...ctx.getState(),
       socials: socials,
     });
-    if(removedKeys) {
-      ctx.dispatch(new Display.SectionDeleteByResumeId(removedKeys));
-    }
+
+    const request = new DisplayRequest.SocialSectionChangeRequest(
+      prevSocialIds,
+      newSocialIds,
+    );
+    return this.displayService
+      .socialSectionChange(request)
+      .pipe(mergeMap((actions) => ctx.dispatch(actions)));
   }
 
   @Action(Resume.ExperiencesUpdate)
