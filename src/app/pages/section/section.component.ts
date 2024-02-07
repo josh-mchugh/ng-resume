@@ -111,7 +111,7 @@ export class SectionComponent implements OnInit {
       ),
       mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
     );
-    // Subscription to create child sections if they do not match layout nodes children length
+    // Subscribe to create static child sections on initial load
     this.layoutNode$
       .pipe(
         filter(
@@ -140,7 +140,7 @@ export class SectionComponent implements OnInit {
       .subscribe((sections) =>
         this.store.dispatch(new Display.SectionAddAll(sections)),
       );
-    // Dynamic sections
+    // Subscribe to create dynamic child sections on initial load
     this.layoutNode$
       .pipe(
         filter(

@@ -25,18 +25,18 @@ export class SocialsInputComponent {
     return false;
   }
 
-  public onSocialDelete(index: number): boolean {
-    this.store.dispatch(new Form.Social.Delete(index));
+  public onSocialDelete(id: string): boolean {
+    this.store.dispatch(new Form.Social.Delete(id));
     return false;
   }
 
-  public onSocialNameInput(index: number, event: Event): void {
+  public onSocialNameInput(id: string, event: Event): void {
     const name = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Social.NameUpdate(index, name));
+    this.store.dispatch(new Form.Social.NameUpdate(id, name));
   }
 
-  public onSocialUrlInput(index: number, event: Event): void {
+  public onSocialUrlInput(id: string, event: Event): void {
     const url = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Social.UrlUpdate(index, url));
+    this.store.dispatch(new Form.Social.UrlUpdate(id, url));
   }
 }

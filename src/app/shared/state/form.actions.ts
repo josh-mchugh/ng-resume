@@ -36,13 +36,13 @@ export namespace Form {
 
     export class Delete {
       static readonly type = '[Form] Social Delete';
-      constructor(public index: number) {}
+      constructor(public id: string) {}
     }
 
     export class NameUpdate {
       static readonly type = '[Form] Social Name Update';
       constructor(
-        public index: number,
+        public id: string,
         public name: string,
       ) {}
     }
@@ -50,7 +50,7 @@ export namespace Form {
     export class UrlUpdate {
       static readonly type = '[Form] Social Url Update';
       constructor(
-        public index: number,
+        public id: string,
         public url: string,
       ) {}
     }

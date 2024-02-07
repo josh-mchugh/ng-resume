@@ -100,20 +100,20 @@ export enum SelectorType {
     location: 'New York, New York',
     phone: '(123) 456-8899',
     socials: {
-      '0': {
-        id: '0',
+      'hPjgs6': {
+        id: 'hPjgs6',
         name: 'Facebook',
         icon: 'fa-brands fa-facebook',
         url: 'https://facebook.com/profile',
       },
-      '1': {
-        id: '1',
+      'TKGmg8': {
+        id: 'TKGmg8',
         name: 'Twitter',
         icon: 'fa-brands fa-twitter',
         url: 'https://twitter.com/profile',
       },
-      '2': {
-        id: '2',
+      'Yle4N7': {
+        id: 'Yle4N7',
         name: 'LinkedIn',
         icon: 'fa-brands fa-linkedin',
         url: 'https://linkedin.com/profile',

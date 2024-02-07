@@ -11,28 +11,28 @@
       <ng-template [ngIf]="i > 0">
         <div
           class="form-group-remove"
-          (click)="onSocialDelete(i)"
-          (keyup.enter)="onSocialDelete(i)"
+          (click)="onSocialDelete(social.id)"
+          (keyup.enter)="onSocialDelete(social.id)"
           tabindex="0"
         >
           <div class="form-group-remove-icon">&times;</div>
         </div>
       </ng-template>
-      <label for="socialName{{ i }}">Name</label>
+      <label for="socialName{{ social.id }}">Name</label>
       <input
         type="text"
-        name="socialName{{ i }}"
+        name="socialName{{ social.id }}"
         placeholder="Name"
         [value]="social.name"
-        (input)="onSocialNameInput(i, $event)"
+        (input)="onSocialNameInput(social.id, $event)"
       />
-      <label for="socialUrl{{ i }}">URL</label>
+      <label for="socialUrl{{ social.id }}">URL</label>
       <input
         type="text"
-        name="socialUrl{{ i }}"
+        name="socialUrl{{ social.id }}"
         placeholder="URL"
         [value]="social.url"
-        (input)="onSocialUrlInput(i, $event)"
+        (input)="onSocialUrlInput(social.id, $event)"
       />
     </div>
   </ng-container>

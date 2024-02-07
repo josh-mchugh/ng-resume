@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
+import ShortUniqueId from 'short-unique-id';
+
+const uuid = new ShortUniqueId();
 
 export interface FormStateModel {
   name: string;
@@ -11,21 +14,23 @@ export interface FormStateModel {
   email: string;
   location: string;
   socials: FormSocialModel[];
-  experiences: Array<FormExperienceModel>;
-  skills: Array<FormSkillModel>;
-  certifications: Array<FormCertificationModel>;
+  experiences: FormExperienceModel[];
+  skills: FormSkillModel[];
+  certifications: FormCertificationModel[];
 }
 
 export interface FormSocialModel {
+  id: string;
   name: string;
   url: string;
 }
 
-function emptySocial(): FormSocialModel {
-  return { name: '', url: '' };
+function emptySocial(id: string): FormSocialModel {
+  return { id: id, name: '', url: '' };
 }
 
 export interface FormExperienceModel {
+  id: string;
   title: string;
   organization: string;
   duration: string;
@@ -34,8 +39,9 @@ export interface FormExperienceModel {
   skills: string;
 }
 
-function emptyExperience(): FormExperienceModel {
+function emptyExperience(id: string): FormExperienceModel {
   return {
+    id: id,
     title: '',
     organization: '',
     duration: '',
@@ -46,26 +52,30 @@ function emptyExperience(): FormExperienceModel {
 }
 
 export interface FormSkillModel {
+  id: string;
   name: string;
   proficiency: number;
 }
 
-function emptySkill(): FormSkillModel {
+function emptySkill(id: string): FormSkillModel {
   return {
+    id: id,
     name: '',
     proficiency: 0,
   };
 }
 
 export interface FormCertificationModel {
+  id: string;
   title: string;
   organization: string;
   year: string;
   location: string;
 }
 
-function emptyCertification(): FormCertificationModel {
+function emptyCertification(id: string): FormCertificationModel {
   return {
+    id: id,
     title: '',
     organization: '',
     year: '',
@@ -82,10 +92,10 @@ function emptyCertification(): FormCertificationModel {
     phone: '',
     email: '',
     location: '',
-    socials: [emptySocial()],
-    experiences: [emptyExperience()],
-    skills: [emptySkill()],
-    certifications: [emptyCertification()],
+    socials: [emptySocial(uuid.rnd())],
+    experiences: [emptyExperience(uuid.rnd())],
+    skills: [emptySkill(uuid.rnd())],
+    certifications: [emptyCertification(uuid.rnd())],
   },
 })
 @Injectable()
@@ -153,7 +163,7 @@ export class FormState {
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
-    const updatedSocials = state.socials.concat(emptySocial());
+    const updatedSocials = state.socials.concat(emptySocial(uuid.rnd()));
     ctx.setState({
       ...state,
       socials: updatedSocials,
@@ -166,7 +176,7 @@ export class FormState {
   socialDelete(ctx: StateContext<FormStateModel>, action: Form.Social.Delete) {
     const state = ctx.getState();
     const updatedSocials = state.socials.filter(
-      (social, index) => index !== action.index,
+      (social) => social.id !== action.id,
     );
     ctx.setState({
       ...state,
@@ -182,8 +192,8 @@ export class FormState {
     action: Form.Social.NameUpdate,
   ) {
     const state = ctx.getState();
-    const updatedSocials = state.socials.map((social, index) =>
-      index === action.index ? { ...social, name: action.name } : social,
+    const updatedSocials = state.socials.map((social) =>
+      social.id === action.id ? { ...social, name: action.name } : social,
     );
     ctx.setState({
       ...state,
@@ -199,8 +209,8 @@ export class FormState {
     action: Form.Social.UrlUpdate,
   ) {
     const state = ctx.getState();
-    const updatedSocials = state.socials.map((social, index) =>
-      index === action.index ? { ...social, url: action.url } : social,
+    const updatedSocials = state.socials.map((social) =>
+      social.id === action.id ? { ...social, url: action.url } : social,
     );
     ctx.setState({
       ...state,
@@ -213,7 +223,7 @@ export class FormState {
   @Action(Form.Experience.Create)
   experienceCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
-    const updatedExperiences = state.experiences.concat(emptyExperience());
+    const updatedExperiences = state.experiences.concat(emptyExperience(uuid.rnd()));
     ctx.setState({
       ...state,
       experiences: updatedExperiences,
@@ -361,7 +371,7 @@ export class FormState {
   @Action(Form.Skill.Create)
   skillCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
-    const updatedSkills = state.skills.concat(emptySkill());
+    const updatedSkills = state.skills.concat(emptySkill(uuid.rnd()));
     ctx.setState({
       ...state,
       skills: updatedSkills,
@@ -424,7 +434,7 @@ export class FormState {
   certificationCreate(ctx: StateContext<FormStateModel>) {
     const state = ctx.getState();
     const updatedCertifications = state.certifications.concat(
-      emptyCertification(),
+      emptyCertification(uuid.rnd()),
     );
     ctx.setState({
       ...state,
@@ -541,16 +551,16 @@ export class FormState {
   mapFormSocialsToResumeSocials(
     formSocials: FormSocialModel[],
   ): Resume.Social[] {
-    return formSocials.map((social, index) => {
-      return new Resume.Social(index.toString(), social.name, social.url);
+    return formSocials.map((social) => {
+      return new Resume.Social(social.id, social.name, social.url);
     });
   }
 
   mapFormExperiencesToResumeExperiences(
     formExperiences: FormExperienceModel[],
   ): Resume.Experience[] {
-    return formExperiences.map((experience, index) => ({
-      id: index.toString(),
+    return formExperiences.map((experience) => ({
+      id: experience.id,
       title: experience.title,
       organization: experience.organization,
       duration: experience.duration,
@@ -563,18 +573,16 @@ export class FormState {
   }
 
   mapFormSkillsToResumeSkills(formSkills: FormSkillModel[]): Resume.Skill[] {
-    return formSkills.map((skill, index) => ({
+    return formSkills.map((skill) => ({
       ...skill,
-      id: index.toString(),
     }));
   }
 
   mapFormCertificationsToResumeCertifications(
     formCertifications: FormCertificationModel[],
   ): Resume.Certification[] {
-    return formCertifications.map((certification, index) => ({
+    return formCertifications.map((certification) => ({
       ...certification,
-      id: index.toString(),
     }));
   }
 }
