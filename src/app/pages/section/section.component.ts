@@ -71,7 +71,9 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.section$ = this.store.select(DisplayState.section(this.id));
+    this.section$ = this.store.select(DisplayState.section(this.id)).pipe(
+      shareReplay(1)
+    );
     // Observable for section LayoutNode
     this.layoutNode$ = this.section$.pipe(
       mergeMap((section) => this.store
