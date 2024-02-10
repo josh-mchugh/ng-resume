@@ -1,29 +1,28 @@
-<ng-container *ngIf="layoutNode$ | async as layoutNode">
-  <!-- Render section with template data available -->
-  <ng-container *ngIf="'CONTENT' === layoutNode.type">
-    <div
-      [class]="getContentClass() | async"
-      (onResize)="onResize($event)"
-      [innerHtml]="htmlContent$ | async"
-    ></div>
-  </ng-container>
-  <!-- Render section which has children and does not render content -->
-  <ng-container *ngIf="'CONTAINER' === layoutNode.type">
-    <div [class]="getContentClass() | async" (onResize)="onResize($event)">
-      <ng-container
-        *ngFor="
-          let section of childSections$ | async;
-          let i = index;
-          trackBy: handleTrackBy
-        "
-      >
-        <app-section
-          [id]="section.id"
-          [parentId]="id"
-          [layoutId]="section.layoutNodeId"
-          [resumeId]="section.resumeId"
-        />
-      </ng-container>
-    </div>
+<ng-container *ngIf="section$ | async as section">
+  <ng-container *ngIf="layoutNode$ | async as layoutNode">
+    <!-- Render section with template data available -->
+    <ng-container *ngIf="'CONTENT' === layoutNode.type">
+      <div
+        [class]="getContentClass() | async"
+        (onResize)="onResize($event)"
+        [innerHtml]="htmlContent$ | async"
+      ></div>
+    </ng-container>
+    <!-- Render section which has children and does not render content -->
+    <ng-container *ngIf="'CONTAINER' === layoutNode.type">
+      <div [class]="getContentClass() | async" (onResize)="onResize($event)">
+        <ng-container
+          *ngFor="
+            let section of childSections$ | async;
+            let i = index;
+            trackBy: handleTrackBy
+          "
+        >
+          <app-section
+            [id]="section.id"
+          />
+        </ng-container>
+      </div>
+    </ng-container>
   </ng-container>
 </ng-container>

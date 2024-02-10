@@ -46,14 +46,7 @@ export class SectionComponent implements OnInit {
   // section id
   @Input() id!: string;
 
-  // layout id
-  @Input() layoutId!: string;
-
-  // parent section id
-  @Input() parentId!: string;
-
-  // Resume Id for retieving resume data
-  @Input() resumeId!: string;
+  section$!: Observable<Section>;
 
   // layout node
   layoutNode$!: Observable<LayoutNode>;
@@ -78,21 +71,26 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.section$ = this.store.select(DisplayState.section(this.id));
     // Observable for section LayoutNode
-    this.layoutNode$ = this.store
-      .select(LayoutState.layoutNode(this.layoutId))
-      .pipe(
-        // Side effect for classes for @HostBinding cannot use Observables
-        tap((layoutNode) => (this.rootClass = layoutNode.classes.root)),
-        shareReplay(1),
-      );
+    this.layoutNode$ = this.section$.pipe(
+      mergeMap((section) => this.store
+        .select(LayoutState.layoutNode(section.layoutNodeId))
+        .pipe(
+          // Side effect for classes for @HostBinding cannot use Observables
+          tap((layoutNode) => (this.rootClass = layoutNode.classes.root)),
+          shareReplay(1),
+        )
+      )
+    );
     // Observable for layout HTML content
     this.htmlContent$ = this.layoutNode$.pipe(
       filter((layoutNode) => NodeType.CONTENT === layoutNode.type),
-      mergeMap((layoutNode) =>
+      combineLatestWith(this.section$),
+      mergeMap(([layoutNode, section]) =>
         iif(
           () => NodeDataType.DYNAMIC === layoutNode.dataType,
-          this.renderDynamicHTML(layoutNode),
+          this.renderDynamicHTML(layoutNode, section),
           this.renderStaticHTML(layoutNode),
         ),
       ),
@@ -109,7 +107,8 @@ export class SectionComponent implements OnInit {
           NodeType.CONTAINER === layoutNode.type &&
           NodeDataType.DYNAMIC === layoutNode.dataType,
       ),
-      mergeMap((layoutNode) => this.getChildResumeIds(layoutNode)),
+      combineLatestWith(this.section$),
+      mergeMap(([layoutNode, section]) => this.getChildResumeIds(layoutNode, section)),
     );
     // Subscribe to create static child sections on initial load
     this.layoutNode$
@@ -119,7 +118,8 @@ export class SectionComponent implements OnInit {
             NodeType.CONTAINER === layoutNode.type &&
             NodeDataType.STATIC === layoutNode.dataType,
         ),
-        mergeMap((layoutNode) =>
+        combineLatestWith(this.section$),
+        mergeMap(([layoutNode, section]) =>
           this.store.select(LayoutState.childNodes(layoutNode.id)),
         ),
         combineLatestWith(
@@ -174,10 +174,10 @@ export class SectionComponent implements OnInit {
       );
   }
 
-  private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
+  private renderDynamicHTML(layoutNode: LayoutNode, section: Section): Observable<SafeHtml> {
     const observables$ = layoutNode.selectors.map((selector) =>
       this.store
-        .select(ResumeState.selectorValue(selector.type, this.resumeId))
+        .select(ResumeState.selectorValue(selector.type, section.resumeId))
         .pipe(map((value) => [selector.key, value])),
     );
     return combineLatest(observables$).pipe(
@@ -197,9 +197,9 @@ export class SectionComponent implements OnInit {
     return of(safeHtml);
   }
 
-  private getChildResumeIds(layoutNode: LayoutNode): Observable<string[]> {
+  private getChildResumeIds(layoutNode: LayoutNode, section: Section): Observable<string[]> {
     return this.store.select(
-      ResumeState.selectorValue(layoutNode.selectors[0].type, this.resumeId),
+      ResumeState.selectorValue(layoutNode.selectors[0].type, section.resumeId),
     );
   }
 
