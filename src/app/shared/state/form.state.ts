@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { State, Action, StateContext } from '@ngxs/store';
+import { Action, createSelector, State, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
 import ShortUniqueId from 'short-unique-id';
@@ -13,10 +13,15 @@ export interface FormStateModel {
   phone: string;
   email: string;
   location: string;
-  socials: FormSocialModel[];
+  socials: Socials;
   experiences: FormExperienceModel[];
   skills: FormSkillModel[];
   certifications: FormCertificationModel[];
+}
+
+export interface Socials {
+  byId: { [id: string]: FormSocialModel };
+  allIds: string[];
 }
 
 export interface FormSocialModel {
@@ -92,7 +97,10 @@ function emptyCertification(id: string): FormCertificationModel {
     phone: '',
     email: '',
     location: '',
-    socials: [emptySocial(uuid.rnd())],
+    socials: {
+      byId: {},
+      allIds: [],
+    },
     experiences: [emptyExperience(uuid.rnd())],
     skills: [emptySkill(uuid.rnd())],
     certifications: [emptyCertification(uuid.rnd())],
@@ -100,6 +108,12 @@ function emptyCertification(id: string): FormCertificationModel {
 })
 @Injectable()
 export class FormState {
+  static getSocials(): (state: FormStateModel) => FormSocialModel[] {
+    return createSelector([FormState], (state: FormStateModel) =>
+      Object.values(state.socials.byId),
+    );
+  }
+
   @Action(Form.NameUpdate)
   formNameUpdate(ctx: StateContext<FormStateModel>, action: Form.NameUpdate) {
     ctx.setState({
@@ -162,28 +176,39 @@ export class FormState {
 
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
-    const state = ctx.getState();
-    const updatedSocials = state.socials.concat(emptySocial(uuid.rnd()));
+    const socials = ctx.getState().socials;
+    const id = uuid.rnd();
+    const updatedById = { ...socials.byId, [id]: emptySocial(id) };
+    const updatedAllIds = Object.keys(updatedById);
+
     ctx.setState({
-      ...state,
-      socials: updatedSocials,
+      ...ctx.getState(),
+      socials: {
+        byId: updatedById,
+        allIds: updatedAllIds,
+      },
     });
-    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
-    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
+
+    // TODO: Dispatch Resume Social Update Event
   }
 
   @Action(Form.Social.Delete)
   socialDelete(ctx: StateContext<FormStateModel>, action: Form.Social.Delete) {
-    const state = ctx.getState();
-    const updatedSocials = state.socials.filter(
-      (social) => social.id !== action.id,
-    );
+    const socials = ctx.getState().socials;
+    const updatedById = Object.values(socials.byId)
+      .filter((social) => action.id !== social.id)
+      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+    const updatedAllIds = Object.keys(updatedById);
+
     ctx.setState({
-      ...state,
-      socials: updatedSocials,
+      ...ctx.getState(),
+      socials: {
+        byId: updatedById,
+        allIds: updatedAllIds,
+      },
     });
-    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
-    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
+
+    // TODO: Dispatch Resume Social Delete Event
   }
 
   @Action(Form.Social.NameUpdate)
@@ -191,16 +216,22 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Social.NameUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedSocials = state.socials.map((social) =>
-      social.id === action.id ? { ...social, name: action.name } : social,
-    );
+    const socials = ctx.getState().socials;
+    const updatedById = Object.values(socials.byId)
+      .map((social) =>
+        social.id === action.id ? { ...social, name: action.name } : social,
+      )
+      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+
     ctx.setState({
-      ...state,
-      socials: updatedSocials,
+      ...ctx.getState(),
+      socials: {
+        ...socials,
+        byId: updatedById,
+      },
     });
-    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
-    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
+
+    // TODO: Dispatch Resume Social Name Update Event
   }
 
   @Action(Form.Social.UrlUpdate)
@@ -208,16 +239,22 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Social.UrlUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedSocials = state.socials.map((social) =>
-      social.id === action.id ? { ...social, url: action.url } : social,
-    );
+    const socials = ctx.getState().socials;
+    const updatedById = Object.values(socials.byId)
+      .map((social) =>
+        social.id === action.id ? { ...social, url: action.url } : social,
+      )
+      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+
     ctx.setState({
-      ...state,
-      socials: updatedSocials,
+      ...ctx.getState(),
+      socials: {
+        ...socials,
+        byId: updatedById,
+      },
     });
-    const resumeSocials = this.mapFormSocialsToResumeSocials(updatedSocials);
-    ctx.dispatch(new Resume.SocialsUpdate(resumeSocials));
+
+    // TODO: Dispatch Resume Social URL Update Event
   }
 
   @Action(Form.Experience.Create)

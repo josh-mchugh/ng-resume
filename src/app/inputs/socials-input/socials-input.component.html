@@ -8,16 +8,14 @@
     "
   >
     <div class="form-group">
-      <ng-template [ngIf]="i > 0">
-        <div
-          class="form-group-remove"
-          (click)="onSocialDelete(social.id)"
-          (keyup.enter)="onSocialDelete(social.id)"
-          tabindex="0"
-        >
-          <div class="form-group-remove-icon">&times;</div>
-        </div>
-      </ng-template>
+      <div
+        class="form-group-remove"
+        (click)="onSocialDelete(social.id)"
+        (keyup.enter)="onSocialDelete(social.id)"
+        tabindex="0"
+      >
+        <div class="form-group-remove-icon">&times;</div>
+      </div>
       <label for="socialName{{ social.id }}">Name</label>
       <input
         type="text"
