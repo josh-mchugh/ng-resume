@@ -680,9 +680,11 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.SocialCreate,
   ) {
-    const socials = ctx.getState().socials;
     const social = { id: action.id, name: '', url: '', icon: '' };
-    const updatedSocials = { ...socials, [social.id]: social };
+    const updatedSocials = {
+      ...ctx.getState().socials,
+      [social.id]: social,
+    };
 
     ctx.setState({
       ...ctx.getState(),
@@ -690,6 +692,23 @@ export class ResumeState {
     });
 
     // TODO: Create new Section for Social
+  }
+
+  @Action(Resume.SocialDelete)
+  socialDelete(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.SocialDelete,
+  ) {
+    const updatedSocials = Object.values(ctx.getState().socials)
+      .filter((social) => action.id !== social.id)
+      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+
+    ctx.setState({
+      ...ctx.getState(),
+      socials: updatedSocials,
+    });
+
+    // TODO: Delete Section referencing Social
   }
 
   @Action(Resume.ExperiencesUpdate)

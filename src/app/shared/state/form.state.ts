@@ -208,7 +208,7 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Social Delete Event
+    return ctx.dispatch(new Resume.SocialDelete(action.id));
   }
 
   @Action(Form.Social.NameUpdate)

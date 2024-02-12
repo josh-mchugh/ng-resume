@@ -34,6 +34,11 @@ export namespace Resume {
     constructor(public id: string) {}
   }
 
+  export class SocialDelete {
+    static readonly type = '[Resume] Social Delete';
+    constructor(public id: string) {}
+  }
+
   export class Experience {
     constructor(
       public id: string,
