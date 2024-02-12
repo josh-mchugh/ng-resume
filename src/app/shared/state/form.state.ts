@@ -189,7 +189,7 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Social Update Event
+    return ctx.dispatch(new Resume.SocialCreate(id));
   }
 
   @Action(Form.Social.Delete)
@@ -587,14 +587,6 @@ export class FormState {
   }
 
   /* Util Functions */
-  mapFormSocialsToResumeSocials(
-    formSocials: FormSocialModel[],
-  ): Resume.Social[] {
-    return formSocials.map((social) => {
-      return new Resume.Social(social.id, social.name, social.url);
-    });
-  }
-
   mapFormExperiencesToResumeExperiences(
     formExperiences: FormExperienceModel[],
   ): Resume.Experience[] {

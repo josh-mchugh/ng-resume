@@ -29,17 +29,9 @@ export namespace Resume {
     constructor(public location: string) {}
   }
 
-  export class Social {
-    constructor(
-      public id: string,
-      public name: string,
-      public url: string,
-    ) {}
-  }
-
-  export class SocialsUpdate {
-    static readonly type = '[Resume] Socials Update';
-    constructor(public socials: Social[]) {}
+  export class SocialCreate {
+    static readonly type = '[Resume] Social Create';
+    constructor(public id: string) {}
   }
 
   export class Experience {

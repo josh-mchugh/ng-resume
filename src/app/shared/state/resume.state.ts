@@ -675,31 +675,21 @@ export class ResumeState {
     });
   }
 
-  @Action(Resume.SocialsUpdate)
-  socialsUpdate(
+  @Action(Resume.SocialCreate)
+  socialCreate(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialsUpdate,
+    action: Resume.SocialCreate,
   ) {
-    const socials = action.socials.reduce(
-      (acc, social) => ({ ...acc, [social.id]: { ...social, icon: '' } }),
-      {},
-    );
-
-    const prevSocialIds = Object.keys(ctx.getState().socials);
-    const newSocialIds = Object.keys(socials);
+    const socials = ctx.getState().socials;
+    const social = { id: action.id, name: '', url: '', icon: '' };
+    const updatedSocials = { ...socials, [social.id]: social };
 
     ctx.setState({
       ...ctx.getState(),
-      socials: socials,
+      socials: updatedSocials,
     });
 
-    const request = new DisplayRequest.SocialSectionChangeRequest(
-      prevSocialIds,
-      newSocialIds,
-    );
-    return this.displayService
-      .socialSectionChange(request)
-      .pipe(mergeMap((actions) => ctx.dispatch(actions)));
+    // TODO: Create new Section for Social
   }
 
   @Action(Resume.ExperiencesUpdate)
