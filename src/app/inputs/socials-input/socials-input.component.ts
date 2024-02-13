@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { FormSocialModel, FormState } from '@shared/state/form.state';
+import { FormSocial, FormState } from '@shared/state/form.state';
 import { Form } from '@shared/state/form.actions';
 
 @Component({
@@ -10,7 +10,7 @@ import { Form } from '@shared/state/form.actions';
   styleUrls: ['./socials-input.component.scss'],
 })
 export class SocialsInputComponent {
-  formSocials$: Observable<FormSocialModel[]>;
+  formSocials$: Observable<FormSocial[]>;
 
   constructor(private store: Store) {
     this.formSocials$ = this.store.select(FormState.getSocials());

@@ -20,18 +20,14 @@ export interface FormStateModel {
 }
 
 export interface Socials {
-  byId: { [id: string]: FormSocialModel };
+  byId: { [id: string]: FormSocial };
   allIds: string[];
 }
 
-export interface FormSocialModel {
+export interface FormSocial {
   id: string;
   name: string;
   url: string;
-}
-
-function emptySocial(id: string): FormSocialModel {
-  return { id: id, name: '', url: '' };
 }
 
 export interface FormExperienceModel {
@@ -108,7 +104,7 @@ function emptyCertification(id: string): FormCertificationModel {
 })
 @Injectable()
 export class FormState {
-  static getSocials(): (state: FormStateModel) => FormSocialModel[] {
+  static getSocials(): (state: FormStateModel) => FormSocial[] {
     return createSelector([FormState], (state: FormStateModel) =>
       Object.values(state.socials.byId),
     );
@@ -177,8 +173,8 @@ export class FormState {
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
     const socials = ctx.getState().socials;
-    const id = uuid.rnd();
-    const updatedById = { ...socials.byId, [id]: emptySocial(id) };
+    const social = { id: uuid.rnd(), name: '', url: '', icon: '' };
+    const updatedById = { ...socials.byId, [social.id]: social };
     const updatedAllIds = Object.keys(updatedById);
 
     ctx.setState({
@@ -189,7 +185,7 @@ export class FormState {
       },
     });
 
-    return ctx.dispatch(new Resume.SocialCreate(id));
+    return ctx.dispatch(new Resume.SocialCreate(social.id));
   }
 
   @Action(Form.Social.Delete)
