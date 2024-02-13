@@ -39,6 +39,14 @@ export namespace Resume {
     constructor(public id: string) {}
   }
 
+  export class SocialNameUpdate {
+    static readonly type = '[Resume] Social Name Update';
+    constructor(
+      public id: string,
+      public name: string,
+    ) {}
+  }
+
   export class Experience {
     constructor(
       public id: string,

@@ -217,21 +217,24 @@ export class FormState {
     action: Form.Social.NameUpdate,
   ) {
     const socials = ctx.getState().socials;
-    const updatedById = Object.values(socials.byId)
-      .map((social) =>
-        social.id === action.id ? { ...social, name: action.name } : social,
-      )
-      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+    const social = socials.byId[action.id];
+    const updatedSocial = { ...social, name: action.name };
 
     ctx.setState({
       ...ctx.getState(),
       socials: {
         ...socials,
-        byId: updatedById,
+        byId: {
+          ...socials.byId,
+          [updatedSocial.id]: updatedSocial,
+        },
       },
     });
 
     // TODO: Dispatch Resume Social Name Update Event
+    return ctx.dispatch(
+      new Resume.SocialNameUpdate(updatedSocial.id, updatedSocial.name),
+    );
   }
 
   @Action(Form.Social.UrlUpdate)
@@ -240,17 +243,17 @@ export class FormState {
     action: Form.Social.UrlUpdate,
   ) {
     const socials = ctx.getState().socials;
-    const updatedById = Object.values(socials.byId)
-      .map((social) =>
-        social.id === action.id ? { ...social, url: action.url } : social,
-      )
-      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+    const social = socials.byId[action.id];
+    const updatedSocial = { ...social, url: action.url };
 
     ctx.setState({
       ...ctx.getState(),
       socials: {
         ...socials,
-        byId: updatedById,
+        byId: {
+          ...socials.byId,
+          [updatedSocial.id]: updatedSocial,
+        },
       },
     });
 

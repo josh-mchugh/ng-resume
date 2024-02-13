@@ -711,6 +711,26 @@ export class ResumeState {
     // TODO: Delete Section referencing Social
   }
 
+  @Action(Resume.SocialNameUpdate)
+  socialNameUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.SocialNameUpdate,
+  ) {
+    const social = ctx.getState().socials[action.id];
+    const updatedSocial = {
+      ...social,
+      name: action.name,
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      socials: {
+        ...ctx.getState().socials,
+        [updatedSocial.id]: updatedSocial,
+      },
+    });
+  }
+
   @Action(Resume.ExperiencesUpdate)
   experiencesUpdate(
     ctx: StateContext<ResumeStateModel>,
