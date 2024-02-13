@@ -63,13 +63,13 @@ export namespace Form {
 
     export class Delete {
       static readonly type = '[Form] Experience Delete';
-      constructor(public index: number) {}
+      constructor(public id: string) {}
     }
 
     export class TitleUpdate {
       static readonly type = '[Form] Experience Title Update';
       constructor(
-        public index: number,
+        public id: string,
         public title: string,
       ) {}
     }
@@ -77,7 +77,7 @@ export namespace Form {
     export class OrganizationUpdate {
       static readonly type = '[Form] Experience Organization Update';
       constructor(
-        public index: number,
+        public id: string,
         public organization: string,
       ) {}
     }
@@ -85,7 +85,7 @@ export namespace Form {
     export class DurationUpdate {
       static readonly type = '[Form] Experience Duration Update';
       constructor(
-        public index: number,
+        public id: string,
         public duration: string,
       ) {}
     }
@@ -93,7 +93,7 @@ export namespace Form {
     export class LocationUpdate {
       static readonly type = '[Form] Experience Location Update';
       constructor(
-        public index: number,
+        public id: string,
         public location: string,
       ) {}
     }
@@ -101,7 +101,7 @@ export namespace Form {
     export class DescriptionUpdate {
       static readonly type = '[Form] Experience Description Update';
       constructor(
-        public index: number,
+        public id: string,
         public description: string,
       ) {}
     }
@@ -109,7 +109,7 @@ export namespace Form {
     export class SkillsUpdate {
       static readonly type = '[Form] Experience Skills Update';
       constructor(
-        public index: number,
+        public id: string,
         public skills: string,
       ) {}
     }

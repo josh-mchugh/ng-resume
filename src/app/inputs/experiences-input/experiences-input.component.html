@@ -8,62 +8,62 @@
     "
   >
     <div class="form-group">
-      <ng-template [ngIf]="i > 0">
-        <div
-          class="form-group-remove"
-          (click)="onExperienceDelete(i)"
-          (keyup.enter)="onExperienceDelete(i)"
-          tabindex="0"
-        >
-          <div class="form-group-remove-icon">&times;</div>
-        </div>
-      </ng-template>
-      <label for="experienceTitle{{ i }}">Title</label>
+      <div
+        class="form-group-remove"
+        (click)="onExperienceDelete(experience.id)"
+        (keyup.enter)="onExperienceDelete(experience.id)"
+        tabindex="0"
+      >
+        <div class="form-group-remove-icon">&times;</div>
+      </div>
+      <label for="experienceTitle-{{ experience.id }}">Title</label>
       <input
         type="text"
-        name="experienceTitle{{ i }}"
+        name="experienceTitle-{{ experience.id }}"
         placeholder="Title"
         [value]="experience.title"
-        (input)="onExperienceTitleInput(i, $event)"
+        (input)="onExperienceTitleInput(experience.id, $event)"
       />
-      <label for="experienceOrganization{{ i }}">Organization</label>
+      <label for="experienceOrganization-{{ experience.id }}"
+        >Organization</label
+      >
       <input
         type="text"
-        name="experienceOrganization{{ i }}"
+        name="experienceOrganization-{{ experience.id }}"
         placeholder="Organization"
         [value]="experience.organization"
-        (input)="onExperienceOrganizationInput(i, $event)"
+        (input)="onExperienceOrganizationInput(experience.id, $event)"
       />
-      <label for="experienceDuration{{ i }}">Duration</label>
+      <label for="experienceDuration-{{ experience.id }}">Duration</label>
       <input
         type="text"
-        name="experienceDuration{{ i }}"
+        name="experienceDuration-{{ experience.id }}"
         placeholder="Duration"
         [value]="experience.duration"
-        (input)="onExperienceDurationInput(i, $event)"
+        (input)="onExperienceDurationInput(experience.id, $event)"
       />
-      <label for="experienceLocation{{ i }}">Location</label>
+      <label for="experienceLocation-{{ experience.id }}">Location</label>
       <input
         type="text"
-        name="experienceLocation{{ i }}"
+        name="experienceLocation-{{ experience.id }}"
         placeholder="Location"
         [value]="experience.location"
-        (input)="onExperienceLocationInput(i, $event)"
+        (input)="onExperienceLocationInput(experience.id, $event)"
       />
-      <label for="experienceDescription{{ i }}">Description</label>
+      <label for="experienceDescription-{{ experience.id }}">Description</label>
       <textarea
-        name="experienceDescription{{ i }}"
+        name="experienceDescription-{{ experience.id }}"
         placeholder="Description"
         [value]="experience.description"
-        (input)="onExperienceDescriptionInput(i, $event)"
+        (input)="onExperienceDescriptionInput(experience.id, $event)"
       ></textarea>
-      <label for="experienceSkills{{ i }}">Skills</label>
+      <label for="experienceSkills-{{ experience.id }}">Skills</label>
       <input
         type="text"
-        name="experienceSkills{{ i }}"
+        name="experienceSkills-{{ experience.id }}"
         placeholder="Skills"
         [value]="experience.skills"
-        (input)="onExperienceSkillsInput(i, $event)"
+        (input)="onExperienceSkillsInput(experience.id, $event)"
       />
     </div>
   </ng-container>

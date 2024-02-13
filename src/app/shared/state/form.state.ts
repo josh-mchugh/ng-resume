@@ -14,12 +14,12 @@ export interface FormStateModel {
   email: string;
   location: string;
   socials: Socials;
-  experiences: FormExperience[];
+  experiences: Experiences;
   skills: FormSkillModel[];
   certifications: FormCertificationModel[];
 }
 
-export interface Socials {
+interface Socials {
   byId: { [id: string]: FormSocial };
   allIds: string[];
 }
@@ -28,6 +28,11 @@ export interface FormSocial {
   id: string;
   name: string;
   url: string;
+}
+
+interface Experiences {
+  byId: { [id: string]: FormExperience };
+  allIds: string[];
 }
 
 export interface FormExperience {
@@ -97,7 +102,10 @@ function emptyCertification(id: string): FormCertificationModel {
       byId: {},
       allIds: [],
     },
-    experiences: [emptyExperience(uuid.rnd())],
+    experiences: {
+      byId: {},
+      allIds: [],
+    },
     skills: [emptySkill(uuid.rnd())],
     certifications: [emptyCertification(uuid.rnd())],
   },
@@ -107,6 +115,12 @@ export class FormState {
   static getSocials(): (state: FormStateModel) => FormSocial[] {
     return createSelector([FormState], (state: FormStateModel) =>
       Object.values(state.socials.byId),
+    );
+  }
+
+  static getExperiences(): (state: FormStateModel) => FormExperience[] {
+    return createSelector([FormState], (state: FormStateModel) =>
+      Object.values(state.experiences.byId),
     );
   }
 
@@ -259,14 +273,26 @@ export class FormState {
 
   @Action(Form.Experience.Create)
   experienceCreate(ctx: StateContext<FormStateModel>) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.concat(
-      emptyExperience(uuid.rnd()),
-    );
+    const experiences = ctx.getState().experiences;
+    const experience = {
+      id: uuid.rnd(),
+      title: '',
+      organization: '',
+      duration: '',
+      location: '',
+      description: '',
+      skills: '',
+    };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        byId: { ...experiences.byId, [experience.id]: experience },
+        allIds: [...experiences.allIds, experience.id],
+      },
     });
+
+    // TODO: Dispatch Resume Experience Create Action
   }
 
   @Action(Form.Experience.Delete)
@@ -274,17 +300,23 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.Delete,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.filter(
-      (experience, index) => index !== action.index,
-    );
+    const updatedById = Object.values(ctx.getState().experiences.byId)
+      .filter((experience) => experience.id !== action.id)
+      .reduce(
+        (acc, experience) => ({ ...acc, [experience.id]: experience }),
+        {},
+      );
+    const updatedAllIds = Object.keys(updatedById);
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        byId: updatedById,
+        allIds: updatedAllIds,
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Delete Action
   }
 
   @Action(Form.Experience.TitleUpdate)
@@ -292,19 +324,21 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.TitleUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.map((experience, index) =>
-      index === action.index
-        ? { ...experience, title: action.title }
-        : experience,
-    );
+    const experience = ctx.getState().experiences.byId[action.id];
+    const updatedExperience = { ...experience, title: action.title };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [updatedExperience.id]: updatedExperience,
+        },
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Title Update Action
   }
 
   @Action(Form.Experience.OrganizationUpdate)
@@ -312,19 +346,24 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.OrganizationUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.map((experience, index) =>
-      index == action.index
-        ? { ...experience, organization: action.organization }
-        : experience,
-    );
+    const experience = ctx.getState().experiences.byId[action.id];
+    const updatedExperience = {
+      ...experience,
+      organization: action.organization,
+    };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [updatedExperience.id]: updatedExperience,
+        },
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Organization Update Action
   }
 
   @Action(Form.Experience.DurationUpdate)
@@ -332,19 +371,21 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.DurationUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.map((experience, index) =>
-      index === action.index
-        ? { ...experience, duration: action.duration }
-        : experience,
-    );
+    const experience = ctx.getState().experiences.byId[action.id];
+    const updatedExperience = { ...experience, duration: action.duration };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [updatedExperience.id]: updatedExperience,
+        },
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Duration Update Action
   }
 
   @Action(Form.Experience.LocationUpdate)
@@ -352,19 +393,21 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.LocationUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.map((experience, index) =>
-      index === action.index
-        ? { ...experience, location: action.location }
-        : experience,
-    );
+    const experience = ctx.getState().experiences.byId[action.id];
+    const updatedExperience = { ...experience, location: action.location };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [updatedExperience.id]: updatedExperience,
+        },
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Location Update Action
   }
 
   @Action(Form.Experience.DescriptionUpdate)
@@ -372,19 +415,24 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.DescriptionUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.map((experience, index) =>
-      index === action.index
-        ? { ...experience, description: action.description }
-        : experience,
-    );
+    const experience = ctx.getState().experiences.byId[action.id];
+    const updatedExperience = {
+      ...experience,
+      description: action.description,
+    };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [updatedExperience.id]: updatedExperience,
+        },
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Description Update Action
   }
 
   @Action(Form.Experience.SkillsUpdate)
@@ -392,19 +440,21 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.SkillsUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedExperiences = state.experiences.map((experience, index) =>
-      index === action.index
-        ? { ...experience, skills: action.skills }
-        : experience,
-    );
+    const experience = ctx.getState().experiences.byId[action.id];
+    const updatedExperience = { ...experience, skills: action.skills };
+
     ctx.setState({
-      ...state,
-      experiences: updatedExperiences,
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [updatedExperience.id]: updatedExperience,
+        },
+      },
     });
-    const resumeExperiences =
-      this.mapFormExperiencesToResumeExperiences(updatedExperiences);
-    ctx.dispatch(new Resume.ExperiencesUpdate(resumeExperiences));
+
+    // TODO: Dispatch Resume Experience Skills Update Action
   }
 
   @Action(Form.Skill.Create)
@@ -587,22 +637,6 @@ export class FormState {
   }
 
   /* Util Functions */
-  mapFormExperiencesToResumeExperiences(
-    formExperiences: FormExperience[],
-  ): Resume.Experience[] {
-    return formExperiences.map((experience) => ({
-      id: experience.id,
-      title: experience.title,
-      organization: experience.organization,
-      duration: experience.duration,
-      location: experience.location,
-      descriptions: experience.description.length
-        ? experience.description.split('\n')
-        : [],
-      skills: experience.skills.length ? experience.skills.split(', ') : [],
-    }));
-  }
-
   mapFormSkillsToResumeSkills(formSkills: FormSkillModel[]): Resume.Skill[] {
     return formSkills.map((skill) => ({
       ...skill,
