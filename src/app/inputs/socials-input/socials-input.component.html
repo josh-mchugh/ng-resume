@@ -16,18 +16,18 @@
       >
         <div class="form-group-remove-icon">&times;</div>
       </div>
-      <label for="socialName{{ social.id }}">Name</label>
+      <label for="socialName-{{ social.id }}">Name</label>
       <input
         type="text"
-        name="socialName{{ social.id }}"
+        name="socialName-{{ social.id }}"
         placeholder="Name"
         [value]="social.name"
         (input)="onSocialNameInput(social.id, $event)"
       />
-      <label for="socialUrl{{ social.id }}">URL</label>
+      <label for="socialUrl-{{ social.id }}">URL</label>
       <input
         type="text"
-        name="socialUrl{{ social.id }}"
+        name="socialUrl-{{ social.id }}"
         placeholder="URL"
         [value]="social.url"
         (input)="onSocialUrlInput(social.id, $event)"

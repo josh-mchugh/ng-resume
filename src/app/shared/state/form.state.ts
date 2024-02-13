@@ -186,9 +186,8 @@ export class FormState {
 
   @Action(Form.Social.Create)
   socialCreate(ctx: StateContext<FormStateModel>) {
-    const socials = ctx.getState().socials;
     const social = { id: uuid.rnd(), name: '', url: '', icon: '' };
-    const updatedById = { ...socials.byId, [social.id]: social };
+    const updatedById = { ...ctx.getState().socials.byId, [social.id]: social };
     const updatedAllIds = Object.keys(updatedById);
 
     ctx.setState({
@@ -204,8 +203,7 @@ export class FormState {
 
   @Action(Form.Social.Delete)
   socialDelete(ctx: StateContext<FormStateModel>, action: Form.Social.Delete) {
-    const socials = ctx.getState().socials;
-    const updatedById = Object.values(socials.byId)
+    const updatedById = Object.values(ctx.getState().socials.byId)
       .filter((social) => action.id !== social.id)
       .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
     const updatedAllIds = Object.keys(updatedById);
@@ -226,16 +224,15 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Social.NameUpdate,
   ) {
-    const socials = ctx.getState().socials;
-    const social = socials.byId[action.id];
+    const social = ctx.getState().socials.byId[action.id];
     const updatedSocial = { ...social, name: action.name };
 
     ctx.setState({
       ...ctx.getState(),
       socials: {
-        ...socials,
+        ...ctx.getState().socials,
         byId: {
-          ...socials.byId,
+          ...ctx.getState().socials.byId,
           [updatedSocial.id]: updatedSocial,
         },
       },
@@ -251,16 +248,15 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Social.UrlUpdate,
   ) {
-    const socials = ctx.getState().socials;
-    const social = socials.byId[action.id];
+    const social = ctx.getState().socials.byId[action.id];
     const updatedSocial = { ...social, url: action.url };
 
     ctx.setState({
       ...ctx.getState(),
       socials: {
-        ...socials,
+        ...ctx.getState().socials,
         byId: {
-          ...socials.byId,
+          ...ctx.getState().socials.byId,
           [updatedSocial.id]: updatedSocial,
         },
       },
