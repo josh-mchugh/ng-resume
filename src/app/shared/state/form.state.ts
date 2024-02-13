@@ -14,7 +14,7 @@ export interface FormStateModel {
   email: string;
   location: string;
   socials: Socials;
-  experiences: FormExperienceModel[];
+  experiences: FormExperience[];
   skills: FormSkillModel[];
   certifications: FormCertificationModel[];
 }
@@ -30,7 +30,7 @@ export interface FormSocial {
   url: string;
 }
 
-export interface FormExperienceModel {
+export interface FormExperience {
   id: string;
   title: string;
   organization: string;
@@ -40,7 +40,7 @@ export interface FormExperienceModel {
   skills: string;
 }
 
-function emptyExperience(id: string): FormExperienceModel {
+function emptyExperience(id: string): FormExperience {
   return {
     id: id,
     title: '',
@@ -588,7 +588,7 @@ export class FormState {
 
   /* Util Functions */
   mapFormExperiencesToResumeExperiences(
-    formExperiences: FormExperienceModel[],
+    formExperiences: FormExperience[],
   ): Resume.Experience[] {
     return formExperiences.map((experience) => ({
       id: experience.id,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { FormExperienceModel } from '@shared/state/form.state';
+import { FormExperience } from '@shared/state/form.state';
 import { Form } from '@shared/state/form.actions';
 
 @Component({
@@ -10,7 +10,7 @@ import { Form } from '@shared/state/form.actions';
   styleUrls: ['./experiences-input.component.scss'],
 })
 export class ExperiencesInputComponent {
-  formExperiences$: Observable<Array<FormExperienceModel>>;
+  formExperiences$: Observable<FormExperience[]>;
 
   constructor(private store: Store) {
     this.formExperiences$ = this.store.select(
