@@ -231,7 +231,6 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Social Name Update Event
     return ctx.dispatch(
       new Resume.SocialNameUpdate(updatedSocial.id, updatedSocial.name),
     );
@@ -257,7 +256,9 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Social URL Update Event
+    return ctx.dispatch(
+      new Resume.SocialUrlUpdate(updatedSocial.id, updatedSocial.url),
+    );
   }
 
   @Action(Form.Experience.Create)

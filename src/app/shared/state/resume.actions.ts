@@ -47,6 +47,14 @@ export namespace Resume {
     ) {}
   }
 
+  export class SocialUrlUpdate {
+    static readonly type = '[Resume] Social Url Update';
+    constructor(
+      public id: string,
+      public url: string,
+    ) {}
+  }
+
   export class Experience {
     constructor(
       public id: string,

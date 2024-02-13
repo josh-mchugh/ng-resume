@@ -731,6 +731,25 @@ export class ResumeState {
     });
   }
 
+  @Action(Resume.SocialUrlUpdate)
+  socialUrlUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.SocialUrlUpdate,
+  ) {
+    const social = ctx.getState().socials[action.id];
+    const updatedSocial = {
+      ...social,
+      url: action.url,
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      socials: {
+        ...ctx.getState().socials,
+        [updatedSocial.id]: updatedSocial,
+      },
+    });
+  }
   @Action(Resume.ExperiencesUpdate)
   experiencesUpdate(
     ctx: StateContext<ResumeStateModel>,
