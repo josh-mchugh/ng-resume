@@ -834,6 +834,26 @@ export class ResumeState {
     });
   }
 
+  @Action(Resume.ExperienceDurationUpdate)
+  experienceDurationUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceDurationUpdate,
+  ) {
+    const experience = ctx.getState().experiences[action.id];
+    const updatedExperience = {
+      ...experience,
+      duration: action.duration,
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        [updatedExperience.id]: updatedExperience,
+      },
+    });
+  }
+
   @Action(Resume.SkillsUpdate)
   skillsUpdate(
     ctx: StateContext<ResumeStateModel>,

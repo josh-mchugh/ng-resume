@@ -81,6 +81,14 @@ export namespace Resume {
     ) {}
   }
 
+  export class ExperienceDurationUpdate {
+    static readonly type = '[Resume] Experience Duration Update';
+    constructor(
+      public id: string,
+      public duration: string,
+    ) {}
+  }
+
   export class Skill {
     constructor(
       public id: string,

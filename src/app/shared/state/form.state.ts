@@ -364,7 +364,6 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Experience Organization Update Action
     return ctx.dispatch(
       new Resume.ExperienceOrganizationUpdate(
         updatedExperience.id,
@@ -392,7 +391,12 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Experience Duration Update Action
+    return ctx.dispatch(
+      new Resume.ExperienceDurationUpdate(
+        updatedExperience.id,
+        updatedExperience.duration,
+      ),
+    );
   }
 
   @Action(Form.Experience.LocationUpdate)
