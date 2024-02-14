@@ -365,6 +365,12 @@ export class FormState {
     });
 
     // TODO: Dispatch Resume Experience Organization Update Action
+    return ctx.dispatch(
+      new Resume.ExperienceOrganizationUpdate(
+        updatedExperience.id,
+        updatedExperience.organization,
+      ),
+    );
   }
 
   @Action(Form.Experience.DurationUpdate)

@@ -73,6 +73,14 @@ export namespace Resume {
     ) {}
   }
 
+  export class ExperienceOrganizationUpdate {
+    static readonly type = '[Resume] Experience Organization Update';
+    constructor(
+      public id: string,
+      public organization: string,
+    ) {}
+  }
+
   export class Skill {
     constructor(
       public id: string,
