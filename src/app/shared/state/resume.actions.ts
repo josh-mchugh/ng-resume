@@ -89,6 +89,14 @@ export namespace Resume {
     ) {}
   }
 
+  export class ExperienceLocationUpdate {
+    static readonly type = '[Resume] Experience Location Update';
+    constructor(
+      public id: string,
+      public location: string,
+    ) {}
+  }
+
   export class Skill {
     constructor(
       public id: string,

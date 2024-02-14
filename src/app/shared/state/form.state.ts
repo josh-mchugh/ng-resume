@@ -418,7 +418,12 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Experience Location Update Action
+    return ctx.dispatch(
+      new Resume.ExperienceLocationUpdate(
+        updatedExperience.id,
+        updatedExperience.location,
+      ),
+    );
   }
 
   @Action(Form.Experience.DescriptionUpdate)
