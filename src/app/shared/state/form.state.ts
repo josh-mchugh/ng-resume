@@ -312,7 +312,7 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Experience Delete Action
+    return ctx.dispatch(new Resume.ExperienceDelete(action.id));
   }
 
   @Action(Form.Experience.TitleUpdate)

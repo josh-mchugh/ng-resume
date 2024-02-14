@@ -60,6 +60,11 @@ export namespace Resume {
     constructor(public id: string) {}
   }
 
+  export class ExperienceDelete {
+    static readonly type = '[Resume] Experience Delete';
+    constructor(public id: string) {}
+  }
+
   export class Skill {
     constructor(
       public id: string,

@@ -776,6 +776,24 @@ export class ResumeState {
     // TODO: Create Section for Experience
   }
 
+  @Action(Resume.ExperienceDelete)
+  experienceDelete(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceDelete,
+  ) {
+    const updatedExperiences = Object.values(ctx.getState().experiences)
+      .filter((experience) => experience.id !== action.id)
+      .reduce(
+        (acc, experience) => ({ ...acc, [experience.id]: experience }),
+        {},
+      );
+
+    ctx.setState({
+      ...ctx.getState(),
+      experiences: updatedExperiences,
+    });
+  }
+
   @Action(Resume.SkillsUpdate)
   skillsUpdate(
     ctx: StateContext<ResumeStateModel>,
