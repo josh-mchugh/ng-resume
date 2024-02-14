@@ -40,6 +40,7 @@ export interface Experience {
 export interface ExperienceDescription {
   id: string;
   experienceId: string;
+  position: number;
   description: string;
 }
 
@@ -150,71 +151,83 @@ export enum SelectorType {
       '0': {
         id: '0',
         experienceId: '0',
+        position: 0,
         description:
           'Efficiently unleash cross-media information without cross-media value.',
       },
       '1': {
         id: '1',
         experienceId: '0',
+        position: 0,
         description:
           'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
       },
       '2': {
         id: '2',
         experienceId: '0',
+        position: 1,
         description:
           'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
       },
       '3': {
         id: '3',
         experienceId: '0',
+        position: 2,
         description:
           'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
       },
       '4': {
         id: '4',
         experienceId: '0',
+        position: 3,
         description: 'Paradigm shift land it in region, design thinking.',
       },
       '5': {
         id: '5',
         experienceId: '1',
+        position: 0,
         description:
           'Collaboratively administrate empowered markets via plug-and-play networks.',
       },
       '6': {
         id: '6',
         experienceId: '1',
+        position: 1,
         description:
           'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
       },
       '7': {
         id: '7',
         experienceId: '1',
+        position: 2,
         description:
           'Pursue scalable customer service through sustainable potentialities.',
       },
       '8': {
         id: '8',
         experienceId: '1',
+        position: 3,
         description:
           'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
       },
       '9': {
         id: '9',
         experienceId: '2',
+        position: 0,
         description:
           'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
       },
       '10': {
         id: '10',
         experienceId: '2',
+        position: 1,
         description:
           'Envisioned multimedia based expertise and cross-media growth strategies.',
       },
       '11': {
         id: '11',
         experienceId: '2',
+        position: 2,
         description:
           'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
       },
