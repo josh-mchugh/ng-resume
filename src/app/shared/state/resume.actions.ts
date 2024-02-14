@@ -55,21 +55,9 @@ export namespace Resume {
     ) {}
   }
 
-  export class Experience {
-    constructor(
-      public id: string,
-      public title: string,
-      public organization: string,
-      public duration: string,
-      public location: string,
-      public descriptions: string[],
-      public skills: string[],
-    ) {}
-  }
-
-  export class ExperiencesUpdate {
-    static readonly type = '[Resume] Experiences Update';
-    constructor(public experiences: Experience[]) {}
+  export class ExperienceCreate {
+    static readonly type = '[Resume] Experience Create';
+    constructor(public id: string) {}
   }
 
   export class Skill {

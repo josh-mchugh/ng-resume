@@ -750,71 +750,30 @@ export class ResumeState {
       },
     });
   }
-  @Action(Resume.ExperiencesUpdate)
-  experiencesUpdate(
+
+  @Action(Resume.ExperienceCreate)
+  experienceCreate(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperiencesUpdate,
+    action: Resume.ExperienceCreate,
   ) {
-    // Create Experience Object
-    const experiences = action.experiences
-      .map((experience) => {
-        return {
-          id: experience.id,
-          title: experience.title,
-          organization: experience.organization,
-          duration: experience.duration,
-          location: experience.location,
-        };
-      })
-      .reduce(
-        (acc, experience) => ({ ...acc, [experience.id]: experience }),
-        {},
-      );
-
-    // Create ExperienceDescription Objects
-    const experienceDescriptions = action.experiences
-      .map((experience, experienceIndex) => {
-        return experience.descriptions.map((description) => {
-          return {
-            experienceId: experienceIndex.toString(),
-            description: description,
-          };
-        });
-      })
-      .flat()
-      .reduce(
-        (acc, description, index) => ({
-          ...acc,
-          [index.toString()]: { ...description, id: index.toString() },
-        }),
-        {},
-      );
-
-    // Create ExperienceSkill Objects
-    const experienceSkills = action.experiences
-      .map((experience, experienceId) => {
-        return experience.skills.map((skill) => {
-          return {
-            experienceId: experienceId.toString(),
-            skill: skill,
-          };
-        });
-      })
-      .flat()
-      .reduce(
-        (acc, skill, index) => ({
-          ...acc,
-          [index.toString()]: { ...skill, id: index.toString() },
-        }),
-        {},
-      );
+    const experience = {
+      id: action.id,
+      title: '',
+      organization: '',
+      duration: '',
+      location: '',
+    };
+    const updatedExperiences = {
+      ...ctx.getState().experiences,
+      [experience.id]: experience,
+    };
 
     ctx.setState({
       ...ctx.getState(),
-      experiences: experiences,
-      experienceDescriptions: experienceDescriptions,
-      experienceSkills: experienceSkills,
+      experiences: updatedExperiences,
     });
+
+    // TODO: Create Section for Experience
   }
 
   @Action(Resume.SkillsUpdate)
