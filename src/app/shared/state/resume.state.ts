@@ -896,40 +896,70 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.ExperienceDescriptionUpdate,
   ) {
+    const findPrevDescByPosition = (
+      prevDescs: ExperienceDescription[],
+      position: number,
+    ) => descriptions.find((prevDesc) => prevDesc.position === position);
 
-    const findPrevDescByPosition = (prevDescs: ExperienceDescription[], position: number) =>
-      descriptions.find((prevDesc) => prevDesc.position === position)
+    const hasPosition = (
+      prevDescs: ExperienceDescription[],
+      position: number,
+    ) => prevDescs.length && findPrevDescByPosition(prevDescs, position);
 
-    const hasPosition = (prevDescs: ExperienceDescription[], position: number) =>
-      prevDescs.length && findPrevDescByPosition(prevDescs, position)
-
-    const updatePrevDesc = (prevDesc: ExperienceDescription | undefined, newDesc: Resume.ExperienceDescription) => ({
+    const updatePrevDesc = (
+      prevDesc: ExperienceDescription | undefined,
+      newDesc: Resume.ExperienceDescription,
+    ) => ({
       ...prevDesc,
-      description: newDesc.value
+      description: newDesc.value,
     });
 
-    const createNewDesc = (newDesc: Resume.ExperienceDescription): ExperienceDescription => ({
+    const createNewDesc = (
+      newDesc: Resume.ExperienceDescription,
+    ): ExperienceDescription => ({
       id: this.uuid.rnd(),
       experienceId: action.id,
       position: newDesc.position,
       description: newDesc.value,
     });
 
-    const descriptions = Object.values(ctx.getState().experienceDescriptions)
-      .filter((description) => description.experienceId === action.id);
+    const descriptions = Object.values(
+      ctx.getState().experienceDescriptions,
+    ).filter((description) => description.experienceId === action.id);
 
-    const updatedDescriptions = action.descriptions.map((description) =>
-      hasPosition(descriptions, description.position)
-        ? updatePrevDesc(findPrevDescByPosition(descriptions, description.position), description)
-        : createNewDesc(description)
+    const descriptionKeys = Object.keys(descriptions);
+
+    const newDescriptions = action.descriptions
+      .map((description) =>
+        hasPosition(descriptions, description.position)
+          ? updatePrevDesc(
+              findPrevDescByPosition(descriptions, description.position),
+              description,
+            )
+          : createNewDesc(description),
+      )
+      .reduce(
+        (acc, description) => ({
+          ...acc,
+          [description.id as string]: description,
+        }),
+        {},
+      );
+
+    const filteredDescriptions = Object.values(
+      ctx.getState().experienceDescriptions,
     )
-    .reduce((acc, description) => ({ ...acc, [description.id as string]: description }), {} );
+      .filter((description) => description.experienceId !== action.id)
+      .reduce(
+        (acc, description) => ({ ...acc, [description.id]: description }),
+        {},
+      );
 
     ctx.setState({
       ...ctx.getState(),
       experienceDescriptions: {
-        ...ctx.getState().experienceDescriptions,
-        ...updatedDescriptions,
+        ...filteredDescriptions,
+        ...newDescriptions,
       },
     });
   }

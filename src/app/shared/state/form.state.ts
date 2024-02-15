@@ -45,18 +45,6 @@ export interface FormExperience {
   skills: string;
 }
 
-function emptyExperience(id: string): FormExperience {
-  return {
-    id: id,
-    title: '',
-    organization: '',
-    duration: '',
-    location: '',
-    description: '',
-    skills: '',
-  };
-}
-
 export interface FormSkillModel {
   id: string;
   name: string;
@@ -448,10 +436,16 @@ export class FormState {
       },
     });
 
-    const descriptions = updatedExperience.description.split('\n')
+    const descriptions = updatedExperience.description
+      .split('\n')
       .filter((value) => value)
       .map((value, index) => new Resume.ExperienceDescription(index, value));
-    return ctx.dispatch(new Resume.ExperienceDescriptionUpdate(updatedExperience.id, descriptions));
+    return ctx.dispatch(
+      new Resume.ExperienceDescriptionUpdate(
+        updatedExperience.id,
+        descriptions,
+      ),
+    );
   }
 
   @Action(Form.Experience.SkillsUpdate)
