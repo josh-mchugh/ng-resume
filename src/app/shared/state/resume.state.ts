@@ -6,6 +6,7 @@ import {
   DisplayRequest,
   DisplayService,
 } from '@shared/service/display.service';
+import ShortUniqueId from 'short-unique-id';
 
 export interface ResumeStateModel {
   name: string;
@@ -379,7 +380,10 @@ export enum SelectorType {
 })
 @Injectable()
 export class ResumeState {
-  constructor(private displayService: DisplayService) {}
+  private uuid: ShortUniqueId;
+  constructor(private displayService: DisplayService) {
+    this.uuid = new ShortUniqueId();
+  }
 
   // Ignore until refactoring out generic type any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -883,6 +887,49 @@ export class ResumeState {
       experiences: {
         ...ctx.getState().experiences,
         [updatedExperience.id]: updatedExperience,
+      },
+    });
+  }
+
+  @Action(Resume.ExperienceDescriptionUpdate)
+  experienceDescriptionUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceDescriptionUpdate,
+  ) {
+
+    const findPrevDescByPosition = (prevDescs: ExperienceDescription[], position: number) =>
+      descriptions.find((prevDesc) => prevDesc.position === position)
+
+    const hasPosition = (prevDescs: ExperienceDescription[], position: number) =>
+      prevDescs.length && findPrevDescByPosition(prevDescs, position)
+
+    const updatePrevDesc = (prevDesc: ExperienceDescription | undefined, newDesc: Resume.ExperienceDescription) => ({
+      ...prevDesc,
+      description: newDesc.value
+    });
+
+    const createNewDesc = (newDesc: Resume.ExperienceDescription): ExperienceDescription => ({
+      id: this.uuid.rnd(),
+      experienceId: action.id,
+      position: newDesc.position,
+      description: newDesc.value,
+    });
+
+    const descriptions = Object.values(ctx.getState().experienceDescriptions)
+      .filter((description) => description.experienceId === action.id);
+
+    const updatedDescriptions = action.descriptions.map((description) =>
+      hasPosition(descriptions, description.position)
+        ? updatePrevDesc(findPrevDescByPosition(descriptions, description.position), description)
+        : createNewDesc(description)
+    )
+    .reduce((acc, description) => ({ ...acc, [description.id as string]: description }), {} );
+
+    ctx.setState({
+      ...ctx.getState(),
+      experienceDescriptions: {
+        ...ctx.getState().experienceDescriptions,
+        ...updatedDescriptions,
       },
     });
   }

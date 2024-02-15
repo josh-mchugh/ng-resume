@@ -97,6 +97,21 @@ export namespace Resume {
     ) {}
   }
 
+  export class ExperienceDescription {
+    constructor(
+      public position: number,
+      public value: string,
+    ) {}
+  }
+
+  export class ExperienceDescriptionUpdate {
+    static readonly type = '[Resume] Experience Description Update';
+    constructor(
+      public id: string,
+      public descriptions: ExperienceDescription[],
+    ) {}
+  }
+
   export class Skill {
     constructor(
       public id: string,

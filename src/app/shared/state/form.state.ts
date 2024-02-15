@@ -448,7 +448,10 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Experience Description Update Action
+    const descriptions = updatedExperience.description.split('\n')
+      .filter((value) => value)
+      .map((value, index) => new Resume.ExperienceDescription(index, value));
+    return ctx.dispatch(new Resume.ExperienceDescriptionUpdate(updatedExperience.id, descriptions));
   }
 
   @Action(Form.Experience.SkillsUpdate)
