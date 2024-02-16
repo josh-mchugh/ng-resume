@@ -896,47 +896,29 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.ExperienceDescriptionUpdate,
   ) {
-    const findPrevDescByPosition = (
-      prevDescs: ExperienceDescription[],
-      position: number,
-    ) => descriptions.find((prevDesc) => prevDesc.position === position);
-
-    const hasPosition = (
-      prevDescs: ExperienceDescription[],
-      position: number,
-    ) => prevDescs.length && findPrevDescByPosition(prevDescs, position);
-
-    const updatePrevDesc = (
-      prevDesc: ExperienceDescription | undefined,
-      newDesc: Resume.ExperienceDescription,
-    ) => ({
-      ...prevDesc,
-      description: newDesc.value,
-    });
-
-    const createNewDesc = (
-      newDesc: Resume.ExperienceDescription,
-    ): ExperienceDescription => ({
-      id: this.uuid.rnd(),
-      experienceId: action.id,
-      position: newDesc.position,
-      description: newDesc.value,
-    });
-
-    const descriptions = Object.values(
+    const experienceDescriptions = Object.values(
       ctx.getState().experienceDescriptions,
     ).filter((description) => description.experienceId === action.id);
 
-    const descriptionKeys = Object.keys(descriptions);
+    const prevDescriptions = new Map(
+      experienceDescriptions.map((description) => [
+        description.position,
+        description,
+      ]),
+    );
 
-    const newDescriptions = action.descriptions
-      .map((description) =>
-        hasPosition(descriptions, description.position)
-          ? updatePrevDesc(
-              findPrevDescByPosition(descriptions, description.position),
-              description,
-            )
-          : createNewDesc(description),
+    const newDescriptions = action.description
+      .split('\n')
+      .filter((value) => value)
+      .map((value, index) =>
+        prevDescriptions.has(index)
+          ? { ...prevDescriptions.get(index), description: value }
+          : {
+              id: this.uuid.rnd(),
+              experienceId: action.id,
+              position: index,
+              description: action.description,
+            },
       )
       .reduce(
         (acc, description) => ({
@@ -946,7 +928,7 @@ export class ResumeState {
         {},
       );
 
-    const filteredDescriptions = Object.values(
+    const otherExperienceDescriptions = Object.values(
       ctx.getState().experienceDescriptions,
     )
       .filter((description) => description.experienceId !== action.id)
@@ -958,7 +940,7 @@ export class ResumeState {
     ctx.setState({
       ...ctx.getState(),
       experienceDescriptions: {
-        ...filteredDescriptions,
+        ...otherExperienceDescriptions,
         ...newDescriptions,
       },
     });

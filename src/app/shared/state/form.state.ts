@@ -436,14 +436,10 @@ export class FormState {
       },
     });
 
-    const descriptions = updatedExperience.description
-      .split('\n')
-      .filter((value) => value)
-      .map((value, index) => new Resume.ExperienceDescription(index, value));
     return ctx.dispatch(
       new Resume.ExperienceDescriptionUpdate(
         updatedExperience.id,
-        descriptions,
+        updatedExperience.description,
       ),
     );
   }
