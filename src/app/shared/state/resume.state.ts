@@ -48,6 +48,7 @@ export interface ExperienceDescription {
 export interface ExperienceSkill {
   id: string;
   experienceId: string;
+  position: number;
   skill: string;
 }
 
@@ -237,96 +238,115 @@ export enum SelectorType {
       '0': {
         id: '0',
         experienceId: '0',
+        position: 0,
         skill: 'Photoshop',
       },
       '1': {
         id: '1',
         experienceId: '0',
+        position: 1,
         skill: 'HTML',
       },
       '2': {
         id: '2',
         experienceId: '0',
+        position: 2,
         skill: 'CSS',
       },
       '3': {
         id: '3',
         experienceId: '0',
+        position: 3,
         skill: 'Illustrator',
       },
       '4': {
         id: '4',
         experienceId: '0',
+        position: 4,
         skill: 'PHP',
       },
       '5': {
         id: '5',
         experienceId: '0',
+        position: 5,
         skill: 'JavaScript',
       },
       '6': {
         id: '6',
         experienceId: '1',
+        position: 0,
         skill: 'Typography',
       },
       '7': {
         id: '7',
         experienceId: '1',
+        position: 1,
         skill: 'Composition',
       },
       '8': {
         id: '8',
         experienceId: '1',
+        position: 2,
         skill: 'Color Theory',
       },
       '9': {
         id: '9',
         experienceId: '1',
+        position: 3,
         skill: 'Design',
       },
       '10': {
         id: '10',
         experienceId: '1',
+        position: 4,
         skill: 'CMS',
       },
       '11': {
         id: '11',
         experienceId: '1',
+        position: 5,
         skill: 'UX',
       },
       '12': {
         id: '12',
         experienceId: '1',
+        position: 6,
         skill: 'Graphic Design',
       },
       '13': {
         id: '13',
         experienceId: '2',
+        position: 0,
         skill: 'SQL',
       },
       '14': {
         id: '14',
         experienceId: '2',
+        position: 1,
         skill: 'NoSQL',
       },
       '15': {
         id: '15',
         experienceId: '2',
+        position: 2,
         skill: 'MySQL',
       },
       '16': {
         id: '16',
         experienceId: '2',
+        position: 3,
         skill: 'Postgres',
       },
       '17': {
         id: '17',
         experienceId: '2',
+        position: 4,
         skill: 'MongoDB',
       },
       '18': {
         id: '18',
         experienceId: '2',
+        position: 5,
         skill: 'Coachbase',
       },
     },
@@ -909,7 +929,7 @@ export class ResumeState {
 
     const newDescriptions = action.description
       .split('\n')
-      .filter((value) => value)
+      .filter((value) => value.trim())
       .map((value, index) =>
         prevDescriptions.has(index)
           ? { ...prevDescriptions.get(index), description: value }
@@ -917,7 +937,7 @@ export class ResumeState {
               id: this.uuid.rnd(),
               experienceId: action.id,
               position: index,
-              description: action.description,
+              description: value,
             },
       )
       .reduce(
@@ -944,6 +964,65 @@ export class ResumeState {
         ...newDescriptions,
       },
     });
+
+    // TODO: Dispatch Create and Delete Section Actions
+  }
+
+  @Action(Resume.ExperienceSkillsUpdate)
+  experienceSkillsUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceSkillsUpdate,
+  ) {
+    const experienceSkills = Object.values(
+      ctx.getState().experienceSkills,
+    ).filter((skill) => skill.experienceId === action.id);
+
+    const prevSkills = new Map(
+      experienceSkills.map((skill) => [
+        skill.position,
+        skill,
+      ]),
+    );
+
+    const newSkills = action.skills
+      .split(',')
+      .filter((value) => value.trim())
+      .map((value, index) =>
+        prevSkills.has(index)
+          ? { ...prevSkills.get(index), skill: value }
+          : {
+              id: this.uuid.rnd(),
+              experienceId: action.id,
+              position: index,
+              skill: value,
+            },
+      )
+      .reduce(
+        (acc, skill) => ({
+          ...acc,
+          [skill.id as string]: skill,
+        }),
+        {},
+      );
+
+    const otherExperienceSkills = Object.values(
+      ctx.getState().experienceSkills,
+    )
+      .filter((skill) => skill.experienceId !== action.id)
+      .reduce(
+        (acc, skill) => ({ ...acc, [skill.id]: skill }),
+        {},
+      );
+
+    ctx.setState({
+      ...ctx.getState(),
+      experienceSkills: {
+        ...otherExperienceSkills,
+        ...newSkills,
+      },
+    });
+
+    // TODO: Dispatch Section Create and Delete Actions
   }
 
   @Action(Resume.SkillsUpdate)

@@ -464,6 +464,12 @@ export class FormState {
     });
 
     // TODO: Dispatch Resume Experience Skills Update Action
+    return ctx.dispatch(
+      new Resume.ExperienceSkillsUpdate(
+        updatedExperience.id,
+        updatedExperience.skills,
+      ),
+    );
   }
 
   @Action(Form.Skill.Create)
