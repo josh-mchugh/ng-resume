@@ -978,10 +978,7 @@ export class ResumeState {
     ).filter((skill) => skill.experienceId === action.id);
 
     const prevSkills = new Map(
-      experienceSkills.map((skill) => [
-        skill.position,
-        skill,
-      ]),
+      experienceSkills.map((skill) => [skill.position, skill]),
     );
 
     const newSkills = action.skills
@@ -1005,14 +1002,9 @@ export class ResumeState {
         {},
       );
 
-    const otherExperienceSkills = Object.values(
-      ctx.getState().experienceSkills,
-    )
+    const otherExperienceSkills = Object.values(ctx.getState().experienceSkills)
       .filter((skill) => skill.experienceId !== action.id)
-      .reduce(
-        (acc, skill) => ({ ...acc, [skill.id]: skill }),
-        {},
-      );
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
 
     ctx.setState({
       ...ctx.getState(),

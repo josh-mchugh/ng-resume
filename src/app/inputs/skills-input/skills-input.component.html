@@ -1,40 +1,34 @@
 <div class="section__header">Skills</div>
 <div>
   <ng-container
-    *ngFor="
-      let skill of formSkills$ | async;
-      let i = index;
-      trackBy: handleSkillTrackBy
-    "
+    *ngFor="let skill of formSkills$ | async; trackBy: handleSkillTrackBy"
   >
     <div class="form-group">
-      <ng-template [ngIf]="i > 0">
-        <div
-          class="form-group-remove"
-          (click)="onSkillDelete(i)"
-          (keyup.enter)="onSkillDelete(i)"
-          tabindex="0"
-        >
-          <div class="form-group-remove-icon">&times;</div>
-        </div>
-      </ng-template>
-      <label for="skillName{{ i }}">Name</label>
+      <div
+        class="form-group-remove"
+        (click)="onSkillDelete(skill.id)"
+        (keyup.enter)="onSkillDelete(skill.id)"
+        tabindex="0"
+      >
+        <div class="form-group-remove-icon">&times;</div>
+      </div>
+      <label for="skillName-{{ skill.id }}">Name</label>
       <input
         type="text"
-        name="skillName{{ i }}"
+        name="skillName-{{ skill.id }}"
         placeholder="Name"
         [value]="skill.name"
-        (input)="onSkillNameInput(i, $event)"
+        (input)="onSkillNameInput(skill.id, $event)"
       />
-      <label for="skillProficiency{{ i }}">Proficiency</label>
+      <label for="skillProficiency-{{ skill.id }}">Proficiency</label>
       <input
         type="range"
-        name="skillProficiency{{ i }}"
+        name="skillProficiency-{{ skill.id }}"
         placeholder="Proficiency"
         minx="0"
         max="5"
         [value]="skill.proficiency"
-        (input)="onSkillProficiencyInput(i, $event)"
+        (input)="onSkillProficiencyInput(skill.id, $event)"
       />
     </div>
   </ng-container>

@@ -15,7 +15,7 @@ export interface FormStateModel {
   location: string;
   socials: Socials;
   experiences: Experiences;
-  skills: FormSkillModel[];
+  skills: Skills;
   certifications: FormCertificationModel[];
 }
 
@@ -45,18 +45,15 @@ export interface FormExperience {
   skills: string;
 }
 
-export interface FormSkillModel {
+interface Skills {
+  byId: { [id: string]: FormSkill };
+  allIds: string[];
+}
+
+export interface FormSkill {
   id: string;
   name: string;
   proficiency: number;
-}
-
-function emptySkill(id: string): FormSkillModel {
-  return {
-    id: id,
-    name: '',
-    proficiency: 0,
-  };
 }
 
 export interface FormCertificationModel {
@@ -94,7 +91,10 @@ function emptyCertification(id: string): FormCertificationModel {
       byId: {},
       allIds: [],
     },
-    skills: [emptySkill(uuid.rnd())],
+    skills: {
+      byId: {},
+      allIds: [],
+    },
     certifications: [emptyCertification(uuid.rnd())],
   },
 })
@@ -109,6 +109,12 @@ export class FormState {
   static getExperiences(): (state: FormStateModel) => FormExperience[] {
     return createSelector([FormState], (state: FormStateModel) =>
       Object.values(state.experiences.byId),
+    );
+  }
+
+  static getSkills(): (state: FormStateModel) => FormSkill[] {
+    return createSelector([FormState], (state: FormStateModel) =>
+      Object.values(state.skills.byId),
     );
   }
 
@@ -474,28 +480,40 @@ export class FormState {
 
   @Action(Form.Skill.Create)
   skillCreate(ctx: StateContext<FormStateModel>) {
-    const state = ctx.getState();
-    const updatedSkills = state.skills.concat(emptySkill(uuid.rnd()));
+    const skills = ctx.getState().skills;
+    const skill = {
+      id: uuid.rnd(),
+      name: '',
+      proficiency: 0,
+    };
+
     ctx.setState({
-      ...state,
-      skills: updatedSkills,
+      ...ctx.getState(),
+      skills: {
+        byId: { ...skills.byId, [skill.id]: skill },
+        allIds: [...skills.allIds, skill.id],
+      },
     });
-    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
-    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
+
+    // TODO: Dispatch Resume Skill Create Action
   }
 
   @Action(Form.Skill.Delete)
   skillDelete(ctx: StateContext<FormStateModel>, action: Form.Skill.Delete) {
-    const state = ctx.getState();
-    const updatedSkills = state.skills.filter(
-      (skill, index) => index !== action.index,
-    );
+    const updatedById = Object.values(ctx.getState().skills.byId)
+      .filter((skill) => skill.id !== action.id)
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+    const updatedAllIds = Object.keys(updatedById);
+
     ctx.setState({
-      ...state,
-      skills: updatedSkills,
+      ...ctx.getState(),
+      skills: {
+        byId: updatedById,
+        allIds: updatedAllIds,
+      },
     });
-    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
-    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
+
+    // TODO: Dispatch Resume Skill Delete Action
   }
 
   @Action(Form.Skill.NameUpdate)
@@ -503,16 +521,21 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Skill.NameUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedSkills = state.skills.map((skill, index) =>
-      index === action.index ? { ...skill, name: action.name } : skill,
-    );
+    const skill = ctx.getState().skills.byId[action.id];
+    const updatedSkill = { ...skill, name: action.name };
+
     ctx.setState({
-      ...state,
-      skills: updatedSkills,
+      ...ctx.getState(),
+      skills: {
+        ...ctx.getState().skills,
+        byId: {
+          ...ctx.getState().skills.byId,
+          [updatedSkill.id]: updatedSkill,
+        },
+      },
     });
-    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
-    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
+
+    // TODO: Dispatch Resume Skill Name Update Action
   }
 
   @Action(Form.Skill.ProficiencyUpdate)
@@ -520,18 +543,21 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Skill.ProficiencyUpdate,
   ) {
-    const state = ctx.getState();
-    const updatedSkills = state.skills.map((skill, index) =>
-      index == action.index
-        ? { ...skill, proficiency: action.proficiency }
-        : skill,
-    );
+    const skill = ctx.getState().skills.byId[action.id];
+    const updatedSkill = { ...skill, proficiency: action.proficiency };
+
     ctx.setState({
-      ...state,
-      skills: updatedSkills,
+      ...ctx.getState(),
+      skills: {
+        ...ctx.getState().skills,
+        byId: {
+          ...ctx.getState().skills.byId,
+          [updatedSkill.id]: updatedSkill,
+        },
+      },
     });
-    const resumeSkills = this.mapFormSkillsToResumeSkills(updatedSkills);
-    ctx.dispatch(new Resume.SkillsUpdate(resumeSkills));
+
+    // TODO: Dispatch Resume Skill Proficiency Update Action
   }
 
   @Action(Form.Certification.Create)
@@ -652,12 +678,6 @@ export class FormState {
   }
 
   /* Util Functions */
-  mapFormSkillsToResumeSkills(formSkills: FormSkillModel[]): Resume.Skill[] {
-    return formSkills.map((skill) => ({
-      ...skill,
-    }));
-  }
-
   mapFormCertificationsToResumeCertifications(
     formCertifications: FormCertificationModel[],
   ): Resume.Certification[] {

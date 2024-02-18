@@ -122,13 +122,13 @@ export namespace Form {
 
     export class Delete {
       static readonly type = '[Form] Skill Delete';
-      constructor(public index: number) {}
+      constructor(public id: string) {}
     }
 
     export class NameUpdate {
       static readonly type = '[Form] Skill Name Update';
       constructor(
-        public index: number,
+        public id: string,
         public name: string,
       ) {}
     }
@@ -136,7 +136,7 @@ export namespace Form {
     export class ProficiencyUpdate {
       static readonly type = '[Form] Skill Proficiency Update';
       constructor(
-        public index: number,
+        public id: string,
         public proficiency: number,
       ) {}
     }
