@@ -829,6 +829,8 @@ export class ResumeState {
       ...ctx.getState(),
       experiences: updatedExperiences,
     });
+
+    // TODO: Dispatch Section Experience Delete Action
   }
 
   @Action(Resume.ExperienceTitleUpdate)
@@ -1030,7 +1032,38 @@ export class ResumeState {
       skills: updatedSkills,
     });
 
-    // TODO: Create new Section for Skill
+    // TODO: Dispatch Sections Skill Create Action
+  }
+
+  @Action(Resume.SkillDelete)
+  skillDelete(ctx: StateContext<ResumeStateModel>, action: Resume.SkillDelete) {
+    const updatedSkills = Object.values(ctx.getState().skills)
+      .filter((skill) => skill.id !== action.id)
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+
+    ctx.setState({
+      ...ctx.getState(),
+      skills: updatedSkills,
+    });
+
+    // TODO: Dispatch Section Skills Delete Action
+  }
+
+  @Action(Resume.SkillNameUpdate)
+  skillNameUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.SkillNameUpdate,
+  ) {
+    const skill = ctx.getState().skills[action.id];
+    const updatedSkill = { ...skill, name: action.name };
+
+    ctx.setState({
+      ...ctx.getState(),
+      skills: {
+        ...ctx.getState().skills,
+        [updatedSkill.id]: updatedSkill,
+      },
+    });
   }
 
   @Action(Resume.CertificationsUpdate)

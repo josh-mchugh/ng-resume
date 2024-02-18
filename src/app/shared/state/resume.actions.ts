@@ -118,6 +118,19 @@ export namespace Resume {
     constructor(public id: string) {}
   }
 
+  export class SkillDelete {
+    static readonly type = '[Resume] Skill Delete';
+    constructor(public id: string) {}
+  }
+
+  export class SkillNameUpdate {
+    static readonly type = '[Resume] Skill Name Update';
+    constructor(
+      public id: string,
+      public name: string,
+    ) {}
+  }
+
   export class Certification {
     constructor(
       public id: string,

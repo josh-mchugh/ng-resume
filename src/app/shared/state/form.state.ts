@@ -512,7 +512,7 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Skill Delete Action
+    return ctx.dispatch(new Resume.SkillDelete(action.id));
   }
 
   @Action(Form.Skill.NameUpdate)
@@ -534,7 +534,9 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Skill Name Update Action
+    return ctx.dispatch(
+      new Resume.SkillNameUpdate(updatedSkill.id, updatedSkill.name),
+    );
   }
 
   @Action(Form.Skill.ProficiencyUpdate)
