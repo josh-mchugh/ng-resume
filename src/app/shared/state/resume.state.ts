@@ -1017,19 +1017,20 @@ export class ResumeState {
     // TODO: Dispatch Section Create and Delete Actions
   }
 
-  @Action(Resume.SkillsUpdate)
-  skillsUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SkillsUpdate,
-  ) {
-    const skills = action.skills.reduce(
-      (acc, skill) => ({ ...acc, [skill.id]: skill }),
-      {},
-    );
+  @Action(Resume.SkillCreate)
+  skillCreate(ctx: StateContext<ResumeStateModel>, action: Resume.SkillCreate) {
+    const skill = { id: action.id, name: '', proficiency: 0 };
+    const updatedSkills = {
+      ...ctx.getState().skills,
+      [skill.id]: skill,
+    };
+
     ctx.setState({
       ...ctx.getState(),
-      skills: skills,
+      skills: updatedSkills,
     });
+
+    // TODO: Create new Section for Skill
   }
 
   @Action(Resume.CertificationsUpdate)

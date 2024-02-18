@@ -113,17 +113,9 @@ export namespace Resume {
     ) {}
   }
 
-  export class Skill {
-    constructor(
-      public id: string,
-      public name: string,
-      public proficiency: number,
-    ) {}
-  }
-
-  export class SkillsUpdate {
-    static readonly type = '[Resume] Skills Update';
-    constructor(public skills: Skill[]) {}
+  export class SkillCreate {
+    static readonly type = '[Resume] Skill Create';
+    constructor(public id: string) {}
   }
 
   export class Certification {

@@ -469,7 +469,6 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Experience Skills Update Action
     return ctx.dispatch(
       new Resume.ExperienceSkillsUpdate(
         updatedExperience.id,
@@ -495,7 +494,7 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Skill Create Action
+    return ctx.dispatch(new Resume.SkillCreate(skill.id));
   }
 
   @Action(Form.Skill.Delete)
