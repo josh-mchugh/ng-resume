@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Action, createSelector, State, StateContext } from '@ngxs/store';
+import {
+  Action,
+  createSelector,
+  State,
+  StateContext,
+  Store,
+} from '@ngxs/store';
 import { Display } from '@shared/state/display.actions';
+import { LayoutState } from '@shared/state/layout.state';
+import ShortUniqueId from 'short-unique-id';
 
 export interface DisplayStateModel {
   pages: Pages;
@@ -69,6 +77,12 @@ function initDimension(): Dimension {
 })
 @Injectable()
 export class DisplayState {
+  private uuid: ShortUniqueId;
+
+  constructor(private store: Store) {
+    this.uuid = new ShortUniqueId();
+  }
+
   static getPages(): (state: DisplayStateModel) => Page[] {
     return createSelector([DisplayState], (state: DisplayStateModel) =>
       Object.values(state.pages.byId),
@@ -178,6 +192,47 @@ export class DisplayState {
       sections: {
         byId: sections,
         allIds: allIds,
+      },
+    });
+  }
+
+  @Action(Display.SectionCreate)
+  sectionCreateSocial(
+    ctx: StateContext<DisplayStateModel>,
+    action: Display.SectionCreate,
+  ) {
+    const layoutNode = this.store.selectSnapshot(
+      LayoutState.layoutNodeBySelectorType(action.selectorType),
+    );
+    const parentSection = Object.values(ctx.getState().sections.byId).find(
+      (section) => section.layoutNodeId === layoutNode.parentId,
+    );
+    if (!parentSection) {
+      throw new Error(
+        `Unable to find parent section by layoutNodeId: ${layoutNode.id}`,
+      );
+    }
+
+    const section = {
+      id: this.uuid.rnd(),
+      parentId: parentSection.id,
+      layoutNodeId: layoutNode.id,
+      resumeId: action.id,
+      pageId: '0',
+      dimension: initDimension(),
+    };
+
+    const updatedById = {
+      ...ctx.getState().sections.byId,
+      [section.id]: section,
+    };
+    const updatedAllIds = Object.keys(updatedById);
+
+    ctx.setState({
+      ...ctx.getState(),
+      sections: {
+        byId: updatedById,
+        allIds: updatedAllIds,
       },
     });
   }

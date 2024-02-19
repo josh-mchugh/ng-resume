@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Store } from '@ngxs/store';
 import ShortUniqueId from 'short-unique-id';
 import { LayoutNode } from '@shared/state/layout.state';

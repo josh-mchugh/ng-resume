@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { mergeMap } from 'rxjs';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
-import {
-  DisplayRequest,
-  DisplayService,
-} from '@shared/service/display.service';
+import { Display } from '@shared/state/display.actions';
 import ShortUniqueId from 'short-unique-id';
 
 export interface ResumeStateModel {
@@ -401,7 +397,8 @@ export enum SelectorType {
 @Injectable()
 export class ResumeState {
   private uuid: ShortUniqueId;
-  constructor(private displayService: DisplayService) {
+
+  constructor() {
     this.uuid = new ShortUniqueId();
   }
 
@@ -728,7 +725,9 @@ export class ResumeState {
       socials: updatedSocials,
     });
 
-    // TODO: Create new Section for Social
+    return ctx.dispatch(
+      new Display.SectionCreate(social.id, SelectorType.SOCIAL_NAME),
+    );
   }
 
   @Action(Resume.SocialDelete)

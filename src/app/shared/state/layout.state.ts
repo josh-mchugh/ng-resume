@@ -671,4 +671,21 @@ export class LayoutState {
       Object.values(state.byId).filter((section) => id === section.parentId),
     );
   }
+
+  static layoutNodeBySelectorType(
+    selectorType: SelectorType,
+  ): (state: LayoutStateModel) => LayoutNode {
+    return createSelector([LayoutState], (state: LayoutStateModel) => {
+      const layoutNode = Object.values(state.byId).find((section) =>
+        section.selectors.find((selector) => selector.type === selectorType),
+      );
+      if (layoutNode) {
+        return layoutNode;
+      } else {
+        throw new Error(
+          `Unable to find layout node with selector type: ${selectorType}`,
+        );
+      }
+    });
+  }
 }

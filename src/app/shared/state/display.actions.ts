@@ -1,4 +1,5 @@
 import { Dimension } from '@shared/state/display.state';
+import { SelectorType } from '@shared/state/resume.state';
 
 export namespace Display {
   export interface Section {
@@ -30,5 +31,13 @@ export namespace Display {
   export class SectionDeleteByResumeIds {
     static readonly type = '[Display] Section Delete By ResumeIds';
     constructor(public resumeIds: string[]) {}
+  }
+
+  export class SectionCreate {
+    static readonly type = '[Display] Section Social Create';
+    constructor(
+      public id: string,
+      public selectorType: SelectorType,
+    ) {}
   }
 }
