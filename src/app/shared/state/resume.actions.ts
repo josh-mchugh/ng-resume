@@ -148,4 +148,12 @@ export namespace Resume {
     static readonly type = '[Resume] Certification Delete';
     constructor(public id: string) {}
   }
+
+  export class CertificationTitleUpdate {
+    static readonly type = '[Resume] Certification Title Update';
+    constructor(
+      public id: string,
+      public title: string,
+    ) {}
+  }
 }

@@ -1127,4 +1127,21 @@ export class ResumeState {
 
     // TODO: Dispatch Section Certification Delete action
   }
+
+  @Action(Resume.CertificationTitleUpdate)
+  certificationTitleUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.CertificationTitleUpdate,
+  ) {
+    const certification = ctx.getState().certifications[action.id];
+    const updatedCertification = { ...certification, title: action.title };
+
+    ctx.setState({
+      ...ctx.getState(),
+      certifications: {
+        ...ctx.getState().certifications,
+        [updatedCertification.id]: updatedCertification,
+      },
+    });
+  }
 }

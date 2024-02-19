@@ -642,7 +642,12 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Certification Title Update Action
+    return ctx.dispatch(
+      new Resume.CertificationTitleUpdate(
+        updatedCertification.id,
+        updatedCertification.title,
+      ),
+    );
   }
 
   @Action(Form.Certification.OrganizationUpdate)
