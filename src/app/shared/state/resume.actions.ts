@@ -156,4 +156,12 @@ export namespace Resume {
       public title: string,
     ) {}
   }
+
+  export class CertificationOrganizationUpdate {
+    static readonly type = '[Resume] Certification Organization Update';
+    constructor(
+      public id: string,
+      public organization: string,
+    ) {}
+  }
 }
