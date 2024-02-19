@@ -1083,18 +1083,28 @@ export class ResumeState {
     });
   }
 
-  @Action(Resume.CertificationsUpdate)
-  certificationsUpdate(
+  @Action(Resume.CertificationCreate)
+  certificationCreate(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationsUpdate,
+    action: Resume.CertificationCreate,
   ) {
-    const certifications = action.certifications.reduce(
-      (acc, certification) => ({ ...acc, [certification.id]: certification }),
-      {},
-    );
+    const certification = {
+      id: action.id,
+      title: '',
+      organization: '',
+      year: '',
+      location: '',
+    };
+    const updatedCertifications = {
+      ...ctx.getState().certifications,
+      [certification.id]: certification,
+    };
+
     ctx.setState({
       ...ctx.getState(),
-      certifications: certifications,
+      certifications: updatedCertifications,
     });
+
+    // TODO: Dispatch Section Create Certification Action
   }
 }
