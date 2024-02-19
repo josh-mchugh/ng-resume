@@ -131,6 +131,14 @@ export namespace Resume {
     ) {}
   }
 
+  export class SkillProficiencyUpdate {
+    static readonly type = '[Resume] Skill Proficiency Update';
+    constructor(
+      public id: string,
+      public proficiency: number,
+    ) {}
+  }
+
   export class Certification {
     constructor(
       public id: string,

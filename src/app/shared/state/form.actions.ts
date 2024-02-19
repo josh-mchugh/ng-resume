@@ -149,13 +149,13 @@ export namespace Form {
 
     export class Delete {
       static readonly type = '[Form] Certification Delete';
-      constructor(public index: number) {}
+      constructor(public id: string) {}
     }
 
     export class TitleUpdate {
       static readonly type = '[Form] Certification Title Update';
       constructor(
-        public index: number,
+        public id: string,
         public title: string,
       ) {}
     }
@@ -163,7 +163,7 @@ export namespace Form {
     export class OrganizationUpdate {
       static readonly type = '[Form] Certification Organization Update';
       constructor(
-        public index: number,
+        public id: string,
         public organization: string,
       ) {}
     }
@@ -171,7 +171,7 @@ export namespace Form {
     export class YearUpdate {
       static readonly type = '[Form] Certification Year Update';
       constructor(
-        public index: number,
+        public id: string,
         public year: string,
       ) {}
     }
@@ -179,7 +179,7 @@ export namespace Form {
     export class LocationUpdate {
       static readonly type = '[Form] Certification Location Update';
       constructor(
-        public index: number,
+        public id: string,
         public location: string,
       ) {}
     }

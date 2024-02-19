@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { FormCertificationModel } from '@shared/state/form.state';
+import { FormCertification, FormState } from '@shared/state/form.state';
 import { Form } from '@shared/state/form.actions';
 
 @Component({
@@ -10,12 +10,10 @@ import { Form } from '@shared/state/form.actions';
   styleUrls: ['./certifications-input.component.scss'],
 })
 export class CertificationsInputComponent {
-  formCertifications$: Observable<Array<FormCertificationModel>>;
+  formCertifications$: Observable<FormCertification[]>;
 
   constructor(private store: Store) {
-    this.formCertifications$ = this.store.select(
-      (state) => state.form.certifications,
-    );
+    this.formCertifications$ = this.store.select(FormState.getCertifications());
   }
 
   public handleCertificationTrackBy(index: number): number {
@@ -27,30 +25,30 @@ export class CertificationsInputComponent {
     return false;
   }
 
-  public onCertificationDelete(index: number): boolean {
-    this.store.dispatch(new Form.Certification.Delete(index));
+  public onCertificationDelete(id: string): boolean {
+    this.store.dispatch(new Form.Certification.Delete(id));
     return false;
   }
 
-  public onCertificationTitleInput(index: number, event: Event): void {
+  public onCertificationTitleInput(id: string, event: Event): void {
     const title = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Certification.TitleUpdate(index, title));
+    this.store.dispatch(new Form.Certification.TitleUpdate(id, title));
   }
 
-  public onCertificationOrganizationInput(index: number, event: Event): void {
+  public onCertificationOrganizationInput(id: string, event: Event): void {
     const organization = (event.target as HTMLInputElement).value;
     this.store.dispatch(
-      new Form.Certification.OrganizationUpdate(index, organization),
+      new Form.Certification.OrganizationUpdate(id, organization),
     );
   }
 
-  public onCertificationYearInput(index: number, event: Event): void {
+  public onCertificationYearInput(id: string, event: Event): void {
     const year = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Certification.YearUpdate(index, year));
+    this.store.dispatch(new Form.Certification.YearUpdate(id, year));
   }
 
-  public onCertificationLocationInput(index: number, event: Event): void {
+  public onCertificationLocationInput(id: string, event: Event): void {
     const location = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Certification.LocationUpdate(index, location));
+    this.store.dispatch(new Form.Certification.LocationUpdate(id, location));
   }
 }

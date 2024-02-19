@@ -1066,6 +1066,23 @@ export class ResumeState {
     });
   }
 
+  @Action(Resume.SkillProficiencyUpdate)
+  skillProficiencyUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.SkillProficiencyUpdate,
+  ) {
+    const skill = ctx.getState().skills[action.id];
+    const updatedSkill = { ...skill, proficiency: action.proficiency };
+
+    ctx.setState({
+      ...ctx.getState(),
+      skills: {
+        ...ctx.getState().skills,
+        [updatedSkill.id]: updatedSkill,
+      },
+    });
+  }
+
   @Action(Resume.CertificationsUpdate)
   certificationsUpdate(
     ctx: StateContext<ResumeStateModel>,

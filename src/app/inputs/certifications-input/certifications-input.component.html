@@ -3,52 +3,51 @@
   <ng-container
     *ngFor="
       let certification of formCertifications$ | async;
-      let i = index;
       trackBy: handleCertificationTrackBy
     "
   >
     <div class="form-group">
-      <ng-template [ngIf]="i > 0">
-        <div
-          class="form-group-remove"
-          (click)="onCertificationDelete(i)"
-          (keyup.enter)="onCertificationDelete(i)"
-          tabindex="0"
-        >
-          <div class="form-group-remove-icon">&times;</div>
-        </div>
-      </ng-template>
-      <label for="certificationTitle{{ i }}">Title</label>
+      <div
+        class="form-group-remove"
+        (click)="onCertificationDelete(certification.id)"
+        (keyup.enter)="onCertificationDelete(certification.id)"
+        tabindex="0"
+      >
+        <div class="form-group-remove-icon">&times;</div>
+      </div>
+      <label for="certificationTitle-{{ certification.id }}">Title</label>
       <input
         type="text"
-        name="certificationTitle{{ i }}"
+        name="certificationTitle-{{ certification.id }}"
         placeholder="Title"
         [value]="certification.title"
-        (input)="onCertificationTitleInput(i, $event)"
+        (input)="onCertificationTitleInput(certification.id, $event)"
       />
-      <label for="certificationOrganization{{ i }}">Organization</label>
+      <label for="certificationOrganization-{{ certification.id }}"
+        >Organization</label
+      >
       <input
         type="text"
-        name="certificationOrganization{{ i }}"
+        name="certificationOrganization-{{ certification.id }}"
         placeholder="Organization"
         [value]="certification.organization"
-        (input)="onCertificationOrganizationInput(i, $event)"
+        (input)="onCertificationOrganizationInput(certification.id, $event)"
       />
-      <label for="certificationYear{{ i }}">Year</label>
+      <label for="certificationYear-{{ certification.id }}">Year</label>
       <input
         type="text"
-        name="certificationYear{{ i }}"
+        name="certificationYear-{{ certification.id }}"
         placeholder="Year"
         [value]="certification.year"
-        (input)="onCertificationYearInput(i, $event)"
+        (input)="onCertificationYearInput(certification.id, $event)"
       />
-      <label for="certificationLocation{{ i }}">Location</label>
+      <label for="certificationLocation-{{ certification.id }}">Location</label>
       <input
         type="text"
-        name="certificationLocation{{ i }}"
+        name="certificationLocation-{{ certification.id }}"
         placeholder="Location"
         [value]="certification.location"
-        (input)="onCertificationLocationInput(i, $event)"
+        (input)="onCertificationLocationInput(certification.id, $event)"
       />
     </div>
   </ng-container>
