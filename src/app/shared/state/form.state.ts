@@ -729,6 +729,11 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Certification Location Update Action
+    return ctx.dispatch(
+      new Resume.CertificationLocationUpdate(
+        updatedCertification.id,
+        updatedCertification.location,
+      ),
+    );
   }
 }

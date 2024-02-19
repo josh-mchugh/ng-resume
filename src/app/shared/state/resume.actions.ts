@@ -172,4 +172,12 @@ export namespace Resume {
       public year: string,
     ) {}
   }
+
+  export class CertificationLocationUpdate {
+    static readonly type = '[Resume] Certification Location Update';
+    constructor(
+      public id: string,
+      public location: string,
+    ) {}
+  }
 }
