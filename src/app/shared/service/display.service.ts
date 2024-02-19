@@ -84,25 +84,4 @@ export class DisplayService {
       pageId: '0',
     };
   }
-
-  public socialSectionChange(
-    request: DisplayRequest.SocialSectionChangeRequest,
-  ): Observable<Display.SectionDeleteByResumeIds[]> {
-    const removedIds = request.prevStateIds.filter(
-      (id) => !request.newStateIds.includes(id),
-    );
-    const addedIds = request.newStateIds.filter(
-      (id) => !request.prevStateIds.includes(id),
-    );
-
-    const addSections = addedIds.map((id) => ({
-      id: this.uuid.rnd(),
-      parentId: '', // TODO
-      layoutNodeId: '', // TODO
-      resumeId: id,
-      pageId: '0',
-    }));
-
-    return of([new Display.SectionDeleteByResumeIds(removedIds)]);
-  }
 }
