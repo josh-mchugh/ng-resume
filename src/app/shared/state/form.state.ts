@@ -699,7 +699,12 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Certification Year Update Action
+    return ctx.dispatch(
+      new Resume.CertificationYearUpdate(
+        updatedCertification.id,
+        updatedCertification.year,
+      ),
+    );
   }
 
   @Action(Form.Certification.LocationUpdate)

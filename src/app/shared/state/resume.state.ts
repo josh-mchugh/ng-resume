@@ -1164,4 +1164,24 @@ export class ResumeState {
       },
     });
   }
+
+  @Action(Resume.CertificationYearUpdate)
+  certificationYearUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.CertificationYearUpdate,
+  ) {
+    const certification = ctx.getState().certifications[action.id];
+    const updatedCertification = {
+      ...certification,
+      year: action.year,
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      certifications: {
+        ...ctx.getState().certifications,
+        [updatedCertification.id]: updatedCertification,
+      },
+    });
+  }
 }
