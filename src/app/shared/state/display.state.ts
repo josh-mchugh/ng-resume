@@ -197,7 +197,7 @@ export class DisplayState {
   }
 
   @Action(Display.SectionCreate)
-  sectionCreateSocial(
+  sectionCreate(
     ctx: StateContext<DisplayStateModel>,
     action: Display.SectionCreate,
   ) {
@@ -217,7 +217,7 @@ export class DisplayState {
       id: this.uuid.rnd(),
       parentId: parentSection.id,
       layoutNodeId: layoutNode.id,
-      resumeId: action.id,
+      resumeId: action.resumeId,
       pageId: '0',
       dimension: initDimension(),
     };
@@ -226,6 +226,25 @@ export class DisplayState {
       ...ctx.getState().sections.byId,
       [section.id]: section,
     };
+    const updatedAllIds = Object.keys(updatedById);
+
+    ctx.setState({
+      ...ctx.getState(),
+      sections: {
+        byId: updatedById,
+        allIds: updatedAllIds,
+      },
+    });
+  }
+
+  @Action(Display.SectionDelete)
+  sectionDelete(
+    ctx: StateContext<DisplayStateModel>,
+    action: Display.SectionDelete,
+  ) {
+    const updatedById = Object.values(ctx.getState().sections.byId)
+      .filter((section) => section.resumeId !== action.resumeId)
+      .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
     const updatedAllIds = Object.keys(updatedById);
 
     ctx.setState({

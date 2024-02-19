@@ -34,10 +34,15 @@ export namespace Display {
   }
 
   export class SectionCreate {
-    static readonly type = '[Display] Section Social Create';
+    static readonly type = '[Display] Section Create';
     constructor(
-      public id: string,
+      public resumeId: string,
       public selectorType: SelectorType,
     ) {}
+  }
+
+  export class SectionDelete {
+    static readonly type = '[Display] Section Delete';
+    constructor(public resumeId: string) {}
   }
 }

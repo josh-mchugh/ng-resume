@@ -744,7 +744,7 @@ export class ResumeState {
       socials: updatedSocials,
     });
 
-    // TODO: Delete Section referencing Social
+    return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
   @Action(Resume.SocialNameUpdate)
