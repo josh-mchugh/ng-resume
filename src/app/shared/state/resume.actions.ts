@@ -143,4 +143,9 @@ export namespace Resume {
     static readonly type = '[Resume] Certification Create';
     constructor(public id: string) {}
   }
+
+  export class CertificationDelete {
+    static readonly type = '[Resume] Certification Delete';
+    constructor(public id: string) {}
+  }
 }

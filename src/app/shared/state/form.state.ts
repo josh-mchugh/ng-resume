@@ -596,7 +596,6 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Certification Create Action
     return ctx.dispatch(new Resume.CertificationCreate(certification.id));
   }
 
@@ -621,7 +620,7 @@ export class FormState {
       },
     });
 
-    // TODO: Dispatch Resume Certification Delete Action
+    return ctx.dispatch(new Resume.CertificationDelete(action.id));
   }
 
   @Action(Form.Certification.TitleUpdate)
