@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
 import { Display } from '@shared/state/display.actions';
+import { DisplayService } from '@shared/service/display.service';
 import ShortUniqueId from 'short-unique-id';
 
 export interface ResumeStateModel {
@@ -398,7 +399,7 @@ export enum SelectorType {
 export class ResumeState {
   private uuid: ShortUniqueId;
 
-  constructor() {
+  constructor(private displayService: DisplayService) {
     this.uuid = new ShortUniqueId();
   }
 
@@ -724,10 +725,6 @@ export class ResumeState {
       ...ctx.getState(),
       socials: updatedSocials,
     });
-
-    return ctx.dispatch(
-      new Display.SectionCreate(social.id, SelectorType.SOCIAL_NAME),
-    );
   }
 
   @Action(Resume.SocialDelete)
@@ -765,6 +762,14 @@ export class ResumeState {
         [updatedSocial.id]: updatedSocial,
       },
     });
+
+    if(!this.displayService.hasSectionByResumeId(updatedSocial.id)) {
+      return ctx.dispatch(
+        new Display.SectionCreate(social.id, SelectorType.SOCIAL_NAME),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.SocialUrlUpdate)
@@ -785,6 +790,14 @@ export class ResumeState {
         [updatedSocial.id]: updatedSocial,
       },
     });
+
+    if(!this.displayService.hasSectionByResumeId(updatedSocial.id)) {
+      return ctx.dispatch(
+        new Display.SectionCreate(social.id, SelectorType.SOCIAL_URL),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.ExperienceCreate)

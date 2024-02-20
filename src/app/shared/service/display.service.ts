@@ -3,6 +3,7 @@ import { Store } from '@ngxs/store';
 import ShortUniqueId from 'short-unique-id';
 import { LayoutNode } from '@shared/state/layout.state';
 import { Display } from '@shared/state/display.actions';
+import { DisplayState } from '@shared/state/display.state';
 
 export namespace DisplayRequest {
   export class CreateRootSections {
@@ -82,5 +83,9 @@ export class DisplayService {
       resumeId: resumeId,
       pageId: '0',
     };
+  }
+
+  public hasSectionByResumeId(resumeId: string): boolean {
+    return this.store.selectSnapshot(DisplayState.hasSectionByResumeId(resumeId));
   }
 }

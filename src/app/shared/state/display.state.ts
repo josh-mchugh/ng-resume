@@ -112,6 +112,18 @@ export class DisplayState {
     );
   }
 
+  static hasSectionByResumeId(
+    resumeId: string,
+  ): (state: DisplayStateModel) => boolean {
+    return createSelector(
+      [DisplayState],
+      (state: DisplayStateModel) =>
+        Object.values(state.sections.byId).filter(
+          (section) => section.resumeId === resumeId,
+        ).length > 0,
+    );
+  }
+
   @Action(Display.SectionAdd)
   add(ctx: StateContext<DisplayStateModel>, action: Display.SectionAdd) {
     let sections = ctx.getState().sections;
