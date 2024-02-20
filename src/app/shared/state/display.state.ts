@@ -114,12 +114,15 @@ export class DisplayState {
 
   static hasSectionByResumeId(
     resumeId: string,
+    layoutNodeId: string,
   ): (state: DisplayStateModel) => boolean {
     return createSelector(
       [DisplayState],
       (state: DisplayStateModel) =>
         Object.values(state.sections.byId).filter(
-          (section) => section.resumeId === resumeId,
+          (section) =>
+            section.resumeId === resumeId &&
+            section.layoutNodeId === layoutNodeId,
         ).length > 0,
     );
   }

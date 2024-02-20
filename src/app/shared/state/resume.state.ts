@@ -763,7 +763,12 @@ export class ResumeState {
       },
     });
 
-    if(!this.displayService.hasSectionByResumeId(updatedSocial.id)) {
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedSocial.id,
+        SelectorType.SOCIAL_NAME,
+      )
+    ) {
       return ctx.dispatch(
         new Display.SectionCreate(social.id, SelectorType.SOCIAL_NAME),
       );
@@ -791,7 +796,12 @@ export class ResumeState {
       },
     });
 
-    if(!this.displayService.hasSectionByResumeId(updatedSocial.id)) {
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedSocial.id,
+        SelectorType.SOCIAL_URL,
+      )
+    ) {
       return ctx.dispatch(
         new Display.SectionCreate(social.id, SelectorType.SOCIAL_URL),
       );
@@ -1116,8 +1126,6 @@ export class ResumeState {
       ...ctx.getState(),
       certifications: updatedCertifications,
     });
-
-    // TODO: Dispatch Section Create Certification Action
   }
 
   @Action(Resume.CertificationDelete)
@@ -1137,7 +1145,7 @@ export class ResumeState {
       certifications: updatedCertifications,
     });
 
-    // TODO: Dispatch Section Certification Delete action
+    return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
   @Action(Resume.CertificationTitleUpdate)
@@ -1155,6 +1163,22 @@ export class ResumeState {
         [updatedCertification.id]: updatedCertification,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedCertification.id,
+        SelectorType.CERTIFICATION_TITLE,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedCertification.id,
+          SelectorType.CERTIFICATION_TITLE,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.CertificationOrganizationUpdate)
@@ -1175,6 +1199,22 @@ export class ResumeState {
         [updatedCertification.id]: updatedCertification,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedCertification.id,
+        SelectorType.CERTIFICATION_ORGANIZATION,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedCertification.id,
+          SelectorType.CERTIFICATION_ORGANIZATION,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.CertificationYearUpdate)
@@ -1195,6 +1235,22 @@ export class ResumeState {
         [updatedCertification.id]: updatedCertification,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedCertification.id,
+        SelectorType.CERTIFICATION_YEAR,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedCertification.id,
+          SelectorType.CERTIFICATION_YEAR,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.CertificationLocationUpdate)
@@ -1215,5 +1271,21 @@ export class ResumeState {
         [updatedCertification.id]: updatedCertification,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedCertification.id,
+        SelectorType.CERTIFICATION_LOCATION,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedCertification.id,
+          SelectorType.CERTIFICATION_LOCATION,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 }

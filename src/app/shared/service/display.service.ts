@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import ShortUniqueId from 'short-unique-id';
-import { LayoutNode } from '@shared/state/layout.state';
+import { LayoutNode, LayoutState } from '@shared/state/layout.state';
 import { Display } from '@shared/state/display.actions';
 import { DisplayState } from '@shared/state/display.state';
+import { SelectorType } from '@shared/state/resume.state';
 
 export namespace DisplayRequest {
   export class CreateRootSections {
@@ -85,7 +86,15 @@ export class DisplayService {
     };
   }
 
-  public hasSectionByResumeId(resumeId: string): boolean {
-    return this.store.selectSnapshot(DisplayState.hasSectionByResumeId(resumeId));
+  public hasSectionByResumeId(
+    resumeId: string,
+    selectorType: SelectorType,
+  ): boolean {
+    const layoutNode = this.store.selectSnapshot(
+      LayoutState.layoutNodeBySelectorType(selectorType),
+    );
+    return this.store.selectSnapshot(
+      DisplayState.hasSectionByResumeId(resumeId, layoutNode.id),
+    );
   }
 }
