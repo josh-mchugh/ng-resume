@@ -831,8 +831,6 @@ export class ResumeState {
       ...ctx.getState(),
       experiences: updatedExperiences,
     });
-
-    // TODO: Create Section for Experience
   }
 
   @Action(Resume.ExperienceDelete)
@@ -852,7 +850,7 @@ export class ResumeState {
       experiences: updatedExperiences,
     });
 
-    // TODO: Dispatch Section Experience Delete Action
+    return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
   @Action(Resume.ExperienceTitleUpdate)
@@ -873,6 +871,22 @@ export class ResumeState {
         [updatedExperience.id]: updatedExperience,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedExperience.id,
+        SelectorType.EXPERIENCE_TITLE,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedExperience.id,
+          SelectorType.EXPERIENCE_TITLE,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.ExperienceOrganizationUpdate)
@@ -893,6 +907,22 @@ export class ResumeState {
         [updatedExperience.id]: updatedExperience,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedExperience.id,
+        SelectorType.EXPERIENCE_ORGANIZATION,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedExperience.id,
+          SelectorType.EXPERIENCE_ORGANIZATION,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.ExperienceDurationUpdate)
@@ -913,6 +943,22 @@ export class ResumeState {
         [updatedExperience.id]: updatedExperience,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedExperience.id,
+        SelectorType.EXPERIENCE_DURATION,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedExperience.id,
+          SelectorType.EXPERIENCE_DURATION,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.ExperienceLocationUpdate)
@@ -933,6 +979,22 @@ export class ResumeState {
         [updatedExperience.id]: updatedExperience,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedExperience.id,
+        SelectorType.EXPERIENCE_LOCATION,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(
+          updatedExperience.id,
+          SelectorType.EXPERIENCE_LOCATION,
+        ),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.ExperienceDescriptionUpdate)
