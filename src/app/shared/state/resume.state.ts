@@ -1053,8 +1053,6 @@ export class ResumeState {
       ...ctx.getState(),
       skills: updatedSkills,
     });
-
-    // TODO: Dispatch Sections Skill Create Action
   }
 
   @Action(Resume.SkillDelete)
@@ -1068,7 +1066,7 @@ export class ResumeState {
       skills: updatedSkills,
     });
 
-    // TODO: Dispatch Section Skills Delete Action
+    return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
   @Action(Resume.SkillNameUpdate)
@@ -1086,6 +1084,19 @@ export class ResumeState {
         [updatedSkill.id]: updatedSkill,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedSkill.id,
+        SelectorType.SKILL_NAME,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(updatedSkill.id, SelectorType.SKILL_NAME),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.SkillProficiencyUpdate)
@@ -1103,6 +1114,19 @@ export class ResumeState {
         [updatedSkill.id]: updatedSkill,
       },
     });
+
+    if (
+      !this.displayService.hasSectionByResumeId(
+        updatedSkill.id,
+        SelectorType.SKILL_BLOCKS,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(updatedSkill.id, SelectorType.SKILL_BLOCKS),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.CertificationCreate)
