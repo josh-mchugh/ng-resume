@@ -106,6 +106,14 @@ export class ResumeState {
     this.uuid = new ShortUniqueId();
   }
 
+  static hasContent(): (state: ResumeStateModel) => boolean {
+    return createSelector(
+      [ResumeState],
+      (state: ResumeStateModel) =>
+        JSON.stringify(state) !== JSON.stringify(DefaultResumeState),
+    );
+  }
+
   // Ignore until refactoring out generic type any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static selectorValue(selectorType: SelectorType, id: string): any {
@@ -360,8 +368,11 @@ export class ResumeState {
   }
 
   @Action(Resume.InitializeState)
-  setResume(ctx: StateContext<ResumeStateModel>, action: Resume.InitializeState) {
-    ctx.setState({...action.resume});
+  setResume(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.InitializeState,
+  ) {
+    ctx.setState({ ...action.resume });
   }
 
   @Action(Resume.NameUpdate)

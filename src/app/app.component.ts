@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Resume } from '@shared/state/resume.actions';
-import { DemoResumeState } from '@shared/state/resume.config';
+import { DefaultResumeState } from '@shared/state/resume.config';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,7 @@ import { DemoResumeState } from '@shared/state/resume.config';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
   constructor(private store: Store) {
-    this.store.dispatch(new Resume.InitializeState(DemoResumeState));
+    this.store.dispatch(new Resume.InitializeState(DefaultResumeState));
   }
 }

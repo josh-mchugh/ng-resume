@@ -1,21 +1,27 @@
-<ng-container
-  *ngFor="
-    let page of pages$ | async;
-    let pageIndex = index;
-    trackBy: handleTrackBy
-  "
->
-  <div class="page">
-    <div class="page__content">
-      <ng-container
-        *ngFor="
-          let section of sections(page.id) | async;
-          let i = index;
-          trackBy: handleTrackBy
-        "
-      >
-        <app-section [id]="section.id" />
-      </ng-container>
+<ng-container *ngIf="hasResumeContent$ | async as hasContent; else noContent">
+  <ng-container
+    *ngFor="
+      let page of pages$ | async;
+      let pageIndex = index;
+      trackBy: handleTrackBy
+    "
+  >
+    <div class="page">
+      <div class="page__content">
+        <ng-container
+          *ngFor="
+            let section of sections(page.id) | async;
+            let i = index;
+            trackBy: handleTrackBy
+          "
+        >
+          <app-section [id]="section.id" />
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
+<ng-template #noContent>
+  Use the inputs on the left hand side to start building your resume. As you
+  enter data, your resume will be put together on the art board.
+</ng-template>

@@ -8,6 +8,7 @@ import {
   DisplayService,
   DisplayRequest,
 } from '@shared/service/display.service';
+import { ResumeState } from '@shared/state/resume.state';
 
 @Component({
   selector: 'app-pages',
@@ -18,11 +19,13 @@ export class PagesComponent {
   @HostBinding('style.width') attrStyleWidth = '100%';
 
   pages$: Observable<Page[]>;
+  hasResumeContent$: Observable<boolean>;
 
   constructor(
     private store: Store,
     private displayService: DisplayService,
   ) {
+    this.hasResumeContent$ = this.store.select(ResumeState.hasContent());
     this.pages$ = this.store.select(DisplayState.getPages());
     this.store
       .select(LayoutState.rootNodes())
