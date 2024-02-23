@@ -1,4 +1,4 @@
-export const EmptyResumeState = {
+export const DefaultResumeState = {
   name: '',
   title: '',
   summary: '',

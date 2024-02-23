@@ -3,7 +3,7 @@ import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
 import { Display } from '@shared/state/display.actions';
 import { DisplayService } from '@shared/service/display.service';
-import { EmptyResumeState } from '@shared/state/resume.config';
+import { DefaultResumeState } from '@shared/state/resume.config';
 import ShortUniqueId from 'short-unique-id';
 
 export interface ResumeStateModel {
@@ -96,7 +96,7 @@ export enum SelectorType {
 
 @State<ResumeStateModel>({
   name: 'resume',
-  defaults: EmptyResumeState,
+  defaults: DefaultResumeState,
 })
 @Injectable()
 export class ResumeState {
