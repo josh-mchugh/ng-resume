@@ -359,6 +359,11 @@ export class ResumeState {
     );
   }
 
+  @Action(Resume.InitializeState)
+  setResume(ctx: StateContext<ResumeStateModel>, action: Resume.InitializeState) {
+    ctx.setState({...action.resume});
+  }
+
   @Action(Resume.NameUpdate)
   nameUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.NameUpdate) {
     ctx.setState({
