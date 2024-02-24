@@ -42,22 +42,22 @@ export const DemoResumeState = {
     },
   },
   experiences: {
-    '0': {
-      id: '0',
+    'sxvDST': {
+      id: 'sxvDST',
       organization: 'Cyberdyne System Corp.',
       title: 'Web Developer',
       duration: 'Jan 2023 - Present',
       location: 'Remote',
     },
-    '1': {
-      id: '1',
+    '6qowVm': {
+      id: '6qowVm',
       organization: 'Very Big Corp. of America',
       title: 'User Experience Expert',
       duration: 'Jan 2022 – Dec 2022',
       location: 'Remote',
     },
-    '2': {
-      id: '2',
+    'By81yN': {
+      id: 'By81yN',
       organization: 'MomCorp',
       title: 'Database Developer',
       duration: 'Jan 2021 – Dec 2021',
@@ -65,246 +65,246 @@ export const DemoResumeState = {
     },
   },
   experienceDescriptions: {
-    '0': {
-      id: '0',
-      experienceId: '0',
+    'DsI9Jf': {
+      id: 'DsI9Jf',
+      experienceId: 'sxvDST',
       position: 0,
       description:
         'Efficiently unleash cross-media information without cross-media value.',
     },
-    '1': {
-      id: '1',
-      experienceId: '0',
-      position: 0,
+    'IH2cXf': {
+      id: 'IH2cXf',
+      experienceId: 'sxvDST',
+      position: 1,
       description:
         'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
     },
-    '2': {
-      id: '2',
-      experienceId: '0',
-      position: 1,
+    'ac3Y3g': {
+      id: 'ac3Y3g',
+      experienceId: 'sxvDST',
+      position: 2,
       description:
         'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
     },
-    '3': {
-      id: '3',
-      experienceId: '0',
-      position: 2,
+    'CNLcFh': {
+      id: 'CNLcFh',
+      experienceId: 'sxvDST',
+      position: 3,
       description:
         'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
     },
-    '4': {
-      id: '4',
-      experienceId: '0',
-      position: 3,
+    'Ov20bL': {
+      id: 'Ov20bL',
+      experienceId: 'sxvDST',
+      position: 4,
       description: 'Paradigm shift land it in region, design thinking.',
     },
-    '5': {
-      id: '5',
-      experienceId: '1',
+    'Z5GUKN': {
+      id: 'Z5GUKN',
+      experienceId: '6qowVm',
       position: 0,
       description:
         'Collaboratively administrate empowered markets via plug-and-play networks.',
     },
-    '6': {
-      id: '6',
-      experienceId: '1',
+    'bVUHf8': {
+      id: 'bVUHf8',
+      experienceId: '6qowVm',
       position: 1,
       description:
         'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
     },
-    '7': {
-      id: '7',
-      experienceId: '1',
+    'NxTdyW': {
+      id: 'NxTdyW',
+      experienceId: '6qowVm',
       position: 2,
       description:
         'Pursue scalable customer service through sustainable potentialities.',
     },
-    '8': {
-      id: '8',
-      experienceId: '1',
+    'hpLq5T': {
+      id: 'hpLq5T',
+      experienceId: '6qowVm',
       position: 3,
       description:
         'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
     },
-    '9': {
-      id: '9',
-      experienceId: '2',
+    'V8Rb8E': {
+      id: 'V8Rb8E',
+      experienceId: 'By81yN',
       position: 0,
       description:
         'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
     },
-    '10': {
-      id: '10',
-      experienceId: '2',
+    'l8faMt': {
+      id: 'l8faMt',
+      experienceId: 'By81yN',
       position: 1,
       description:
         'Envisioned multimedia based expertise and cross-media growth strategies.',
     },
-    '11': {
-      id: '11',
-      experienceId: '2',
+    'SzvBRx': {
+      id: 'SzvBRx',
+      experienceId: 'By81yN',
       position: 2,
       description:
         'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
     },
   },
   experienceSkills: {
-    '0': {
-      id: '0',
-      experienceId: '0',
+    'A8QsRq': {
+      id: 'A8QsRq',
+      experienceId: 'sxvDST',
       position: 0,
       skill: 'Photoshop',
     },
-    '1': {
-      id: '1',
-      experienceId: '0',
+    'ODDIMq': {
+      id: 'ODDIMq',
+      experienceId: 'sxvDST',
       position: 1,
       skill: 'HTML',
     },
-    '2': {
-      id: '2',
-      experienceId: '0',
+    'w62dl4': {
+      id: 'w62dl4',
+      experienceId: 'sxvDST',
       position: 2,
       skill: 'CSS',
     },
-    '3': {
-      id: '3',
-      experienceId: '0',
+    'LmRQEY': {
+      id: 'LmRQEY',
+      experienceId: 'sxvDST',
       position: 3,
       skill: 'Illustrator',
     },
-    '4': {
-      id: '4',
-      experienceId: '0',
+    'iLPjrp': {
+      id: 'iLPjrp',
+      experienceId: 'sxvDST',
       position: 4,
       skill: 'PHP',
     },
-    '5': {
-      id: '5',
-      experienceId: '0',
+    'HI3wnF': {
+      id: 'HI3wnF',
+      experienceId: 'sxvDST',
       position: 5,
       skill: 'JavaScript',
     },
-    '6': {
-      id: '6',
-      experienceId: '1',
+    'imSw9w': {
+      id: 'imSw9w',
+      experienceId: '6qowVm',
       position: 0,
       skill: 'Typography',
     },
-    '7': {
-      id: '7',
-      experienceId: '1',
+    'TYDZ9i': {
+      id: 'TYDZ9i',
+      experienceId: '6qowVm',
       position: 1,
       skill: 'Composition',
     },
-    '8': {
-      id: '8',
-      experienceId: '1',
+    'pA2K9b': {
+      id: 'pA2K9b',
+      experienceId: '6qowVm',
       position: 2,
       skill: 'Color Theory',
     },
-    '9': {
-      id: '9',
-      experienceId: '1',
+    'taNZ2T': {
+      id: 'taNZ2T',
+      experienceId: '6qowVm',
       position: 3,
       skill: 'Design',
     },
-    '10': {
-      id: '10',
-      experienceId: '1',
+    '1npMv6': {
+      id: '1npMv6',
+      experienceId: '6qowVm',
       position: 4,
       skill: 'CMS',
     },
-    '11': {
-      id: '11',
-      experienceId: '1',
+    'Xrdzpz': {
+      id: 'Xrdzpz',
+      experienceId: '6qowVm',
       position: 5,
       skill: 'UX',
     },
-    '12': {
-      id: '12',
-      experienceId: '1',
+    '36dY9U': {
+      id: '36dY9U',
+      experienceId: '6qowVm',
       position: 6,
       skill: 'Graphic Design',
     },
-    '13': {
-      id: '13',
-      experienceId: '2',
+    '1hdpg5': {
+      id: '1hdpg5',
+      experienceId: 'By81yN',
       position: 0,
       skill: 'SQL',
     },
-    '14': {
-      id: '14',
-      experienceId: '2',
+    'AWGq5n': {
+      id: 'AWGq5n',
+      experienceId: 'By81yN',
       position: 1,
       skill: 'NoSQL',
     },
-    '15': {
-      id: '15',
-      experienceId: '2',
+    'UpJ3Qc': {
+      id: 'UpJ3Qc',
+      experienceId: 'By81yN',
       position: 2,
       skill: 'MySQL',
     },
-    '16': {
-      id: '16',
-      experienceId: '2',
+    'i9YcN5': {
+      id: 'i9YcN5',
+      experienceId: 'By81yN',
       position: 3,
       skill: 'Postgres',
     },
-    '17': {
-      id: '17',
-      experienceId: '2',
+    'BlPZ2D': {
+      id: 'BlPZ2D',
+      experienceId: 'By81yN',
       position: 4,
       skill: 'MongoDB',
     },
-    '18': {
-      id: '18',
-      experienceId: '2',
+    '2JD9Zt': {
+      id: '2JD9Zt',
+      experienceId: 'By81yN',
       position: 5,
       skill: 'Coachbase',
     },
   },
   skills: {
-    '0': {
-      id: '0',
+    'jGFwg2': {
+      id: 'jGFwg2',
       name: 'Photoshop',
       proficiency: 4,
     },
-    '1': {
-      id: '1',
+    'i4OWR1': {
+      id: 'i4OWR1',
       name: 'Illustrator',
       proficiency: 2,
     },
-    '2': {
-      id: '2',
+    '4nQsf4': {
+      id: '4nQsf4',
       name: 'PHP',
       proficiency: 2,
     },
-    '3': {
-      id: '3',
+    'CfsDjk': {
+      id: 'CfsDjk',
       name: 'HTML',
       proficiency: 3,
     },
-    '4': {
-      id: '4',
+    'cpXp68': {
+      id: 'cpXp68',
       name: 'WordPress',
       proficiency: 3,
     },
-    '5': {
-      id: '5',
+    'oWDqpM': {
+      id: 'oWDqpM',
       name: 'CSS',
       proficiency: 3,
     },
-    '6': {
-      id: '6',
+    '4d9Uoh': {
+      id: '4d9Uoh',
       name: 'Joomla',
       proficiency: 3,
     },
   },
   certifications: {
-    '0': {
-      id: '0',
+    'doku5G': {
+      id: 'doku5G',
       title: 'Master Degree in Studies',
       organization: 'Name of University',
       location: 'New York, New York',
