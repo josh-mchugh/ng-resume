@@ -42,7 +42,7 @@ export const DemoResumeState = {
     },
   },
   experiences: {
-    'sxvDST': {
+    sxvDST: {
       id: 'sxvDST',
       organization: 'Cyberdyne System Corp.',
       title: 'Web Developer',
@@ -56,7 +56,7 @@ export const DemoResumeState = {
       duration: 'Jan 2022 – Dec 2022',
       location: 'Remote',
     },
-    'By81yN': {
+    By81yN: {
       id: 'By81yN',
       organization: 'MomCorp',
       title: 'Database Developer',
@@ -65,83 +65,83 @@ export const DemoResumeState = {
     },
   },
   experienceDescriptions: {
-    'DsI9Jf': {
+    DsI9Jf: {
       id: 'DsI9Jf',
       experienceId: 'sxvDST',
       position: 0,
       description:
         'Efficiently unleash cross-media information without cross-media value.',
     },
-    'IH2cXf': {
+    IH2cXf: {
       id: 'IH2cXf',
       experienceId: 'sxvDST',
       position: 1,
       description:
         'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
     },
-    'ac3Y3g': {
+    ac3Y3g: {
       id: 'ac3Y3g',
       experienceId: 'sxvDST',
       position: 2,
       description:
         'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
     },
-    'CNLcFh': {
+    CNLcFh: {
       id: 'CNLcFh',
       experienceId: 'sxvDST',
       position: 3,
       description:
         'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
     },
-    'Ov20bL': {
+    Ov20bL: {
       id: 'Ov20bL',
       experienceId: 'sxvDST',
       position: 4,
       description: 'Paradigm shift land it in region, design thinking.',
     },
-    'Z5GUKN': {
+    Z5GUKN: {
       id: 'Z5GUKN',
       experienceId: '6qowVm',
       position: 0,
       description:
         'Collaboratively administrate empowered markets via plug-and-play networks.',
     },
-    'bVUHf8': {
+    bVUHf8: {
       id: 'bVUHf8',
       experienceId: '6qowVm',
       position: 1,
       description:
         'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
     },
-    'NxTdyW': {
+    NxTdyW: {
       id: 'NxTdyW',
       experienceId: '6qowVm',
       position: 2,
       description:
         'Pursue scalable customer service through sustainable potentialities.',
     },
-    'hpLq5T': {
+    hpLq5T: {
       id: 'hpLq5T',
       experienceId: '6qowVm',
       position: 3,
       description:
         'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
     },
-    'V8Rb8E': {
+    V8Rb8E: {
       id: 'V8Rb8E',
       experienceId: 'By81yN',
       position: 0,
       description:
         'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
     },
-    'l8faMt': {
+    l8faMt: {
       id: 'l8faMt',
       experienceId: 'By81yN',
       position: 1,
       description:
         'Envisioned multimedia based expertise and cross-media growth strategies.',
     },
-    'SzvBRx': {
+    SzvBRx: {
       id: 'SzvBRx',
       experienceId: 'By81yN',
       position: 2,
@@ -150,61 +150,61 @@ export const DemoResumeState = {
     },
   },
   experienceSkills: {
-    'A8QsRq': {
+    A8QsRq: {
       id: 'A8QsRq',
       experienceId: 'sxvDST',
       position: 0,
       skill: 'Photoshop',
     },
-    'ODDIMq': {
+    ODDIMq: {
       id: 'ODDIMq',
       experienceId: 'sxvDST',
       position: 1,
       skill: 'HTML',
     },
-    'w62dl4': {
+    w62dl4: {
       id: 'w62dl4',
       experienceId: 'sxvDST',
       position: 2,
       skill: 'CSS',
     },
-    'LmRQEY': {
+    LmRQEY: {
       id: 'LmRQEY',
       experienceId: 'sxvDST',
       position: 3,
       skill: 'Illustrator',
     },
-    'iLPjrp': {
+    iLPjrp: {
       id: 'iLPjrp',
       experienceId: 'sxvDST',
       position: 4,
       skill: 'PHP',
     },
-    'HI3wnF': {
+    HI3wnF: {
       id: 'HI3wnF',
       experienceId: 'sxvDST',
       position: 5,
       skill: 'JavaScript',
     },
-    'imSw9w': {
+    imSw9w: {
       id: 'imSw9w',
       experienceId: '6qowVm',
       position: 0,
       skill: 'Typography',
     },
-    'TYDZ9i': {
+    TYDZ9i: {
       id: 'TYDZ9i',
       experienceId: '6qowVm',
       position: 1,
       skill: 'Composition',
     },
-    'pA2K9b': {
+    pA2K9b: {
       id: 'pA2K9b',
       experienceId: '6qowVm',
       position: 2,
       skill: 'Color Theory',
     },
-    'taNZ2T': {
+    taNZ2T: {
       id: 'taNZ2T',
       experienceId: '6qowVm',
       position: 3,
@@ -216,7 +216,7 @@ export const DemoResumeState = {
       position: 4,
       skill: 'CMS',
     },
-    'Xrdzpz': {
+    Xrdzpz: {
       id: 'Xrdzpz',
       experienceId: '6qowVm',
       position: 5,
@@ -234,25 +234,25 @@ export const DemoResumeState = {
       position: 0,
       skill: 'SQL',
     },
-    'AWGq5n': {
+    AWGq5n: {
       id: 'AWGq5n',
       experienceId: 'By81yN',
       position: 1,
       skill: 'NoSQL',
     },
-    'UpJ3Qc': {
+    UpJ3Qc: {
       id: 'UpJ3Qc',
       experienceId: 'By81yN',
       position: 2,
       skill: 'MySQL',
     },
-    'i9YcN5': {
+    i9YcN5: {
       id: 'i9YcN5',
       experienceId: 'By81yN',
       position: 3,
       skill: 'Postgres',
     },
-    'BlPZ2D': {
+    BlPZ2D: {
       id: 'BlPZ2D',
       experienceId: 'By81yN',
       position: 4,
@@ -266,12 +266,12 @@ export const DemoResumeState = {
     },
   },
   skills: {
-    'jGFwg2': {
+    jGFwg2: {
       id: 'jGFwg2',
       name: 'Photoshop',
       proficiency: 4,
     },
-    'i4OWR1': {
+    i4OWR1: {
       id: 'i4OWR1',
       name: 'Illustrator',
       proficiency: 2,
@@ -281,17 +281,17 @@ export const DemoResumeState = {
       name: 'PHP',
       proficiency: 2,
     },
-    'CfsDjk': {
+    CfsDjk: {
       id: 'CfsDjk',
       name: 'HTML',
       proficiency: 3,
     },
-    'cpXp68': {
+    cpXp68: {
       id: 'cpXp68',
       name: 'WordPress',
       proficiency: 3,
     },
-    'oWDqpM': {
+    oWDqpM: {
       id: 'oWDqpM',
       name: 'CSS',
       proficiency: 3,
@@ -303,7 +303,7 @@ export const DemoResumeState = {
     },
   },
   certifications: {
-    'doku5G': {
+    doku5G: {
       id: 'doku5G',
       title: 'Master Degree in Studies',
       organization: 'Name of University',

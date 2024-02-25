@@ -126,6 +126,90 @@ export class FormState {
     );
   }
 
+  @Action(Form.InitializeState)
+  initializeState(
+    ctx: StateContext<FormStateModel>,
+    action: Form.InitializeState,
+  ) {
+    const socials = Object.values(action.resume.socials)
+      .map((social) => ({
+        id: social.id,
+        name: social.name,
+        url: social.url,
+      }))
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+
+    const experiences = Object.values(action.resume.experiences)
+      .map((experience) => ({
+        id: experience.id,
+        title: experience.title,
+        organization: experience.organization,
+        duration: experience.duration,
+        description: Object.values(action.resume.experienceDescriptions)
+          .filter((description) => description.experienceId === experience.id)
+          .map((description) => description.description)
+          .join('\n'),
+        skills: Object.values(action.resume.experienceSkills)
+          .filter((skill) => skill.experienceId === experience.id)
+          .map((skill) => skill.skill)
+          .join(', '),
+      }))
+      .reduce(
+        (acc, experience) => ({ ...acc, [experience.id]: experience }),
+        {},
+      );
+
+    const skills = Object.values(action.resume.skills)
+      .map((skill) => ({
+        id: skill.id,
+        name: skill.name,
+        proficiency: skill.proficiency,
+      }))
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+
+    const certifications = Object.values(action.resume.certifications)
+      .map((certification) => ({
+        id: certification.id,
+        title: certification.title,
+        organization: certification.organization,
+        year: certification.year,
+        location: certification.location,
+      }))
+      .reduce(
+        (acc, certification) => ({ ...acc, [certification.id]: certification }),
+        {},
+      );
+
+    const newState = {
+      name: action.resume.name,
+      title: action.resume.title,
+      summary: action.resume.summary,
+      phone: action.resume.phone,
+      email: action.resume.email,
+      location: action.resume.location,
+      socials: {
+        byId: socials,
+        allIds: Object.keys(socials),
+      },
+      experiences: {
+        byId: experiences,
+        allIds: Object.keys(experiences),
+      },
+      skills: {
+        byId: skills,
+        allIds: Object.keys(skills),
+      },
+      certifications: {
+        byId: certifications,
+        allIds: Object.keys(certifications),
+      },
+    };
+
+    ctx.setState({
+      ...newState,
+    });
+  }
+
   @Action(Form.NameUpdate)
   formNameUpdate(ctx: StateContext<FormStateModel>, action: Form.NameUpdate) {
     ctx.setState({

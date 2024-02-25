@@ -1,4 +1,11 @@
+import { ResumeStateModel } from '@shared/state/resume.state';
+
 export namespace Form {
+  export class InitializeState {
+    static readonly type = '[Form] Initialize State';
+    constructor(public resume: ResumeStateModel) {}
+  }
+
   export class NameUpdate {
     static readonly type = '[Form] Name Update';
     constructor(public name: string) {}
