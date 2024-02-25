@@ -129,7 +129,7 @@ export class FormState {
           .join('\n'),
         skills: Object.values(action.resume.experienceSkills)
           .filter((skill) => skill.experienceId === experience.id)
-          .map((skill) => skill.skill)
+          .map((skill) => skill.value)
           .join(', '),
       }))
       .reduce(

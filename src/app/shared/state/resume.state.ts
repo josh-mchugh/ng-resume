@@ -48,7 +48,7 @@ export interface ExperienceSkill {
   id: string;
   experienceId: string;
   position: number;
-  skill: string;
+  value: string;
 }
 
 export interface Skill {
@@ -277,7 +277,7 @@ export class ResumeState {
   private static selectorExperienceSkill(id: string) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experienceSkills[id].skill,
+      (state: ResumeStateModel) => state.experienceSkills[id].value,
     );
   }
 
