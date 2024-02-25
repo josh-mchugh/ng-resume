@@ -132,7 +132,7 @@ export class ResumeState {
       case SelectorType.SKILL_NAME:
         return this.selectorSkillName(id);
       case SelectorType.SKILL_BLOCKS:
-       return this.selectorSkillBlocks(id);
+        return this.selectorSkillBlocks(id);
       case SelectorType.CERTIFICATION_LIST:
         return this.selectorCertificationList();
       case SelectorType.CERTIFICATION_TITLE:

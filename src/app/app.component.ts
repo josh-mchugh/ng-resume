@@ -6,7 +6,6 @@ import { LayoutStateConfig } from '@shared/state/layout.config';
 import { Resume } from '@shared/state/resume.actions';
 import { ResumeStateConfig } from '@shared/state/resume.config';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
