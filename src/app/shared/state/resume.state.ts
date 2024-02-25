@@ -41,7 +41,7 @@ export interface ExperienceDescription {
   id: string;
   experienceId: string;
   position: number;
-  description: string;
+  value: string;
 }
 
 export interface ExperienceSkill {
@@ -132,7 +132,7 @@ export class ResumeState {
       case SelectorType.SKILL_NAME:
         return this.selectorSkillName(id);
       case SelectorType.SKILL_BLOCKS:
-        return this.selectorSkillBlocks(id);
+       return this.selectorSkillBlocks(id);
       case SelectorType.CERTIFICATION_LIST:
         return this.selectorCertificationList();
       case SelectorType.CERTIFICATION_TITLE:
@@ -262,7 +262,7 @@ export class ResumeState {
   private static selectorExperienceDescription(id: string) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experienceDescriptions[id].description,
+      (state: ResumeStateModel) => state.experienceDescriptions[id].value,
     );
   }
 

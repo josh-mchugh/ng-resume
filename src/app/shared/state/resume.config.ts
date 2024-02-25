@@ -70,83 +70,83 @@ export class ResumeStateConfig {
       id: 'DsI9Jf',
       experienceId: 'sxvDST',
       position: 0,
-      description:
+      value:
         'Efficiently unleash cross-media information without cross-media value.',
     },
     IH2cXf: {
       id: 'IH2cXf',
       experienceId: 'sxvDST',
       position: 1,
-      description:
+      value:
         'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
     },
     ac3Y3g: {
       id: 'ac3Y3g',
       experienceId: 'sxvDST',
       position: 2,
-      description:
+      value:
         'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
     },
     CNLcFh: {
       id: 'CNLcFh',
       experienceId: 'sxvDST',
       position: 3,
-      description:
+      value:
         'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
     },
     Ov20bL: {
       id: 'Ov20bL',
       experienceId: 'sxvDST',
       position: 4,
-      description: 'Paradigm shift land it in region, design thinking.',
+      value: 'Paradigm shift land it in region, design thinking.',
     },
     Z5GUKN: {
       id: 'Z5GUKN',
       experienceId: '6qowVm',
       position: 0,
-      description:
+      value:
         'Collaboratively administrate empowered markets via plug-and-play networks.',
     },
     bVUHf8: {
       id: 'bVUHf8',
       experienceId: '6qowVm',
       position: 1,
-      description:
+      value:
         'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
     },
     NxTdyW: {
       id: 'NxTdyW',
       experienceId: '6qowVm',
       position: 2,
-      description:
+      value:
         'Pursue scalable customer service through sustainable potentialities.',
     },
     hpLq5T: {
       id: 'hpLq5T',
       experienceId: '6qowVm',
       position: 3,
-      description:
+      value:
         'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
     },
     V8Rb8E: {
       id: 'V8Rb8E',
       experienceId: 'By81yN',
       position: 0,
-      description:
+      value:
         'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
     },
     l8faMt: {
       id: 'l8faMt',
       experienceId: 'By81yN',
       position: 1,
-      description:
+      value:
         'Envisioned multimedia based expertise and cross-media growth strategies.',
     },
     SzvBRx: {
       id: 'SzvBRx',
       experienceId: 'By81yN',
       position: 2,
-      description:
+      value:
         'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
     },
   },
