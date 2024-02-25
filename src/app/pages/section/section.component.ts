@@ -29,10 +29,12 @@ import {
 import { Display } from '@shared/state/display.actions';
 import {
   LayoutState,
-  LayoutNode,
+  LayoutNode
+} from '@shared/state/layout.state';
+import {
   NodeType,
   NodeDataType,
-} from '@shared/state/layout.state';
+} from '@shared/state/layout.interface';
 import { ResumeState } from '@shared/state/resume.state';
 import { DisplayState, Section } from '@shared/state/display.state';
 
