@@ -7,6 +7,7 @@ import {
   Store,
 } from '@ngxs/store';
 import { Display } from '@shared/state/display.actions';
+import { DisplayStateConfig } from '@shared/state/display.config';
 import { LayoutState } from '@shared/state/layout.state';
 import ShortUniqueId from 'short-unique-id';
 
@@ -60,20 +61,7 @@ function initDimension(): Dimension {
 
 @State<DisplayStateModel>({
   name: 'display',
-  defaults: {
-    pages: {
-      byId: {
-        '0': {
-          id: '0',
-        },
-      },
-      allIds: ['0'],
-    },
-    sections: {
-      byId: {},
-      allIds: [],
-    },
-  },
+  defaults: DisplayStateConfig.DEFAULT,
 })
 @Injectable()
 export class DisplayState {
