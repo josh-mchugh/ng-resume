@@ -3,6 +3,7 @@ import { Action, createSelector, State, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
 import { Resume } from './resume.actions';
 import ShortUniqueId from 'short-unique-id';
+import { DefaultFormState } from '@shared/state/form.config';
 
 export interface FormStateModel {
   name: string;
@@ -69,30 +70,7 @@ export interface FormCertification {
 
 @State<FormStateModel>({
   name: 'form',
-  defaults: {
-    name: '',
-    title: '',
-    summary: '',
-    phone: '',
-    email: '',
-    location: '',
-    socials: {
-      byId: {},
-      allIds: [],
-    },
-    experiences: {
-      byId: {},
-      allIds: [],
-    },
-    skills: {
-      byId: {},
-      allIds: [],
-    },
-    certifications: {
-      byId: {},
-      allIds: [],
-    },
-  },
+  defaults: DefaultFormState,
 })
 @Injectable()
 export class FormState {
