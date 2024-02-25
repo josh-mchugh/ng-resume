@@ -1,5 +1,5 @@
 import { Dimension } from '@shared/state/display.state';
-import { SelectorType } from '@shared/state/resume.state';
+import { SelectorType } from '@shared/state/selector-type.enum';
 
 export namespace Display {
   export interface Section {

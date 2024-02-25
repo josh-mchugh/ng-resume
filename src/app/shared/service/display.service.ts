@@ -4,7 +4,7 @@ import ShortUniqueId from 'short-unique-id';
 import { LayoutNode, LayoutState } from '@shared/state/layout.state';
 import { Display } from '@shared/state/display.actions';
 import { DisplayState } from '@shared/state/display.state';
-import { SelectorType } from '@shared/state/resume.state';
+import { SelectorType } from '@shared/state/selector-type.enum';
 
 export namespace DisplayRequest {
   export class CreateRootSections {

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { State, createSelector } from '@ngxs/store';
-import { SelectorType } from '@shared/state/resume.state';
+import { Action, State, StateContext, createSelector } from '@ngxs/store';
+import { Layout } from '@shared/state/layout.actions';
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
-import { DefaultLayoutState } from '@shared/state/layout.config';
+import { LayoutStateConfig } from '@shared/state/layout.config';
+import { SelectorType } from '@shared/state/selector-type.enum';
 
 export interface LayoutStateModel {
   byId: { [id: string]: LayoutNode };
@@ -32,7 +33,7 @@ export interface Selector {
 
 @State<LayoutStateModel>({
   name: 'layout',
-  defaults: DefaultLayoutState,
+  defaults: LayoutStateConfig.DEFAULT,
 })
 @Injectable()
 export class LayoutState {
@@ -75,6 +76,16 @@ export class LayoutState {
           `Unable to find layout node with selector type: ${selectorType}`,
         );
       }
+    });
+  }
+
+  @Action(Layout.InitializeState)
+  initializeState(
+    ctx: StateContext<LayoutStateModel>,
+    action: Layout.InitializeState,
+  ) {
+    ctx.setState({
+      ...action.layout,
     });
   }
 }

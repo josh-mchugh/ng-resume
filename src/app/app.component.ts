@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Form } from '@shared/state/form.actions';
+import { Layout } from '@shared/state/layout.actions';
+import { LayoutStateConfig } from '@shared/state/layout.config';
 import { Resume } from '@shared/state/resume.actions';
-import { DefaultResumeState } from '@shared/state/resume.config';
+import { DemoResumeState } from '@shared/state/resume.config';
+
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,11 @@ import { DefaultResumeState } from '@shared/state/resume.config';
 })
 export class AppComponent {
   constructor(private store: Store) {
-    const initialResumeState = DefaultResumeState;
+    const initialResumeState = DemoResumeState;
     this.store.dispatch([
       new Resume.InitializeState(initialResumeState),
       new Form.InitializeState(initialResumeState),
+      new Layout.InitializeState(LayoutStateConfig.DEMO),
     ]);
   }
 }

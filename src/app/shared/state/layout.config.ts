@@ -1,12 +1,13 @@
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
-import { SelectorType } from '@shared/state/resume.state';
+import { SelectorType } from '@shared/state/selector-type.enum';
 
-export const DefaultLayoutState = {
-  byId: {},
-  allIds: [],
-}
+export class LayoutStateConfig {
+  public static readonly DEFAULT = {
+    byId: {},
+    allIds: [],
+  };
 
-export const DemoLayoutState = {
+  public static readonly DEMO = {
   byId: {
     '0': {
       id: '0',
@@ -660,3 +661,5 @@ export const DemoLayoutState = {
     '0,1,2,1,1',
   ],
 };
+
+}
