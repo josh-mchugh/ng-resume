@@ -3,7 +3,7 @@ import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
 import { Display } from '@shared/state/display.actions';
 import { DisplayService } from '@shared/service/display.service';
-import { DefaultResumeState } from '@shared/state/resume.config';
+import { ResumeStateConfig } from '@shared/state/resume.config';
 import { SelectorType } from '@shared/state/selector-type.enum';
 import ShortUniqueId from 'short-unique-id';
 
@@ -67,7 +67,7 @@ export interface Certification {
 
 @State<ResumeStateModel>({
   name: 'resume',
-  defaults: DefaultResumeState,
+  defaults: ResumeStateConfig.DEFAULT,
 })
 @Injectable()
 export class ResumeState {
@@ -81,7 +81,7 @@ export class ResumeState {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) =>
-        JSON.stringify(state) !== JSON.stringify(DefaultResumeState),
+        JSON.stringify(state) !== JSON.stringify(ResumeStateConfig.DEFAULT),
     );
   }
 

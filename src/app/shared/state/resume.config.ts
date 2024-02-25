@@ -1,19 +1,20 @@
-export const DefaultResumeState = {
-  name: '',
-  title: '',
-  summary: '',
-  email: '',
-  location: '',
-  phone: '',
-  socials: {},
-  experiences: {},
-  experienceDescriptions: {},
-  experienceSkills: {},
-  skills: {},
-  certifications: {},
-};
+export class ResumeStateConfig {
+  public static readonly DEFAULT = {
+    name: '',
+    title: '',
+    summary: '',
+    email: '',
+    location: '',
+    phone: '',
+    socials: {},
+    experiences: {},
+    experienceDescriptions: {},
+    experienceSkills: {},
+    skills: {},
+    certifications: {},
+  };
 
-export const DemoResumeState = {
+  public static readonly DEMO = {
   name: 'John Doe',
   title: 'Web and Graphic Designer',
   summary:
@@ -312,3 +313,5 @@ export const DemoResumeState = {
     },
   },
 };
+
+}
