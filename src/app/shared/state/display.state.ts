@@ -8,7 +8,9 @@ import {
 } from '@ngxs/store';
 import { Display } from '@shared/state/display.actions';
 import { DisplayStateConfig } from '@shared/state/display.config';
-import { LayoutState } from '@shared/state/layout.state';
+import { NodeType, NodeDataType } from '@shared/state/layout.interface';
+import { LayoutState, LayoutNode } from '@shared/state/layout.state';
+import { ResumeState } from '@shared/state/resume.state';
 import ShortUniqueId from 'short-unique-id';
 
 export interface DisplayStateModel {
@@ -115,44 +117,61 @@ export class DisplayState {
     );
   }
 
-  @Action(Display.SectionAdd)
-  add(ctx: StateContext<DisplayStateModel>, action: Display.SectionAdd) {
-    let sections = ctx.getState().sections;
-    sections = {
-      byId: {
-        ...sections.byId,
-        [action.section.id]: { ...action.section, dimension: initDimension() },
-      },
-      allIds: [...sections.allIds, action.section.id],
+  @Action(Display.InitializeState)
+  initializeState(ctx: StateContext<DisplayStateModel>) {
+    const rootNodes = this.store.selectSnapshot(LayoutState.rootNodes());
+
+    const buildSection = (
+      parentId: string,
+      resumeId: string,
+      layoutNode: LayoutNode,
+    ): Section[] => {
+      const id = this.uuid.rnd();
+      const section = {
+        id: id,
+        layoutNodeId: layoutNode.id,
+        parentId: parentId,
+        resumeId: resumeId,
+        pageId: '0',
+        dimension: initDimension(),
+      };
+
+      const childNodes = this.store.selectSnapshot(
+        LayoutState.childNodes(layoutNode.id),
+      );
+      if (childNodes.length) {
+        const isDynamicContainer =
+          NodeType.CONTAINER === layoutNode.type &&
+          NodeDataType.DYNAMIC === layoutNode.dataType;
+
+        const resumeIds: string[] = isDynamicContainer
+          ? this.store.selectSnapshot(
+              ResumeState.selectorValue(layoutNode.selectors[0].type, resumeId),
+            )
+          : [''];
+        const childSections = resumeIds
+          .map((resumeId) =>
+            childNodes.map((node) => buildSection(id, resumeId, node)),
+          )
+          .flat()
+          .flat();
+        return [section, ...childSections];
+      }
+
+      return [section];
     };
+
+    const sections = rootNodes
+      .map((node) => buildSection('', '', node))
+      .flat()
+      .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
+
     ctx.setState({
       ...ctx.getState(),
-      sections: sections,
-    });
-  }
-
-  @Action(Display.SectionAddAll)
-  addAll(ctx: StateContext<DisplayStateModel>, action: Display.SectionAddAll) {
-    let sections = ctx.getState().sections;
-    const newSectionIds = action.sections.map((section) => section.id);
-    const newSections = action.sections.reduce(
-      (acc, section) => ({
-        ...acc,
-        [section.id]: { ...section, dimension: initDimension() },
-      }),
-      {},
-    );
-    sections = {
-      byId: {
-        ...sections.byId,
-        ...newSections,
+      sections: {
+        byId: sections,
+        allIds: Object.keys(sections),
       },
-      allIds: [...sections.allIds, ...newSectionIds],
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      sections: sections,
     });
   }
 
@@ -169,32 +188,6 @@ export class DisplayState {
           ...sections.byId,
           [action.id]: { ...section },
         },
-      },
-    });
-  }
-
-  @Action(Display.SectionDeleteByResumeIds)
-  delete(
-    ctx: StateContext<DisplayStateModel>,
-    action: Display.SectionDeleteByResumeIds,
-  ) {
-    const sections = Object.values(ctx.getState().sections.byId)
-      .filter((section) => !action.resumeIds.includes(section.resumeId))
-      .reduce(
-        (acc, section) => ({
-          ...acc,
-          [section.id]: { ...section },
-        }),
-        {},
-      );
-
-    const allIds = Object.keys(sections);
-
-    ctx.setState({
-      ...ctx.getState(),
-      sections: {
-        byId: sections,
-        allIds: allIds,
       },
     });
   }

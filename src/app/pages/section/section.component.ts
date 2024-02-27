@@ -17,15 +17,9 @@ import {
   mergeMap,
   Observable,
   of,
-  shareReplay,
-  take,
   tap,
 } from 'rxjs';
 import { DimensionService } from '@shared/service/dimension.service';
-import {
-  DisplayService,
-  DisplayRequest,
-} from '@shared/service/display.service';
 import { Display } from '@shared/state/display.actions';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
@@ -50,9 +44,6 @@ export class SectionComponent implements OnInit {
   // child sections for sections type container
   childSections$!: Observable<Section[]>;
 
-  // List of ids child resume content
-  childResumeIds$!: Observable<string[]>;
-
   // HTML content for section which renders content
   htmlContent$!: Observable<SafeHtml>;
 
@@ -61,22 +52,18 @@ export class SectionComponent implements OnInit {
 
   public constructor(
     private dimensionService: DimensionService,
-    private displayService: DisplayService,
     private domSanitizer: DomSanitizer,
     private store: Store,
   ) {}
 
   ngOnInit(): void {
-    this.section$ = this.store
-      .select(DisplayState.section(this.id))
-      .pipe(shareReplay(1));
+    this.section$ = this.store.select(DisplayState.section(this.id));
     // Observable for section LayoutNode
     this.layoutNode$ = this.section$.pipe(
       mergeMap((section) =>
         this.store.select(LayoutState.layoutNode(section.layoutNodeId)).pipe(
           // Side effect for classes for @HostBinding cannot use Observables
           tap((layoutNode) => (this.rootClass = layoutNode.classes.root)),
-          shareReplay(1),
         ),
       ),
     );
@@ -97,80 +84,6 @@ export class SectionComponent implements OnInit {
       filter((layoutNode) => NodeType.CONTAINER === layoutNode.type),
       mergeMap(() => this.getChildSections()),
     );
-    // Observable for child resume ids for dynamic containers
-    this.childResumeIds$ = this.layoutNode$.pipe(
-      filter(
-        (layoutNode) =>
-          NodeType.CONTAINER === layoutNode.type &&
-          NodeDataType.DYNAMIC === layoutNode.dataType,
-      ),
-      combineLatestWith(this.section$),
-      mergeMap(([layoutNode, section]) =>
-        this.getChildResumeIds(layoutNode, section),
-      ),
-    );
-    // Subscribe to create static child sections on initial load
-    this.layoutNode$
-      .pipe(
-        filter(
-          (layoutNode) =>
-            NodeType.CONTAINER === layoutNode.type &&
-            NodeDataType.STATIC === layoutNode.dataType,
-        ),
-        combineLatestWith(this.section$),
-        mergeMap(([layoutNode, section]) =>
-          this.store.select(LayoutState.childNodes(layoutNode.id)),
-        ),
-        combineLatestWith(
-          this.store.select(DisplayState.childSections(this.id)),
-        ),
-        filter(
-          ([layoutNodes, sections]) => sections.length < layoutNodes.length,
-        ),
-        map(([layoutNodes]) => {
-          const request = new DisplayRequest.CreateStaticSections(
-            layoutNodes,
-            this.id,
-          );
-          return this.displayService.createStaticSections(request);
-        }),
-        take(1),
-      )
-      .subscribe((sections) =>
-        this.store.dispatch(new Display.SectionAddAll(sections)),
-      );
-    // Subscribe to create dynamic child sections on initial load
-    this.layoutNode$
-      .pipe(
-        filter(
-          (layoutNode) =>
-            NodeType.CONTAINER === layoutNode.type &&
-            NodeDataType.DYNAMIC === layoutNode.dataType,
-        ),
-        mergeMap((layoutNode) =>
-          this.store.select(LayoutState.childNodes(layoutNode.id)),
-        ),
-        combineLatestWith(
-          this.store.select(DisplayState.childSections(this.id)),
-          this.childResumeIds$,
-        ),
-        filter(
-          ([layoutNodes, sections, resumeIds]) =>
-            sections.length < layoutNodes.length * resumeIds.length,
-        ),
-        map(([layoutNodes, sections, resumeIds]) => {
-          const request = new DisplayRequest.CreateDynamicSections(
-            layoutNodes,
-            this.id,
-            resumeIds,
-          );
-          return this.displayService.createDynamicSections(request);
-        }),
-        take(1),
-      )
-      .subscribe((sections) =>
-        this.store.dispatch(new Display.SectionAddAll(sections)),
-      );
   }
 
   private renderDynamicHTML(
@@ -197,15 +110,6 @@ export class SectionComponent implements OnInit {
     const template = Mustache.render(layoutNode.template, {});
     const safeHtml = this.domSanitizer.bypassSecurityTrustHtml(template);
     return of(safeHtml);
-  }
-
-  private getChildResumeIds(
-    layoutNode: LayoutNode,
-    section: Section,
-  ): Observable<string[]> {
-    return this.store.select(
-      ResumeState.selectorValue(layoutNode.selectors[0].type, section.resumeId),
-    );
   }
 
   private getChildSections(): Observable<Section[]> {

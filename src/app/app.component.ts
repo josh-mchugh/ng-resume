@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { Display } from '@shared/state/display.actions';
 import { Form } from '@shared/state/form.actions';
 import { Layout } from '@shared/state/layout.actions';
 import { LayoutStateConfig } from '@shared/state/layout.config';
@@ -14,10 +15,12 @@ import { ResumeStateConfig } from '@shared/state/resume.config';
 export class AppComponent {
   constructor(private store: Store) {
     const initialResumeState = ResumeStateConfig.DEMO;
-    this.store.dispatch([
-      new Resume.InitializeState(initialResumeState),
-      new Form.InitializeState(initialResumeState),
-      new Layout.InitializeState(LayoutStateConfig.DEMO),
-    ]);
+    this.store
+      .dispatch([
+        new Resume.InitializeState(initialResumeState),
+        new Form.InitializeState(initialResumeState),
+        new Layout.InitializeState(LayoutStateConfig.DEMO),
+      ])
+      .subscribe(() => this.store.dispatch(new Display.InitializeState()));
   }
 }

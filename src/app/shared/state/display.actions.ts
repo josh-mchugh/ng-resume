@@ -2,22 +2,8 @@ import { Dimension } from '@shared/state/display.state';
 import { SelectorType } from '@shared/state/selector-type.enum';
 
 export namespace Display {
-  export interface Section {
-    id: string;
-    parentId: string;
-    layoutNodeId: string;
-    resumeId: string;
-    pageId: string;
-  }
-
-  export class SectionAdd {
-    static readonly type = '[Display] Section Add';
-    constructor(public section: Section) {}
-  }
-
-  export class SectionAddAll {
-    static readonly type = '[Display] Section Add All';
-    constructor(public sections: Section[]) {}
+  export class InitializeState {
+    static readonly type = '[Display] Initialize State';
   }
 
   export class SectionUpdate {
@@ -26,11 +12,6 @@ export namespace Display {
       public id: string,
       public dimension: Dimension,
     ) {}
-  }
-
-  export class SectionDeleteByResumeIds {
-    static readonly type = '[Display] Section Delete By ResumeIds';
-    constructor(public resumeIds: string[]) {}
   }
 
   export class SectionCreate {
