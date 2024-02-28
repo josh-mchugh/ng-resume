@@ -631,7 +631,7 @@ export class FormState {
           ),
       );
 
-    const updatedIds = experienceDescriptions
+    const updatedDescriptions = experienceDescriptions
       .filter((prevDescription) =>
         newDescriptionsAllIds.includes(prevDescription.id),
       )
@@ -641,13 +641,20 @@ export class FormState {
           prevDescription.position !==
             newDescriptions[prevDescription.id].position,
       )
-      .map((prevDescription) => prevDescription.id);
+      .map(
+        (prevDescription) =>
+          new Resume.ExperienceDescriptionUpdate(
+            prevDescription.id,
+            newDescriptions[prevDescription.id].position,
+            newDescriptions[prevDescription.id].value,
+          ),
+      );
 
     const removedIds = prevDescriptionIds.filter(
       (id) => !newDescriptionsAllIds.includes(id),
     );
 
-    return ctx.dispatch([...addedDescriptions]);
+    return ctx.dispatch([...addedDescriptions, ...updatedDescriptions]);
   }
 
   @Action(Form.Experience.SkillsUpdate)
