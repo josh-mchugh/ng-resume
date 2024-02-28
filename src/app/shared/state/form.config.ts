@@ -14,6 +14,10 @@ export class FormStateConfig {
       byId: {},
       allIds: [],
     },
+    experienceDescriptions: {
+      byId: {},
+      allIds: [],
+    },
     skills: {
       byId: {},
       allIds: [],

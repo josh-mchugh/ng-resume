@@ -54,7 +54,7 @@
       <textarea
         name="experienceDescription-{{ experience.id }}"
         placeholder="Description"
-        [value]="experience.description"
+        [value]="experience.rawDescription"
         (input)="onExperienceDescriptionInput(experience.id, $event)"
       ></textarea>
       <label for="experienceSkills-{{ experience.id }}">Skills</label>

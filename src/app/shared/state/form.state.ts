@@ -14,6 +14,7 @@ export interface FormStateModel {
   location: string;
   socials: Socials;
   experiences: Experiences;
+  experienceDescriptions: ExperienceDescriptions;
   skills: Skills;
   certifications: Certifications;
 }
@@ -40,8 +41,20 @@ export interface FormExperience {
   organization: string;
   duration: string;
   location: string;
-  description: string;
+  rawDescription: string;
   skills: string;
+}
+
+interface ExperienceDescriptions {
+  byId: { [id: string]: FormExperienceDescription };
+  allIds: string[];
+}
+
+export interface FormExperienceDescription {
+  id: string;
+  experienceId: string;
+  position: number;
+  value: string;
 }
 
 interface Skills {
@@ -92,6 +105,16 @@ export class FormState {
     );
   }
 
+  static getExperienceDescription(
+    id: string,
+  ): (state: FormStateModel) => FormExperienceDescription[] {
+    return createSelector([FormState], (state: FormStateModel) =>
+      Object.values(state.experienceDescriptions.byId).filter(
+        (description) => description.experienceId === id,
+      ),
+    );
+  }
+
   static getSkills(): (state: FormStateModel) => FormSkill[] {
     return createSelector([FormState], (state: FormStateModel) =>
       Object.values(state.skills.byId),
@@ -123,7 +146,7 @@ export class FormState {
         title: experience.title,
         organization: experience.organization,
         duration: experience.duration,
-        description: Object.values(action.resume.experienceDescriptions)
+        rawDescription: Object.values(action.resume.experienceDescriptions)
           .filter((description) => description.experienceId === experience.id)
           .map((description) => description.value)
           .join('\n'),
@@ -134,6 +157,20 @@ export class FormState {
       }))
       .reduce(
         (acc, experience) => ({ ...acc, [experience.id]: experience }),
+        {},
+      );
+
+    const experienceDescriptions = Object.values(
+      action.resume.experienceDescriptions,
+    )
+      .map((description) => ({
+        id: description.id,
+        exerienceId: description.experienceId,
+        position: description.position,
+        value: description.value,
+      }))
+      .reduce(
+        (acc, description) => ({ ...acc, [description.id]: description }),
         {},
       );
 
@@ -172,6 +209,10 @@ export class FormState {
       experiences: {
         byId: experiences,
         allIds: Object.keys(experiences),
+      },
+      experienceDescriptions: {
+        byId: experienceDescriptions,
+        allIds: Object.keys(experienceDescriptions),
       },
       skills: {
         byId: skills,
@@ -340,7 +381,7 @@ export class FormState {
       organization: '',
       duration: '',
       location: '',
-      description: '',
+      rawDescription: '',
       skills: '',
     };
 
@@ -368,11 +409,31 @@ export class FormState {
       );
     const updatedAllIds = Object.keys(updatedById);
 
+    const updatedDescriptionsById = Object.values(
+      ctx.getState().experienceDescriptions.byId,
+    )
+      .filter(
+        (experienceDescription) =>
+          experienceDescription.experienceId !== action.id,
+      )
+      .reduce(
+        (acc, experienceDescription) => ({
+          ...acc,
+          [experienceDescription.id]: experienceDescription,
+        }),
+        {},
+      );
+    const updatedDescriptionsAllIds = Object.keys(updatedDescriptionsById);
+
     ctx.setState({
       ...ctx.getState(),
       experiences: {
         byId: updatedById,
         allIds: updatedAllIds,
+      },
+      experienceDescriptions: {
+        byId: updatedDescriptionsById,
+        allIds: updatedDescriptionsAllIds,
       },
     });
 
@@ -495,28 +556,87 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.DescriptionUpdate,
   ) {
-    const experience = ctx.getState().experiences.byId[action.id];
-    const updatedExperience = {
-      ...experience,
-      description: action.description,
-    };
+    const experienceDescriptions = Object.values(
+      ctx.getState().experienceDescriptions.byId,
+    ).filter((description) => description.experienceId === action.id);
+
+    const prevDescriptions = new Map(
+      experienceDescriptions.map((description) => [
+        description.position,
+        description,
+      ]),
+    );
+    const prevDescriptionIds = experienceDescriptions.map(
+      (description) => description.id,
+    );
+
+    const newDescriptions: { [id: string]: FormExperienceDescription } =
+      action.description
+        .split('\n')
+        .filter((value) => value.trim())
+        .map((value, index) =>
+          prevDescriptions.has(index)
+            ? { ...prevDescriptions.get(index), value: value }
+            : {
+                id: this.uuid.rnd(),
+                experienceId: action.id,
+                position: index,
+                value: value,
+              },
+        )
+        .reduce(
+          (acc, description) => ({
+            ...acc,
+            [description.id as string]: description,
+          }),
+          {},
+        );
+    const newDescriptionsAllIds = Object.keys(newDescriptions);
+
+    const otherExperienceDescriptions = Object.values(
+      ctx.getState().experienceDescriptions.byId,
+    )
+      .filter((description) => description.experienceId !== action.id)
+      .reduce(
+        (acc, description) => ({ ...acc, [description.id]: description }),
+        {},
+      );
+    const otherExperienceDescriptionsAllIds = Object.keys(
+      otherExperienceDescriptions,
+    );
 
     ctx.setState({
       ...ctx.getState(),
-      experiences: {
-        ...ctx.getState().experiences,
+      experienceDescriptions: {
         byId: {
-          ...ctx.getState().experiences.byId,
-          [updatedExperience.id]: updatedExperience,
+          ...otherExperienceDescriptions,
+          ...newDescriptions,
         },
+        allIds: [
+          ...otherExperienceDescriptionsAllIds,
+          ...newDescriptionsAllIds,
+        ],
       },
     });
 
-    return ctx.dispatch(
-      new Resume.ExperienceDescriptionUpdate(
-        updatedExperience.id,
-        updatedExperience.description,
-      ),
+    const addedIds = newDescriptionsAllIds.filter(
+      (id) => !prevDescriptionIds.includes(id),
+    );
+
+    const updatedIds = experienceDescriptions
+      .filter((prevDescription) =>
+        newDescriptionsAllIds.includes(prevDescription.id),
+      )
+      .filter(
+        (prevDescription) =>
+          prevDescription.value !== newDescriptions[prevDescription.id].value ||
+          prevDescription.position !==
+            newDescriptions[prevDescription.id].position,
+      )
+      .map((prevDescription) => prevDescription.id);
+
+    const removedIds = prevDescriptionIds.filter(
+      (id) => !newDescriptionsAllIds.includes(id),
     );
   }
 
