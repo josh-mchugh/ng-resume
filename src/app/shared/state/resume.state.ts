@@ -687,61 +687,52 @@ export class ResumeState {
     }
   }
 
-  @Action(Resume.ExperienceDescriptionUpdate)
-  experienceDescriptionUpdate(
+  @Action(Resume.ExperienceDescriptionCreate)
+  experienceDescriptionCreate(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceDescriptionUpdate,
+    action: Resume.ExperienceDescriptionCreate,
   ) {
-    const experienceDescriptions = Object.values(
-      ctx.getState().experienceDescriptions,
-    ).filter((description) => description.experienceId === action.id);
-
-    const prevDescriptions = new Map(
-      experienceDescriptions.map((description) => [
-        description.position,
-        description,
-      ]),
-    );
-
-    const newDescriptions = action.description
-      .split('\n')
-      .filter((value) => value.trim())
-      .map((value, index) =>
-        prevDescriptions.has(index)
-          ? { ...prevDescriptions.get(index), description: value }
-          : {
-              id: this.uuid.rnd(),
-              experienceId: action.id,
-              position: index,
-              description: value,
-            },
-      )
-      .reduce(
-        (acc, description) => ({
-          ...acc,
-          [description.id as string]: description,
-        }),
-        {},
-      );
-
-    const otherExperienceDescriptions = Object.values(
-      ctx.getState().experienceDescriptions,
-    )
-      .filter((description) => description.experienceId !== action.id)
-      .reduce(
-        (acc, description) => ({ ...acc, [description.id]: description }),
-        {},
-      );
+    const experienceDescription = {
+      id: action.id,
+      experienceId: action.experienceId,
+      position: action.position,
+      value: action.value,
+    };
 
     ctx.setState({
       ...ctx.getState(),
       experienceDescriptions: {
-        ...otherExperienceDescriptions,
-        ...newDescriptions,
+        ...ctx.getState().experienceDescriptions,
+        [experienceDescription.id]: experienceDescription,
       },
     });
 
-    // TODO: Dispatch Create and Delete Section Actions
+    if (
+      this.displayService.hasSectionByResumeId(
+        experienceDescription.experienceId,
+        SelectorType.EXPERIENCE_DESCRIPTION_LIST,
+      )
+    ) {
+      return ctx.dispatch([
+        new Display.NestedSectionCreate(
+          experienceDescription.id,
+          experienceDescription.experienceId,
+          SelectorType.EXPERIENCE_DESCRIPTION,
+        ),
+      ]);
+    } else {
+      return ctx.dispatch([
+        new Display.SectionCreate(
+          experienceDescription.experienceId,
+          SelectorType.EXPERIENCE_DESCRIPTION_LIST,
+        ),
+        new Display.NestedSectionCreate(
+          experienceDescription.id,
+          experienceDescription.experienceId,
+          SelectorType.EXPERIENCE_DESCRIPTION,
+        ),
+      ]);
+    }
   }
 
   @Action(Resume.ExperienceSkillsUpdate)

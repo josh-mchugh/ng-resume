@@ -619,9 +619,17 @@ export class FormState {
       },
     });
 
-    const addedIds = newDescriptionsAllIds.filter(
-      (id) => !prevDescriptionIds.includes(id),
-    );
+    const addedDescriptions = newDescriptionsAllIds
+      .filter((id) => !prevDescriptionIds.includes(id))
+      .map(
+        (id) =>
+          new Resume.ExperienceDescriptionCreate(
+            newDescriptions[id].id,
+            newDescriptions[id].experienceId,
+            newDescriptions[id].position,
+            newDescriptions[id].value,
+          ),
+      );
 
     const updatedIds = experienceDescriptions
       .filter((prevDescription) =>
@@ -638,6 +646,8 @@ export class FormState {
     const removedIds = prevDescriptionIds.filter(
       (id) => !newDescriptionsAllIds.includes(id),
     );
+
+    return ctx.dispatch([...addedDescriptions]);
   }
 
   @Action(Form.Experience.SkillsUpdate)
