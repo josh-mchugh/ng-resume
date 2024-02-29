@@ -757,6 +757,28 @@ export class ResumeState {
     });
   }
 
+  @Action(Resume.ExperienceDescriptionDelete)
+  experienceDescriptionDelete(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceDescriptionDelete,
+  ) {
+    const updatedExperienceDescriptions = Object.values(
+      ctx.getState().experienceDescriptions,
+    )
+      .filter((description) => description.id !== action.id)
+      .reduce(
+        (acc, description) => ({ ...acc, [description.id]: description }),
+        {},
+      );
+
+    ctx.setState({
+      ...ctx.getState(),
+      experienceDescriptions: updatedExperienceDescriptions,
+    });
+
+    return ctx.dispatch(new Display.SectionDelete(action.id));
+  }
+
   @Action(Resume.ExperienceSkillsUpdate)
   experienceSkillsUpdate(
     ctx: StateContext<ResumeStateModel>,

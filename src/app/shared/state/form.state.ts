@@ -650,11 +650,15 @@ export class FormState {
           ),
       );
 
-    const removedIds = prevDescriptionIds.filter(
-      (id) => !newDescriptionsAllIds.includes(id),
-    );
+    const removedDescriptions = prevDescriptionIds
+      .filter((id) => !newDescriptionsAllIds.includes(id))
+      .map((id) => new Resume.ExperienceDescriptionDelete(id));
 
-    return ctx.dispatch([...addedDescriptions, ...updatedDescriptions]);
+    return ctx.dispatch([
+      ...removedDescriptions,
+      ...updatedDescriptions,
+      ...addedDescriptions,
+    ]);
   }
 
   @Action(Form.Experience.SkillsUpdate)
