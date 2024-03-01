@@ -633,6 +633,16 @@ export class FormState {
 
     ctx.setState({
       ...ctx.getState(),
+      experiences: {
+        ...ctx.getState().experiences,
+        byId: {
+          ...ctx.getState().experiences.byId,
+          [action.id]: {
+            ...ctx.getState().experiences.byId[action.id],
+            rawDescription: action.description,
+          },
+        },
+      },
       experienceDescriptions: {
         byId: {
           ...otherExperienceDescriptions,
