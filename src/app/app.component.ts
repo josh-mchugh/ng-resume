@@ -14,7 +14,7 @@ import { ResumeStateConfig } from '@shared/state/resume.config';
 })
 export class AppComponent {
   constructor(private store: Store) {
-    const initialResumeState = ResumeStateConfig.DEFAULT;
+    const initialResumeState = ResumeStateConfig.DEMO;
     this.store
       .dispatch([
         new Resume.InitializeState(initialResumeState),

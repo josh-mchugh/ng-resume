@@ -15,6 +15,7 @@ export interface FormStateModel {
   socials: Socials;
   experiences: Experiences;
   experienceDescriptions: ExperienceDescriptions;
+  experienceSkills: ExperienceSkills;
   skills: Skills;
   certifications: Certifications;
 }
@@ -51,6 +52,18 @@ interface ExperienceDescriptions {
 }
 
 export interface FormExperienceDescription {
+  id: string;
+  experienceId: string;
+  position: number;
+  value: string;
+}
+
+interface ExperienceSkills {
+  byId: { [id: string]: FormExperienceSkill };
+  allIds: string[];
+}
+
+export interface FormExperienceSkill {
   id: string;
   experienceId: string;
   position: number;
@@ -174,6 +187,15 @@ export class FormState {
         {},
       );
 
+    const experienceSkills = Object.values(action.resume.experienceSkills)
+      .map((skill) => ({
+        id: skill.id,
+        experienceId: skill.experienceId,
+        position: skill.position,
+        value: skill.value,
+      }))
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+
     const skills = Object.values(action.resume.skills)
       .map((skill) => ({
         id: skill.id,
@@ -213,6 +235,10 @@ export class FormState {
       experienceDescriptions: {
         byId: experienceDescriptions,
         allIds: Object.keys(experienceDescriptions),
+      },
+      experienceSkills: {
+        byId: experienceSkills,
+        allIds: Object.keys(experienceSkills),
       },
       skills: {
         byId: skills,
