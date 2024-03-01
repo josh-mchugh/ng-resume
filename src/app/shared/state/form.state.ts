@@ -42,7 +42,7 @@ export interface FormExperience {
   duration: string;
   location: string;
   rawDescription: string;
-  skills: string;
+  rawSkills: string;
 }
 
 interface ExperienceDescriptions {
@@ -150,7 +150,7 @@ export class FormState {
           .filter((description) => description.experienceId === experience.id)
           .map((description) => description.value)
           .join('\n'),
-        skills: Object.values(action.resume.experienceSkills)
+        rawSkills: Object.values(action.resume.experienceSkills)
           .filter((skill) => skill.experienceId === experience.id)
           .map((skill) => skill.value)
           .join(', '),
@@ -382,7 +382,7 @@ export class FormState {
       duration: '',
       location: '',
       rawDescription: '',
-      skills: '',
+      rawSkills: '',
     };
 
     ctx.setState({

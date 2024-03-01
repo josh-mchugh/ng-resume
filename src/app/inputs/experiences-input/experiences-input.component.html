@@ -62,7 +62,7 @@
         type="text"
         name="experienceSkills-{{ experience.id }}"
         placeholder="Skills"
-        [value]="experience.skills"
+        [value]="experience.rawSkills"
         (input)="onExperienceSkillsInput(experience.id, $event)"
       />
     </div>
