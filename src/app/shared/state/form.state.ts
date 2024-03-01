@@ -692,8 +692,41 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.Experience.SkillsUpdate,
   ) {
-    const experience = ctx.getState().experiences.byId[action.id];
-    const updatedExperience = { ...experience, skills: action.skills };
+    const experienceSkills = Object.values(
+      ctx.getState().experienceSkills.byId,
+    ).filter((skill) => skill.experienceId === action.id);
+
+    const prevSkills = new Map(
+      experienceSkills.map((skill) => [skill.position, skill]),
+    );
+
+    const prevSkillIds = experienceSkills.map((skill) => skill.id);
+
+    const newSkills: { [id: string]: FormExperienceSkill } = action.skills
+      .split(',')
+      .map((value) => value.trim())
+      .filter((value) => value)
+      .map((value, index) =>
+        prevSkills.has(index)
+          ? { ...prevSkills.get(index), value: value }
+          : {
+              id: this.uuid.rnd(),
+              experienceId: action.id,
+              position: index,
+              value: value,
+            },
+      )
+      .reduce((acc, skill) => ({ ...acc, [skill.id as string]: skill }), {});
+
+    const newSkillIds = Object.keys(newSkills);
+
+    const otherExperienceSkills = Object.values(
+      ctx.getState().experienceSkills.byId,
+    )
+      .filter((skill) => skill.experienceId !== action.id)
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+
+    const otherExperienceSkillIds = Object.keys(otherExperienceSkills);
 
     ctx.setState({
       ...ctx.getState(),
@@ -701,17 +734,20 @@ export class FormState {
         ...ctx.getState().experiences,
         byId: {
           ...ctx.getState().experiences.byId,
-          [updatedExperience.id]: updatedExperience,
+          [action.id]: {
+            ...ctx.getState().experiences.byId[action.id],
+            rawSkills: action.skills,
+          },
         },
       },
+      experienceSkills: {
+        byId: {
+          ...otherExperienceSkills,
+          ...newSkills,
+        },
+        allIds: [...otherExperienceSkillIds, ...newSkillIds],
+      },
     });
-
-    return ctx.dispatch(
-      new Resume.ExperienceSkillsUpdate(
-        updatedExperience.id,
-        updatedExperience.skills,
-      ),
-    );
   }
 
   @Action(Form.Skill.Create)
