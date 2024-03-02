@@ -787,7 +787,11 @@ export class FormState {
           ),
       );
 
-    return ctx.dispatch([...updatedSkills, ...addedSkills]);
+    const removedSkills = prevSkillIds
+      .filter((id) => !newSkillIds.includes(id))
+      .map((id) => new Resume.ExperienceSkillDelete(id));
+
+    return ctx.dispatch([...removedSkills, ...updatedSkills, ...addedSkills]);
   }
 
   @Action(Form.Skill.Create)

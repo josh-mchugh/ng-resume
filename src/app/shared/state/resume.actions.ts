@@ -142,6 +142,11 @@ export namespace Resume {
     ) {}
   }
 
+  export class ExperienceSkillDelete {
+    static readonly type = '[Resume] Experience Skill Delete';
+    constructor(public id: string) {}
+  }
+
   export class ExperienceDescriptionDelete {
     static readonly type = '[Resume] Experience Description Delete';
     constructor(public id: string) {}

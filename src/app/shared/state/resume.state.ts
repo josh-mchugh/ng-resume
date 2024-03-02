@@ -848,6 +848,25 @@ export class ResumeState {
     });
   }
 
+  @Action(Resume.ExperienceSkillDelete)
+  experienceSkillDelete(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceSkillDelete,
+  ) {
+    const updatedExperienceSkills = Object.values(
+      ctx.getState().experienceSkills,
+    )
+      .filter((skill) => skill.id !== action.id)
+      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+
+    ctx.setState({
+      ...ctx.getState(),
+      experienceSkills: updatedExperienceSkills,
+    });
+
+    return ctx.dispatch(new Display.SectionDelete(action.id));
+  }
+
   @Action(Resume.SkillCreate)
   skillCreate(ctx: StateContext<ResumeStateModel>, action: Resume.SkillCreate) {
     const skill = { id: action.id, name: '', proficiency: 0 };
