@@ -123,6 +123,16 @@ export namespace Resume {
     ) {}
   }
 
+  export class ExperienceSkillCreate {
+    static readonly type = '[Resume] Experience Skill Create';
+    constructor(
+      public id: string,
+      public experienceId: string,
+      public position: number,
+      public value: string,
+    ) {}
+  }
+
   export class ExperienceDescriptionDelete {
     static readonly type = '[Resume] Experience Description Delete';
     constructor(public id: string) {}

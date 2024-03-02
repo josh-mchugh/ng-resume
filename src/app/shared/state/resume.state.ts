@@ -779,53 +779,52 @@ export class ResumeState {
     return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
-  @Action(Resume.ExperienceSkillsUpdate)
-  experienceSkillsUpdate(
+  @Action(Resume.ExperienceSkillCreate)
+  experienceSkillCreate(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceSkillsUpdate,
+    action: Resume.ExperienceSkillCreate,
   ) {
-    const experienceSkills = Object.values(
-      ctx.getState().experienceSkills,
-    ).filter((skill) => skill.experienceId === action.id);
-
-    const prevSkills = new Map(
-      experienceSkills.map((skill) => [skill.position, skill]),
-    );
-
-    const newSkills = action.skills
-      .split(',')
-      .filter((value) => value.trim())
-      .map((value, index) =>
-        prevSkills.has(index)
-          ? { ...prevSkills.get(index), skill: value }
-          : {
-              id: this.uuid.rnd(),
-              experienceId: action.id,
-              position: index,
-              skill: value,
-            },
-      )
-      .reduce(
-        (acc, skill) => ({
-          ...acc,
-          [skill.id as string]: skill,
-        }),
-        {},
-      );
-
-    const otherExperienceSkills = Object.values(ctx.getState().experienceSkills)
-      .filter((skill) => skill.experienceId !== action.id)
-      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+    const experienceSkill = {
+      id: action.id,
+      experienceId: action.experienceId,
+      position: action.position,
+      value: action.value,
+    };
 
     ctx.setState({
       ...ctx.getState(),
       experienceSkills: {
-        ...otherExperienceSkills,
-        ...newSkills,
+        ...ctx.getState().experienceSkills,
+        [experienceSkill.id]: experienceSkill,
       },
     });
 
-    // TODO: Dispatch Section Create and Delete Actions
+    if (
+      this.displayService.hasSectionByResumeId(
+        experienceSkill.experienceId,
+        SelectorType.EXPERIENCE_SKILL_LIST,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.NestedSectionCreate(
+          experienceSkill.id,
+          experienceSkill.experienceId,
+          SelectorType.EXPERIENCE_SKILL,
+        ),
+      );
+    } else {
+      return ctx.dispatch([
+        new Display.SectionCreate(
+          experienceSkill.experienceId,
+          SelectorType.EXPERIENCE_SKILL_LIST,
+        ),
+        new Display.NestedSectionCreate(
+          experienceSkill.id,
+          experienceSkill.experienceId,
+          SelectorType.EXPERIENCE_SKILL,
+        ),
+      ]);
+    }
   }
 
   @Action(Resume.SkillCreate)
