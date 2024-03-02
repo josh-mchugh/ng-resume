@@ -6,8 +6,8 @@ import {
   StateContext,
   Store,
 } from '@ngxs/store';
-import { Display } from '@shared/state/display.actions';
-import { DisplayStateConfig } from '@shared/state/display.config';
+import { Display } from '@display/display.actions';
+import { DisplayStateConfig } from '@display/display.config';
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
 import { ResumeState } from '@shared/state/resume.state';

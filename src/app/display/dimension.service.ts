@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Dimension } from '@shared/state/display.state';
+import { Dimension } from '@display/display.state';
 
 @Injectable({
   providedIn: 'root',

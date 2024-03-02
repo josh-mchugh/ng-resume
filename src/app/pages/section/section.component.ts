@@ -19,12 +19,12 @@ import {
   of,
   tap,
 } from 'rxjs';
-import { DimensionService } from '@shared/service/dimension.service';
-import { Display } from '@shared/state/display.actions';
+import { DimensionService } from '@display/dimension.service';
+import { Display } from '@display/display.actions';
+import { DisplayState, Section } from '@display/display.state';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
 import { ResumeState } from '@shared/state/resume.state';
-import { DisplayState, Section } from '@shared/state/display.state';
 
 @Component({
   selector: 'app-section',

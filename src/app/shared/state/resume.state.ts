@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
-import { Display } from '@shared/state/display.actions';
-import { DisplayService } from '@shared/service/display.service';
+import { Display } from '@display/display.actions';
+import { DisplayService } from '@display/display.service';
 import { ResumeStateConfig } from '@shared/state/resume.config';
 import { SelectorType } from '@shared/state/selector-type.enum';
 import ShortUniqueId from 'short-unique-id';

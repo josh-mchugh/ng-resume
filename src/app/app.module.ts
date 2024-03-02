@@ -13,7 +13,7 @@ import { environment } from './../environments/environment';
 import { ResumeState } from '@shared/state/resume.state';
 import { FormState } from '@shared/state/form.state';
 import { LayoutState } from '@shared/state/layout.state';
-import { DisplayState } from '@shared/state/display.state';
+import { DisplayState } from '@display/display.state';
 import { PagesComponent } from './pages/pages.component';
 import { DetailsInputComponent } from './inputs/details-input/details-input.component';
 import { ContactInputComponent } from './inputs/contact-input/contact-input.component';

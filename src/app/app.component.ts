@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Display } from '@shared/state/display.actions';
+import { Display } from '@display/display.actions';
 import { Form } from '@shared/state/form.actions';
 import { Layout } from '@shared/state/layout.actions';
 import { LayoutStateConfig } from '@shared/state/layout.config';
