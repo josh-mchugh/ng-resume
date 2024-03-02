@@ -827,6 +827,27 @@ export class ResumeState {
     }
   }
 
+  @Action(Resume.ExperienceSkillUpdate)
+  experienceSkillUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.ExperienceSkillUpdate,
+  ) {
+    const experienceSkill = ctx.getState().experienceSkills[action.id];
+    const updatedExperienceSkill = {
+      ...experienceSkill,
+      position: action.position,
+      value: action.value,
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      experienceSkills: {
+        ...ctx.getState().experienceSkills,
+        [updatedExperienceSkill.id]: updatedExperienceSkill,
+      },
+    });
+  }
+
   @Action(Resume.SkillCreate)
   skillCreate(ctx: StateContext<ResumeStateModel>, action: Resume.SkillCreate) {
     const skill = { id: action.id, name: '', proficiency: 0 };

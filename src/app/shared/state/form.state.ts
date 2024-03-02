@@ -771,7 +771,23 @@ export class FormState {
           ),
       );
 
-    return ctx.dispatch([...addedSkills]);
+    const updatedSkills = experienceSkills
+      .filter((prevSkill) => newSkillIds.includes(prevSkill.id))
+      .filter(
+        (prevSkill) =>
+          prevSkill.value !== newSkills[prevSkill.id].value ||
+          prevSkill.position !== newSkills[prevSkill.id].position,
+      )
+      .map(
+        (prevSkill) =>
+          new Resume.ExperienceSkillUpdate(
+            prevSkill.id,
+            newSkills[prevSkill.id].position,
+            newSkills[prevSkill.id].value,
+          ),
+      );
+
+    return ctx.dispatch([...updatedSkills, ...addedSkills]);
   }
 
   @Action(Form.Skill.Create)
