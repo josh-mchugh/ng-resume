@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, createSelector, State, StateContext } from '@ngxs/store';
 import { Form } from './form.actions';
-import { Resume } from './resume.actions';
+import { Resume } from '@resume/resume.actions';
 import ShortUniqueId from 'short-unique-id';
 import { FormStateConfig } from '@shared/state/form.config';
 

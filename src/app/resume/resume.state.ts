@@ -3,7 +3,7 @@ import { State, Action, StateContext, createSelector } from '@ngxs/store';
 import { Resume } from './resume.actions';
 import { Display } from '@display/display.actions';
 import { DisplayService } from '@display/display.service';
-import { ResumeStateConfig } from '@shared/state/resume.config';
+import { ResumeStateConfig } from '@resume/resume.config';
 import { SelectorType } from '@shared/state/selector-type.enum';
 import ShortUniqueId from 'short-unique-id';
 

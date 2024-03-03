@@ -4,8 +4,8 @@ import { Display } from '@display/display.actions';
 import { Form } from '@shared/state/form.actions';
 import { Layout } from '@shared/state/layout.actions';
 import { LayoutStateConfig } from '@shared/state/layout.config';
-import { Resume } from '@shared/state/resume.actions';
-import { ResumeStateConfig } from '@shared/state/resume.config';
+import { Resume } from '@resume/resume.actions';
+import { ResumeStateConfig } from '@resume/resume.config';
 
 @Component({
   selector: 'app-root',

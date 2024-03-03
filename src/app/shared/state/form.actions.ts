@@ -1,4 +1,4 @@
-import { ResumeStateModel } from '@shared/state/resume.state';
+import { ResumeStateModel } from '@resume/resume.state';
 
 export namespace Form {
   export class InitializeState {

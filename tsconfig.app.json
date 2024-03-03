@@ -6,7 +6,8 @@
     "types": [],
     "paths": {
       "@shared/*": ["src/app/shared/*"],
-      "@display/*": ["src/app/display/*"]
+      "@display/*": ["src/app/display/*"],
+      "@resume/*": ["src/app/resume/*"]
     },
   },
   "files": [

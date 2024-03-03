@@ -10,7 +10,7 @@ import { NgxResizeObserverModule } from 'ngx-resize-observer';
 import { AppComponent } from './app.component';
 
 import { environment } from './../environments/environment';
-import { ResumeState } from '@shared/state/resume.state';
+import { ResumeState } from '@resume/resume.state';
 import { FormState } from '@shared/state/form.state';
 import { LayoutState } from '@shared/state/layout.state';
 import { DisplayState } from '@display/display.state';

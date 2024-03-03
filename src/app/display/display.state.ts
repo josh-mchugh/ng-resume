@@ -10,7 +10,7 @@ import { Display } from '@display/display.actions';
 import { DisplayStateConfig } from '@display/display.config';
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
-import { ResumeState } from '@shared/state/resume.state';
+import { ResumeState } from '@resume/resume.state';
 import ShortUniqueId from 'short-unique-id';
 
 export interface DisplayStateModel {

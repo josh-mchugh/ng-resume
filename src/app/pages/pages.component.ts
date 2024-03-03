@@ -2,7 +2,7 @@ import { Component, HostBinding } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { DisplayState, Page, Section } from '@display/display.state';
-import { ResumeState } from '@shared/state/resume.state';
+import { ResumeState } from '@resume/resume.state';
 
 @Component({
   selector: 'app-pages',

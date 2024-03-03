@@ -24,7 +24,7 @@ import { Display } from '@display/display.actions';
 import { DisplayState, Section } from '@display/display.state';
 import { LayoutState, LayoutNode } from '@shared/state/layout.state';
 import { NodeType, NodeDataType } from '@shared/state/layout.interface';
-import { ResumeState } from '@shared/state/resume.state';
+import { ResumeState } from '@resume/resume.state';
 
 @Component({
   selector: 'app-section',
