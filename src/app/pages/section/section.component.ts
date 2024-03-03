@@ -22,8 +22,8 @@ import {
 import { DimensionService } from '@display/dimension.service';
 import { Display } from '@display/display.actions';
 import { DisplayState, Section } from '@display/display.state';
-import { LayoutState, LayoutNode } from '@shared/state/layout.state';
-import { NodeType, NodeDataType } from '@shared/state/layout.interface';
+import { LayoutState, LayoutNode } from '@layout/layout.state';
+import { NodeType, NodeDataType } from '@layout/layout.interface';
 import { ResumeState } from '@resume/resume.state';
 
 @Component({

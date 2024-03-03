@@ -8,8 +8,8 @@ import {
 } from '@ngxs/store';
 import { Display } from '@display/display.actions';
 import { DisplayStateConfig } from '@display/display.config';
-import { NodeType, NodeDataType } from '@shared/state/layout.interface';
-import { LayoutState, LayoutNode } from '@shared/state/layout.state';
+import { NodeType, NodeDataType } from '@layout/layout.interface';
+import { LayoutState, LayoutNode } from '@layout/layout.state';
 import { ResumeState } from '@resume/resume.state';
 import ShortUniqueId from 'short-unique-id';
 

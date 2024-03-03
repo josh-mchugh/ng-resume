@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Display } from '@display/display.actions';
 import { Form } from '@shared/state/form.actions';
-import { Layout } from '@shared/state/layout.actions';
-import { LayoutStateConfig } from '@shared/state/layout.config';
+import { Layout } from '@layout/layout.actions';
+import { LayoutStateConfig } from '@layout/layout.config';
 import { Resume } from '@resume/resume.actions';
 import { ResumeStateConfig } from '@resume/resume.config';
 

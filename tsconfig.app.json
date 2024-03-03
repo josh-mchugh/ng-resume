@@ -7,7 +7,8 @@
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@display/*": ["src/app/display/*"],
-      "@resume/*": ["src/app/resume/*"]
+      "@resume/*": ["src/app/resume/*"],
+      "@layout/*": ["src/app/layout/*"]
     },
   },
   "files": [

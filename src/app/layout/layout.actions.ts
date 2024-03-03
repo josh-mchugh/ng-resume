@@ -1,4 +1,4 @@
-import { LayoutStateModel } from '@shared/state/layout.state';
+import { LayoutStateModel } from '@layout/layout.state';
 
 export namespace Layout {
   export class InitializeState {

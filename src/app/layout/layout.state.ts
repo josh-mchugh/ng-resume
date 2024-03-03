@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action, State, StateContext, createSelector } from '@ngxs/store';
-import { Layout } from '@shared/state/layout.actions';
-import { NodeType, NodeDataType } from '@shared/state/layout.interface';
-import { LayoutStateConfig } from '@shared/state/layout.config';
+import { Layout } from '@layout/layout.actions';
+import { NodeType, NodeDataType } from '@layout/layout.interface';
+import { LayoutStateConfig } from '@layout/layout.config';
 import { SelectorType } from '@shared/state/selector-type.enum';
 
 export interface LayoutStateModel {

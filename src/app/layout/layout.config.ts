@@ -1,4 +1,4 @@
-import { NodeType, NodeDataType } from '@shared/state/layout.interface';
+import { NodeType, NodeDataType } from '@layout/layout.interface';
 import { SelectorType } from '@shared/state/selector-type.enum';
 
 export class LayoutStateConfig {
