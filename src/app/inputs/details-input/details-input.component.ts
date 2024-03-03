@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { Form } from '@shared/state/form.actions';
+import { Form } from '@form/form.actions';
 
 @Component({
   selector: 'app-details-input',
