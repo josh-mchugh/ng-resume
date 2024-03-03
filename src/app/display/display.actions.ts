@@ -1,5 +1,5 @@
 import { Dimension } from '@display/display.state';
-import { SelectorType } from '@shared/state/selector-type.enum';
+import { SelectorType } from '@resume/selector-type.enum';
 
 export namespace Display {
   export class InitializeState {

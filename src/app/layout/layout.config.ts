@@ -1,5 +1,5 @@
 import { NodeType, NodeDataType } from '@layout/layout.interface';
-import { SelectorType } from '@shared/state/selector-type.enum';
+import { SelectorType } from '@resume/selector-type.enum';
 
 export class LayoutStateConfig {
   public static readonly DEFAULT = {

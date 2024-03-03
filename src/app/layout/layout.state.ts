@@ -3,7 +3,7 @@ import { Action, State, StateContext, createSelector } from '@ngxs/store';
 import { Layout } from '@layout/layout.actions';
 import { NodeType, NodeDataType } from '@layout/layout.interface';
 import { LayoutStateConfig } from '@layout/layout.config';
-import { SelectorType } from '@shared/state/selector-type.enum';
+import { SelectorType } from '@resume/selector-type.enum';
 
 export interface LayoutStateModel {
   byId: { [id: string]: LayoutNode };
