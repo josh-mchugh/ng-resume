@@ -6,6 +6,10 @@ import { LayoutStateConfig } from '@layout/layout.config';
 import { SelectorType } from '@resume/selector-type.enum';
 
 export interface LayoutStateModel {
+  nodes: Nodes;
+}
+
+interface Nodes {
   byId: { [id: string]: LayoutNode };
   allIds: string[];
 }
@@ -39,26 +43,26 @@ export interface Selector {
 export class LayoutState {
   static allNodes(): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.byId),
+      Object.values(state.nodes.byId),
     );
   }
 
   static layoutNode(id: string): (state: LayoutStateModel) => LayoutNode {
     return createSelector(
       [LayoutState],
-      (state: LayoutStateModel) => state.byId[id],
+      (state: LayoutStateModel) => state.nodes.byId[id],
     );
   }
 
   static rootNodes(): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.byId).filter((section) => '' === section.parentId),
+      Object.values(state.nodes.byId).filter((section) => '' === section.parentId),
     );
   }
 
   static childNodes(id: string): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.byId).filter((section) => id === section.parentId),
+      Object.values(state.nodes.byId).filter((section) => id === section.parentId),
     );
   }
 
@@ -66,7 +70,7 @@ export class LayoutState {
     selectorType: SelectorType,
   ): (state: LayoutStateModel) => LayoutNode {
     return createSelector([LayoutState], (state: LayoutStateModel) => {
-      const layoutNode = Object.values(state.byId).find((section) =>
+      const layoutNode = Object.values(state.nodes.byId).find((section) =>
         section.selectors.find((selector) => selector.type === selectorType),
       );
       if (layoutNode) {
