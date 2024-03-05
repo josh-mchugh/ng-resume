@@ -3,6 +3,10 @@ import { SelectorType } from '@resume/selector-type.enum';
 
 export class LayoutStateConfig {
   public static readonly DEFAULT = {
+    page: {
+      maxSize: 0,
+      anchors: [],
+    },
     nodes: {
       byId: {},
       allIds: [],
@@ -10,6 +14,10 @@ export class LayoutStateConfig {
   };
 
   public static readonly DEMO = {
+    page: {
+      maxSize: 955,
+      anchors: ['0,0', '0,1'],
+    },
     nodes: {
       byId: {
         '0': {

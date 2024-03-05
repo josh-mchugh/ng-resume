@@ -6,7 +6,13 @@ import { LayoutStateConfig } from '@layout/layout.config';
 import { SelectorType } from '@resume/selector-type.enum';
 
 export interface LayoutStateModel {
+  page: Page;
   nodes: Nodes;
+}
+
+export interface Page {
+  maxSize: number;
+  anchors: string[];
 }
 
 interface Nodes {
