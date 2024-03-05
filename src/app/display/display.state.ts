@@ -119,6 +119,10 @@ export class DisplayState {
 
   @Action(Display.InitializeState)
   initializeState(ctx: StateContext<DisplayStateModel>) {
+    const pageProperties = this.store.selectSnapshot(LayoutState.page());
+
+    const page = { id: this.uuid.rnd() };
+
     const rootNodes = this.store.selectSnapshot(LayoutState.rootNodes());
 
     const buildSection = (
@@ -132,7 +136,7 @@ export class DisplayState {
         layoutNodeId: layoutNode.id,
         parentId: parentId,
         resumeId: resumeId,
-        pageId: '0',
+        pageId: page.id,
         dimension: initDimension(),
       };
 
@@ -167,7 +171,12 @@ export class DisplayState {
       .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
 
     ctx.setState({
-      ...ctx.getState(),
+      pages: {
+        byId: {
+          [page.id]: page,
+        },
+        allIds: [page.id],
+      },
       sections: {
         byId: sections,
         allIds: Object.keys(sections),
@@ -178,6 +187,7 @@ export class DisplayState {
   @Action(Display.SectionUpdate)
   update(ctx: StateContext<DisplayStateModel>, action: Display.SectionUpdate) {
     const sections = ctx.getState().sections;
+
     let section = sections.byId[action.id];
     section = { ...section, dimension: action.dimension };
     ctx.setState({

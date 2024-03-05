@@ -47,6 +47,13 @@ export interface Selector {
 })
 @Injectable()
 export class LayoutState {
+  static page(): (state: LayoutStateModel) => Page {
+    return createSelector(
+      [LayoutState],
+      (state: LayoutStateModel) => state.page,
+    );
+  }
+
   static allNodes(): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
       Object.values(state.nodes.byId),
@@ -62,13 +69,17 @@ export class LayoutState {
 
   static rootNodes(): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.nodes.byId).filter((section) => '' === section.parentId),
+      Object.values(state.nodes.byId).filter(
+        (section) => '' === section.parentId,
+      ),
     );
   }
 
   static childNodes(id: string): (state: LayoutStateModel) => LayoutNode[] {
     return createSelector([LayoutState], (state: LayoutStateModel) =>
-      Object.values(state.nodes.byId).filter((section) => id === section.parentId),
+      Object.values(state.nodes.byId).filter(
+        (section) => id === section.parentId,
+      ),
     );
   }
 
