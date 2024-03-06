@@ -25,6 +25,7 @@ export interface Pages {
 
 export interface Page {
   id: string;
+  position: number;
 }
 
 export interface Sections {
@@ -121,7 +122,10 @@ export class DisplayState {
   initializeState(ctx: StateContext<DisplayStateModel>) {
     const pageProperties = this.store.selectSnapshot(LayoutState.page());
 
-    const page = { id: this.uuid.rnd() };
+    const page = {
+      id: this.uuid.rnd(),
+      position: 0,
+    };
 
     const rootNodes = this.store.selectSnapshot(LayoutState.rootNodes());
 
