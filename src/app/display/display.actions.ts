@@ -6,8 +6,8 @@ export namespace Display {
     static readonly type = '[Display] Initialize State';
   }
 
-  export class SectionUpdate {
-    static readonly type = '[Display] Section Update';
+  export class SectionDimensionUpdate {
+    static readonly type = '[Display] Section Dimension Update';
     constructor(
       public id: string,
       public dimension: Dimension,

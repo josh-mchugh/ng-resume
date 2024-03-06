@@ -188,19 +188,20 @@ export class DisplayState {
     });
   }
 
-  @Action(Display.SectionUpdate)
-  update(ctx: StateContext<DisplayStateModel>, action: Display.SectionUpdate) {
-    const sections = ctx.getState().sections;
-
-    let section = sections.byId[action.id];
-    section = { ...section, dimension: action.dimension };
+  @Action(Display.SectionDimensionUpdate)
+  update(
+    ctx: StateContext<DisplayStateModel>,
+    action: Display.SectionDimensionUpdate,
+  ) {
+    const section = ctx.getState().sections.byId[action.id];
+    const updatedSection = { ...section, dimension: action.dimension };
     ctx.setState({
       ...ctx.getState(),
       sections: {
         ...ctx.getState().sections,
         byId: {
-          ...sections.byId,
-          [action.id]: { ...section },
+          ...ctx.getState().sections.byId,
+          [action.id]: { ...updatedSection },
         },
       },
     });

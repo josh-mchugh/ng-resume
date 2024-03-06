@@ -137,6 +137,6 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    this.store.dispatch(new Display.SectionUpdate(this.id, dimension));
+    this.store.dispatch(new Display.SectionDimensionUpdate(this.id, dimension));
   }
 }
