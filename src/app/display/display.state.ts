@@ -8,6 +8,7 @@ import {
 } from '@ngxs/store';
 import { Display } from '@display/display.actions';
 import { DisplayStateConfig } from '@display/display.config';
+import { DisplayService } from '@display/display.service';
 import { NodeType, NodeDataType } from '@layout/layout.interface';
 import { LayoutState, LayoutNode } from '@layout/layout.state';
 import { ResumeState } from '@resume/resume.state';
@@ -70,7 +71,10 @@ function initDimension(): Dimension {
 export class DisplayState {
   private uuid: ShortUniqueId;
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private displayService: DisplayService,
+  ) {
     this.uuid = new ShortUniqueId();
   }
 
@@ -115,6 +119,16 @@ export class DisplayState {
             section.resumeId === resumeId &&
             section.layoutNodeId === layoutNodeId,
         ).length > 0,
+    );
+  }
+
+  static sectionsByLayoutNodeIds(
+    layoutNodeIds: string[],
+  ): (state: DisplayStateModel) => Section[] {
+    return createSelector([DisplayState], (state: DisplayStateModel) =>
+      Object.values(state.sections.byId).filter((section) =>
+        layoutNodeIds.includes(section.layoutNodeId),
+      ),
     );
   }
 
@@ -205,6 +219,8 @@ export class DisplayState {
         },
       },
     });
+
+    this.displayService.pageExceedsMaxHeight();
   }
 
   @Action(Display.SectionCreate)

@@ -11,7 +11,7 @@ export interface LayoutStateModel {
 }
 
 export interface Page {
-  maxSize: number;
+  maxHeight: number;
   anchors: string[];
 }
 

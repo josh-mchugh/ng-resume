@@ -4,7 +4,7 @@ import { SelectorType } from '@resume/selector-type.enum';
 export class LayoutStateConfig {
   public static readonly DEFAULT = {
     page: {
-      maxSize: 0,
+      maxHeight: 0,
       anchors: [],
     },
     nodes: {
@@ -15,7 +15,7 @@ export class LayoutStateConfig {
 
   public static readonly DEMO = {
     page: {
-      maxSize: 955,
+      maxHeight: 955,
       anchors: ['0,0', '0,1'],
     },
     nodes: {
