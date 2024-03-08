@@ -131,8 +131,8 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  public handleTrackBy(index: number): number {
-    return index;
+  public handleTrackBy(index: number, section: Section): string {
+    return section.id;
   }
 
   public onResize(event: ResizeObserverEntry): void {

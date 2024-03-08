@@ -220,7 +220,7 @@ export class DisplayState {
       },
     });
 
-    if(this.displayService.pageExceedsMaxHeight()) {
+    if (this.displayService.pageExceedsMaxHeight()) {
       return ctx.dispatch(new Display.PageCreate());
     } else {
       return;
@@ -331,13 +331,8 @@ export class DisplayState {
   }
 
   @Action(Display.PageCreate)
-  pageCreate(
-    ctx: StateContext<DisplayStateModel>,
-    action: Display.PageCreate,
-  ) {
-    const pagePosition = Object.values(
-      ctx.getState().pages.byId,
-    ).length;
+  pageCreate(ctx: StateContext<DisplayStateModel>, action: Display.PageCreate) {
+    const pagePosition = Object.values(ctx.getState().pages.byId).length;
 
     const page = {
       id: this.uuid.rnd(),
@@ -351,10 +346,7 @@ export class DisplayState {
           ...ctx.getState().pages.byId,
           [page.id]: page,
         },
-        allIds: [
-          ...ctx.getState().pages.allIds,
-          page.id,
-        ],
+        allIds: [...ctx.getState().pages.allIds, page.id],
       },
     });
   }

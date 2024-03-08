@@ -178,7 +178,7 @@ export class FormState {
     )
       .map((description) => ({
         id: description.id,
-        exerienceId: description.experienceId,
+        experienceId: description.experienceId,
         position: description.position,
         value: description.value,
       }))
