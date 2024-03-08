@@ -220,7 +220,11 @@ export class DisplayState {
       },
     });
 
-    this.displayService.pageExceedsMaxHeight();
+    if(this.displayService.pageExceedsMaxHeight()) {
+      return ctx.dispatch(new Display.PageCreate());
+    } else {
+      return;
+    }
   }
 
   @Action(Display.SectionCreate)
@@ -322,6 +326,35 @@ export class DisplayState {
       sections: {
         byId: updatedById,
         allIds: updatedAllIds,
+      },
+    });
+  }
+
+  @Action(Display.PageCreate)
+  pageCreate(
+    ctx: StateContext<DisplayStateModel>,
+    action: Display.PageCreate,
+  ) {
+    const pagePosition = Object.values(
+      ctx.getState().pages.byId,
+    ).length;
+
+    const page = {
+      id: this.uuid.rnd(),
+      position: pagePosition,
+    };
+
+    ctx.setState({
+      ...ctx.getState(),
+      pages: {
+        byId: {
+          ...ctx.getState().pages.byId,
+          [page.id]: page,
+        },
+        allIds: [
+          ...ctx.getState().pages.allIds,
+          page.id,
+        ],
       },
     });
   }

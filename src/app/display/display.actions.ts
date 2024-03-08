@@ -35,4 +35,8 @@ export namespace Display {
     static readonly type = '[Display] Section Delete';
     constructor(public resumeId: string) {}
   }
+
+  export class PageCreate {
+    static readonly type = '[Display] Page Create';
+  }
 }
