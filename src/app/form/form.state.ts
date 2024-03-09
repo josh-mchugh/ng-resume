@@ -159,6 +159,7 @@ export class FormState {
         title: experience.title,
         organization: experience.organization,
         duration: experience.duration,
+        location: experience.location,
         rawDescription: Object.values(action.resume.experienceDescriptions)
           .filter((description) => description.experienceId === experience.id)
           .map((description) => description.value)
