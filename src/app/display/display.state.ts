@@ -134,8 +134,6 @@ export class DisplayState {
 
   @Action(Display.InitializeState)
   initializeState(ctx: StateContext<DisplayStateModel>) {
-    const pageProperties = this.store.selectSnapshot(LayoutState.page());
-
     const page = {
       id: this.uuid.rnd(),
       position: 0,
@@ -331,7 +329,7 @@ export class DisplayState {
   }
 
   @Action(Display.PageCreate)
-  pageCreate(ctx: StateContext<DisplayStateModel>, action: Display.PageCreate) {
+  pageCreate(ctx: StateContext<DisplayStateModel>) {
     const pagePosition = Object.values(ctx.getState().pages.byId).length;
 
     const page = {

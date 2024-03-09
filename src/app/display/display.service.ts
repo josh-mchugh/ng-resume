@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { DisplayState, Section } from '@display/display.state';
+import { DisplayState } from '@display/display.state';
 import { LayoutState } from '@layout/layout.state';
 import { SelectorType } from '@resume/selector-type.enum';
 
