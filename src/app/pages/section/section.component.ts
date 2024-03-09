@@ -34,7 +34,7 @@ import { ResumeState } from '@resume/resume.state';
 })
 export class SectionComponent implements OnInit {
   // section id
-  @Input() id!: string;
+  @Input() section!: Section;
 
   section$!: Observable<Section>;
 
@@ -57,24 +57,19 @@ export class SectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.section$ = this.store.select(DisplayState.section(this.id));
-    // Observable for section LayoutNode
-    this.layoutNode$ = this.section$.pipe(
-      mergeMap((section) =>
-        this.store.select(LayoutState.layoutNode(section.layoutNodeId)).pipe(
-          // Side effect for classes for @HostBinding cannot use Observables
-          tap((layoutNode) => (this.rootClass = layoutNode.classes.root)),
-        ),
-      ),
-    );
     // Observable for layout HTML content
+    this.layoutNode$ = this.store
+      .select(LayoutState.layoutNode(this.section.layoutNodeId))
+      .pipe(
+        // Side effect for classes for @HostBinding cannot use Observables
+        tap((layoutNode) => (this.rootClass = layoutNode.classes.root)),
+      );
     this.htmlContent$ = this.layoutNode$.pipe(
       filter((layoutNode) => NodeType.CONTENT === layoutNode.type),
-      combineLatestWith(this.section$),
-      mergeMap(([layoutNode, section]) =>
+      mergeMap((layoutNode) =>
         iif(
           () => NodeDataType.DYNAMIC === layoutNode.dataType,
-          this.renderDynamicHTML(layoutNode, section),
+          this.renderDynamicHTML(layoutNode),
           this.renderStaticHTML(layoutNode),
         ),
       ),
@@ -86,13 +81,10 @@ export class SectionComponent implements OnInit {
     );
   }
 
-  private renderDynamicHTML(
-    layoutNode: LayoutNode,
-    section: Section,
-  ): Observable<SafeHtml> {
+  private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
     const observables$ = layoutNode.selectors.map((selector) =>
       this.store
-        .select(ResumeState.selectorValue(selector.type, section.resumeId))
+        .select(ResumeState.selectorValue(selector.type, this.section.resumeId))
         .pipe(map((value) => [selector.key, value])),
     );
     return combineLatest(observables$).pipe(
@@ -113,7 +105,7 @@ export class SectionComponent implements OnInit {
   }
 
   private getChildSections(): Observable<Section[]> {
-    return this.store.select(DisplayState.childSections(this.id));
+    return this.store.select(DisplayState.childSections(this.section.id));
   }
 
   @HostBinding('class')
@@ -137,6 +129,8 @@ export class SectionComponent implements OnInit {
 
   public onResize(event: ResizeObserverEntry): void {
     const dimension = this.dimensionService.createDimension(event.target);
-    this.store.dispatch(new Display.SectionDimensionUpdate(this.id, dimension));
+    this.store.dispatch(
+      new Display.SectionDimensionUpdate(this.section.id, dimension),
+    );
   }
 }

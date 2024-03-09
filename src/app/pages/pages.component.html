@@ -3,7 +3,7 @@
     *ngFor="
       let page of pages$ | async;
       let pageIndex = index;
-      trackBy: handleTrackBy
+      trackBy: handlePageTrackBy
     "
   >
     <div class="page">
@@ -12,10 +12,10 @@
           *ngFor="
             let section of sections(page.id) | async;
             let i = index;
-            trackBy: handleTrackBy
+            trackBy: handleSectionTrackBy
           "
         >
-          <app-section [id]="section.id" />
+          <app-section [section]="section" />
         </ng-container>
       </div>
     </div>

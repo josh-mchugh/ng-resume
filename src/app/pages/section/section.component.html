@@ -1,4 +1,4 @@
-<ng-container *ngIf="section$ | async as section">
+<ng-container *ngIf="section">
   <ng-container *ngIf="layoutNode$ | async as layoutNode">
     <!-- Render section with template data available -->
     <ng-container *ngIf="'CONTENT' === layoutNode.type">
@@ -18,7 +18,7 @@
             trackBy: handleTrackBy
           "
         >
-          <app-section [id]="section.id" />
+          <app-section [section]="section" />
         </ng-container>
       </div>
     </ng-container>

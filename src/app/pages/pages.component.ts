@@ -24,7 +24,11 @@ export class PagesComponent {
     return this.store.select(DisplayState.rootSections(pageId));
   }
 
-  public handleTrackBy(index: number): number {
-    return index;
+  public handlePageTrackBy(index: number, page: Page): string {
+    return page.id;
+  }
+
+  public handleSectionTrackBy(index: number, section: Section): string {
+    return section.id;
   }
 }
