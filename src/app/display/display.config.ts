@@ -3,6 +3,10 @@ export class DisplayStateConfig {
     pages: {
       byId: {},
       allIds: [],
+      properties: {
+        anchors: [],
+        maxHeight: 0,
+      },
     },
     sections: {
       byId: {},

@@ -22,11 +22,17 @@ export interface DisplayStateModel {
 export interface Pages {
   byId: { [id: string]: Page };
   allIds: string[];
+  properties: PageProperties;
 }
 
 export interface Page {
   id: string;
   position: number;
+}
+
+export interface PageProperties {
+  anchors: string[];
+  maxHeight: number;
 }
 
 export interface Sections {
@@ -134,6 +140,7 @@ export class DisplayState {
 
   @Action(Display.InitializeState)
   initializeState(ctx: StateContext<DisplayStateModel>) {
+    const pageProperties = this.store.selectSnapshot(LayoutState.page());
     const page = {
       id: this.uuid.rnd(),
       position: 0,
@@ -188,6 +195,10 @@ export class DisplayState {
 
     ctx.setState({
       pages: {
+        properties: {
+          anchors: pageProperties.anchors,
+          maxHeight: pageProperties.maxHeight,
+        },
         byId: {
           [page.id]: page,
         },
@@ -218,11 +229,17 @@ export class DisplayState {
       },
     });
 
-    if (this.displayService.pageExceedsMaxHeight()) {
-      return ctx.dispatch(new Display.PageCreate());
-    } else {
-      return;
+    if (
+      ctx.getState().pages.properties.anchors.includes(section.layoutNodeId)
+    ) {
+      if (
+        ctx.getState().pages.properties.maxHeight < section.dimension.height
+      ) {
+        return ctx.dispatch(new Display.PageCreate());
+      }
     }
+
+    return;
   }
 
   @Action(Display.SectionCreate)
@@ -340,6 +357,7 @@ export class DisplayState {
     ctx.setState({
       ...ctx.getState(),
       pages: {
+        ...ctx.getState().pages,
         byId: {
           ...ctx.getState().pages.byId,
           [page.id]: page,

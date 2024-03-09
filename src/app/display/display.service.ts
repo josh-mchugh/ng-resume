@@ -21,14 +21,4 @@ export class DisplayService {
       DisplayState.hasSectionByResumeId(resumeId, layoutNode.id),
     );
   }
-
-  public pageExceedsMaxHeight(): boolean {
-    const layoutPage = this.store.selectSnapshot(LayoutState.page());
-
-    const anchorSections = this.store
-      .selectSnapshot(DisplayState.sectionsByLayoutNodeIds(layoutPage.anchors))
-      .filter((section) => section.dimension.height > layoutPage.maxHeight);
-
-    return anchorSections.length > 0;
-  }
 }
