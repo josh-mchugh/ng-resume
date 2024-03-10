@@ -354,6 +354,61 @@ export class DisplayState {
       position: pagePosition,
     };
 
+    // build sections to anchor nodes
+    const rootNodes = this.store.selectSnapshot(LayoutState.rootNodes());
+
+    const buildSection = (
+      parentId: string,
+      resumeId: string,
+      layoutNode: LayoutNode,
+    ): Section[] => {
+      const id = this.uuid.rnd();
+      const section = {
+        id: id,
+        layoutNodeId: layoutNode.id,
+        parentId: parentId,
+        resumeId: resumeId,
+        pageId: page.id,
+        dimension: initDimension(),
+      };
+
+      if (
+        !ctx.getState().pages.properties.anchors.includes(section.layoutNodeId)
+      ) {
+        const childNodes = this.store.selectSnapshot(
+          LayoutState.childNodes(layoutNode.id),
+        );
+        if (childNodes.length) {
+          const isDynamicContainer =
+            NodeType.CONTAINER === layoutNode.type &&
+            NodeDataType.DYNAMIC === layoutNode.dataType;
+
+          const resumeIds: string[] = isDynamicContainer
+            ? this.store.selectSnapshot(
+                ResumeState.selectorValue(
+                  layoutNode.selectors[0].type,
+                  resumeId,
+                ),
+              )
+            : [''];
+          const childSections = resumeIds
+            .map((resumeId) =>
+              childNodes.map((node) => buildSection(id, resumeId, node)),
+            )
+            .flat()
+            .flat();
+          return [section, ...childSections];
+        }
+      }
+
+      return [section];
+    };
+
+    const sections = rootNodes
+      .map((node) => buildSection('', '', node))
+      .flat()
+      .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
+
     ctx.setState({
       ...ctx.getState(),
       pages: {
@@ -363,6 +418,14 @@ export class DisplayState {
           [page.id]: page,
         },
         allIds: [...ctx.getState().pages.allIds, page.id],
+      },
+      sections: {
+        ...ctx.getState().sections,
+        byId: {
+          ...ctx.getState().sections.byId,
+          ...sections,
+        },
+        allIds: [...ctx.getState().sections.allIds, ...Object.keys(sections)],
       },
     });
   }
