@@ -32,6 +32,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 0,
         },
         '0,0': {
           id: '0,0',
@@ -45,6 +46,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 0,
         },
         '0,0,0': {
           id: '0,0,0',
@@ -58,6 +60,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 0,
         },
         '0,0,0,0': {
           id: '0,0,0,0',
@@ -76,6 +79,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '<div class="name">{{ name }}</div>',
+          position: 0,
         },
         '0,0,0,1': {
           id: '0,0,0,1',
@@ -94,6 +98,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '<div class="title">{{ title }}</div>',
+          position: 1,
         },
         '0,0,1': {
           id: '0,0,1',
@@ -107,6 +112,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 1,
         },
         '0,0,1,0': {
           id: '0,0,1,0',
@@ -121,6 +127,7 @@ export class LayoutStateConfig {
           selectors: [],
           template:
             '<div class="header header--summary"><div class="header__title">SUMMARY</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+          position: 0,
         },
         '0,0,1,1': {
           id: '0,0,1,1',
@@ -139,6 +146,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '<div class="summary">{{ summary }}</div>',
+          position: 1,
         },
         '0,0,2': {
           id: '0,0,2',
@@ -152,6 +160,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 2,
         },
         '0,0,2,0': {
           id: '0,0,2,0',
@@ -166,6 +175,7 @@ export class LayoutStateConfig {
           selectors: [],
           template:
             '<div class="header header--contact"><div class="header__title">CONTACT</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+          position: 0,
         },
         '0,0,2,1': {
           id: '0,0,2,1',
@@ -185,6 +195,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="contact contact--first"><span class="contact__icon"><i class="fa-solid fa-phone"></i></span>{{ phone }}</div>',
+          position: 1,
         },
         '0,0,2,2': {
           id: '0,0,2,2',
@@ -204,6 +215,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-envelope"></i></span>{{ email }}</div>',
+          position: 2,
         },
         '0,0,2,3': {
           id: '0,0,2,3',
@@ -223,6 +235,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="contact"><span class="contact__icon"><i class="fa-solid fa-location-dot"></i></span>{{ location }}</div>',
+          position: 3,
         },
         '0,0,3': {
           id: '0,0,3',
@@ -236,6 +249,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 3,
         },
         '0,0,3,0': {
           id: '0,0,3,0',
@@ -250,6 +264,7 @@ export class LayoutStateConfig {
           selectors: [],
           template:
             '<div class="header header--social"><div class="header__title">SOCIAL</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line header-divider__line--white"></div></div></div></div>',
+          position: 0,
         },
         '0,0,3,1': {
           id: '0,0,3,1',
@@ -268,6 +283,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '',
+          position: 1,
         },
         '0,0,3,1,0': {
           id: '0,0,3,1,0',
@@ -295,6 +311,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="social"><div><span class="social__icon"><i class="{{ icon }}"></i></span>{{ name }}</div><a class="social__link" href=" {{ url }}"> {{ url }} </a></div>',
+          position: 0,
         },
         '0,1': {
           id: '0,1',
@@ -308,6 +325,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 1,
         },
         '0,1,0': {
           id: '0,1,0',
@@ -321,6 +339,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 0,
         },
         '0,1,0,0': {
           id: '0,1,0,0',
@@ -335,6 +354,7 @@ export class LayoutStateConfig {
           selectors: [],
           template:
             '<div class="header header--experience"><div class="header__title">WORK EXPERIENCE</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+          position: 0,
         },
         '0,1,0,1': {
           id: '0,1,0,1',
@@ -353,6 +373,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '',
+          position: 1,
         },
         '0,1,0,1,0': {
           id: '0,1,0,1,0',
@@ -376,6 +397,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="experience-position"><div class="experience-position__title">{{ title }}</div><div>{{ duration }}</div></div>',
+          position: 0,
         },
         '0,1,0,1,1': {
           id: '0,1,0,1,1',
@@ -399,6 +421,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="experience-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+          position: 1,
         },
         '0,1,0,1,2': {
           id: '0,1,0,1,2',
@@ -417,6 +440,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '',
+          position: 2,
         },
         '0,1,0,1,2,0': {
           id: '0,1,0,1,2,0',
@@ -436,6 +460,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="experience-description"><span class="experience-description__icon"><i class="fa-solid fa-chevron-right"></i></span>{{ description }}</div>',
+          position: 0,
         },
         '0,1,0,1,3': {
           id: '0,1,0,1,3',
@@ -454,6 +479,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '',
+          position: 3,
         },
         '0,1,0,1,3,0': {
           id: '0,1,0,1,3,0',
@@ -472,6 +498,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '<div class="experience-skill">{{ skill }}</div>',
+          position: 0,
         },
         '0,1,1': {
           id: '0,1,1',
@@ -485,6 +512,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 1,
         },
         '0,1,1,0': {
           id: '0,1,1,0',
@@ -499,6 +527,7 @@ export class LayoutStateConfig {
           selectors: [],
           template:
             '<div class="header header--skill"><div class="header__title">PROFESSIONAL SKILLS</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+          position: 0,
         },
         '0,1,1,1': {
           id: '0,1,1,1',
@@ -517,6 +546,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '',
+          position: 1,
         },
         '0,1,1,1,0': {
           id: '0,1,1,1,0',
@@ -540,6 +570,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="skill"><div>{{ name }}</div><div class="skill__gauge">{{ #blocks }}<div class="gauge-block {{ #active }} gauge-block--active {{ /active }}"></div>{{ /blocks }}</div>',
+          position: 0,
         },
         '0,1,2': {
           id: '0,1,2',
@@ -553,6 +584,7 @@ export class LayoutStateConfig {
           },
           selectors: [],
           template: '',
+          position: 2,
         },
         '0,1,2,0': {
           id: '0,1,2,0',
@@ -567,6 +599,7 @@ export class LayoutStateConfig {
           selectors: [],
           template:
             '<div class="header header--certification"><div class="header__title">EDUCATION</div><div class="header__divider"><div class="header-divider__container"><div class="header-divider__line"></div></div></div></div>',
+          position: 0,
         },
         '0,1,2,1': {
           id: '0,1,2,1',
@@ -585,6 +618,7 @@ export class LayoutStateConfig {
             },
           ],
           template: '',
+          position: 1,
         },
         '0,1,2,1,0': {
           id: '0,1,2,1,0',
@@ -608,6 +642,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="certification-degree"><div class="certification-degree__title">{{ title }}</div><div>{{ year }}</div></div>',
+          position: 0,
         },
         '0,1,2,1,1': {
           id: '0,1,2,1,1',
@@ -631,6 +666,7 @@ export class LayoutStateConfig {
           ],
           template:
             '<div class="certification-organization"><div>{{ organization }}</div><div>{{ location }}</div></div>',
+          position: 1,
         },
       },
       allIds: [

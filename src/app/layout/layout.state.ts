@@ -29,6 +29,7 @@ export interface LayoutNode {
   classes: Classes;
   selectors: Selector[];
   template: string;
+  position: number;
 }
 
 export interface Classes {
