@@ -170,8 +170,8 @@ textarea {
 @media screen {
   .page {
     background: var(--white);
-    background-shadow: 0 0.5mm 2mm var(--page-background-shadow);
-    margin: 5mm auto;
+    background-shadow: 0 2px 8px var(--page-background-shadow);
+    margin: 19px auto;
   }
 }
 
