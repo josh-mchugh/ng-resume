@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { DisplayState } from '@display/display.state';
+import { DisplayState, Page } from '@display/display.state';
 import { LayoutState } from '@layout/layout.state';
 import { SelectorType } from '@resume/selector-type.enum';
 
@@ -19,6 +19,14 @@ export class DisplayService {
     );
     return this.store.selectSnapshot(
       DisplayState.hasSectionByResumeId(resumeId, layoutNode.id),
+    );
+  }
+
+  public hasNextPage(pageId: string, pages: { [id: string]: Page }) {
+    const page = pages[pageId];
+    const pagePositions = Object.values(pages).map((page) => page.position);
+    return (
+      pagePositions.filter((position) => position > page.position).length > 0
     );
   }
 }

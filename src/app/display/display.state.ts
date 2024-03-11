@@ -226,16 +226,20 @@ export class DisplayState {
         ...ctx.getState().sections,
         byId: {
           ...ctx.getState().sections.byId,
-          [action.id]: { ...updatedSection },
+          [updatedSection.id]: { ...updatedSection },
         },
       },
     });
 
     if (
-      ctx.getState().pages.properties.anchors.includes(section.layoutNodeId)
+      ctx.getState().pages.properties.anchors.includes(section.layoutNodeId) &&
+      ctx.getState().pages.properties.maxHeight < section.dimension.height
     ) {
       if (
-        ctx.getState().pages.properties.maxHeight < section.dimension.height
+        !this.displayService.hasNextPage(
+          section.pageId,
+          ctx.getState().pages.byId,
+        )
       ) {
         return ctx.dispatch(new Display.PageCreate());
       }
