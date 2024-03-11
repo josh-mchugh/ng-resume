@@ -45,6 +45,7 @@ export interface Section {
   parentId: string;
   layoutNodeId: string;
   resumeId: string;
+  position: number;
   pageId: string;
   dimension: Dimension;
 }
@@ -159,6 +160,7 @@ export class DisplayState {
         layoutNodeId: layoutNode.id,
         parentId: parentId,
         resumeId: resumeId,
+        position: layoutNode.position,
         pageId: page.id,
         dimension: initDimension(),
       };
@@ -264,6 +266,7 @@ export class DisplayState {
       parentId: parentSection.id,
       layoutNodeId: layoutNode.id,
       resumeId: action.resumeId,
+      position: layoutNode.position,
       pageId: '0',
       dimension: initDimension(),
     };
@@ -307,6 +310,7 @@ export class DisplayState {
       parentId: parentSection.id,
       layoutNodeId: layoutNode.id,
       resumeId: action.resumeId,
+      position: layoutNode.position,
       pageId: '0',
       dimension: initDimension(),
     };
@@ -368,6 +372,7 @@ export class DisplayState {
         layoutNodeId: layoutNode.id,
         parentId: parentId,
         resumeId: resumeId,
+        position: layoutNode.position,
         pageId: page.id,
         dimension: initDimension(),
       };
