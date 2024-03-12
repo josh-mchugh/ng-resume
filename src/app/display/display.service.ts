@@ -29,4 +29,11 @@ export class DisplayService {
       pagePositions.filter((position) => position > page.position).length > 0
     );
   }
+
+  public nextPage(prevPageId: string, pages: { [id: string]: Page }) {
+    const prevPage = pages[prevPageId];
+    return Object.values(pages).filter(
+      (page) => page.position === prevPage.position + 1,
+    )[0];
+  }
 }
