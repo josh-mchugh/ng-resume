@@ -234,6 +234,7 @@ export class DisplayState {
   ) {
     const section = ctx.getState().sections.byId[action.id];
     const updatedSection = { ...section, dimension: action.dimension };
+
     ctx.setState({
       ...ctx.getState(),
       sections: {
@@ -245,26 +246,7 @@ export class DisplayState {
       },
     });
 
-    if (
-      ctx.getState().pages.properties.anchors.includes(section.layoutNodeId) &&
-      ctx.getState().pages.properties.maxHeight < section.dimension.height
-    ) {
-      if (
-        !this.displayService.hasNextPage(
-          section.pageId,
-          ctx.getState().pages.byId,
-        )
-      ) {
-        return ctx.dispatch([
-          new Display.PageCreate(),
-          new Display.LastSectionMoveNextPage(section.id),
-        ]);
-      } else {
-        return ctx.dispatch(new Display.LastSectionMoveNextPage(section.id));
-      }
-    }
 
-    return;
   }
 
   @Action(Display.SectionCreate)
@@ -447,72 +429,6 @@ export class DisplayState {
         },
         allIds: [...ctx.getState().pages.allIds, page.id],
       },
-      sections: {
-        ...ctx.getState().sections,
-        byId: {
-          ...ctx.getState().sections.byId,
-          ...sections,
-        },
-        allIds: [...ctx.getState().sections.allIds, ...Object.keys(sections)],
-      },
-    });
-  }
-
-  @Action(Display.LastSectionMoveNextPage)
-  lastSectionMoveNextPage(
-    ctx: StateContext<DisplayStateModel>,
-    action: Display.LastSectionMoveNextPage,
-  ) {
-    const section = ctx.getState().sections.byId[action.anchorId];
-    const nextPage = this.displayService.nextPage(
-      section.pageId,
-      ctx.getState().pages.byId,
-    );
-    const nextPageAnchorSection = this.store.selectSnapshot(
-      DisplayState.sectionByLayoutNodeId(section.layoutNodeId, nextPage.id),
-    );
-
-    const buildSections = (sectionId: string, parentId: string): Section[] => {
-      const sections = this.store
-        .selectSnapshot(DisplayState.childSections(sectionId))
-        .sort((a, b) => b.position - a.position);
-
-      if (sections.length) {
-        const section = sections[0];
-        const childSections = this.store.selectSnapshot(
-          DisplayState.childSections(section.id),
-        );
-
-        if (childSections.length) {
-          const newSectionId = this.uuid.rnd();
-          const buildChildSections = childSections
-            .map((section) => buildSections(section.id, newSectionId))
-            .flat();
-
-          return [
-            {
-              ...section,
-              id: newSectionId,
-              parentId: parentId,
-              pageId: nextPage.id,
-            },
-            ...buildChildSections,
-          ];
-        }
-
-        return [{ ...section, parentId: parentId, pageId: nextPage.id }];
-      }
-
-      return [];
-    };
-
-    const sections = buildSections(section.id, nextPageAnchorSection.id).reduce(
-      (acc, section) => ({ ...acc, [section.id]: section }),
-      {},
-    );
-
-    ctx.setState({
-      ...ctx.getState(),
       sections: {
         ...ctx.getState().sections,
         byId: {

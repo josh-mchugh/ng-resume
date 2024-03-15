@@ -21,19 +21,4 @@ export class DisplayService {
       DisplayState.hasSectionByResumeId(resumeId, layoutNode.id),
     );
   }
-
-  public hasNextPage(pageId: string, pages: { [id: string]: Page }) {
-    const page = pages[pageId];
-    const pagePositions = Object.values(pages).map((page) => page.position);
-    return (
-      pagePositions.filter((position) => position > page.position).length > 0
-    );
-  }
-
-  public nextPage(prevPageId: string, pages: { [id: string]: Page }) {
-    const prevPage = pages[prevPageId];
-    return Object.values(pages).filter(
-      (page) => page.position === prevPage.position + 1,
-    )[0];
-  }
 }

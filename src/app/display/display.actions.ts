@@ -39,9 +39,4 @@ export namespace Display {
   export class PageCreate {
     static readonly type = '[Display] Page Create';
   }
-
-  export class LastSectionMoveNextPage {
-    static readonly type = '[Display] Last Section Move Next Page';
-    constructor(public anchorId: string) {}
-  }
 }
