@@ -246,8 +246,11 @@ export class DisplayState {
       },
     });
 
-    const actions = ctx.getState().pages.properties.anchors.includes(updatedSection.layoutNodeId)
-      ? [new Display.SectionAnchorUpdate(updatedSection.id)] : [];
+    const actions = ctx
+      .getState()
+      .pages.properties.anchors.includes(updatedSection.layoutNodeId)
+      ? [new Display.SectionAnchorUpdate(updatedSection.id)]
+      : [];
 
     return ctx.dispatch(actions);
   }
@@ -451,29 +454,34 @@ export class DisplayState {
     const section = ctx.getState().sections.byId[action.sectionId];
     const maxPageHeight = ctx.getState().pages.properties.maxHeight;
     const heightDifference = section.dimension.height - maxPageHeight;
-    const shiftType = section.dimension.height > maxPageHeight
-      ? Display.AnchorShiftType.OUT_OF_BOUNDS
-      : Display.AnchorShiftType.IN_BOUNDS;
-    console.log("Anchor Height: ", section.dimension.height);
-    console.log("Max Page Height: ", maxPageHeight);
-    console.log("Hight Difference: ", heightDifference);
-    console.log("Shift Type: ", shiftType);
+    const shiftType =
+      section.dimension.height > maxPageHeight
+        ? Display.AnchorShiftType.OUT_OF_BOUNDS
+        : Display.AnchorShiftType.IN_BOUNDS;
+    console.log('Anchor Height: ', section.dimension.height);
+    console.log('Max Page Height: ', maxPageHeight);
+    console.log('Hight Difference: ', heightDifference);
+    console.log('Shift Type: ', shiftType);
 
     const currentPage = ctx.getState().pages.byId[section.pageId];
     const nextPages = Object.values(ctx.getState().pages.byId)
       .filter((page) => page.position > currentPage.position)
       .sort((a, b) => a.position - b.position);
     const hasNextPage = nextPages.length > 0;
-    console.log("Current Page: ", currentPage);
-    console.log("nextPages: ", nextPages);
-    console.log("Has Next Page: ", hasNextPage);
+    console.log('Current Page: ', currentPage);
+    console.log('nextPages: ', nextPages);
+    console.log('Has Next Page: ', hasNextPage);
 
-    if(!hasNextPage) {
-      if(Display.AnchorShiftType.OUT_OF_BOUNDS === shiftType) {
+    if (!hasNextPage) {
+      if (Display.AnchorShiftType.OUT_OF_BOUNDS === shiftType) {
         ctx.dispatch([
           new Display.PageCreate(),
-          new Display.SectionAnchorShift(section.id, shiftType, heightDifference)
-        ])
+          new Display.SectionAnchorShift(
+            section.id,
+            shiftType,
+            heightDifference,
+          ),
+        ]);
       }
     }
   }
@@ -488,66 +496,84 @@ export class DisplayState {
     const sections = Object.values(ctx.getState().sections.byId);
 
     const nest = (items: Section[], id: string): Section[] =>
-      items.filter((item) => item['parentId'] === id)
+      items
+        .filter((item) => item['parentId'] === id)
         .sort((a, b) => a.position - b.position)
-        .map((item) => ({ ...item, children: nest(items, item.id ) }) )
+        .map((item) => ({ ...item, children: nest(items, item.id) }));
 
-    const anchorChildSections = nest(sections, section.id)
-    console.log("Anchor Child Sections: ", anchorChildSections);
+    const anchorChildSections = nest(sections, section.id);
+    console.log('Anchor Child Sections: ', anchorChildSections);
 
-    if(Display.AnchorShiftType.OUT_OF_BOUNDS === action.shiftType) {
-
+    if (Display.AnchorShiftType.OUT_OF_BOUNDS === action.shiftType) {
       const reducer = (sections: any): any => {
-        return sections.reduceRight((acc: any, curr: any) => {
-          console.log("Reducer curr: ", curr);
-          if(acc.sum < action.shiftDifference) {
-            if(curr.children.length) {
-              return reducer(curr.children);
+        return sections.reduceRight(
+          (acc: any, curr: any) => {
+            console.log('Reducer curr: ', curr);
+            if (acc.sum < action.shiftDifference) {
+              if (curr.children.length) {
+                return reducer(curr.children);
+              }
+              return {
+                sum: acc.yPositions.includes(curr.dimension.y)
+                  ? acc.sum
+                  : acc.sum + curr.dimension.height,
+                yPositions: [...acc.yPositions, curr.dimension.y],
+                sections: [...acc.sections, curr],
+              };
             }
-            return {
-              sum: acc.yPositions.includes(curr.dimension.y) ? acc.sum : acc.sum + curr.dimension.height,
-              yPositions: [ ...acc.yPositions, curr.dimension.y],
-              sections: [ ...acc.sections, curr],
-            };
-          }
-          return acc;
-        }, { sum: 0, yPositions: [] as number[], sections: [] as Section[] }, );
-      }
+            return acc;
+          },
+          { sum: 0, yPositions: [] as number[], sections: [] as Section[] },
+        );
+      };
 
       const reduced = reducer(anchorChildSections);
-      console.log("reduced: ", reduced);
+      console.log('reduced: ', reduced);
 
       const nestContainers = (parentId: string): Section[] => {
         const section = ctx.getState().sections.byId[parentId];
-        console.log("section: ", section);
-        if(ctx.getState().pages.properties.anchors.includes(section.layoutNodeId)) {
-          console.log("parent id is an anchor");
+        console.log('section: ', section);
+        if (
+          ctx.getState().pages.properties.anchors.includes(section.layoutNodeId)
+        ) {
+          console.log('parent id is an anchor');
           return [];
         }
-        console.log("parent id is NOT an anchor");
-        return [
-          section,
-          ...nestContainers(section.parentId),
-        ];
-      }
+        console.log('parent id is NOT an anchor');
+        return [section, ...nestContainers(section.parentId)];
+      };
 
-      const containers = reduced.sections.flatMap((section: Section) => nestContainers(section.parentId));
-      console.log("containers: ", containers);
+      const containers = reduced.sections.flatMap((section: Section) =>
+        nestContainers(section.parentId),
+      );
+      console.log('containers: ', containers);
 
-      const nestedContainers = nest([...containers, ...reduced.sections], section.id);
-      console.log("Nested Containers: ", nestedContainers);
+      const nestedContainers = nest(
+        [...containers, ...reduced.sections],
+        section.id,
+      );
+      console.log('Nested Containers: ', nestedContainers);
 
       const pages = Object.values(ctx.getState().pages.byId);
-      const nextPages = pages.filter((page) => page.position > currentPage.position);
+      const nextPages = pages.filter(
+        (page) => page.position > currentPage.position,
+      );
       const nextPage = nextPages[0];
-      console.log("Next Page: ", nextPage);
+      console.log('Next Page: ', nextPage);
 
-      const nextPageAnchor = sections.filter((s) => s.pageId === nextPage.id && s.layoutNodeId === section.layoutNodeId)[0];
-      console.log("Next anchor: ", nextPageAnchor);
+      const nextPageAnchor = sections.filter(
+        (s) =>
+          s.pageId === nextPage.id && s.layoutNodeId === section.layoutNodeId,
+      )[0];
+      console.log('Next anchor: ', nextPageAnchor);
 
       const migrator = (sections: any, parentId: string): Section[] => {
         return sections.flatMap((section: any) => {
-          const sectionId = reduced.sections.filter((s: any) => s.id === section.id).length ? section.id : this.uuid.rnd();
+          const sectionId = reduced.sections.filter(
+            (s: any) => s.id === section.id,
+          ).length
+            ? section.id
+            : this.uuid.rnd();
           const newSection = {
             id: sectionId,
             parentId: parentId,
@@ -555,21 +581,21 @@ export class DisplayState {
             layoutNodeId: section.layoutNodeId,
             position: section.position,
             resumeId: section.resumeId,
-            dimension: initDimension()
+            dimension: initDimension(),
           };
-          if(section.children.length) {
-            return [
-              newSection,
-              ...migrator(section.children, sectionId),
-            ];
+          if (section.children.length) {
+            return [newSection, ...migrator(section.children, sectionId)];
           }
           return [newSection];
-        })
-      }
+        });
+      };
       const migratedSections = migrator(nestedContainers, nextPageAnchor.id);
-      console.log("Migrated Sections: ", migratedSections);
+      console.log('Migrated Sections: ', migratedSections);
 
-      const newSections = migratedSections.reduce((acc, section) => ({ ...acc, [section.id]: section }), {}, );
+      const newSections = migratedSections.reduce(
+        (acc, section) => ({ ...acc, [section.id]: section }),
+        {},
+      );
 
       ctx.setState({
         ...ctx.getState(),
