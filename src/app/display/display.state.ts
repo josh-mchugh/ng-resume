@@ -491,37 +491,21 @@ export class DisplayState {
     ctx: StateContext<DisplayStateModel>,
     action: Display.SectionAnchorShift,
   ) {
+    // Variables related to anchor section and current page
     const section = ctx.getState().sections.byId[action.sectionId];
     const currentPage = ctx.getState().pages.byId[section.pageId];
     const sections = Object.values(ctx.getState().sections.byId);
 
+    // Anchor section children in expanded tree form
     const anchorChildSections = this.buildSectionsTree(section.id, sections);
     console.log('Anchor Child Sections: ', anchorChildSections);
 
     if (Display.AnchorShiftType.OUT_OF_BOUNDS === action.shiftType) {
-      const reducer = (sections: any): any => {
-        return sections.reduceRight(
-          (acc: any, curr: any) => {
-            console.log('Reducer curr: ', curr);
-            if (acc.sum < action.shiftDifference) {
-              if (curr.children.length) {
-                return reducer(curr.children);
-              }
-              return {
-                sum: acc.yPositions.includes(curr.dimension.y)
-                  ? acc.sum
-                  : acc.sum + curr.dimension.height,
-                yPositions: [...acc.yPositions, curr.dimension.y],
-                sections: [...acc.sections, curr],
-              };
-            }
-            return acc;
-          },
-          { sum: 0, yPositions: [] as number[], sections: [] as Section[] },
-        );
-      };
-
-      const reduced = reducer(anchorChildSections);
+      // Get anchors last child sections with sum hight totally high difference
+      const reduced = this.getLastChildNodesWithinHeightLimit(
+        anchorChildSections,
+        action.shiftDifference,
+      );
       console.log('reduced: ', reduced);
 
       const nestContainers = (parentId: string): Section[] => {
@@ -615,5 +599,33 @@ export class DisplayState {
         ...section,
         children: this.buildSectionsTree(section.id, sections),
       }));
+  }
+
+  private getLastChildNodesWithinHeightLimit(
+    sections: Section[],
+    heightLimit: number,
+  ): any {
+    return sections.reduceRight(
+      (acc: any, curr: any) => {
+        console.log('Reducer curr: ', curr);
+        if (acc.sum < heightLimit) {
+          if (curr.children.length) {
+            return this.getLastChildNodesWithinHeightLimit(
+              curr.children,
+              heightLimit,
+            );
+          }
+          return {
+            sum: acc.yPositions.includes(curr.dimension.y)
+              ? acc.sum
+              : acc.sum + curr.dimension.height,
+            yPositions: [...acc.yPositions, curr.dimension.y],
+            sections: [...acc.sections, curr],
+          };
+        }
+        return acc;
+      },
+      { sum: 0, yPositions: [] as number[], sections: [] as Section[] },
+    );
   }
 }
