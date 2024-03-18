@@ -46,9 +46,8 @@ export namespace Display {
   }
 
   export enum AnchorShiftType {
-    EXPAND = 'EXPAND',
-    SHRANK = 'SHRANK',
-    SAME = 'SAME'
+    OUT_OF_BOUNDS = 'OUT_OF_BOUNDS',
+    IN_BOUNDS = 'IN_BOUNDS',
   }
 
   export class SectionAnchorShift {
@@ -56,7 +55,7 @@ export namespace Display {
     constructor(
       public sectionId: string,
       public shiftType: AnchorShiftType,
-      public shiftDifference: number
+      public shiftDifference: number,
     ) {}
   }
 }

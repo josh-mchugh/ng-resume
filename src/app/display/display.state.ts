@@ -451,9 +451,9 @@ export class DisplayState {
     const section = ctx.getState().sections.byId[action.sectionId];
     const maxPageHeight = ctx.getState().pages.properties.maxHeight;
     const heightDifference = section.dimension.height - maxPageHeight;
-    const shiftType = maxPageHeight === section.dimension.height
-      ? Display.AnchorShiftType.SAME
-      : section.dimension.height > maxPageHeight ? Display.AnchorShiftType.EXPAND : Display.AnchorShiftType.SHRANK;
+    const shiftType = section.dimension.height > maxPageHeight
+      ? Display.AnchorShiftType.OUT_OF_BOUNDS
+      : Display.AnchorShiftType.IN_BOUNDS;
     console.log("Anchor Height: ", section.dimension.height);
     console.log("Max Page Height: ", maxPageHeight);
     console.log("Hight Difference: ", heightDifference);
@@ -469,7 +469,7 @@ export class DisplayState {
     console.log("Has Next Page: ", hasNextPage);
 
     if(!hasNextPage) {
-      if(Display.AnchorShiftType.EXPAND === shiftType) {
+      if(Display.AnchorShiftType.OUT_OF_BOUNDS === shiftType) {
         ctx.dispatch([
           new Display.PageCreate(),
           new Display.SectionAnchorShift(section.id, shiftType, heightDifference)
@@ -495,7 +495,7 @@ export class DisplayState {
     const anchorChildSections = nest(sections, section.id)
     console.log("Anchor Child Sections: ", anchorChildSections);
 
-    if(Display.AnchorShiftType.EXPAND === action.shiftType) {
+    if(Display.AnchorShiftType.OUT_OF_BOUNDS === action.shiftType) {
 
       const reducer = (sections: any): any => {
         return sections.reduceRight((acc: any, curr: any) => {
@@ -505,12 +505,13 @@ export class DisplayState {
               return reducer(curr.children);
             }
             return {
-              sum: acc.sum + curr.dimension.height,
+              sum: acc.yPositions.includes(curr.dimension.y) ? acc.sum : acc.sum + curr.dimension.height,
+              yPositions: [ ...acc.yPositions, curr.dimension.y],
               sections: [ ...acc.sections, curr],
             };
           }
           return acc;
-        }, { sum: 0, sections: [] as Section[] }, );
+        }, { sum: 0, yPositions: [] as number[], sections: [] as Section[] }, );
       }
 
       const reduced = reducer(anchorChildSections);
