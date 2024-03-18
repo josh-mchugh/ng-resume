@@ -39,4 +39,24 @@ export namespace Display {
   export class PageCreate {
     static readonly type = '[Display] Page Create';
   }
+
+  export class SectionAnchorUpdate {
+    static readonly type = '[Display] Section Anchor Update';
+    constructor(public sectionId: string) {}
+  }
+
+  export enum AnchorShiftType {
+    EXPAND = 'EXPAND',
+    SHRANK = 'SHRANK',
+    SAME = 'SAME'
+  }
+
+  export class SectionAnchorShift {
+    static readonly type = '[Display] Section Anchor Shift';
+    constructor(
+      public sectionId: string,
+      public shiftType: AnchorShiftType,
+      public shiftDifference: number
+    ) {}
+  }
 }
