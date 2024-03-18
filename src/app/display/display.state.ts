@@ -495,13 +495,7 @@ export class DisplayState {
     const currentPage = ctx.getState().pages.byId[section.pageId];
     const sections = Object.values(ctx.getState().sections.byId);
 
-    const nest = (items: Section[], id: string): Section[] =>
-      items
-        .filter((item) => item['parentId'] === id)
-        .sort((a, b) => a.position - b.position)
-        .map((item) => ({ ...item, children: nest(items, item.id) }));
-
-    const anchorChildSections = nest(sections, section.id);
+    const anchorChildSections = this.buildSectionsTree(section.id, sections);
     console.log('Anchor Child Sections: ', anchorChildSections);
 
     if (Display.AnchorShiftType.OUT_OF_BOUNDS === action.shiftType) {
@@ -548,10 +542,10 @@ export class DisplayState {
       );
       console.log('containers: ', containers);
 
-      const nestedContainers = nest(
-        [...containers, ...reduced.sections],
-        section.id,
-      );
+      const nestedContainers = this.buildSectionsTree(section.id, [
+        ...containers,
+        ...reduced.sections,
+      ]);
       console.log('Nested Containers: ', nestedContainers);
 
       const pages = Object.values(ctx.getState().pages.byId);
@@ -611,5 +605,15 @@ export class DisplayState {
         },
       });
     }
+  }
+
+  private buildSectionsTree(id: string, sections: Section[]): Section[] {
+    return sections
+      .filter((section) => section.parentId === id)
+      .sort((a, b) => a.position - b.position)
+      .map((section) => ({
+        ...section,
+        children: this.buildSectionsTree(section.id, sections),
+      }));
   }
 }
