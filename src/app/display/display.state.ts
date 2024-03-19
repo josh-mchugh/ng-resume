@@ -502,11 +502,11 @@ export class DisplayState {
 
     if (Display.AnchorShiftType.OUT_OF_BOUNDS === action.shiftType) {
       // Get anchors last child sections with sum hight totally high difference
-      const reduced = this.getLastChildNodesWithinHeightLimit(
+      const moveSections = this.getLastChildNodesWithinHeightLimit(
         anchorChildSections,
         action.shiftDifference,
       );
-      console.log('reduced: ', reduced);
+      console.log('moveSections: ', moveSections);
 
       const nestContainers = (parentId: string): Section[] => {
         const section = ctx.getState().sections.byId[parentId];
@@ -521,14 +521,14 @@ export class DisplayState {
         return [section, ...nestContainers(section.parentId)];
       };
 
-      const containers = reduced.sections.flatMap((section: Section) =>
+      const containers = moveSections.flatMap((section: Section) =>
         nestContainers(section.parentId),
       );
       console.log('containers: ', containers);
 
       const nestedContainers = this.buildSectionsTree(section.id, [
         ...containers,
-        ...reduced.sections,
+        ...moveSections,
       ]);
       console.log('Nested Containers: ', nestedContainers);
 
@@ -547,9 +547,8 @@ export class DisplayState {
 
       const migrator = (sections: any, parentId: string): Section[] => {
         return sections.flatMap((section: any) => {
-          const sectionId = reduced.sections.filter(
-            (s: any) => s.id === section.id,
-          ).length
+          const sectionId = moveSections.filter((s: any) => s.id === section.id)
+            .length
             ? section.id
             : this.uuid.rnd();
           const newSection = {
@@ -602,30 +601,42 @@ export class DisplayState {
   }
 
   private getLastChildNodesWithinHeightLimit(
-    sections: Section[],
+    sections: any,
     heightLimit: number,
   ): any {
-    return sections.reduceRight(
-      (acc: any, curr: any) => {
-        console.log('Reducer curr: ', curr);
-        if (acc.sum < heightLimit) {
-          if (curr.children.length) {
-            return this.getLastChildNodesWithinHeightLimit(
-              curr.children,
-              heightLimit,
-            );
+    let sum = 0;
+    let yAxisSet = new Set<number>();
+    let results: any[] = [];
+
+    const recurs = (sections: any): void => {
+      for (let i = sections.length - 1; i >= 0; i--) {
+        console.log(`Sections[${i}]: `, sections[i]);
+        const section = sections[i];
+
+        if (section.children.length) {
+          recurs(section.children);
+        } else {
+          if (sum < heightLimit) {
+            // refactor in the future to check if section has
+            // a sibling with the same height or different height
+            // and take the largest of the siblings.
+            sum = yAxisSet.has(section.dimension.y)
+              ? sum
+              : sum + section.dimension.height;
+            yAxisSet.add(section.dimension.y);
+            results.push(section);
           }
-          return {
-            sum: acc.yPositions.includes(curr.dimension.y)
-              ? acc.sum
-              : acc.sum + curr.dimension.height,
-            yPositions: [...acc.yPositions, curr.dimension.y],
-            sections: [...acc.sections, curr],
-          };
         }
-        return acc;
-      },
-      { sum: 0, yPositions: [] as number[], sections: [] as Section[] },
-    );
+
+        if (sum > heightLimit) {
+          return;
+        }
+      }
+    };
+
+    recurs(sections);
+
+    console.log('results: ', results);
+    return results;
   }
 }
