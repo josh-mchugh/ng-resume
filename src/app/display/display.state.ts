@@ -508,22 +508,8 @@ export class DisplayState {
       );
       console.log('moveSections: ', moveSections);
 
-      const nestContainers = (parentId: string): Section[] => {
-        const section = ctx.getState().sections.byId[parentId];
-        console.log('section: ', section);
-        if (
-          ctx.getState().pages.properties.anchors.includes(section.layoutNodeId)
-        ) {
-          console.log('parent id is an anchor');
-          return [];
-        }
-        console.log('parent id is NOT an anchor');
-        return [section, ...nestContainers(section.parentId)];
-      };
-
-      const containers = moveSections.flatMap((section: Section) =>
-        nestContainers(section.parentId),
-      );
+      //
+      const containers = this.getParentContainersUntilAnchor(section.id, moveSections, ctx.getState().sections.byId);
       console.log('containers: ', containers);
 
       const nestedContainers = this.buildSectionsTree(section.id, [
@@ -638,5 +624,20 @@ export class DisplayState {
 
     console.log('results: ', results);
     return results;
+  }
+
+  private getParentContainersUntilAnchor(anchorId: string, moveSections: any[], sections: { [id: string]: Section } ): any[] {
+    const nestContainers = (parentId: string): Section[] => {
+      const section = sections[parentId];
+      console.log('section: ', section);
+      if (section.id === anchorId) {
+        console.log('parent id is an anchor');
+        return [];
+      }
+      console.log('parent id is NOT an anchor');
+      return [section, ...nestContainers(section.parentId)];
+    };
+
+    return moveSections.flatMap((section) => nestContainers(section.parentId));
   }
 }
