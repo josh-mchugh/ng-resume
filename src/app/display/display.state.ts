@@ -509,7 +509,11 @@ export class DisplayState {
       console.log('moveSections: ', moveSections);
 
       //
-      const containers = this.getParentContainersUntilAnchor(section.id, moveSections, ctx.getState().sections.byId);
+      const containers = this.getParentContainersUntilAnchor(
+        section.id,
+        moveSections,
+        ctx.getState().sections.byId,
+      );
       console.log('containers: ', containers);
 
       const nestedContainers = this.buildSectionsTree(section.id, [
@@ -626,18 +630,35 @@ export class DisplayState {
     return results;
   }
 
-  private getParentContainersUntilAnchor(anchorId: string, moveSections: any[], sections: { [id: string]: Section } ): any[] {
-    const nestContainers = (parentId: string): Section[] => {
+  private getParentContainersUntilAnchor(
+    anchorId: string,
+    moveSections: any[],
+    sections: { [id: string]: Section },
+  ): any[] {
+    console.log('Getting Parent Container Sections');
+    const parentIds = new Set<string>(
+      moveSections.map((section) => section.parentId),
+    );
+    console.log('Parent Ids: ', parentIds);
+
+    const resultMap = new Map<string, Section>();
+
+    const recurs = (parentId: string): void => {
       const section = sections[parentId];
-      console.log('section: ', section);
-      if (section.id === anchorId) {
-        console.log('parent id is an anchor');
-        return [];
+      console.log('Parent Section: ', section);
+      if (section.id !== anchorId) {
+        if (!resultMap.has(section.id)) {
+          resultMap.set(section.id, section);
+        }
+        recurs(section.parentId);
       }
-      console.log('parent id is NOT an anchor');
-      return [section, ...nestContainers(section.parentId)];
     };
 
-    return moveSections.flatMap((section) => nestContainers(section.parentId));
+    parentIds.forEach((parentId) => recurs(parentId));
+
+    const results = [...resultMap.values()];
+    console.log('Results: ', results);
+
+    return results;
   }
 }
