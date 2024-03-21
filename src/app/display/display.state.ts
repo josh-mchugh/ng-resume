@@ -508,7 +508,7 @@ export class DisplayState {
       );
       console.log('moveSections: ', moveSections);
 
-      //
+      // Get parent container sections up until anchor on current page
       const containers = this.getParentContainersUntilAnchor(
         section.id,
         moveSections,
@@ -516,12 +516,14 @@ export class DisplayState {
       );
       console.log('containers: ', containers);
 
+      // Build a tree of containers and content sections
       const nestedContainers = this.buildSectionsTree(section.id, [
         ...containers,
         ...moveSections,
       ]);
       console.log('Nested Containers: ', nestedContainers);
 
+      // Get the next page
       const pages = Object.values(ctx.getState().pages.byId);
       const nextPages = pages.filter(
         (page) => page.position > currentPage.position,
@@ -529,36 +531,23 @@ export class DisplayState {
       const nextPage = nextPages[0];
       console.log('Next Page: ', nextPage);
 
+      // Get the anchor on the next page by layout node id
       const nextPageAnchor = sections.filter(
         (s) =>
           s.pageId === nextPage.id && s.layoutNodeId === section.layoutNodeId,
       )[0];
-      console.log('Next anchor: ', nextPageAnchor);
+      console.log('Next Page Anchor: ', nextPageAnchor);
 
-      const migrator = (sections: any, parentId: string): Section[] => {
-        return sections.flatMap((section: any) => {
-          const sectionId = moveSections.filter((s: any) => s.id === section.id)
-            .length
-            ? section.id
-            : this.uuid.rnd();
-          const newSection = {
-            id: sectionId,
-            parentId: parentId,
-            pageId: nextPage.id,
-            layoutNodeId: section.layoutNodeId,
-            position: section.position,
-            resumeId: section.resumeId,
-            dimension: initDimension(),
-          };
-          if (section.children.length) {
-            return [newSection, ...migrator(section.children, sectionId)];
-          }
-          return [newSection];
-        });
-      };
-      const migratedSections = migrator(nestedContainers, nextPageAnchor.id);
+      // Create new containers and migrate content sections to the new page
+      const migratedSections = this.createAndMigrateSections(
+        nextPageAnchor.id,
+        nextPage.id,
+        nestedContainers,
+        moveSections,
+      );
       console.log('Migrated Sections: ', migratedSections);
 
+      // Format new sections as an object
       const newSections = migratedSections.reduce(
         (acc, section) => ({ ...acc, [section.id]: section }),
         {},
@@ -658,6 +647,45 @@ export class DisplayState {
 
     const results = [...resultMap.values()];
     console.log('Results: ', results);
+
+    return results;
+  }
+
+  private createAndMigrateSections(
+    parentId: string,
+    nextPageId: string,
+    containers: any[],
+    sections: any[],
+  ): Section[] {
+    const sectionIds = new Set<string>(sections.map((section) => section.id));
+
+    let results: Section[] = [];
+
+    const recurs = (parentId: string, sections: any[]): void => {
+      for (let section of sections) {
+        const sectionId = sectionIds.has(section.id)
+          ? section.id
+          : this.uuid.rnd();
+
+        if (section.children.length) {
+          recurs(sectionId, section.children);
+        }
+
+        const newSection = {
+          id: sectionId,
+          parentId: parentId,
+          pageId: nextPageId,
+          layoutNodeId: section.layoutNodeId,
+          position: section.position,
+          resumeId: section.resumeId,
+          dimension: initDimension(),
+        };
+
+        results.push(newSection);
+      }
+    };
+
+    recurs(parentId, containers);
 
     return results;
   }
