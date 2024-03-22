@@ -491,6 +491,8 @@ export class DisplayState {
     ctx: StateContext<DisplayStateModel>,
     action: Display.SectionAnchorShift,
   ) {
+    console.log("Starting Anchor Shift Action: ", new Date());
+
     // Variables related to anchor section and current page
     const section = ctx.getState().sections.byId[action.sectionId];
     const currentPage = ctx.getState().pages.byId[section.pageId];
@@ -567,6 +569,8 @@ export class DisplayState {
         },
       });
     }
+
+    console.log("End Anchor Shift Action: ", new Date());
   }
 
   private buildSectionsTree(id: string, sections: Section[]): Section[] {
@@ -687,6 +691,7 @@ export class DisplayState {
 
     recurs(parentId, containers);
 
+    console.log("Results: ", results);
     return results;
   }
 }
