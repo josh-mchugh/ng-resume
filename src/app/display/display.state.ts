@@ -555,41 +555,12 @@ export class DisplayState {
         {},
       );
 
-      const removedContainerIds = new Set<string>();
-      for (let container of containers) {
-        console.log('Container: ', container);
-        const childSections = sections.filter(
-          (section) => section.parentId === container.id,
-        );
-
-        const childrenAfterMove: Section[] = [];
-        for (let childSection of childSections) {
-          console.log('Child Section: ', childSection);
-
-          if (removedContainerIds.has(childSection.id)) {
-            console.log(
-              'Moving container to removed Container List: ',
-              childSection,
-            );
-            childrenAfterMove.push(childSection);
-          }
-
-          for (let moveSection of moveSections) {
-            if (moveSection.id === childSection.id) {
-              console.log('Child Section In MoveSections: ', childSection);
-              childrenAfterMove.push(childSection);
-            }
-          }
-        }
-
-        console.log('Children After Move: ', childrenAfterMove);
-
-        if (childrenAfterMove.length === childSections.length) {
-          console.log('Container Child Length matches movedSections lengths.');
-          console.log('Moving container to removed container list.');
-          removedContainerIds.add(container.id);
-        }
-      }
+      const removedContainerIds = this.getRemovedContainerIds(
+        containers,
+        moveSections,
+        sections,
+      );
+      console.log('Removed Container Ids: ', removedContainerIds);
 
       const filteredSections = Object.values(ctx.getState().sections.byId)
         .filter((section) => !removedContainerIds.has(section.id))
@@ -732,6 +703,52 @@ export class DisplayState {
     recurs(parentId, containers);
 
     console.log('Results: ', results);
+    return results;
+  }
+
+  private getRemovedContainerIds(
+    containers: Section[],
+    moveSections: Section[],
+    sections: Section[],
+  ): Set<string> {
+    const results = new Set<string>();
+
+    for (let container of containers) {
+      console.log('Container: ', container);
+      const childSections = sections.filter(
+        (section) => section.parentId === container.id,
+      );
+
+      const childrenAfterMove: Section[] = [];
+      for (let childSection of childSections) {
+        console.log('Child Section: ', childSection);
+
+        if (results.has(childSection.id)) {
+          console.log(
+            'Moving container to removed Container List: ',
+            childSection,
+          );
+          childrenAfterMove.push(childSection);
+          break;
+        }
+
+        for (let moveSection of moveSections) {
+          if (moveSection.id === childSection.id) {
+            console.log('Child Section In MoveSections: ', childSection);
+            childrenAfterMove.push(childSection);
+            break;
+          }
+        }
+      }
+
+      console.log('Children After Move: ', childrenAfterMove);
+
+      if (childrenAfterMove.length === childSections.length) {
+        results.add(container.id);
+        console.log('Moving container to removed container list: ', results);
+      }
+    }
+
     return results;
   }
 }
