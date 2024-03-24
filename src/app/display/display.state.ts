@@ -491,7 +491,7 @@ export class DisplayState {
     ctx: StateContext<DisplayStateModel>,
     action: Display.SectionAnchorShift,
   ) {
-    console.log("Starting Anchor Shift Action: ", new Date());
+    console.log('Starting Anchor Shift Action: ', new Date());
 
     // Variables related to anchor section and current page
     const section = ctx.getState().sections.byId[action.sectionId];
@@ -555,22 +555,62 @@ export class DisplayState {
         {},
       );
 
+      const removedContainerIds = new Set<string>();
+      for (let container of containers) {
+        console.log('Container: ', container);
+        const childSections = sections.filter(
+          (section) => section.parentId === container.id,
+        );
+
+        const childrenAfterMove: Section[] = [];
+        for (let childSection of childSections) {
+          console.log('Child Section: ', childSection);
+
+          if (removedContainerIds.has(childSection.id)) {
+            console.log(
+              'Moving container to removed Container List: ',
+              childSection,
+            );
+            childrenAfterMove.push(childSection);
+          }
+
+          for (let moveSection of moveSections) {
+            if (moveSection.id === childSection.id) {
+              console.log('Child Section In MoveSections: ', childSection);
+              childrenAfterMove.push(childSection);
+            }
+          }
+        }
+
+        console.log('Children After Move: ', childrenAfterMove);
+
+        if (childrenAfterMove.length === childSections.length) {
+          console.log('Container Child Length matches movedSections lengths.');
+          console.log('Moving container to removed container list.');
+          removedContainerIds.add(container.id);
+        }
+      }
+
+      const filteredSections = Object.values(ctx.getState().sections.byId)
+        .filter((section) => !removedContainerIds.has(section.id))
+        .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
+
       ctx.setState({
         ...ctx.getState(),
         sections: {
           byId: {
-            ...ctx.getState().sections.byId,
+            ...filteredSections,
             ...newSections,
           },
           allIds: [
-            ...ctx.getState().sections.allIds,
+            ...Object.keys(filteredSections),
             ...Object.keys(newSections),
           ],
         },
       });
     }
 
-    console.log("End Anchor Shift Action: ", new Date());
+    console.log('End Anchor Shift Action: ', new Date());
   }
 
   private buildSectionsTree(id: string, sections: Section[]): Section[] {
@@ -691,7 +731,7 @@ export class DisplayState {
 
     recurs(parentId, containers);
 
-    console.log("Results: ", results);
+    console.log('Results: ', results);
     return results;
   }
 }
