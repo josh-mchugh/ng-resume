@@ -64,6 +64,27 @@ export class ResumeStateConfig {
         duration: 'Jan 2021 – Dec 2021',
         location: 'Remote',
       },
+      DqS3iu : {
+        id: 'DqS3iu',
+        organization: 'O\'Connell LLC',
+        title: 'Junior Engineer',
+        duration: 'Jan 2020 - Dec 2020',
+        location: 'Remote',
+      },
+      JDi6zL: {
+        id: 'JDi6zL',
+        organization: 'Turner Inc',
+        title: 'Information Services Liaison',
+        duration: 'Jan 2019 - Dec 2019',
+        location: 'Remote',
+      },
+      wv7RWA: {
+        id: 'wv7RWA',
+        organization: 'Homenick Group',
+        title: 'Information Technology Technician',
+        duration: 'Jan 2018 - Dec 2018',
+        location: 'Remote',
+      },
     },
     experienceDescriptions: {
       DsI9Jf: {
@@ -148,6 +169,72 @@ export class ResumeStateConfig {
         position: 2,
         value:
           'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
+      },
+      cfuZQP : {
+        id: 'cfuZQP',
+        experienceId: 'DqS3iu',
+        position: 0,
+        value: 'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
+      },
+      '3Qfl0f': {
+        id: '3Qfl0f',
+        experienceId: 'DqS3iu',
+        position: 1,
+        value: 'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services \(ADFS\) in Microsoft Windows Azure \(IaaS\).',
+      },
+      c9HOmD: {
+        id: 'c9HOmD',
+        experienceId: 'DqS3iu',
+        position: 2,
+        value: 'Creating and managing storage in Microsoft Windows Azure (IaaS).',
+      },
+      duyQxx: {
+        id: 'duyQxx',
+        experienceId: 'DqS3iu',
+        position: 3,
+        value: 'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
+      },
+      X2RU0c: {
+        id: 'X2RU0c',
+        experienceId: 'JDi6zL',
+        position: 0,
+        value: 'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
+      },
+      sT4moZ: {
+        id: 'sT4moZ',
+        experienceId: 'JDi6zL',
+        position: 1,
+        value: 'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
+      },
+      YWpmDa: {
+        id: 'YWpmDa',
+        experienceId: 'JDi6zL',
+        position: 2,
+        value: 'Installing, configuring, and supporting BBars computer backup software.',
+      },
+      '7dsIrL': {
+        id: '7dsIrL',
+        experienceId: 'JDi6zL',
+        position: 3,
+        value: 'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
+      },
+      tEHYrq: {
+        id: 'tEHYrq',
+        experienceId: 'wv7RWA',
+        position: 0,
+        value: 'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
+      },
+      V8AFW1: {
+        id: 'V8AFW1',
+        experienceId: 'wv7RWA',
+        position: 1,
+        value: 'Configuring and supporting Blackberry devices on the Blackberry Enterprise Server to receive Exchange email.',
+      },
+      '04jBVn': {
+        id: '04jBVn',
+        experienceId: 'wv7RWA',
+        position: 2,
+        value: 'Installing, configuring, and testing Veeam virtual machine backup software and Virtual Desktop Infrastructure (VDI).',
       },
     },
     experienceSkills: {
@@ -264,6 +351,66 @@ export class ResumeStateConfig {
         experienceId: 'By81yN',
         position: 5,
         value: 'Coachbase',
+      },
+      lY6dHN: {
+        id: 'lY6dHN',
+        experienceId: 'DqS3iu',
+        position: 0,
+        value: 'Active Directory',
+      },
+      FWbOYH : {
+        id: 'FWbOYH',
+        experienceId: 'DqS3iu',
+        position: 1,
+        value: 'VMWare',
+      },
+      mnj4z9: {
+        id: 'mnj4z9',
+        experienceId: 'DqS3iu',
+        position: 2,
+        value: 'PowerShell',
+      },
+      LDxNuH: {
+        id: 'LDxNuH',
+        experienceId: 'DqS3iu',
+        position: 3,
+        value: 'Office 365',
+      },
+      '8Mf0xD': {
+        id: '8Mf0xD',
+        experienceId: 'JDi6zL',
+        position: 0,
+        value: 'C++',
+      },
+      slefNV: {
+        id: 'slefNV',
+        experienceId: 'JDi6zL',
+        position: 1,
+        value: 'Java'
+      },
+      ZXieJh: {
+        id: 'ZXieJh',
+        experienceId: 'JDi6zL',
+        position: 2,
+        value: 'HTML,',
+      },
+      '33PoKh': {
+        id: '33PoKh',
+        experienceId: 'JDi6zL',
+        position: 3,
+        value: 'CSS',
+      },
+      kPNAZo: {
+        id: 'kPNAZo',
+        experienceId: 'wv7RWA',
+        position: 0,
+        value: 'VB.Net'
+      },
+      '6XKu0i': {
+        id: '6XKu0i',
+        experienceId: 'wv7RWA',
+        position: 1,
+        value: 'T-SQL',
       },
     },
     skills: {

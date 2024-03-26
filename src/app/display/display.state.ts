@@ -585,13 +585,23 @@ export class DisplayState {
   }
 
   private buildSectionsTree(id: string, sections: Section[]): Section[] {
-    return sections
-      .filter((section) => section.parentId === id)
-      .sort((a, b) => a.position - b.position)
-      .map((section) => ({
-        ...section,
-        children: this.buildSectionsTree(section.id, sections),
-      }));
+
+    const recurs = (parentId: string): any[] => {
+      let results: any[] = [];
+
+      for (let section of sections) {
+        if (section.parentId === parentId) {
+          results.push({
+            ...section,
+            children: recurs(section.id),
+          });
+        }
+      }
+
+      return results;
+    }
+
+    return recurs(id);
   }
 
   private getLastChildNodesWithinHeightLimit(
