@@ -8,6 +8,8 @@ import { SelectorType } from '@resume/selector-type.enum';
 import ShortUniqueId from 'short-unique-id';
 
 export interface ResumeStateModel {
+  byId: { [id: string]: ResumeNode };
+  allIds: string[];
   name: string;
   title: string;
   summary: string;
@@ -20,6 +22,14 @@ export interface ResumeStateModel {
   experienceSkills: { [id: string]: ExperienceSkill };
   skills: { [id: string]: Skill };
   certifications: { [id: string]: Certification };
+}
+
+export interface ResumeNode {
+  id: string;
+  parentId: string;
+  type: SelectorType;
+  position: number;
+  value: string | number;
 }
 
 export interface Social {

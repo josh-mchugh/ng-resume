@@ -1,5 +1,9 @@
+import { SelectorType } from '@resume/selector-type.enum';
+
 export class ResumeStateConfig {
   public static readonly DEFAULT = {
+    byId: {},
+    allIds: [],
     name: '',
     title: '',
     summary: '',
@@ -15,6 +19,16 @@ export class ResumeStateConfig {
   };
 
   public static readonly DEMO = {
+    byId: {
+      cGOn1Z: {
+        id: 'cGOn1Z',
+        parentId: '',
+        type: SelectorType.NAME,
+        position: 0,
+        value: 'John Doe',
+      },
+    },
+    allIds: ['cGOn1Z'],
     name: 'John Doe',
     title: 'Web and Graphic Designer',
     summary:
@@ -64,9 +78,9 @@ export class ResumeStateConfig {
         duration: 'Jan 2021 – Dec 2021',
         location: 'Remote',
       },
-      DqS3iu : {
+      DqS3iu: {
         id: 'DqS3iu',
-        organization: 'O\'Connell LLC',
+        organization: "O'Connell LLC",
         title: 'Junior Engineer',
         duration: 'Jan 2020 - Dec 2020',
         location: 'Remote',
@@ -170,71 +184,82 @@ export class ResumeStateConfig {
         value:
           'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
       },
-      cfuZQP : {
+      cfuZQP: {
         id: 'cfuZQP',
         experienceId: 'DqS3iu',
         position: 0,
-        value: 'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
+        value:
+          'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
       },
       '3Qfl0f': {
         id: '3Qfl0f',
         experienceId: 'DqS3iu',
         position: 1,
-        value: 'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services \(ADFS\) in Microsoft Windows Azure \(IaaS\).',
+        value:
+          'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services (ADFS) in Microsoft Windows Azure (IaaS).',
       },
       c9HOmD: {
         id: 'c9HOmD',
         experienceId: 'DqS3iu',
         position: 2,
-        value: 'Creating and managing storage in Microsoft Windows Azure (IaaS).',
+        value:
+          'Creating and managing storage in Microsoft Windows Azure (IaaS).',
       },
       duyQxx: {
         id: 'duyQxx',
         experienceId: 'DqS3iu',
         position: 3,
-        value: 'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
+        value:
+          'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
       },
       X2RU0c: {
         id: 'X2RU0c',
         experienceId: 'JDi6zL',
         position: 0,
-        value: 'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
+        value:
+          'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
       },
       sT4moZ: {
         id: 'sT4moZ',
         experienceId: 'JDi6zL',
         position: 1,
-        value: 'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
+        value:
+          'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
       },
       YWpmDa: {
         id: 'YWpmDa',
         experienceId: 'JDi6zL',
         position: 2,
-        value: 'Installing, configuring, and supporting BBars computer backup software.',
+        value:
+          'Installing, configuring, and supporting BBars computer backup software.',
       },
       '7dsIrL': {
         id: '7dsIrL',
         experienceId: 'JDi6zL',
         position: 3,
-        value: 'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
+        value:
+          'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
       },
       tEHYrq: {
         id: 'tEHYrq',
         experienceId: 'wv7RWA',
         position: 0,
-        value: 'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
+        value:
+          'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
       },
       V8AFW1: {
         id: 'V8AFW1',
         experienceId: 'wv7RWA',
         position: 1,
-        value: 'Configuring and supporting Blackberry devices on the Blackberry Enterprise Server to receive Exchange email.',
+        value:
+          'Configuring and supporting Blackberry devices on the Blackberry Enterprise Server to receive Exchange email.',
       },
       '04jBVn': {
         id: '04jBVn',
         experienceId: 'wv7RWA',
         position: 2,
-        value: 'Installing, configuring, and testing Veeam virtual machine backup software and Virtual Desktop Infrastructure (VDI).',
+        value:
+          'Installing, configuring, and testing Veeam virtual machine backup software and Virtual Desktop Infrastructure (VDI).',
       },
     },
     experienceSkills: {
@@ -358,7 +383,7 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Active Directory',
       },
-      FWbOYH : {
+      FWbOYH: {
         id: 'FWbOYH',
         experienceId: 'DqS3iu',
         position: 1,
@@ -386,7 +411,7 @@ export class ResumeStateConfig {
         id: 'slefNV',
         experienceId: 'JDi6zL',
         position: 1,
-        value: 'Java'
+        value: 'Java',
       },
       ZXieJh: {
         id: 'ZXieJh',
@@ -404,7 +429,7 @@ export class ResumeStateConfig {
         id: 'kPNAZo',
         experienceId: 'wv7RWA',
         position: 0,
-        value: 'VB.Net'
+        value: 'VB.Net',
       },
       '6XKu0i': {
         id: '6XKu0i',

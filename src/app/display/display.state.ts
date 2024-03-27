@@ -585,7 +585,6 @@ export class DisplayState {
   }
 
   private buildSectionsTree(id: string, sections: Section[]): Section[] {
-
     const recurs = (parentId: string): any[] => {
       let results: any[] = [];
 
@@ -599,7 +598,7 @@ export class DisplayState {
       }
 
       return results;
-    }
+    };
 
     return recurs(id);
   }
