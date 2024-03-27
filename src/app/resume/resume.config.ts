@@ -4,6 +4,7 @@ export class ResumeStateConfig {
   public static readonly DEFAULT = {
     byId: {},
     allIds: [],
+    byType: {},
     name: '',
     title: '',
     summary: '',
@@ -29,6 +30,9 @@ export class ResumeStateConfig {
       },
     },
     allIds: ['cGOn1Z'],
+    byType: {
+      NAME: ['cGOn1Z'],
+    },
     name: 'John Doe',
     title: 'Web and Graphic Designer',
     summary:

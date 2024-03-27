@@ -10,6 +10,7 @@ import ShortUniqueId from 'short-unique-id';
 export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
+  byType: { [type: string]: string[] };
   name: string;
   title: string;
   summary: string;
@@ -159,10 +160,10 @@ export class ResumeState {
   }
 
   private static selectorName() {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.name,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const id = state.byType[SelectorType.NAME][0];
+      return id ? state.byId[id].value : '';
+    });
   }
 
   private static selectorTitle() {
