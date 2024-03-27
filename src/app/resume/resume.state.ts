@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  name: string;
   title: string;
   summary: string;
   phone: string;
@@ -360,7 +359,7 @@ export class ResumeState {
   @Action(Resume.NameUpdate)
   nameUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.NameUpdate) {
     const ids = ctx.getState().byType[SelectorType.NAME];
-    const node = ids
+    const node = ids.length
       ? {
           ...ctx.getState().byId[ids[0]],
           value: action.value,
@@ -383,7 +382,7 @@ export class ResumeState {
         ...ctx.getState().byType,
         [SelectorType.NAME]: [
           ...new Set([
-            ...(ctx.getState().byType[SelectorType.NAME] || []),
+            ...(ctx.getState().byType[SelectorType.NAME]),
             node.id,
           ]),
         ],

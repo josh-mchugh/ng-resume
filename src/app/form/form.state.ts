@@ -4,6 +4,7 @@ import ShortUniqueId from 'short-unique-id';
 import { Form } from '@form/form.actions';
 import { FormStateConfig } from '@form/form.config';
 import { Resume } from '@resume/resume.actions';
+import { SelectorType } from '@resume/selector-type.enum';
 
 export interface FormStateModel {
   name: string;
@@ -219,7 +220,7 @@ export class FormState {
       );
 
     const newState = {
-      name: action.resume.name,
+      name: action.resume.byId[action.resume.byType[SelectorType.NAME][0]]?.value.toString() || '',
       title: action.resume.title,
       summary: action.resume.summary,
       phone: action.resume.phone,

@@ -4,8 +4,10 @@ export class ResumeStateConfig {
   public static readonly DEFAULT = {
     byId: {},
     allIds: [],
-    byType: {},
-    name: '',
+    byType: {
+      NAME: [],
+      TITLE: []
+    },
     title: '',
     summary: '',
     email: '',
@@ -41,7 +43,6 @@ export class ResumeStateConfig {
       NAME: ['cGOn1Z'],
       TITLE: ['ImxJzl'],
     },
-    name: 'John Doe',
     title: 'Web and Graphic Designer',
     summary:
       'Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.',
