@@ -169,7 +169,10 @@ export class ResumeState {
   private static selectorTitle() {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.title,
+      (state: ResumeStateModel) => {
+        const id = state.byType[SelectorType.TITLE][0];
+        return id ? state.byId[id].value : '';
+      },
     );
   }
 
