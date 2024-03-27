@@ -167,13 +167,10 @@ export class ResumeState {
   }
 
   private static selectorTitle() {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => {
-        const id = state.byType[SelectorType.TITLE][0];
-        return id ? state.byId[id].value : '';
-      },
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const id = state.byType[SelectorType.TITLE][0];
+      return id ? state.byId[id].value : '';
+    });
   }
 
   private static selectorSummary() {
@@ -362,9 +359,35 @@ export class ResumeState {
 
   @Action(Resume.NameUpdate)
   nameUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.NameUpdate) {
+    const ids = ctx.getState().byType[SelectorType.NAME];
+    const node = ids
+      ? {
+          ...ctx.getState().byId[ids[0]],
+          value: action.value,
+        }
+      : {
+          id: this.uuid.rnd(),
+          parentId: '',
+          type: SelectorType.NAME,
+          position: 0,
+          value: action.value,
+        };
     ctx.setState({
       ...ctx.getState(),
-      name: action.name,
+      byId: {
+        ...ctx.getState().byId,
+        [node.id]: node,
+      },
+      allIds: [...new Set([...ctx.getState().allIds, node.id])],
+      byType: {
+        ...ctx.getState().byType,
+        [SelectorType.NAME]: [
+          ...new Set([
+            ...(ctx.getState().byType[SelectorType.NAME] || []),
+            node.id,
+          ]),
+        ],
+      },
     });
   }
 
