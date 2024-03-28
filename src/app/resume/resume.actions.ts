@@ -1,4 +1,5 @@
 import { ResumeStateModel } from '@resume/resume.state';
+import { SelectorType } from '@resume/selector-type.enum';
 
 export namespace Resume {
   export class InitializeState {
@@ -6,14 +7,12 @@ export namespace Resume {
     constructor(public resume: ResumeStateModel) {}
   }
 
-  export class NameUpdate {
-    static readonly type = '[Resume] Name Update';
-    constructor(public value: string) {}
-  }
-
-  export class TitleUpdate {
-    static readonly type = '[Resume] Title Update';
-    constructor(public value: string) {}
+  export class NodeCreateOrUpdate {
+    static readonly type = '[Resume] Node Create Or Update';
+    constructor(
+      public type: SelectorType,
+      public value: string,
+    ) {}
   }
 
   export class SummaryUpdate {

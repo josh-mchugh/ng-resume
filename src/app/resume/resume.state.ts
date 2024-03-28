@@ -355,9 +355,12 @@ export class ResumeState {
     ctx.setState({ ...action.resume });
   }
 
-  @Action(Resume.NameUpdate)
-  nameUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.NameUpdate) {
-    const ids = ctx.getState().byType[SelectorType.NAME];
+  @Action(Resume.NodeCreateOrUpdate)
+  nameUpdate(
+    ctx: StateContext<ResumeStateModel>,
+    action: Resume.NodeCreateOrUpdate,
+  ) {
+    const ids = ctx.getState().byType[action.type];
     const node = ids.length
       ? {
           ...ctx.getState().byId[ids[0]],
@@ -366,7 +369,7 @@ export class ResumeState {
       : {
           id: this.uuid.rnd(),
           parentId: '',
-          type: SelectorType.NAME,
+          type: action.type,
           position: 0,
           value: action.value,
         };
@@ -379,39 +382,8 @@ export class ResumeState {
       allIds: [...new Set([...ctx.getState().allIds, node.id])],
       byType: {
         ...ctx.getState().byType,
-        [SelectorType.NAME]: [
-          ...new Set([...ctx.getState().byType[SelectorType.NAME], node.id]),
-        ],
-      },
-    });
-  }
-
-  @Action(Resume.TitleUpdate)
-  titleUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.TitleUpdate) {
-    const ids = ctx.getState().byType[SelectorType.TITLE];
-    const node = ids.length
-      ? {
-          ...ctx.getState().byId[ids[0]],
-          value: action.value,
-        }
-      : {
-          id: this.uuid.rnd(),
-          parentId: '',
-          type: SelectorType.TITLE,
-          position: 0,
-          value: action.value,
-        };
-    ctx.setState({
-      ...ctx.getState(),
-      byId: {
-        ...ctx.getState().byId,
-        [node.id]: node,
-      },
-      allIds: [...new Set([...ctx.getState().allIds, node.id])],
-      byType: {
-        ...ctx.getState().byType,
-        [SelectorType.TITLE]: [
-          ...new Set([...ctx.getState().byType[SelectorType.TITLE], node.id]),
+        [action.type]: [
+          ...new Set([...ctx.getState().byType[action.type], node.id]),
         ],
       },
     });

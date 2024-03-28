@@ -269,7 +269,7 @@ export class FormState {
       ...ctx.getState(),
       name: action.name,
     });
-    ctx.dispatch(new Resume.NameUpdate(action.name));
+    ctx.dispatch(new Resume.NodeCreateOrUpdate(SelectorType.NAME, action.name));
   }
 
   @Action(Form.TitleUpdate)
@@ -278,7 +278,9 @@ export class FormState {
       ...ctx.getState(),
       title: action.title,
     });
-    ctx.dispatch(new Resume.TitleUpdate(action.title));
+    ctx.dispatch(
+      new Resume.NodeCreateOrUpdate(SelectorType.TITLE, action.title),
+    );
   }
 
   @Action(Form.SummaryUpdate)
