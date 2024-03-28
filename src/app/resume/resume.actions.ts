@@ -15,11 +15,6 @@ export namespace Resume {
     ) {}
   }
 
-  export class SummaryUpdate {
-    static readonly type = '[Resume] Summary Update';
-    constructor(public summary: string) {}
-  }
-
   export class PhoneUpdate {
     static readonly type = '[Resume] Phone Update';
     constructor(public phone: string) {}

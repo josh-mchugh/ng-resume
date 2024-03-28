@@ -7,9 +7,8 @@ export class ResumeStateConfig {
     byType: {
       NAME: [],
       TITLE: [],
+      SUMMARY: [],
     },
-    title: '',
-    summary: '',
     email: '',
     location: '',
     phone: '',
@@ -37,15 +36,21 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Web and Graphic Designer',
       },
+      yklt7L: {
+        id: 'yklt7L',
+        parentId: '',
+        type: SelectorType.SUMMARY,
+        position: 0,
+        value:
+          'Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.',
+      },
     },
-    allIds: ['cGOn1Z', 'ImxJzl'],
+    allIds: ['cGOn1Z', 'ImxJzl', 'yklt7L'],
     byType: {
       NAME: ['cGOn1Z'],
       TITLE: ['ImxJzl'],
+      SUMMARY: ['yklt7L'],
     },
-    title: 'Web and Graphic Designer',
-    summary:
-      'Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.',
     email: 'info@youremail.com',
     location: 'New York, New York',
     phone: '(123) 456-8899',

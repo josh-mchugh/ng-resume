@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  summary: string;
   phone: string;
   email: string;
   location: string;
@@ -172,10 +171,10 @@ export class ResumeState {
   }
 
   private static selectorSummary() {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.summary,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const id = state.byType[SelectorType.SUMMARY][0];
+      return id ? state.byId[id].value : '';
+    });
   }
 
   private static selectorEmail() {
@@ -386,17 +385,6 @@ export class ResumeState {
           ...new Set([...ctx.getState().byType[action.type], node.id]),
         ],
       },
-    });
-  }
-
-  @Action(Resume.SummaryUpdate)
-  summaryUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SummaryUpdate,
-  ) {
-    ctx.setState({
-      ...ctx.getState(),
-      summary: action.summary,
     });
   }
 

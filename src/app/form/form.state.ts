@@ -228,7 +228,10 @@ export class FormState {
         action.resume.byId[
           action.resume.byType[SelectorType.TITLE][0]
         ]?.value.toString() || '',
-      summary: action.resume.summary,
+      summary:
+        action.resume.byId[
+          action.resume.byType[SelectorType.SUMMARY][0]
+        ]?.value.toString() || '',
       phone: action.resume.phone,
       email: action.resume.email,
       location: action.resume.location,
@@ -292,7 +295,9 @@ export class FormState {
       ...ctx.getState(),
       summary: action.summary,
     });
-    ctx.dispatch(new Resume.SummaryUpdate(action.summary));
+    ctx.dispatch(
+      new Resume.NodeCreateOrUpdate(SelectorType.SUMMARY, action.summary),
+    );
   }
 
   @Action(Form.PhoneUpdate)
