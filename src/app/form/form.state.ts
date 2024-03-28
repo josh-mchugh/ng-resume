@@ -220,8 +220,14 @@ export class FormState {
       );
 
     const newState = {
-      name: action.resume.byId[action.resume.byType[SelectorType.NAME][0]]?.value.toString() || '',
-      title: action.resume.title,
+      name:
+        action.resume.byId[
+          action.resume.byType[SelectorType.NAME][0]
+        ]?.value.toString() || '',
+      title:
+        action.resume.byId[
+          action.resume.byType[SelectorType.TITLE][0]
+        ]?.value.toString() || '',
       summary: action.resume.summary,
       phone: action.resume.phone,
       email: action.resume.email,

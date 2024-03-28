@@ -6,7 +6,7 @@ export class ResumeStateConfig {
     allIds: [],
     byType: {
       NAME: [],
-      TITLE: []
+      TITLE: [],
     },
     title: '',
     summary: '',

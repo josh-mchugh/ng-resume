@@ -13,7 +13,7 @@ export namespace Resume {
 
   export class TitleUpdate {
     static readonly type = '[Resume] Title Update';
-    constructor(public title: string) {}
+    constructor(public value: string) {}
   }
 
   export class SummaryUpdate {

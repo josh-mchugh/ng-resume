@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  title: string;
   summary: string;
   phone: string;
   email: string;
@@ -381,10 +380,7 @@ export class ResumeState {
       byType: {
         ...ctx.getState().byType,
         [SelectorType.NAME]: [
-          ...new Set([
-            ...(ctx.getState().byType[SelectorType.NAME]),
-            node.id,
-          ]),
+          ...new Set([...ctx.getState().byType[SelectorType.NAME], node.id]),
         ],
       },
     });
@@ -392,9 +388,32 @@ export class ResumeState {
 
   @Action(Resume.TitleUpdate)
   titleUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.TitleUpdate) {
+    const ids = ctx.getState().byType[SelectorType.TITLE];
+    const node = ids.length
+      ? {
+          ...ctx.getState().byId[ids[0]],
+          value: action.value,
+        }
+      : {
+          id: this.uuid.rnd(),
+          parentId: '',
+          type: SelectorType.TITLE,
+          position: 0,
+          value: action.value,
+        };
     ctx.setState({
       ...ctx.getState(),
-      title: action.title,
+      byId: {
+        ...ctx.getState().byId,
+        [node.id]: node,
+      },
+      allIds: [...new Set([...ctx.getState().allIds, node.id])],
+      byType: {
+        ...ctx.getState().byType,
+        [SelectorType.TITLE]: [
+          ...new Set([...ctx.getState().byType[SelectorType.TITLE], node.id]),
+        ],
+      },
     });
   }
 
