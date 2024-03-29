@@ -12,7 +12,6 @@ export interface ResumeStateModel {
   allIds: string[];
   byType: { [type: string]: string[] };
   phone: string;
-  email: string;
   location: string;
   socials: { [id: string]: Social };
   experiences: { [id: string]: Experience };
@@ -178,10 +177,10 @@ export class ResumeState {
   }
 
   private static selectorEmail() {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.email,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const id = state.byType[SelectorType.EMAIL][0];
+      return id ? state.byId[id].value : '';
+    });
   }
 
   private static selectorLocation() {
@@ -393,14 +392,6 @@ export class ResumeState {
     ctx.setState({
       ...ctx.getState(),
       phone: action.phone,
-    });
-  }
-
-  @Action(Resume.EmailUpdate)
-  emailUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.EmailUpdate) {
-    ctx.setState({
-      ...ctx.getState(),
-      email: action.email,
     });
   }
 

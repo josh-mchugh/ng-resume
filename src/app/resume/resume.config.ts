@@ -8,6 +8,7 @@ export class ResumeStateConfig {
       NAME: [],
       TITLE: [],
       SUMMARY: [],
+      EMAIL: [],
     },
     email: '',
     location: '',
@@ -44,14 +45,21 @@ export class ResumeStateConfig {
         value:
           'Rock Star/Ninja can you ballpark the cost per unit for me, for touch base disband the squad but rehydrate as needed sacred cow.',
       },
+      QHVCZE: {
+        id: 'QHVCZE',
+        parentId: '',
+        type: SelectorType.EMAIL,
+        position: 0,
+        value: 'info@youremail.com'
+      }
     },
-    allIds: ['cGOn1Z', 'ImxJzl', 'yklt7L'],
+    allIds: ['cGOn1Z', 'ImxJzl', 'yklt7L', 'QHVCZE'],
     byType: {
       NAME: ['cGOn1Z'],
       TITLE: ['ImxJzl'],
       SUMMARY: ['yklt7L'],
+      EMAIL: ['QHVCZE'],
     },
-    email: 'info@youremail.com',
     location: 'New York, New York',
     phone: '(123) 456-8899',
     socials: {

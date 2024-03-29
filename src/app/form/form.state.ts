@@ -233,7 +233,10 @@ export class FormState {
           action.resume.byType[SelectorType.SUMMARY][0]
         ]?.value.toString() || '',
       phone: action.resume.phone,
-      email: action.resume.email,
+      email:
+      action.resume.byId[
+        action.resume.byType[SelectorType.EMAIL][0]
+      ]?.value.toString() || '',
       location: action.resume.location,
       socials: {
         byId: socials,
@@ -315,7 +318,7 @@ export class FormState {
       ...ctx.getState(),
       email: action.email,
     });
-    ctx.dispatch(new Resume.EmailUpdate(action.email));
+    ctx.dispatch(new Resume.NodeCreateOrUpdate(SelectorType.EMAIL, action.email));
   }
 
   @Action(Form.LocationUpdate)
