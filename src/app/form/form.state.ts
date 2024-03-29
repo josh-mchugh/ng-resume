@@ -240,7 +240,10 @@ export class FormState {
         action.resume.byId[
           action.resume.byType[SelectorType.EMAIL][0]
         ]?.value.toString() || '',
-      location: action.resume.location,
+      location:
+        action.resume.byId[
+          action.resume.byType[SelectorType.LOCATION][0]
+        ]?.value.toString() || '',
       socials: {
         byId: socials,
         allIds: Object.keys(socials),
@@ -337,7 +340,9 @@ export class FormState {
       ...ctx.getState(),
       location: action.location,
     });
-    ctx.dispatch(new Resume.LocationUpdate(action.location));
+    ctx.dispatch(
+      new Resume.NodeCreateOrUpdate(SelectorType.LOCATION, action.location),
+    );
   }
 
   @Action(Form.Social.Create)

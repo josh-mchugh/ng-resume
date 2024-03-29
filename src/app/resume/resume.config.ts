@@ -10,6 +10,7 @@ export class ResumeStateConfig {
       SUMMARY: [],
       EMAIL: [],
       PHONE: [],
+      LOCATION: [],
     },
     email: '',
     location: '',
@@ -60,6 +61,13 @@ export class ResumeStateConfig {
         position: 0,
         value: '(123) 456-8899',
       },
+      '56FXgD': {
+        id: '56FXgD',
+        parentId: '',
+        type: SelectorType.LOCATION,
+        position: 0,
+        value: 'New York, New York',
+      },
     },
     allIds: ['cGOn1Z', 'ImxJzl', 'yklt7L', 'QHVCZE', '9fpoXz'],
     byType: {
@@ -68,8 +76,8 @@ export class ResumeStateConfig {
       SUMMARY: ['yklt7L'],
       EMAIL: ['QHVCZE'],
       PHONE: ['9fpoXz'],
+      LOCATION: ['56FXgD'],
     },
-    location: 'New York, New York',
     socials: {
       hPjgs6: {
         id: 'hPjgs6',

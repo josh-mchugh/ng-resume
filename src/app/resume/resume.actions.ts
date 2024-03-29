@@ -15,11 +15,6 @@ export namespace Resume {
     ) {}
   }
 
-  export class LocationUpdate {
-    static readonly type = '[Resume] Location Update';
-    constructor(public location: string) {}
-  }
-
   export class SocialCreate {
     static readonly type = '[Resume] Social Create';
     constructor(public id: string) {}
