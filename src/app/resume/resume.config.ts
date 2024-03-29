@@ -9,6 +9,7 @@ export class ResumeStateConfig {
       TITLE: [],
       SUMMARY: [],
       EMAIL: [],
+      PHONE: [],
     },
     email: '',
     location: '',
@@ -50,18 +51,25 @@ export class ResumeStateConfig {
         parentId: '',
         type: SelectorType.EMAIL,
         position: 0,
-        value: 'info@youremail.com'
-      }
+        value: 'info@youremail.com',
+      },
+      '9fpoXz': {
+        id: '9fpoXz',
+        parentId: '',
+        type: SelectorType.PHONE,
+        position: 0,
+        value: '(123) 456-8899',
+      },
     },
-    allIds: ['cGOn1Z', 'ImxJzl', 'yklt7L', 'QHVCZE'],
+    allIds: ['cGOn1Z', 'ImxJzl', 'yklt7L', 'QHVCZE', '9fpoXz'],
     byType: {
       NAME: ['cGOn1Z'],
       TITLE: ['ImxJzl'],
       SUMMARY: ['yklt7L'],
       EMAIL: ['QHVCZE'],
+      PHONE: ['9fpoXz'],
     },
     location: 'New York, New York',
-    phone: '(123) 456-8899',
     socials: {
       hPjgs6: {
         id: 'hPjgs6',

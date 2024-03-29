@@ -232,11 +232,14 @@ export class FormState {
         action.resume.byId[
           action.resume.byType[SelectorType.SUMMARY][0]
         ]?.value.toString() || '',
-      phone: action.resume.phone,
+      phone:
+        action.resume.byId[
+          action.resume.byType[SelectorType.PHONE][0]
+        ]?.value.toString() || '',
       email:
-      action.resume.byId[
-        action.resume.byType[SelectorType.EMAIL][0]
-      ]?.value.toString() || '',
+        action.resume.byId[
+          action.resume.byType[SelectorType.EMAIL][0]
+        ]?.value.toString() || '',
       location: action.resume.location,
       socials: {
         byId: socials,
@@ -309,7 +312,9 @@ export class FormState {
       ...ctx.getState(),
       phone: action.phone,
     });
-    ctx.dispatch(new Resume.PhoneUpdate(action.phone));
+    ctx.dispatch(
+      new Resume.NodeCreateOrUpdate(SelectorType.PHONE, action.phone),
+    );
   }
 
   @Action(Form.EmailUpdate)
@@ -318,7 +323,9 @@ export class FormState {
       ...ctx.getState(),
       email: action.email,
     });
-    ctx.dispatch(new Resume.NodeCreateOrUpdate(SelectorType.EMAIL, action.email));
+    ctx.dispatch(
+      new Resume.NodeCreateOrUpdate(SelectorType.EMAIL, action.email),
+    );
   }
 
   @Action(Form.LocationUpdate)

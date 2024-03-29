@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  phone: string;
   location: string;
   socials: { [id: string]: Social };
   experiences: { [id: string]: Experience };
@@ -191,10 +190,10 @@ export class ResumeState {
   }
 
   private static selectorPhone() {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.phone,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const id = state.byType[SelectorType.PHONE][0];
+      return id ? state.byId[id].value : '';
+    });
   }
 
   private static selectorSocialList() {
@@ -384,14 +383,6 @@ export class ResumeState {
           ...new Set([...ctx.getState().byType[action.type], node.id]),
         ],
       },
-    });
-  }
-
-  @Action(Resume.PhoneUpdate)
-  phoneUpdate(ctx: StateContext<ResumeStateModel>, action: Resume.PhoneUpdate) {
-    ctx.setState({
-      ...ctx.getState(),
-      phone: action.phone,
     });
   }
 
