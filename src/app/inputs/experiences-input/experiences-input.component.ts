@@ -30,9 +30,9 @@ export class ExperiencesInputComponent {
     return false;
   }
 
-  public onExperienceTitleInput(id: string, event: Event): void {
+  public onExperienceTitleInput(id: string, event: Event, index: number): void {
     const title = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Experience.TitleUpdate(id, title));
+    this.store.dispatch(new Form.Experience.TitleUpdate(id, title, index));
   }
 
   public onExperienceOrganizationInput(

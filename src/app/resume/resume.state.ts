@@ -237,7 +237,7 @@ export class ResumeState {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
       const groupIds = [
         ...state.byType[SelectorType.EXPERIENCE_ORGANIZATION],
-        //...state.byType[SelectorType.EXPERIENCE_TITLE],
+        ...state.byType[SelectorType.EXPERIENCE_TITLE],
         //...state.byType[SelectorType.EXPERIENCE_DURATION],
         //...state.byType[SelectorType.EXPERIENCE_LOCATION],
         //...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
@@ -248,10 +248,12 @@ export class ResumeState {
   }
 
   private static selectorExperienceTitle(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.experiences[id].title,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.EXPERIENCE_TITLE]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorExperienceDuration(id: string) {

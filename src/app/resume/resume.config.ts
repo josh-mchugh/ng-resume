@@ -15,6 +15,7 @@ export class ResumeStateConfig {
       SOCIAL_ICON: [],
       SOCIAL_URL: [],
       EXPERIENCE_ORGANIZATION: [],
+      EXPERIENCE_TITLE: [],
     },
     experiences: {},
     experienceDescriptions: {},
@@ -154,6 +155,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Cyberdyne System Corp.',
       },
+      woPRPF: {
+        id: 'woPRPF',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_TITLE,
+        position: 0,
+        value: 'Web Developer',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -166,6 +175,7 @@ export class ResumeStateConfig {
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5'],
+      EXPERIENCE_TITLE: ['woPRPF'],
     },
     allIds: [
       'cGOn1Z',
@@ -184,6 +194,7 @@ export class ResumeStateConfig {
       'EevRIX',
       'PdFyKt',
       'mHqQo5',
+      'woPRPF',
     ],
     experiences: {
       sxvDST: {
