@@ -98,6 +98,7 @@ export namespace Form {
       constructor(
         public id: string,
         public duration: string,
+        public index: number,
       ) {}
     }
 

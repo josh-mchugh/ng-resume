@@ -46,9 +46,15 @@ export class ExperiencesInputComponent {
     );
   }
 
-  public onExperienceDurationInput(id: string, event: Event): void {
+  public onExperienceDurationInput(
+    id: string,
+    event: Event,
+    index: number,
+  ): void {
     const duration = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Experience.DurationUpdate(id, duration));
+    this.store.dispatch(
+      new Form.Experience.DurationUpdate(id, duration, index),
+    );
   }
 
   public onExperienceLocationInput(id: string, event: Event): void {

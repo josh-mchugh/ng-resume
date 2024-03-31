@@ -53,30 +53,6 @@ export namespace Resume {
     constructor(public id: string) {}
   }
 
-  export class ExperienceTitleUpdate {
-    static readonly type = '[Resume] Experience Title Update';
-    constructor(
-      public id: string,
-      public title: string,
-    ) {}
-  }
-
-  export class ExperienceOrganizationUpdate {
-    static readonly type = '[Resume] Experience Organization Update';
-    constructor(
-      public id: string,
-      public organization: string,
-    ) {}
-  }
-
-  export class ExperienceDurationUpdate {
-    static readonly type = '[Resume] Experience Duration Update';
-    constructor(
-      public id: string,
-      public duration: string,
-    ) {}
-  }
-
   export class ExperienceLocationUpdate {
     static readonly type = '[Resume] Experience Location Update';
     constructor(

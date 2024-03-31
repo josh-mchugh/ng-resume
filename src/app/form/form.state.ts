@@ -176,7 +176,7 @@ export class FormState {
     const experiences = [
       ...action.resume.byType[SelectorType.EXPERIENCE_ORGANIZATION],
       ...action.resume.byType[SelectorType.EXPERIENCE_TITLE],
-      //...action.resume.byType[SelectorType.EXPERIENCE_DURATION],
+      ...action.resume.byType[SelectorType.EXPERIENCE_DURATION],
       //...action.resume.byType[SelectorType.EXPERIENCE_LOCATION],
       //...action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION],
       //...action.resume.byType[SelectorType.EXPERIENCE_SKILL],
@@ -596,6 +596,7 @@ export class FormState {
         SelectorType.EXPERIENCE_TITLE,
         updatedExperience.title,
         updatedExperience.id,
+        action.index,
       ),
     );
   }
@@ -652,9 +653,11 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.ExperienceDurationUpdate(
-        updatedExperience.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.EXPERIENCE_DURATION,
         updatedExperience.duration,
+        updatedExperience.id,
+        action.index,
       ),
     );
   }

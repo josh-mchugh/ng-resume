@@ -16,6 +16,7 @@ export class ResumeStateConfig {
       SOCIAL_URL: [],
       EXPERIENCE_ORGANIZATION: [],
       EXPERIENCE_TITLE: [],
+      EXPERIENCE_DURATION: [],
     },
     experiences: {},
     experienceDescriptions: {},
@@ -163,6 +164,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Web Developer',
       },
+      D63MSQ: {
+        id: 'D63MSQ',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_DURATION,
+        position: 0,
+        value: 'Jan 2023 - Present',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -176,6 +185,7 @@ export class ResumeStateConfig {
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5'],
       EXPERIENCE_TITLE: ['woPRPF'],
+      EXPERIENCE_DURATION: ['D63MSQ'],
     },
     allIds: [
       'cGOn1Z',
@@ -195,6 +205,7 @@ export class ResumeStateConfig {
       'PdFyKt',
       'mHqQo5',
       'woPRPF',
+      'D63MSQ',
     ],
     experiences: {
       sxvDST: {
