@@ -51,6 +51,7 @@ export namespace Form {
       constructor(
         public id: string,
         public name: string,
+        public index: number,
       ) {}
     }
 
@@ -59,6 +60,7 @@ export namespace Form {
       constructor(
         public id: string,
         public url: string,
+        public index: number,
       ) {}
     }
   }

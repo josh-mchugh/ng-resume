@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  socials: { [id: string]: Social };
   experiences: { [id: string]: Experience };
   experienceDescriptions: { [id: string]: ExperienceDescription };
   experienceSkills: { [id: string]: ExperienceSkill };
@@ -21,7 +20,8 @@ export interface ResumeStateModel {
 
 export interface ResumeNode {
   id: string;
-  parentId: string;
+  groupId: string;
+  groupPosition: number;
   type: SelectorType;
   position: number;
   value: string | number;
@@ -196,30 +196,41 @@ export class ResumeState {
   }
 
   private static selectorSocialList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      Object.keys(state.socials),
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const groupIds = [
+        ...state.byType[SelectorType.SOCIAL_NAME],
+        ...state.byType[SelectorType.SOCIAL_ICON],
+        ...state.byType[SelectorType.SOCIAL_URL],
+      ].map((id) => state.byId[id].groupId);
+      return [...new Set<string>(groupIds)];
+    });
   }
 
   private static selectorSocialIcon(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.socials[id].icon,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.SOCIAL_ICON]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorSocialName(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.socials[id].name,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.SOCIAL_NAME]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorSocialUrl(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.socials[id].url,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.SOCIAL_URL]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorExperienceList() {
@@ -356,7 +367,8 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.NodeCreateOrUpdate,
   ) {
-    const ids = ctx.getState().byType[action.type];
+    const ids = ctx.getState().byType[action.type]
+      .filter((id) =>  ctx.getState().byId[id].groupId === action.groupId);
     const node = ids.length
       ? {
           ...ctx.getState().byId[ids[0]],
@@ -364,7 +376,8 @@ export class ResumeState {
         }
       : {
           id: this.uuid.rnd(),
-          parentId: '',
+          groupId: action.groupId,
+          groupPosition: action.groupPosition,
           type: action.type,
           position: 0,
           value: action.value,
@@ -383,23 +396,19 @@ export class ResumeState {
         ],
       },
     });
-  }
 
-  @Action(Resume.SocialCreate)
-  socialCreate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialCreate,
-  ) {
-    const social = { id: action.id, name: '', url: '', icon: '' };
-    const updatedSocials = {
-      ...ctx.getState().socials,
-      [social.id]: social,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      socials: updatedSocials,
-    });
+    if (action.groupId &&
+      !this.displayService.hasSectionByResumeId(
+        node.groupId,
+        node.type,
+      )
+    ) {
+      return ctx.dispatch(
+        new Display.SectionCreate(node.groupId, node.type),
+      );
+    } else {
+      return;
+    }
   }
 
   @Action(Resume.SocialDelete)
@@ -407,82 +416,30 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.SocialDelete,
   ) {
-    const updatedSocials = Object.values(ctx.getState().socials)
-      .filter((social) => action.id !== social.id)
-      .reduce((acc, social) => ({ ...acc, [social.id]: social }), {});
+    const removedIds = new Set<string>();
+    const updatedNodes = Object.values(ctx.getState().byId)
+      .filter((node) => {
+        if(action.id !== node.groupId) {
+          removedIds.add(node.id);
+          return true;
+        }
+        return false;
+      })
+      .reduce((acc, node) => ({ ...acc, [node.id]: node }), {});
 
     ctx.setState({
       ...ctx.getState(),
-      socials: updatedSocials,
+      byId: updatedNodes,
+      allIds: ctx.getState().allIds.filter((id) => removedIds.has(id)),
+      byType: {
+        ...ctx.getState().byType,
+        [SelectorType.SOCIAL_NAME]: ctx.getState().byType[SelectorType.SOCIAL_NAME].filter((id) => removedIds.has(id)),
+        [SelectorType.SOCIAL_ICON]: ctx.getState().byType[SelectorType.SOCIAL_ICON].filter((id) => removedIds.has(id)),
+        [SelectorType.SOCIAL_URL]: ctx.getState().byType[SelectorType.SOCIAL_URL].filter((id) => removedIds.has(id)),
+      }
     });
 
     return ctx.dispatch(new Display.SectionDelete(action.id));
-  }
-
-  @Action(Resume.SocialNameUpdate)
-  socialNameUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialNameUpdate,
-  ) {
-    const social = ctx.getState().socials[action.id];
-    const updatedSocial = {
-      ...social,
-      name: action.name,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      socials: {
-        ...ctx.getState().socials,
-        [updatedSocial.id]: updatedSocial,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedSocial.id,
-        SelectorType.SOCIAL_NAME,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(social.id, SelectorType.SOCIAL_NAME),
-      );
-    } else {
-      return;
-    }
-  }
-
-  @Action(Resume.SocialUrlUpdate)
-  socialUrlUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialUrlUpdate,
-  ) {
-    const social = ctx.getState().socials[action.id];
-    const updatedSocial = {
-      ...social,
-      url: action.url,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      socials: {
-        ...ctx.getState().socials,
-        [updatedSocial.id]: updatedSocial,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedSocial.id,
-        SelectorType.SOCIAL_URL,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(social.id, SelectorType.SOCIAL_URL),
-      );
-    } else {
-      return;
-    }
   }
 
   @Action(Resume.ExperienceCreate)

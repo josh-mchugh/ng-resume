@@ -12,6 +12,8 @@ export namespace Resume {
     constructor(
       public type: SelectorType,
       public value: string,
+      public groupId = '',
+      public groupPosition = 0,
     ) {}
   }
 

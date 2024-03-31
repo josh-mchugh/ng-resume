@@ -30,13 +30,13 @@ export class SocialsInputComponent {
     return false;
   }
 
-  public onSocialNameInput(id: string, event: Event): void {
+  public onSocialNameInput(id: string, event: Event, index: number): void {
     const name = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Social.NameUpdate(id, name));
+    this.store.dispatch(new Form.Social.NameUpdate(id, name, index));
   }
 
-  public onSocialUrlInput(id: string, event: Event): void {
+  public onSocialUrlInput(id: string, event: Event, index: number): void {
     const url = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Social.UrlUpdate(id, url));
+    this.store.dispatch(new Form.Social.UrlUpdate(id, url, index));
   }
 }

@@ -22,7 +22,7 @@
         name="socialName-{{ social.id }}"
         placeholder="Name"
         [value]="social.name"
-        (input)="onSocialNameInput(social.id, $event)"
+        (input)="onSocialNameInput(social.id, $event, i)"
       />
       <label for="socialUrl-{{ social.id }}">URL</label>
       <input
@@ -30,7 +30,7 @@
         name="socialUrl-{{ social.id }}"
         placeholder="URL"
         [value]="social.url"
-        (input)="onSocialUrlInput(social.id, $event)"
+        (input)="onSocialUrlInput(social.id, $event, i)"
       />
     </div>
   </ng-container>

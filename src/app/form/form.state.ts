@@ -146,13 +146,32 @@ export class FormState {
     ctx: StateContext<FormStateModel>,
     action: Form.InitializeState,
   ) {
-    const socials = Object.values(action.resume.socials)
-      .map((social) => ({
-        id: social.id,
-        name: social.name,
-        url: social.url,
-      }))
-      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+    const socials = [
+      ...action.resume.byType[SelectorType.SOCIAL_NAME],
+      ...action.resume.byType[SelectorType.SOCIAL_ICON],
+      ...action.resume.byType[SelectorType.SOCIAL_URL],
+    ]
+      .map((nodeId) => action.resume.byId[nodeId])
+      .sort((a, b) => a.groupPosition - b.groupPosition)
+      .reduce(
+        (acc, node) => {
+          if (!acc[node.groupId]) {
+            acc[node.groupId] = {
+              id: node.groupId,
+              name: '',
+              url: '',
+            };
+          }
+          if (SelectorType.SOCIAL_NAME === node.type) {
+            acc[node.groupId].name = node.value.toString();
+          }
+          if (SelectorType.SOCIAL_URL === node.type) {
+            acc[node.groupId].url = node.value.toString();
+          }
+          return acc;
+        },
+        {} as { [id: string]: FormSocial },
+      );
 
     const experiences = Object.values(action.resume.experiences)
       .map((experience) => ({
@@ -358,8 +377,6 @@ export class FormState {
         allIds: updatedAllIds,
       },
     });
-
-    return ctx.dispatch(new Resume.SocialCreate(social.id));
   }
 
   @Action(Form.Social.Delete)
@@ -400,7 +417,7 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.SocialNameUpdate(updatedSocial.id, updatedSocial.name),
+      new Resume.NodeCreateOrUpdate(SelectorType.SOCIAL_NAME, updatedSocial.name, updatedSocial.id, action.index),
     );
   }
 
@@ -424,7 +441,7 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.SocialUrlUpdate(updatedSocial.id, updatedSocial.url),
+      new Resume.NodeCreateOrUpdate(SelectorType.SOCIAL_URL, updatedSocial.url, updatedSocial.id, action.index),
     );
   }
 
