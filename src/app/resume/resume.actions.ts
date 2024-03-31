@@ -17,48 +17,14 @@ export namespace Resume {
     ) {}
   }
 
-  export class SocialCreate {
-    static readonly type = '[Resume] Social Create';
-    constructor(public id: string) {}
-  }
-
   export class SocialDelete {
     static readonly type = '[Resume] Social Delete';
-    constructor(public id: string) {}
-  }
-
-  export class SocialNameUpdate {
-    static readonly type = '[Resume] Social Name Update';
-    constructor(
-      public id: string,
-      public name: string,
-    ) {}
-  }
-
-  export class SocialUrlUpdate {
-    static readonly type = '[Resume] Social Url Update';
-    constructor(
-      public id: string,
-      public url: string,
-    ) {}
-  }
-
-  export class ExperienceCreate {
-    static readonly type = '[Resume] Experience Create';
     constructor(public id: string) {}
   }
 
   export class ExperienceDelete {
     static readonly type = '[Resume] Experience Delete';
     constructor(public id: string) {}
-  }
-
-  export class ExperienceLocationUpdate {
-    static readonly type = '[Resume] Experience Location Update';
-    constructor(
-      public id: string,
-      public location: string,
-    ) {}
   }
 
   export class ExperienceDescriptionCreate {

@@ -239,7 +239,7 @@ export class ResumeState {
         ...state.byType[SelectorType.EXPERIENCE_ORGANIZATION],
         ...state.byType[SelectorType.EXPERIENCE_TITLE],
         ...state.byType[SelectorType.EXPERIENCE_DURATION],
-        //...state.byType[SelectorType.EXPERIENCE_LOCATION],
+        ...state.byType[SelectorType.EXPERIENCE_LOCATION],
         //...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
         //...state.byType[SelectorType.EXPERIENCE_SKILL],
       ].map((id) => state.byId[id].groupId);
@@ -275,10 +275,12 @@ export class ResumeState {
   }
 
   private static selectorExperienceLocation(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.experiences[id].location,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.EXPERIENCE_LOCATION]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorExperienceDescriptionList(id: string) {
@@ -461,29 +463,6 @@ export class ResumeState {
     return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
-  @Action(Resume.ExperienceCreate)
-  experienceCreate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceCreate,
-  ) {
-    const experience = {
-      id: action.id,
-      title: '',
-      organization: '',
-      duration: '',
-      location: '',
-    };
-    const updatedExperiences = {
-      ...ctx.getState().experiences,
-      [experience.id]: experience,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      experiences: updatedExperiences,
-    });
-  }
-
   @Action(Resume.ExperienceDelete)
   experienceDelete(
     ctx: StateContext<ResumeStateModel>,
@@ -502,42 +481,6 @@ export class ResumeState {
     });
 
     return ctx.dispatch(new Display.SectionDelete(action.id));
-  }
-
-  @Action(Resume.ExperienceLocationUpdate)
-  experienceLocationUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceLocationUpdate,
-  ) {
-    const experience = ctx.getState().experiences[action.id];
-    const updatedExperience = {
-      ...experience,
-      location: action.location,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      experiences: {
-        ...ctx.getState().experiences,
-        [updatedExperience.id]: updatedExperience,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedExperience.id,
-        SelectorType.EXPERIENCE_LOCATION,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(
-          updatedExperience.id,
-          SelectorType.EXPERIENCE_LOCATION,
-        ),
-      );
-    } else {
-      return;
-    }
   }
 
   @Action(Resume.ExperienceDescriptionCreate)

@@ -172,6 +172,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Jan 2023 - Present',
       },
+      xSdMqL: {
+        id: 'xSdMqL',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_LOCATION,
+        position: 0,
+        value: 'Remote',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -186,6 +194,7 @@ export class ResumeStateConfig {
       EXPERIENCE_ORGANIZATION: ['mHqQo5'],
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
+      EXPERIENCE_LOCATION: ['xSdMqL'],
     },
     allIds: [
       'cGOn1Z',
@@ -206,6 +215,7 @@ export class ResumeStateConfig {
       'mHqQo5',
       'woPRPF',
       'D63MSQ',
+      'xSdMqL',
     ],
     experiences: {
       sxvDST: {

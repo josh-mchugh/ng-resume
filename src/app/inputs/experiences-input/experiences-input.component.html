@@ -48,7 +48,7 @@
         name="experienceLocation-{{ experience.id }}"
         placeholder="Location"
         [value]="experience.location"
-        (input)="onExperienceLocationInput(experience.id, $event)"
+        (input)="onExperienceLocationInput(experience.id, $event, i)"
       />
       <label for="experienceDescription-{{ experience.id }}">Description</label>
       <textarea

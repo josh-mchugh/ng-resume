@@ -177,7 +177,7 @@ export class FormState {
       ...action.resume.byType[SelectorType.EXPERIENCE_ORGANIZATION],
       ...action.resume.byType[SelectorType.EXPERIENCE_TITLE],
       ...action.resume.byType[SelectorType.EXPERIENCE_DURATION],
-      //...action.resume.byType[SelectorType.EXPERIENCE_LOCATION],
+      ...action.resume.byType[SelectorType.EXPERIENCE_LOCATION],
       //...action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION],
       //...action.resume.byType[SelectorType.EXPERIENCE_SKILL],
     ]
@@ -682,9 +682,11 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.ExperienceLocationUpdate(
-        updatedExperience.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.EXPERIENCE_LOCATION,
         updatedExperience.location,
+        updatedExperience.id,
+        action.index,
       ),
     );
   }
