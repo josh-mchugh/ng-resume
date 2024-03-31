@@ -32,7 +32,7 @@
         name="experienceOrganization-{{ experience.id }}"
         placeholder="Organization"
         [value]="experience.organization"
-        (input)="onExperienceOrganizationInput(experience.id, $event)"
+        (input)="onExperienceOrganizationInput(experience.id, $event, i)"
       />
       <label for="experienceDuration-{{ experience.id }}">Duration</label>
       <input

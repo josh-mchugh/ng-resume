@@ -14,6 +14,7 @@ export class ResumeStateConfig {
       SOCIAL_NAME: [],
       SOCIAL_ICON: [],
       SOCIAL_URL: [],
+      EXPERIENCE_ORGANIZATION: [],
     },
     experiences: {},
     experienceDescriptions: {},
@@ -145,6 +146,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'https://linkedin.com/profile',
       },
+      mHqQo5: {
+        id: 'mHqQo5',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_ORGANIZATION,
+        position: 0,
+        value: 'Cyberdyne System Corp.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -156,6 +165,7 @@ export class ResumeStateConfig {
       SOCIAL_NAME: ['bSWNcA', 'NSKVRu', 'nyHCys'],
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
+      EXPERIENCE_ORGANIZATION: ['mHqQo5'],
     },
     allIds: [
       'cGOn1Z',
@@ -173,6 +183,7 @@ export class ResumeStateConfig {
       'nyHCys',
       'EevRIX',
       'PdFyKt',
+      'mHqQo5',
     ],
     experiences: {
       sxvDST: {

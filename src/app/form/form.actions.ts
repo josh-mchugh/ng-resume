@@ -88,6 +88,7 @@ export namespace Form {
       constructor(
         public id: string,
         public organization: string,
+        public index: number,
       ) {}
     }
 

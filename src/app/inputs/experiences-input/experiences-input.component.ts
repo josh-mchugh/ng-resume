@@ -35,10 +35,14 @@ export class ExperiencesInputComponent {
     this.store.dispatch(new Form.Experience.TitleUpdate(id, title));
   }
 
-  public onExperienceOrganizationInput(id: string, event: Event): void {
+  public onExperienceOrganizationInput(
+    id: string,
+    event: Event,
+    index: number,
+  ): void {
     const organization = (event.target as HTMLInputElement).value;
     this.store.dispatch(
-      new Form.Experience.OrganizationUpdate(id, organization),
+      new Form.Experience.OrganizationUpdate(id, organization, index),
     );
   }
 

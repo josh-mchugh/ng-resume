@@ -234,9 +234,17 @@ export class ResumeState {
   }
 
   private static selectorExperienceList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      Object.keys(state.experiences),
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const groupIds = [
+        ...state.byType[SelectorType.EXPERIENCE_ORGANIZATION],
+        //...state.byType[SelectorType.EXPERIENCE_TITLE],
+        //...state.byType[SelectorType.EXPERIENCE_DURATION],
+        //...state.byType[SelectorType.EXPERIENCE_LOCATION],
+        //...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
+        //...state.byType[SelectorType.EXPERIENCE_SKILL],
+      ].map((id) => state.byId[id].groupId);
+      return [...new Set<string>(groupIds)];
+    });
   }
 
   private static selectorExperienceTitle(id: string) {
@@ -254,10 +262,12 @@ export class ResumeState {
   }
 
   private static selectorExperienceOrganization(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.experiences[id].organization,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.EXPERIENCE_ORGANIZATION]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorExperienceLocation(id: string) {
@@ -367,8 +377,11 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.NodeCreateOrUpdate,
   ) {
-    const ids = ctx.getState().byType[action.type]
-      .filter((id) =>  ctx.getState().byId[id].groupId === action.groupId);
+    const ids = ctx
+      .getState()
+      .byType[action.type].filter(
+        (id) => ctx.getState().byId[id].groupId === action.groupId,
+      );
     const node = ids.length
       ? {
           ...ctx.getState().byId[ids[0]],
@@ -397,15 +410,11 @@ export class ResumeState {
       },
     });
 
-    if (action.groupId &&
-      !this.displayService.hasSectionByResumeId(
-        node.groupId,
-        node.type,
-      )
+    if (
+      action.groupId &&
+      !this.displayService.hasSectionByResumeId(node.groupId, node.type)
     ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(node.groupId, node.type),
-      );
+      return ctx.dispatch(new Display.SectionCreate(node.groupId, node.type));
     } else {
       return;
     }
@@ -419,7 +428,7 @@ export class ResumeState {
     const removedIds = new Set<string>();
     const updatedNodes = Object.values(ctx.getState().byId)
       .filter((node) => {
-        if(action.id !== node.groupId) {
+        if (action.id !== node.groupId) {
           removedIds.add(node.id);
           return true;
         }
@@ -433,10 +442,16 @@ export class ResumeState {
       allIds: ctx.getState().allIds.filter((id) => removedIds.has(id)),
       byType: {
         ...ctx.getState().byType,
-        [SelectorType.SOCIAL_NAME]: ctx.getState().byType[SelectorType.SOCIAL_NAME].filter((id) => removedIds.has(id)),
-        [SelectorType.SOCIAL_ICON]: ctx.getState().byType[SelectorType.SOCIAL_ICON].filter((id) => removedIds.has(id)),
-        [SelectorType.SOCIAL_URL]: ctx.getState().byType[SelectorType.SOCIAL_URL].filter((id) => removedIds.has(id)),
-      }
+        [SelectorType.SOCIAL_NAME]: ctx
+          .getState()
+          .byType[SelectorType.SOCIAL_NAME].filter((id) => removedIds.has(id)),
+        [SelectorType.SOCIAL_ICON]: ctx
+          .getState()
+          .byType[SelectorType.SOCIAL_ICON].filter((id) => removedIds.has(id)),
+        [SelectorType.SOCIAL_URL]: ctx
+          .getState()
+          .byType[SelectorType.SOCIAL_URL].filter((id) => removedIds.has(id)),
+      },
     });
 
     return ctx.dispatch(new Display.SectionDelete(action.id));

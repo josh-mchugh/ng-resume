@@ -173,26 +173,77 @@ export class FormState {
         {} as { [id: string]: FormSocial },
       );
 
-    const experiences = Object.values(action.resume.experiences)
-      .map((experience) => ({
-        id: experience.id,
-        title: experience.title,
-        organization: experience.organization,
-        duration: experience.duration,
-        location: experience.location,
-        rawDescription: Object.values(action.resume.experienceDescriptions)
-          .filter((description) => description.experienceId === experience.id)
-          .map((description) => description.value)
-          .join('\n'),
-        rawSkills: Object.values(action.resume.experienceSkills)
-          .filter((skill) => skill.experienceId === experience.id)
-          .map((skill) => skill.value)
-          .join(', '),
-      }))
+    const experiences = [
+      ...action.resume.byType[SelectorType.EXPERIENCE_ORGANIZATION],
+      //...action.resume.byType[SelectorType.EXPERIENCE_TITLE],
+      //...action.resume.byType[SelectorType.EXPERIENCE_DURATION],
+      //...action.resume.byType[SelectorType.EXPERIENCE_LOCATION],
+      //...action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION],
+      //...action.resume.byType[SelectorType.EXPERIENCE_SKILL],
+    ]
+      .map((nodeId) => action.resume.byId[nodeId])
+      .sort((a, b) => a.groupPosition - b.groupPosition)
       .reduce(
-        (acc, experience) => ({ ...acc, [experience.id]: experience }),
-        {},
+        (acc, node) => {
+          if (!acc[node.groupId]) {
+            acc[node.groupId] = {
+              id: node.groupId,
+              organization: '',
+              title: '',
+              duration: '',
+              location: '',
+              rawDescription: '',
+              rawSkills: '',
+            };
+          }
+          if (SelectorType.EXPERIENCE_ORGANIZATION === node.type) {
+            acc[node.groupId].organization = node.value.toString();
+          }
+          if (SelectorType.EXPERIENCE_TITLE === node.type) {
+            acc[node.groupId].title = node.value.toString();
+          }
+          if (SelectorType.EXPERIENCE_DURATION === node.type) {
+            acc[node.groupId].duration = node.value.toString();
+          }
+          if (SelectorType.EXPERIENCE_LOCATION === node.type) {
+            acc[node.groupId].location = node.value.toString();
+          }
+          if (SelectorType.EXPERIENCE_DESCRIPTION === node.type) {
+            acc[node.groupId].rawDescription = acc[
+              node.groupId
+            ].rawDescription.concat('\n', node.value.toString());
+          }
+          if (SelectorType.EXPERIENCE_SKILL === node.type) {
+            acc[node.groupId].rawSkills = acc[node.groupId].rawSkills.concat(
+              '\n',
+              node.value.toString(),
+            );
+          }
+          return acc;
+        },
+        {} as { [id: string]: FormExperience },
       );
+
+    //const experiences = Object.values(action.resume.experiences)
+    //  .map((experience) => ({
+    //    id: experience.id,
+    //    title: experience.title,
+    //    organization: experience.organization,
+    //    duration: experience.duration,
+    //    location: experience.location,
+    //    rawDescription: Object.values(action.resume.experienceDescriptions)
+    //      .filter((description) => description.experienceId === experience.id)
+    //      .map((description) => description.value)
+    //      .join('\n'),
+    //    rawSkills: Object.values(action.resume.experienceSkills)
+    //      .filter((skill) => skill.experienceId === experience.id)
+    //      .map((skill) => skill.value)
+    //      .join(', '),
+    //  }))
+    //  .reduce(
+    //    (acc, experience) => ({ ...acc, [experience.id]: experience }),
+    //    {},
+    //  );
 
     const experienceDescriptions = Object.values(
       action.resume.experienceDescriptions,
@@ -417,7 +468,12 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.NodeCreateOrUpdate(SelectorType.SOCIAL_NAME, updatedSocial.name, updatedSocial.id, action.index),
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.SOCIAL_NAME,
+        updatedSocial.name,
+        updatedSocial.id,
+        action.index,
+      ),
     );
   }
 
@@ -441,7 +497,12 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.NodeCreateOrUpdate(SelectorType.SOCIAL_URL, updatedSocial.url, updatedSocial.id, action.index),
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.SOCIAL_URL,
+        updatedSocial.url,
+        updatedSocial.id,
+        action.index,
+      ),
     );
   }
 
@@ -465,8 +526,6 @@ export class FormState {
         allIds: [...experiences.allIds, experience.id],
       },
     });
-
-    return ctx.dispatch(new Resume.ExperienceCreate(experience.id));
   }
 
   @Action(Form.Experience.Delete)
@@ -563,9 +622,11 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.ExperienceOrganizationUpdate(
-        updatedExperience.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.EXPERIENCE_ORGANIZATION,
         updatedExperience.organization,
+        updatedExperience.id,
+        action.index,
       ),
     );
   }
