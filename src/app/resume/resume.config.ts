@@ -180,6 +180,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Remote',
       },
+      Oq1IQ6: {
+        id: 'Oq1IQ6',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 0,
+        value: 'Efficiently unleash cross-media information without cross-media value.',
+      }
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -195,6 +203,7 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
+      EXPERIENCE_DESCRIPTION: ['Oq1IQ6'],
     },
     allIds: [
       'cGOn1Z',
@@ -216,15 +225,9 @@ export class ResumeStateConfig {
       'woPRPF',
       'D63MSQ',
       'xSdMqL',
+      'Oq1IQ6',
     ],
     experiences: {
-      sxvDST: {
-        id: 'sxvDST',
-        organization: 'Cyberdyne System Corp.',
-        title: 'Web Developer',
-        duration: 'Jan 2023 - Present',
-        location: 'Remote',
-      },
       '6qowVm': {
         id: '6qowVm',
         organization: 'Very Big Corp. of America',
@@ -262,13 +265,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      DsI9Jf: {
-        id: 'DsI9Jf',
-        experienceId: 'sxvDST',
-        position: 0,
-        value:
-          'Efficiently unleash cross-media information without cross-media value.',
-      },
       IH2cXf: {
         id: 'IH2cXf',
         experienceId: 'sxvDST',

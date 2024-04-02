@@ -14,35 +14,21 @@ export namespace Resume {
       public value: string,
       public groupId = '',
       public groupPosition = 0,
+      public position = 0,
     ) {}
   }
 
-  export class SocialDelete {
-    static readonly type = '[Resume] Social Delete';
-    constructor(public id: string) {}
+  export class NodeDeleteByGroupId {
+    static readonly type = '[Resume] Node Delete By Group Id';
+    constructor(public groupId: string) {}
   }
 
-  export class ExperienceDelete {
-    static readonly type = '[Resume] Experience Delete';
-    constructor(public id: string) {}
-  }
-
-  export class ExperienceDescriptionCreate {
-    static readonly type = '[Resume] Experience Description Create';
+  export class NodeDeleteByGroupIdAndPosition {
+    static readonly type = '[Resume] Node Delete By Group Id And Position';
     constructor(
-      public id: string,
-      public experienceId: string,
+      public groupId: string,
+      public type: SelectorType,
       public position: number,
-      public value: string,
-    ) {}
-  }
-
-  export class ExperienceDescriptionUpdate {
-    static readonly type = '[Resume] Experience Description Update';
-    constructor(
-      public id: string,
-      public position: number,
-      public value: string,
     ) {}
   }
 

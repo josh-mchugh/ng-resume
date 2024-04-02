@@ -178,7 +178,7 @@ export class FormState {
       ...action.resume.byType[SelectorType.EXPERIENCE_TITLE],
       ...action.resume.byType[SelectorType.EXPERIENCE_DURATION],
       ...action.resume.byType[SelectorType.EXPERIENCE_LOCATION],
-      //...action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION],
+      ...action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION],
       //...action.resume.byType[SelectorType.EXPERIENCE_SKILL],
     ]
       .map((nodeId) => action.resume.byId[nodeId])
@@ -209,54 +209,38 @@ export class FormState {
             acc[node.groupId].location = node.value.toString();
           }
           if (SelectorType.EXPERIENCE_DESCRIPTION === node.type) {
-            acc[node.groupId].rawDescription = acc[
+            acc[node.groupId].rawDescription = acc[node.groupId].rawDescription ? acc[
               node.groupId
-            ].rawDescription.concat('\n', node.value.toString());
+            ].rawDescription.concat('\n', node.value.toString())
+              : node.value.toString();
           }
           if (SelectorType.EXPERIENCE_SKILL === node.type) {
-            acc[node.groupId].rawSkills = acc[node.groupId].rawSkills.concat(
+            acc[node.groupId].rawSkills = acc[node.groupId].rawSkills ? acc[node.groupId].rawSkills.concat(
               '\n',
               node.value.toString(),
-            );
+            )
+              : node.value.toString();
           }
           return acc;
         },
         {} as { [id: string]: FormExperience },
       );
 
-    //const experiences = Object.values(action.resume.experiences)
-    //  .map((experience) => ({
-    //    id: experience.id,
-    //    title: experience.title,
-    //    organization: experience.organization,
-    //    duration: experience.duration,
-    //    location: experience.location,
-    //    rawDescription: Object.values(action.resume.experienceDescriptions)
-    //      .filter((description) => description.experienceId === experience.id)
-    //      .map((description) => description.value)
-    //      .join('\n'),
-    //    rawSkills: Object.values(action.resume.experienceSkills)
-    //      .filter((skill) => skill.experienceId === experience.id)
-    //      .map((skill) => skill.value)
-    //      .join(', '),
-    //  }))
-    //  .reduce(
-    //    (acc, experience) => ({ ...acc, [experience.id]: experience }),
-    //    {},
-    //  );
-
-    const experienceDescriptions = Object.values(
-      action.resume.experienceDescriptions,
-    )
-      .map((description) => ({
-        id: description.id,
-        experienceId: description.experienceId,
-        position: description.position,
-        value: description.value,
-      }))
+    const experienceDescriptions = action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION]
+      .map((nodeId) => action.resume.byId[nodeId])
       .reduce(
-        (acc, description) => ({ ...acc, [description.id]: description }),
-        {},
+        (acc, node) => {
+          if (!acc[node.id]) {
+            acc[node.id] = {
+              id: node.id,
+              experienceId: node.groupId,
+              position: node.position,
+              value: node.value.toString(),
+            };
+          }
+          return acc;
+        },
+        {} as { [id: string]: FormExperienceDescription },
       );
 
     const experienceSkills = Object.values(action.resume.experienceSkills)
@@ -445,7 +429,7 @@ export class FormState {
       },
     });
 
-    return ctx.dispatch(new Resume.SocialDelete(action.id));
+    return ctx.dispatch(new Resume.NodeDeleteByGroupId(action.id));
   }
 
   @Action(Form.Social.NameUpdate)
@@ -569,7 +553,7 @@ export class FormState {
       },
     });
 
-    return ctx.dispatch(new Resume.ExperienceDelete(action.id));
+    return ctx.dispatch(new Resume.NodeDeleteByGroupId(action.id));
   }
 
   @Action(Form.Experience.TitleUpdate)
@@ -773,11 +757,12 @@ export class FormState {
       .filter((id) => !prevDescriptionIds.includes(id))
       .map(
         (id) =>
-          new Resume.ExperienceDescriptionCreate(
-            newDescriptions[id].id,
-            newDescriptions[id].experienceId,
-            newDescriptions[id].position,
+          new Resume.NodeCreateOrUpdate(
+            SelectorType.EXPERIENCE_DESCRIPTION,
             newDescriptions[id].value,
+            newDescriptions[id].experienceId,
+            action.index,
+            newDescriptions[id].position,
           ),
       );
 
@@ -793,16 +778,23 @@ export class FormState {
       )
       .map(
         (prevDescription) =>
-          new Resume.ExperienceDescriptionUpdate(
-            prevDescription.id,
-            newDescriptions[prevDescription.id].position,
+          new Resume.NodeCreateOrUpdate(
+            SelectorType.EXPERIENCE_DESCRIPTION,
             newDescriptions[prevDescription.id].value,
+            newDescriptions[prevDescription.id].experienceId,
+            action.index,
+            newDescriptions[prevDescription.id].position,
           ),
       );
 
     const removedDescriptions = prevDescriptionIds
       .filter((id) => !newDescriptionsAllIds.includes(id))
-      .map((id) => new Resume.ExperienceDescriptionDelete(id));
+      .flatMap((id) => experienceDescriptions.filter((prevDescription) => prevDescription.id === id))
+      .map((prevDescription) => new Resume.NodeDeleteByGroupIdAndPosition(
+        prevDescription.experienceId,
+        SelectorType.EXPERIENCE_DESCRIPTION,
+        prevDescription.position,
+      ));
 
     return ctx.dispatch([
       ...removedDescriptions,

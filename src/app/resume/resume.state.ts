@@ -240,7 +240,7 @@ export class ResumeState {
         ...state.byType[SelectorType.EXPERIENCE_TITLE],
         ...state.byType[SelectorType.EXPERIENCE_DURATION],
         ...state.byType[SelectorType.EXPERIENCE_LOCATION],
-        //...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
+        ...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
         //...state.byType[SelectorType.EXPERIENCE_SKILL],
       ].map((id) => state.byId[id].groupId);
       return [...new Set<string>(groupIds)];
@@ -283,19 +283,19 @@ export class ResumeState {
     });
   }
 
-  private static selectorExperienceDescriptionList(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      Object.values(state.experienceDescriptions)
-        .filter((description) => id === description.experienceId)
-        .map((description) => description.id),
-    );
+  private static selectorExperienceDescriptionList(groupId: string) {
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const ids = state.byType[SelectorType.EXPERIENCE_DESCRIPTION]
+        .map((id) => state.byId[id])
+        .filter((node) => node.groupId === groupId)
+        .sort((a, b) => a.position - b.position)
+        .map((node) => node.id);
+      return [...new Set<string>(ids)];
+    });
   }
 
   private static selectorExperienceDescription(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.experienceDescriptions[id].value,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => state.byId[id].value);
   }
 
   private static selectorExperienceSkillList(id: string) {
@@ -383,14 +383,15 @@ export class ResumeState {
     ctx: StateContext<ResumeStateModel>,
     action: Resume.NodeCreateOrUpdate,
   ) {
-    const ids = ctx
-      .getState()
-      .byType[action.type].filter(
+    const nodes = ctx.getState().byType[action.type]
+      .filter(
         (id) => ctx.getState().byId[id].groupId === action.groupId,
-      );
-    const node = ids.length
+      )
+      .map((id) => ctx.getState().byId[id])
+      .sort((a, b) => a.position - b.position);
+    const node = nodes.length && nodes[action.position]
       ? {
-          ...ctx.getState().byId[ids[0]],
+          ...nodes[action.position],
           value: action.value,
         }
       : {
@@ -398,7 +399,7 @@ export class ResumeState {
           groupId: action.groupId,
           groupPosition: action.groupPosition,
           type: action.type,
-          position: 0,
+          position: action.position,
           value: action.value,
         };
     ctx.setState({
@@ -418,161 +419,89 @@ export class ResumeState {
 
     if (
       action.groupId &&
-      !this.displayService.hasSectionByResumeId(node.groupId, node.type)
+      !this.displayService.hasSectionByResumeId(node.id, node.type)
     ) {
-      return ctx.dispatch(new Display.SectionCreate(node.groupId, node.type));
+      return ctx.dispatch(new Display.SectionCreate(node.id, node.type));
     } else {
       return;
     }
   }
 
-  @Action(Resume.SocialDelete)
-  socialDelete(
+  @Action(Resume.NodeDeleteByGroupId)
+  nodeDeletByGroupId(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.SocialDelete,
+    action: Resume.NodeDeleteByGroupId,
   ) {
-    const removedIds = new Set<string>();
-    const updatedNodes = Object.values(ctx.getState().byId)
-      .filter((node) => {
-        if (action.id !== node.groupId) {
-          removedIds.add(node.id);
-          return true;
-        }
-        return false;
-      })
+    const nodes = Object.values(ctx.getState().byId);
+
+    const removedNodes = nodes
+      .filter((node) => node.groupId === action.groupId)
+      .reduce((acc, node) => ({ ...acc, [node.id]: node }), {} );
+
+    const removeIds = Object.keys(removedNodes);
+
+    const updatedById = nodes
+      .filter((node) => !removeIds.includes(node.id))
       .reduce((acc, node) => ({ ...acc, [node.id]: node }), {});
 
+    const updatedByType = nodes
+      .filter((node) => !removeIds.includes(node.id))
+      .reduce((acc, node) => {
+        if(!acc[node.type]) {
+          acc[node.type] = [];
+        }
+        acc[node.type].push(node.id);
+        return acc;
+      }, {} as { [id: string]: string[] } );
+
     ctx.setState({
       ...ctx.getState(),
-      byId: updatedNodes,
-      allIds: ctx.getState().allIds.filter((id) => removedIds.has(id)),
-      byType: {
-        ...ctx.getState().byType,
-        [SelectorType.SOCIAL_NAME]: ctx
-          .getState()
-          .byType[SelectorType.SOCIAL_NAME].filter((id) => removedIds.has(id)),
-        [SelectorType.SOCIAL_ICON]: ctx
-          .getState()
-          .byType[SelectorType.SOCIAL_ICON].filter((id) => removedIds.has(id)),
-        [SelectorType.SOCIAL_URL]: ctx
-          .getState()
-          .byType[SelectorType.SOCIAL_URL].filter((id) => removedIds.has(id)),
-      },
+      byId: updatedById,
+      allIds: ctx.getState().allIds.filter((id) => removeIds.includes(id)),
+      byType: updatedByType,
     });
 
-    return ctx.dispatch(new Display.SectionDelete(action.id));
+    return ctx.dispatch([...removeIds.map((id) => new Display.SectionDelete(id)), new Display.SectionDelete(action.groupId)]);
   }
 
-  @Action(Resume.ExperienceDelete)
-  experienceDelete(
+  @Action(Resume.NodeDeleteByGroupIdAndPosition)
+  nodeDeleteByGroupIdAndPosition(
     ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceDelete,
+    action: Resume.NodeDeleteByGroupIdAndPosition,
   ) {
-    const updatedExperiences = Object.values(ctx.getState().experiences)
-      .filter((experience) => experience.id !== action.id)
-      .reduce(
-        (acc, experience) => ({ ...acc, [experience.id]: experience }),
-        {},
-      );
+    const nodes = Object.values(ctx.getState().byId);
+
+    const removeNodes = nodes
+      .filter((node) => node.groupId === action.groupId
+        && node.type === action.type
+              && node.position === action.position
+             )
+      .reduce((acc, node) => ({ ...acc, [node.id]: node }), {} );
+
+    const removeIds = Object.keys(removeNodes);
+
+    const updatedById = nodes
+      .filter((node) => !removeIds.includes(node.id))
+      .reduce((acc, node) => ({ ...acc, [node.id]: node }), {});
+
+    const updatedByType = nodes
+      .filter((node) => !removeIds.includes(node.id))
+      .reduce((acc, node) => {
+        if(!acc[node.type]) {
+          acc[node.type] = [];
+        }
+        acc[node.type].push(node.id);
+        return acc;
+      }, {} as { [id: string]: string[] } );
 
     ctx.setState({
       ...ctx.getState(),
-      experiences: updatedExperiences,
+      byId: updatedById,
+      allIds: ctx.getState().allIds.filter((id) => removeIds.includes(id)),
+      byType: updatedByType,
     });
 
-    return ctx.dispatch(new Display.SectionDelete(action.id));
-  }
-
-  @Action(Resume.ExperienceDescriptionCreate)
-  experienceDescriptionCreate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceDescriptionCreate,
-  ) {
-    const experienceDescription = {
-      id: action.id,
-      experienceId: action.experienceId,
-      position: action.position,
-      value: action.value,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      experienceDescriptions: {
-        ...ctx.getState().experienceDescriptions,
-        [experienceDescription.id]: experienceDescription,
-      },
-    });
-
-    if (
-      this.displayService.hasSectionByResumeId(
-        experienceDescription.experienceId,
-        SelectorType.EXPERIENCE_DESCRIPTION_LIST,
-      )
-    ) {
-      return ctx.dispatch([
-        new Display.NestedSectionCreate(
-          experienceDescription.id,
-          experienceDescription.experienceId,
-          SelectorType.EXPERIENCE_DESCRIPTION,
-        ),
-      ]);
-    } else {
-      return ctx.dispatch([
-        new Display.SectionCreate(
-          experienceDescription.experienceId,
-          SelectorType.EXPERIENCE_DESCRIPTION_LIST,
-        ),
-        new Display.NestedSectionCreate(
-          experienceDescription.id,
-          experienceDescription.experienceId,
-          SelectorType.EXPERIENCE_DESCRIPTION,
-        ),
-      ]);
-    }
-  }
-
-  @Action(Resume.ExperienceDescriptionUpdate)
-  experienceDescriptionUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceDescriptionUpdate,
-  ) {
-    const experienceDescription =
-      ctx.getState().experienceDescriptions[action.id];
-    const updatedExperienceDescription = {
-      ...experienceDescription,
-      position: action.position,
-      value: action.value,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      experienceDescriptions: {
-        ...ctx.getState().experienceDescriptions,
-        [updatedExperienceDescription.id]: updatedExperienceDescription,
-      },
-    });
-  }
-
-  @Action(Resume.ExperienceDescriptionDelete)
-  experienceDescriptionDelete(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceDescriptionDelete,
-  ) {
-    const updatedExperienceDescriptions = Object.values(
-      ctx.getState().experienceDescriptions,
-    )
-      .filter((description) => description.id !== action.id)
-      .reduce(
-        (acc, description) => ({ ...acc, [description.id]: description }),
-        {},
-      );
-
-    ctx.setState({
-      ...ctx.getState(),
-      experienceDescriptions: updatedExperienceDescriptions,
-    });
-
-    return ctx.dispatch(new Display.SectionDelete(action.id));
+    return ctx.dispatch([...removeIds.map((id) => new Display.SectionDelete(id))]);
   }
 
   @Action(Resume.ExperienceSkillCreate)
