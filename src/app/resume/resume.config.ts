@@ -212,6 +212,14 @@ export class ResumeStateConfig {
         position: 3,
         value: 'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
       },
+      Ov20bL: {
+        id: 'Ov20bL',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 4,
+        value: 'Paradigm shift land it in region, design thinking.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -227,7 +235,7 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
-      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf', 'ac3Y3g', 'CNLcFh'],
+      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf', 'ac3Y3g', 'CNLcFh', 'Ov20bL'],
     },
     allIds: [
       'cGOn1Z',
@@ -253,6 +261,7 @@ export class ResumeStateConfig {
       'IH2cXf',
       'ac3Y3g',
       'CNLcFh',
+      'Ov20bL',
     ],
     experiences: {
       '6qowVm': {
@@ -292,12 +301,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      Ov20bL: {
-        id: 'Ov20bL',
-        experienceId: 'sxvDST',
-        position: 4,
-        value: 'Paradigm shift land it in region, design thinking.',
-      },
       Z5GUKN: {
         id: 'Z5GUKN',
         experienceId: '6qowVm',
