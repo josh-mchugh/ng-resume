@@ -187,7 +187,15 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
         value: 'Efficiently unleash cross-media information without cross-media value.',
-      }
+      },
+      IH2cXf: {
+        id: 'IH2cXf',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 1,
+        value: 'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -203,7 +211,7 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
-      EXPERIENCE_DESCRIPTION: ['Oq1IQ6'],
+      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf'],
     },
     allIds: [
       'cGOn1Z',
@@ -226,6 +234,7 @@ export class ResumeStateConfig {
       'D63MSQ',
       'xSdMqL',
       'Oq1IQ6',
+      'IH2cXf',
     ],
     experiences: {
       '6qowVm': {
@@ -265,13 +274,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      IH2cXf: {
-        id: 'IH2cXf',
-        experienceId: 'sxvDST',
-        position: 1,
-        value:
-          'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
-      },
       ac3Y3g: {
         id: 'ac3Y3g',
         experienceId: 'sxvDST',
