@@ -196,6 +196,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
       },
+      ac3Y3g: {
+        id: 'ac3Y3g',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 2,
+        value: 'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -211,7 +219,7 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
-      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf'],
+      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf', 'ac3Y3g'],
     },
     allIds: [
       'cGOn1Z',
@@ -235,6 +243,7 @@ export class ResumeStateConfig {
       'xSdMqL',
       'Oq1IQ6',
       'IH2cXf',
+      'ac3Y3g',
     ],
     experiences: {
       '6qowVm': {
@@ -274,13 +283,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      ac3Y3g: {
-        id: 'ac3Y3g',
-        experienceId: 'sxvDST',
-        position: 2,
-        value:
-          'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
-      },
       CNLcFh: {
         id: 'CNLcFh',
         experienceId: 'sxvDST',
