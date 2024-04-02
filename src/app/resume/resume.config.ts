@@ -204,6 +204,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
       },
+      CNLcFh: {
+        id: 'CNLcFh',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 3,
+        value: 'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -219,7 +227,7 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
-      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf', 'ac3Y3g'],
+      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf', 'ac3Y3g', 'CNLcFh'],
     },
     allIds: [
       'cGOn1Z',
@@ -244,6 +252,7 @@ export class ResumeStateConfig {
       'Oq1IQ6',
       'IH2cXf',
       'ac3Y3g',
+      'CNLcFh',
     ],
     experiences: {
       '6qowVm': {
@@ -283,13 +292,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      CNLcFh: {
-        id: 'CNLcFh',
-        experienceId: 'sxvDST',
-        position: 3,
-        value:
-          'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
-      },
       Ov20bL: {
         id: 'Ov20bL',
         experienceId: 'sxvDST',
