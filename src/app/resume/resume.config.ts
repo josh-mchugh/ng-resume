@@ -186,7 +186,8 @@ export class ResumeStateConfig {
         groupPosition: 0,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
-        value: 'Efficiently unleash cross-media information without cross-media value.',
+        value:
+          'Efficiently unleash cross-media information without cross-media value.',
       },
       IH2cXf: {
         id: 'IH2cXf',
@@ -194,7 +195,8 @@ export class ResumeStateConfig {
         groupPosition: 0,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 1,
-        value: 'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
+        value:
+          'Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.',
       },
       ac3Y3g: {
         id: 'ac3Y3g',
@@ -202,7 +204,8 @@ export class ResumeStateConfig {
         groupPosition: 0,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 2,
-        value: 'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
+        value:
+          'Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas',
       },
       CNLcFh: {
         id: 'CNLcFh',
@@ -210,7 +213,8 @@ export class ResumeStateConfig {
         groupPosition: 0,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 3,
-        value: 'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
+        value:
+          'Ladder back to the strategy we need evergreen content blue money synergize productive mindfulness.',
       },
       Ov20bL: {
         id: 'Ov20bL',
@@ -235,7 +239,13 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: ['woPRPF'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
-      EXPERIENCE_DESCRIPTION: ['Oq1IQ6', 'IH2cXf', 'ac3Y3g', 'CNLcFh', 'Ov20bL'],
+      EXPERIENCE_DESCRIPTION: [
+        'Oq1IQ6',
+        'IH2cXf',
+        'ac3Y3g',
+        'CNLcFh',
+        'Ov20bL',
+      ],
     },
     allIds: [
       'cGOn1Z',

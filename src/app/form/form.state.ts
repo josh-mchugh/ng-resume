@@ -209,16 +209,16 @@ export class FormState {
             acc[node.groupId].location = node.value.toString();
           }
           if (SelectorType.EXPERIENCE_DESCRIPTION === node.type) {
-            acc[node.groupId].rawDescription = acc[node.groupId].rawDescription ? acc[
-              node.groupId
-            ].rawDescription.concat('\n', node.value.toString())
+            acc[node.groupId].rawDescription = acc[node.groupId].rawDescription
+              ? acc[node.groupId].rawDescription.concat(
+                  '\n',
+                  node.value.toString(),
+                )
               : node.value.toString();
           }
           if (SelectorType.EXPERIENCE_SKILL === node.type) {
-            acc[node.groupId].rawSkills = acc[node.groupId].rawSkills ? acc[node.groupId].rawSkills.concat(
-              '\n',
-              node.value.toString(),
-            )
+            acc[node.groupId].rawSkills = acc[node.groupId].rawSkills
+              ? acc[node.groupId].rawSkills.concat('\n', node.value.toString())
               : node.value.toString();
           }
           return acc;
@@ -226,7 +226,9 @@ export class FormState {
         {} as { [id: string]: FormExperience },
       );
 
-    const experienceDescriptions = action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION]
+    const experienceDescriptions = action.resume.byType[
+      SelectorType.EXPERIENCE_DESCRIPTION
+    ]
       .map((nodeId) => action.resume.byId[nodeId])
       .reduce(
         (acc, node) => {
@@ -789,12 +791,19 @@ export class FormState {
 
     const removedDescriptions = prevDescriptionIds
       .filter((id) => !newDescriptionsAllIds.includes(id))
-      .flatMap((id) => experienceDescriptions.filter((prevDescription) => prevDescription.id === id))
-      .map((prevDescription) => new Resume.NodeDeleteByGroupIdAndPosition(
-        prevDescription.experienceId,
-        SelectorType.EXPERIENCE_DESCRIPTION,
-        prevDescription.position,
-      ));
+      .flatMap((id) =>
+        experienceDescriptions.filter(
+          (prevDescription) => prevDescription.id === id,
+        ),
+      )
+      .map(
+        (prevDescription) =>
+          new Resume.NodeDeleteByGroupIdAndPosition(
+            prevDescription.experienceId,
+            SelectorType.EXPERIENCE_DESCRIPTION,
+            prevDescription.position,
+          ),
+      );
 
     return ctx.dispatch([
       ...removedDescriptions,

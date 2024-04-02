@@ -68,9 +68,15 @@ export class ExperiencesInputComponent {
     );
   }
 
-  public onExperienceDescriptionInput(id: string, event: Event, index: number): void {
+  public onExperienceDescriptionInput(
+    id: string,
+    event: Event,
+    index: number,
+  ): void {
     const description = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Experience.DescriptionUpdate(id, description, index));
+    this.store.dispatch(
+      new Form.Experience.DescriptionUpdate(id, description, index),
+    );
   }
 
   public onExperienceSkillsInput(id: string, event: Event): void {
