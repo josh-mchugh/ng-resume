@@ -125,6 +125,7 @@ export namespace Form {
       constructor(
         public id: string,
         public skills: string,
+        public index: number,
       ) {}
     }
   }

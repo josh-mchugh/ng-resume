@@ -63,7 +63,7 @@
         name="experienceSkills-{{ experience.id }}"
         placeholder="Skills"
         [value]="experience.rawSkills"
-        (input)="onExperienceSkillsInput(experience.id, $event)"
+        (input)="onExperienceSkillsInput(experience.id, $event, i)"
       />
     </div>
   </ng-container>

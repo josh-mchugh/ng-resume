@@ -241,7 +241,7 @@ export class ResumeState {
         ...state.byType[SelectorType.EXPERIENCE_DURATION],
         ...state.byType[SelectorType.EXPERIENCE_LOCATION],
         ...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
-        //...state.byType[SelectorType.EXPERIENCE_SKILL],
+        ...state.byType[SelectorType.EXPERIENCE_SKILL],
       ].map((id) => state.byId[id].groupId);
       return [...new Set<string>(groupIds)];
     });
@@ -301,18 +301,21 @@ export class ResumeState {
     );
   }
 
-  private static selectorExperienceSkillList(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      Object.values(state.experienceSkills)
-        .filter((skill) => id === skill.experienceId)
-        .map((skill) => skill.id),
-    );
+  private static selectorExperienceSkillList(groupId: string) {
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const ids = state.byType[SelectorType.EXPERIENCE_SKILL]
+        .map((id) => state.byId[id])
+        .filter((node) => node.groupId === groupId)
+        .sort((a, b) => a.position - b.position)
+        .map((node) => node.id);
+      return [...new Set<string>(ids)];
+    });
   }
 
   private static selectorExperienceSkill(id: string) {
     return createSelector(
       [ResumeState],
-      (state: ResumeStateModel) => state.experienceSkills[id].value,
+      (state: ResumeStateModel) => state.byId[id].value,
     );
   }
 
@@ -520,94 +523,6 @@ export class ResumeState {
     return ctx.dispatch([
       ...removeIds.map((id) => new Display.SectionDelete(id)),
     ]);
-  }
-
-  @Action(Resume.ExperienceSkillCreate)
-  experienceSkillCreate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceSkillCreate,
-  ) {
-    const experienceSkill = {
-      id: action.id,
-      experienceId: action.experienceId,
-      position: action.position,
-      value: action.value,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      experienceSkills: {
-        ...ctx.getState().experienceSkills,
-        [experienceSkill.id]: experienceSkill,
-      },
-    });
-
-    if (
-      this.displayService.hasSectionByResumeId(
-        experienceSkill.experienceId,
-        SelectorType.EXPERIENCE_SKILL_LIST,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.NestedSectionCreate(
-          experienceSkill.id,
-          experienceSkill.experienceId,
-          SelectorType.EXPERIENCE_SKILL,
-        ),
-      );
-    } else {
-      return ctx.dispatch([
-        new Display.SectionCreate(
-          experienceSkill.experienceId,
-          SelectorType.EXPERIENCE_SKILL_LIST,
-        ),
-        new Display.NestedSectionCreate(
-          experienceSkill.id,
-          experienceSkill.experienceId,
-          SelectorType.EXPERIENCE_SKILL,
-        ),
-      ]);
-    }
-  }
-
-  @Action(Resume.ExperienceSkillUpdate)
-  experienceSkillUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceSkillUpdate,
-  ) {
-    const experienceSkill = ctx.getState().experienceSkills[action.id];
-    const updatedExperienceSkill = {
-      ...experienceSkill,
-      position: action.position,
-      value: action.value,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      experienceSkills: {
-        ...ctx.getState().experienceSkills,
-        [updatedExperienceSkill.id]: updatedExperienceSkill,
-      },
-    });
-  }
-
-  @Action(Resume.ExperienceSkillDelete)
-  experienceSkillDelete(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.ExperienceSkillDelete,
-  ) {
-    const updatedExperienceSkills = Object.values(
-      ctx.getState().experienceSkills,
-    )
-      .filter((skill) => skill.id !== action.id)
-      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
-
-    ctx.setState({
-      ...ctx.getState(),
-      experienceSkills: updatedExperienceSkills,
-    });
-
-    return ctx.dispatch(new Display.SectionDelete(action.id));
   }
 
   @Action(Resume.SkillCreate)

@@ -179,7 +179,7 @@ export class FormState {
       ...action.resume.byType[SelectorType.EXPERIENCE_DURATION],
       ...action.resume.byType[SelectorType.EXPERIENCE_LOCATION],
       ...action.resume.byType[SelectorType.EXPERIENCE_DESCRIPTION],
-      //...action.resume.byType[SelectorType.EXPERIENCE_SKILL],
+      ...action.resume.byType[SelectorType.EXPERIENCE_SKILL],
     ]
       .map((nodeId) => action.resume.byId[nodeId])
       .sort((a, b) => a.groupPosition - b.groupPosition)
@@ -218,7 +218,7 @@ export class FormState {
           }
           if (SelectorType.EXPERIENCE_SKILL === node.type) {
             acc[node.groupId].rawSkills = acc[node.groupId].rawSkills
-              ? acc[node.groupId].rawSkills.concat('\n', node.value.toString())
+              ? acc[node.groupId].rawSkills.concat(', ', node.value.toString())
               : node.value.toString();
           }
           return acc;
@@ -245,14 +245,22 @@ export class FormState {
         {} as { [id: string]: FormExperienceDescription },
       );
 
-    const experienceSkills = Object.values(action.resume.experienceSkills)
-      .map((skill) => ({
-        id: skill.id,
-        experienceId: skill.experienceId,
-        position: skill.position,
-        value: skill.value,
-      }))
-      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+    const experienceSkills = action.resume.byType[SelectorType.EXPERIENCE_SKILL]
+      .map((nodeId) => action.resume.byId[nodeId])
+      .reduce(
+        (acc, node) => {
+          if (!acc[node.id]) {
+            acc[node.id] = {
+              id: node.id,
+              experienceId: node.groupId,
+              position: node.position,
+              value: node.value.toString(),
+            };
+          }
+          return acc;
+        },
+        {} as { [id: string]: FormExperienceSkill },
+      );
 
     const skills = Object.values(action.resume.skills)
       .map((skill) => ({
@@ -878,11 +886,12 @@ export class FormState {
       .filter((id) => !prevSkillIds.includes(id))
       .map(
         (id) =>
-          new Resume.ExperienceSkillCreate(
-            newSkills[id].id,
-            newSkills[id].experienceId,
-            newSkills[id].position,
+          new Resume.NodeCreateOrUpdate(
+            SelectorType.EXPERIENCE_SKILL,
             newSkills[id].value,
+            newSkills[id].experienceId,
+            action.index,
+            newSkills[id].position,
           ),
       );
 
@@ -895,16 +904,28 @@ export class FormState {
       )
       .map(
         (prevSkill) =>
-          new Resume.ExperienceSkillUpdate(
-            prevSkill.id,
-            newSkills[prevSkill.id].position,
+          new Resume.NodeCreateOrUpdate(
+            SelectorType.EXPERIENCE_SKILL,
             newSkills[prevSkill.id].value,
+            newSkills[prevSkill.id].experienceId,
+            action.index,
+            newSkills[prevSkill.id].position,
           ),
       );
 
     const removedSkills = prevSkillIds
       .filter((id) => !newSkillIds.includes(id))
-      .map((id) => new Resume.ExperienceSkillDelete(id));
+      .flatMap((id) =>
+        experienceSkills.filter((prevSkill) => prevSkill.id === id),
+      )
+      .map(
+        (prevSkill) =>
+          new Resume.NodeDeleteByGroupIdAndPosition(
+            prevSkill.experienceId,
+            SelectorType.EXPERIENCE_SKILL,
+            prevSkill.position,
+          ),
+      );
 
     return ctx.dispatch([...removedSkills, ...updatedSkills, ...addedSkills]);
   }

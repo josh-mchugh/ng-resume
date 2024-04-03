@@ -32,43 +32,6 @@ export namespace Resume {
     ) {}
   }
 
-  export class ExperienceSkillCreate {
-    static readonly type = '[Resume] Experience Skill Create';
-    constructor(
-      public id: string,
-      public experienceId: string,
-      public position: number,
-      public value: string,
-    ) {}
-  }
-
-  export class ExperienceSkillUpdate {
-    static readonly type = '[Resume] Experience Skill Update';
-    constructor(
-      public id: string,
-      public position: number,
-      public value: string,
-    ) {}
-  }
-
-  export class ExperienceSkillDelete {
-    static readonly type = '[Resume] Experience Skill Delete';
-    constructor(public id: string) {}
-  }
-
-  export class ExperienceDescriptionDelete {
-    static readonly type = '[Resume] Experience Description Delete';
-    constructor(public id: string) {}
-  }
-
-  export class ExperienceSkillsUpdate {
-    static readonly type = '[Resume] Experience Skills Update';
-    constructor(
-      public id: string,
-      public skills: string,
-    ) {}
-  }
-
   export class SkillCreate {
     static readonly type = '[Resume] Skill Create';
     constructor(public id: string) {}

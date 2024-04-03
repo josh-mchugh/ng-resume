@@ -17,6 +17,7 @@ export class ResumeStateConfig {
       EXPERIENCE_ORGANIZATION: [],
       EXPERIENCE_TITLE: [],
       EXPERIENCE_DURATION: [],
+      EXPERIENCE_SKILL: [],
     },
     experiences: {},
     experienceDescriptions: {},
@@ -224,6 +225,14 @@ export class ResumeStateConfig {
         position: 4,
         value: 'Paradigm shift land it in region, design thinking.',
       },
+      Z4AfFQ: {
+        id: 'Z4AfFQ',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 0,
+        value: 'Photoshop',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -246,6 +255,7 @@ export class ResumeStateConfig {
         'CNLcFh',
         'Ov20bL',
       ],
+      EXPERIENCE_SKILL: ['Z4AfFQ'],
     },
     allIds: [
       'cGOn1Z',
@@ -272,6 +282,7 @@ export class ResumeStateConfig {
       'ac3Y3g',
       'CNLcFh',
       'Ov20bL',
+      'Z4AfFQ',
     ],
     experiences: {
       '6qowVm': {
@@ -439,12 +450,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      A8QsRq: {
-        id: 'A8QsRq',
-        experienceId: 'sxvDST',
-        position: 0,
-        value: 'Photoshop',
-      },
       ODDIMq: {
         id: 'ODDIMq',
         experienceId: 'sxvDST',

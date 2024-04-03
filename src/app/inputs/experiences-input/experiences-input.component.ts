@@ -79,8 +79,12 @@ export class ExperiencesInputComponent {
     );
   }
 
-  public onExperienceSkillsInput(id: string, event: Event): void {
+  public onExperienceSkillsInput(
+    id: string,
+    event: Event,
+    index: number,
+  ): void {
     const skills = (event.target as HTMLInputElement).value;
-    this.store.dispatch(new Form.Experience.SkillsUpdate(id, skills));
+    this.store.dispatch(new Form.Experience.SkillsUpdate(id, skills, index));
   }
 }
