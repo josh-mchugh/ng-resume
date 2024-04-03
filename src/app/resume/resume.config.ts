@@ -248,7 +248,15 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_SKILL,
         position: 2,
         value: 'CSS',
-      }
+      },
+      cuAGAQ: {
+        id: 'cuAGAQ',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 3,
+        value: 'Illustrator',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -271,7 +279,7 @@ export class ResumeStateConfig {
         'CNLcFh',
         'Ov20bL',
       ],
-      EXPERIENCE_SKILL: ['Z4AfFQ', 'xuLMPb', 'YXlaIx'],
+      EXPERIENCE_SKILL: ['Z4AfFQ', 'xuLMPb', 'YXlaIx', 'cuAGAQ'],
     },
     allIds: [
       'cGOn1Z',
@@ -301,6 +309,7 @@ export class ResumeStateConfig {
       'Z4AfFQ',
       'xuLMPb',
       'YXlaIx',
+      'cuAGAQ',
     ],
     experiences: {
       '6qowVm': {
@@ -468,12 +477,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      LmRQEY: {
-        id: 'LmRQEY',
-        experienceId: 'sxvDST',
-        position: 3,
-        value: 'Illustrator',
-      },
       iLPjrp: {
         id: 'iLPjrp',
         experienceId: 'sxvDST',
