@@ -265,6 +265,14 @@ export class ResumeStateConfig {
         position: 4,
         value: 'PHP',
       },
+      tzXZQe: {
+        id: 'tzXZQe',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 5,
+        value: 'JavaScript',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -287,7 +295,14 @@ export class ResumeStateConfig {
         'CNLcFh',
         'Ov20bL',
       ],
-      EXPERIENCE_SKILL: ['Z4AfFQ', 'xuLMPb', 'YXlaIx', 'cuAGAQ', 'tFxwhP'],
+      EXPERIENCE_SKILL: [
+        'Z4AfFQ',
+        'xuLMPb',
+        'YXlaIx',
+        'cuAGAQ',
+        'tFxwhP',
+        'tzXZQe',
+      ],
     },
     allIds: [
       'cGOn1Z',
@@ -319,6 +334,7 @@ export class ResumeStateConfig {
       'YXlaIx',
       'cuAGAQ',
       'tFxwhP',
+      'tzXZQe',
     ],
     experiences: {
       '6qowVm': {
@@ -486,12 +502,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      HI3wnF: {
-        id: 'HI3wnF',
-        experienceId: 'sxvDST',
-        position: 5,
-        value: 'JavaScript',
-      },
       imSw9w: {
         id: 'imSw9w',
         experienceId: '6qowVm',
