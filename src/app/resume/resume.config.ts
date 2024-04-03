@@ -233,6 +233,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Photoshop',
       },
+      xuLMPb: {
+        id: 'xuLMPb',
+        groupId: 'sxvDST',
+        groupPosition: 0,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 1,
+        value: 'HTML',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -255,7 +263,7 @@ export class ResumeStateConfig {
         'CNLcFh',
         'Ov20bL',
       ],
-      EXPERIENCE_SKILL: ['Z4AfFQ'],
+      EXPERIENCE_SKILL: ['Z4AfFQ', 'xuLMPb'],
     },
     allIds: [
       'cGOn1Z',
@@ -283,6 +291,7 @@ export class ResumeStateConfig {
       'CNLcFh',
       'Ov20bL',
       'Z4AfFQ',
+      'xuLMPb',
     ],
     experiences: {
       '6qowVm': {
@@ -450,12 +459,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      ODDIMq: {
-        id: 'ODDIMq',
-        experienceId: 'sxvDST',
-        position: 1,
-        value: 'HTML',
-      },
       w62dl4: {
         id: 'w62dl4',
         experienceId: 'sxvDST',
