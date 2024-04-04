@@ -345,6 +345,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Typography',
       },
+      GXivPT: {
+        id: 'GXivPT',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 1,
+        value: 'Composition',
+      }
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -379,6 +387,7 @@ export class ResumeStateConfig {
         'tFxwhP',
         'tzXZQe',
         'hb34AN',
+        'GXivPT',
       ],
     },
     allIds: [
@@ -421,6 +430,7 @@ export class ResumeStateConfig {
       'Af1Gpd',
       'HQAfhi',
       'hb34AN',
+      'GXivPT',
     ],
     experiences: {
       By81yN: {
@@ -553,12 +563,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      TYDZ9i: {
-        id: 'TYDZ9i',
-        experienceId: '6qowVm',
-        position: 1,
-        value: 'Composition',
-      },
       pA2K9b: {
         id: 'pA2K9b',
         experienceId: '6qowVm',
