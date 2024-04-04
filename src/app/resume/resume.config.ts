@@ -289,6 +289,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'User Experience Expert',
       },
+      JOpOqX: {
+        id: 'JOpOqX',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_DURATION,
+        position: 0,
+        value: 'Jan 2022 – Dec 2022',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -302,7 +310,7 @@ export class ResumeStateConfig {
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi'],
-      EXPERIENCE_DURATION: ['D63MSQ'],
+      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
@@ -353,6 +361,7 @@ export class ResumeStateConfig {
       'tzXZQe',
       'xvvZMK',
       'xaQQXi',
+      'JOpOqX',
     ],
     experiences: {
       '6qowVm': {
