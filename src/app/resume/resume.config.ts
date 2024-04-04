@@ -297,6 +297,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Jan 2022 – Dec 2022',
       },
+      '4GajzB': {
+        id: '4GajzB',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_LOCATION,
+        position: 0,
+        value: 'Remote',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -311,7 +319,7 @@ export class ResumeStateConfig {
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX'],
-      EXPERIENCE_LOCATION: ['xSdMqL'],
+      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
         'IH2cXf',
@@ -362,6 +370,7 @@ export class ResumeStateConfig {
       'xvvZMK',
       'xaQQXi',
       'JOpOqX',
+      '4GajzB',
     ],
     experiences: {
       '6qowVm': {
