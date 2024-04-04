@@ -337,6 +337,14 @@ export class ResumeStateConfig {
         position: 3,
         value: 'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
       },
+      hb34AN: {
+        id: 'hb34AN',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 0,
+        value: 'Typography',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -370,6 +378,7 @@ export class ResumeStateConfig {
         'cuAGAQ',
         'tFxwhP',
         'tzXZQe',
+        'hb34AN',
       ],
     },
     allIds: [
@@ -411,6 +420,7 @@ export class ResumeStateConfig {
       'et6YYy',
       'Af1Gpd',
       'HQAfhi',
+      'hb34AN',
     ],
     experiences: {
       By81yN: {
@@ -543,12 +553,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      imSw9w: {
-        id: 'imSw9w',
-        experienceId: '6qowVm',
-        position: 0,
-        value: 'Typography',
-      },
       TYDZ9i: {
         id: 'TYDZ9i',
         experienceId: '6qowVm',
