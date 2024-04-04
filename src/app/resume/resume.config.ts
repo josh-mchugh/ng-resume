@@ -321,6 +321,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
       },
+      Af1Gpd: {
+        id: 'Af1Gpd',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 2,
+        value: 'Pursue scalable customer service through sustainable potentialities.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -344,6 +352,7 @@ export class ResumeStateConfig {
         'Ov20bL',
         'CWPe8V',
         'et6YYy',
+        'Af1Gpd',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -391,6 +400,7 @@ export class ResumeStateConfig {
       '4GajzB',
       'CWPe8V',
       'et6YYy',
+      'Af1Gpd',
     ],
     experiences: {
       By81yN: {
@@ -423,20 +433,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      bVUHf8: {
-        id: 'bVUHf8',
-        experienceId: '6qowVm',
-        position: 1,
-        value:
-          'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
-      },
-      NxTdyW: {
-        id: 'NxTdyW',
-        experienceId: '6qowVm',
-        position: 2,
-        value:
-          'Pursue scalable customer service through sustainable potentialities.',
-      },
       hpLq5T: {
         id: 'hpLq5T',
         experienceId: '6qowVm',
