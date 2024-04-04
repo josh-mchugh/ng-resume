@@ -352,7 +352,15 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_SKILL,
         position: 1,
         value: 'Composition',
-      }
+      },
+      VAdl0u: {
+        id: 'VAdl0u',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 2,
+        value: 'Color Theory',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -388,6 +396,7 @@ export class ResumeStateConfig {
         'tzXZQe',
         'hb34AN',
         'GXivPT',
+        'VAdl0u',
       ],
     },
     allIds: [
@@ -431,6 +440,7 @@ export class ResumeStateConfig {
       'HQAfhi',
       'hb34AN',
       'GXivPT',
+      'VAdl0u',
     ],
     experiences: {
       By81yN: {
@@ -563,12 +573,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      pA2K9b: {
-        id: 'pA2K9b',
-        experienceId: '6qowVm',
-        position: 2,
-        value: 'Color Theory',
-      },
       taNZ2T: {
         id: 'taNZ2T',
         experienceId: '6qowVm',
