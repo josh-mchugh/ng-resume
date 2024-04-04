@@ -385,6 +385,14 @@ export class ResumeStateConfig {
         position: 5,
         value: 'UX',
       },
+      Od930N: {
+        id: 'Od930N',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 6,
+        value: 'Graphic Design',
+      }
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -424,6 +432,7 @@ export class ResumeStateConfig {
         'q4UGVi',
         'gpuzzS',
         '9CMYf2',
+        'Od930N',
       ],
     },
     allIds: [
@@ -471,6 +480,7 @@ export class ResumeStateConfig {
       'q4UGVi',
       'gpuzzS',
       '9CMYf2',
+      'Od930N',
     ],
     experiences: {
       By81yN: {
@@ -603,12 +613,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      '36dY9U': {
-        id: '36dY9U',
-        experienceId: '6qowVm',
-        position: 6,
-        value: 'Graphic Design',
-      },
       '1hdpg5': {
         id: '1hdpg5',
         experienceId: 'By81yN',
