@@ -361,6 +361,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'Color Theory',
       },
+      q4UGVi: {
+        id: 'q4UGVi',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 3,
+        value: 'Design',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -397,6 +405,7 @@ export class ResumeStateConfig {
         'hb34AN',
         'GXivPT',
         'VAdl0u',
+        'q4UGVi',
       ],
     },
     allIds: [
@@ -441,6 +450,7 @@ export class ResumeStateConfig {
       'hb34AN',
       'GXivPT',
       'VAdl0u',
+      'q4UGVi',
     ],
     experiences: {
       By81yN: {
@@ -573,12 +583,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      taNZ2T: {
-        id: 'taNZ2T',
-        experienceId: '6qowVm',
-        position: 3,
-        value: 'Design',
-      },
       '1npMv6': {
         id: '1npMv6',
         experienceId: '6qowVm',
