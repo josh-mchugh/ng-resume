@@ -313,6 +313,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Collaboratively administrate empowered markets via plug-and-play networks.',
       },
+      et6YYy: {
+        id: 'et6YYy',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 1,
+        value: 'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -335,6 +343,7 @@ export class ResumeStateConfig {
         'CNLcFh',
         'Ov20bL',
         'CWPe8V',
+        'et6YYy',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -380,6 +389,8 @@ export class ResumeStateConfig {
       'xaQQXi',
       'JOpOqX',
       '4GajzB',
+      'CWPe8V',
+      'et6YYy',
     ],
     experiences: {
       By81yN: {
