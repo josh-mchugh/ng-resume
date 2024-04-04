@@ -305,6 +305,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Remote',
       },
+      CWPe8V: {
+        id: 'CWPe8V',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 0,
+        value: 'Collaboratively administrate empowered markets via plug-and-play networks.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -326,6 +334,7 @@ export class ResumeStateConfig {
         'ac3Y3g',
         'CNLcFh',
         'Ov20bL',
+        'CWPe8V',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -373,13 +382,6 @@ export class ResumeStateConfig {
       '4GajzB',
     ],
     experiences: {
-      '6qowVm': {
-        id: '6qowVm',
-        organization: 'Very Big Corp. of America',
-        title: 'User Experience Expert',
-        duration: 'Jan 2022 – Dec 2022',
-        location: 'Remote',
-      },
       By81yN: {
         id: 'By81yN',
         organization: 'MomCorp',
@@ -410,13 +412,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      Z5GUKN: {
-        id: 'Z5GUKN',
-        experienceId: '6qowVm',
-        position: 0,
-        value:
-          'Collaboratively administrate empowered markets via plug-and-play networks.',
-      },
       bVUHf8: {
         id: 'bVUHf8',
         experienceId: '6qowVm',
