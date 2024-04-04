@@ -369,6 +369,14 @@ export class ResumeStateConfig {
         position: 3,
         value: 'Design',
       },
+      gpuzzS: {
+        id: 'gpuzzS',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 4,
+        value: 'CMS',
+      }
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -406,6 +414,7 @@ export class ResumeStateConfig {
         'GXivPT',
         'VAdl0u',
         'q4UGVi',
+        'gpuzzS',
       ],
     },
     allIds: [
@@ -451,6 +460,7 @@ export class ResumeStateConfig {
       'GXivPT',
       'VAdl0u',
       'q4UGVi',
+      'gpuzzS',
     ],
     experiences: {
       By81yN: {
@@ -583,12 +593,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      '1npMv6': {
-        id: '1npMv6',
-        experienceId: '6qowVm',
-        position: 4,
-        value: 'CMS',
-      },
       Xrdzpz: {
         id: 'Xrdzpz',
         experienceId: '6qowVm',
