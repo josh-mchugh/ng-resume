@@ -280,7 +280,15 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_ORGANIZATION,
         position: 0,
         value: 'Very Big Corp. of America',
-      }
+      },
+      xaQQXi: {
+        id: 'xaQQXi',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_TITLE,
+        position: 0,
+        value: 'User Experience Expert',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -293,7 +301,7 @@ export class ResumeStateConfig {
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK'],
-      EXPERIENCE_TITLE: ['woPRPF'],
+      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi'],
       EXPERIENCE_DURATION: ['D63MSQ'],
       EXPERIENCE_LOCATION: ['xSdMqL'],
       EXPERIENCE_DESCRIPTION: [
@@ -344,6 +352,7 @@ export class ResumeStateConfig {
       'tFxwhP',
       'tzXZQe',
       'xvvZMK',
+      'xaQQXi',
     ],
     experiences: {
       '6qowVm': {
