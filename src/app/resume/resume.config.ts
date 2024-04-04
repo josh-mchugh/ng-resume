@@ -329,6 +329,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'Pursue scalable customer service through sustainable potentialities.',
       },
+      HQAfhi: {
+        id: 'HQAfhi',
+        groupId: '6qowVm',
+        groupPosition: 1,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 3,
+        value: 'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -353,6 +361,7 @@ export class ResumeStateConfig {
         'CWPe8V',
         'et6YYy',
         'Af1Gpd',
+        'HQAfhi',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -401,6 +410,7 @@ export class ResumeStateConfig {
       'CWPe8V',
       'et6YYy',
       'Af1Gpd',
+      'HQAfhi',
     ],
     experiences: {
       By81yN: {
@@ -433,13 +443,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      hpLq5T: {
-        id: 'hpLq5T',
-        experienceId: '6qowVm',
-        position: 3,
-        value:
-          'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
-      },
       V8Rb8E: {
         id: 'V8Rb8E',
         experienceId: 'By81yN',
