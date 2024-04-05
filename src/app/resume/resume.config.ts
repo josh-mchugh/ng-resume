@@ -392,7 +392,15 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_SKILL,
         position: 6,
         value: 'Graphic Design',
-      }
+      },
+      iuqlt6: {
+        id: 'iuqlt6',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_ORGANIZATION,
+        position: 0,
+        value: 'MomCorp',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -404,7 +412,7 @@ export class ResumeStateConfig {
       SOCIAL_NAME: ['bSWNcA', 'NSKVRu', 'nyHCys'],
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
-      EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK'],
+      EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB'],
@@ -481,6 +489,7 @@ export class ResumeStateConfig {
       'gpuzzS',
       '9CMYf2',
       'Od930N',
+      'iuqlt6',
     ],
     experiences: {
       By81yN: {
