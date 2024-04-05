@@ -441,6 +441,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'Envisioned multimedia based expertise and cross-media growth strategies.',
       },
+      '7VRrjV': {
+        id: '7VRrjV',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 2,
+        value: 'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -468,6 +476,7 @@ export class ResumeStateConfig {
         'HQAfhi',
         'vq87P2',
         '87cdhd',
+        '7VRrjV',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -537,6 +546,7 @@ export class ResumeStateConfig {
       '7QKmCX',
       'vq87P2',
       '87cdhd',
+      '7VRrjV',
     ],
     experiences: {
       DqS3iu: {
@@ -562,13 +572,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      SzvBRx: {
-        id: 'SzvBRx',
-        experienceId: 'By81yN',
-        position: 2,
-        value:
-          'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
-      },
       cfuZQP: {
         id: 'cfuZQP',
         experienceId: 'DqS3iu',
