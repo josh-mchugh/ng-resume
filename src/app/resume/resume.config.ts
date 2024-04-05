@@ -473,6 +473,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'MySQL',
       },
+      uaftXK: {
+        id: 'uaftXK',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 3,
+        value: 'Postgres',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -519,6 +527,7 @@ export class ResumeStateConfig {
         'oHfWhn',
         '7zNOal',
         'mxrRXZ',
+        'uaftXK',
       ],
     },
     allIds: [
@@ -577,6 +586,7 @@ export class ResumeStateConfig {
       'oHfWhn',
       '7zNOal',
       'mxrRXZ',
+      'uaftXK',
     ],
     experiences: {
       DqS3iu: {
@@ -681,12 +691,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      i9YcN5: {
-        id: 'i9YcN5',
-        experienceId: 'By81yN',
-        position: 3,
-        value: 'Postgres',
-      },
       BlPZ2D: {
         id: 'BlPZ2D',
         experienceId: 'By81yN',
