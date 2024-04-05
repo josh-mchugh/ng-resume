@@ -449,6 +449,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
       },
+      oHfWhn: {
+        id: 'oHfWhn',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 0,
+        value: 'SQL',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -492,6 +500,7 @@ export class ResumeStateConfig {
         'gpuzzS',
         '9CMYf2',
         'Od930N',
+        'oHfWhn',
       ],
     },
     allIds: [
@@ -547,6 +556,7 @@ export class ResumeStateConfig {
       'vq87P2',
       '87cdhd',
       '7VRrjV',
+      'oHfWhn',
     ],
     experiences: {
       DqS3iu: {
@@ -651,12 +661,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      '1hdpg5': {
-        id: '1hdpg5',
-        experienceId: 'By81yN',
-        position: 0,
-        value: 'SQL',
-      },
       AWGq5n: {
         id: 'AWGq5n',
         experienceId: 'By81yN',
