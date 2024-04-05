@@ -417,6 +417,22 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Jan 2021 – Dec 2021',
       },
+      '7QKmCX': {
+        id: '7QKmCX',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_LOCATION,
+        position: 0,
+        value: 'Remote',
+      },
+      vq87P2: {
+        id: 'vq87P2',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 0,
+        value: 'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -431,7 +447,7 @@ export class ResumeStateConfig {
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV'],
-      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB'],
+      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
         'IH2cXf',
@@ -442,6 +458,7 @@ export class ResumeStateConfig {
         'et6YYy',
         'Af1Gpd',
         'HQAfhi',
+        'vq87P2',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -508,15 +525,10 @@ export class ResumeStateConfig {
       'iuqlt6',
       'g8g11w',
       '5knyWV',
+      '7QKmCX',
+      'vq87P2',
     ],
     experiences: {
-      By81yN: {
-        id: 'By81yN',
-        organization: 'MomCorp',
-        title: 'Database Developer',
-        duration: 'Jan 2021 – Dec 2021',
-        location: 'Remote',
-      },
       DqS3iu: {
         id: 'DqS3iu',
         organization: "O'Connell LLC",
@@ -540,13 +552,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      V8Rb8E: {
-        id: 'V8Rb8E',
-        experienceId: 'By81yN',
-        position: 0,
-        value:
-          'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
-      },
       l8faMt: {
         id: 'l8faMt',
         experienceId: 'By81yN',
