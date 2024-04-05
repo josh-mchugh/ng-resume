@@ -433,6 +433,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
       },
+      '87cdhd': {
+        id: '87cdhd',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 1,
+        value: 'Envisioned multimedia based expertise and cross-media growth strategies.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -459,6 +467,7 @@ export class ResumeStateConfig {
         'Af1Gpd',
         'HQAfhi',
         'vq87P2',
+        '87cdhd',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -527,6 +536,7 @@ export class ResumeStateConfig {
       '5knyWV',
       '7QKmCX',
       'vq87P2',
+      '87cdhd',
     ],
     experiences: {
       DqS3iu: {
@@ -552,13 +562,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      l8faMt: {
-        id: 'l8faMt',
-        experienceId: 'By81yN',
-        position: 1,
-        value:
-          'Envisioned multimedia based expertise and cross-media growth strategies.',
-      },
       SzvBRx: {
         id: 'SzvBRx',
         experienceId: 'By81yN',
