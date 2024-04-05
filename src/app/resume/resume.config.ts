@@ -481,6 +481,22 @@ export class ResumeStateConfig {
         position: 3,
         value: 'Postgres',
       },
+      xHTzxU: {
+        id: 'xHTzxU',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 4,
+        value: 'MongoDB',
+      },
+      bm0beF: {
+        id: 'bm0beF',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 5,
+        value: 'Couchbase',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -528,6 +544,8 @@ export class ResumeStateConfig {
         '7zNOal',
         'mxrRXZ',
         'uaftXK',
+        'xHTzxU',
+        'bm0beF',
       ],
     },
     allIds: [
@@ -587,6 +605,8 @@ export class ResumeStateConfig {
       '7zNOal',
       'mxrRXZ',
       'uaftXK',
+      'xHTzxU',
+      'bm0beF',
     ],
     experiences: {
       DqS3iu: {
@@ -691,18 +711,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      BlPZ2D: {
-        id: 'BlPZ2D',
-        experienceId: 'By81yN',
-        position: 4,
-        value: 'MongoDB',
-      },
-      '2JD9Zt': {
-        id: '2JD9Zt',
-        experienceId: 'By81yN',
-        position: 5,
-        value: 'Coachbase',
-      },
       lY6dHN: {
         id: 'lY6dHN',
         experienceId: 'DqS3iu',
