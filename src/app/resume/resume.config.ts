@@ -409,6 +409,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Database Developer',
       },
+      '5knyWV': {
+        id: '5knyWV',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_DURATION,
+        position: 0,
+        value: 'Jan 2021 – Dec 2021',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -422,7 +430,7 @@ export class ResumeStateConfig {
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w'],
-      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX'],
+      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
@@ -499,6 +507,7 @@ export class ResumeStateConfig {
       'Od930N',
       'iuqlt6',
       'g8g11w',
+      '5knyWV',
     ],
     experiences: {
       By81yN: {
