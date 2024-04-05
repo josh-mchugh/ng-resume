@@ -401,6 +401,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'MomCorp',
       },
+      g8g11w: {
+        id: 'g8g11w',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_TITLE,
+        position: 0,
+        value: 'Database Developer',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -413,7 +421,7 @@ export class ResumeStateConfig {
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6'],
-      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi'],
+      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB'],
       EXPERIENCE_DESCRIPTION: [
@@ -490,6 +498,7 @@ export class ResumeStateConfig {
       '9CMYf2',
       'Od930N',
       'iuqlt6',
+      'g8g11w',
     ],
     experiences: {
       By81yN: {
