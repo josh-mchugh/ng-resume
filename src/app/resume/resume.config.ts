@@ -465,6 +465,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'NoSQL',
       },
+      mxrRXZ: {
+        id: 'mxrRXZ',
+        groupId: 'By81yN',
+        groupPosition: 2,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 2,
+        value: 'MySQL',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -510,6 +518,7 @@ export class ResumeStateConfig {
         'Od930N',
         'oHfWhn',
         '7zNOal',
+        'mxrRXZ',
       ],
     },
     allIds: [
@@ -567,6 +576,7 @@ export class ResumeStateConfig {
       '7VRrjV',
       'oHfWhn',
       '7zNOal',
+      'mxrRXZ',
     ],
     experiences: {
       DqS3iu: {
@@ -671,12 +681,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      UpJ3Qc: {
-        id: 'UpJ3Qc',
-        experienceId: 'By81yN',
-        position: 2,
-        value: 'MySQL',
-      },
       i9YcN5: {
         id: 'i9YcN5',
         experienceId: 'By81yN',
