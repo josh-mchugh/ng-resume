@@ -743,7 +743,16 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
         value:
-        'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
+          'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
+      },
+      '9s6RUs': {
+        id: '9s6RUs',
+        groupId: 'wv7RWA',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 1,
+        value:
+          'Configuring and supporting Blackberry devices on the Blackberry Enterprise Server to receive Exchange email.',
       },
     },
     byType: {
@@ -764,9 +773,30 @@ export class ResumeStateConfig {
         'jTcVWu',
         'Uq4URW',
       ],
-      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV', 'ZOcstA'],
-      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF', 'pKWFgj'],
-      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC', 'uWmqfg', 'a7yjRM'],
+      EXPERIENCE_TITLE: [
+        'woPRPF',
+        'xaQQXi',
+        'g8g11w',
+        'FhMROM',
+        'GNVHRV',
+        'ZOcstA',
+      ],
+      EXPERIENCE_DURATION: [
+        'D63MSQ',
+        'JOpOqX',
+        '5knyWV',
+        '3Zt1jU',
+        'COnDfF',
+        'pKWFgj',
+      ],
+      EXPERIENCE_LOCATION: [
+        'xSdMqL',
+        '4GajzB',
+        '7QKmCX',
+        '4aihVC',
+        'uWmqfg',
+        'a7yjRM',
+      ],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
         'IH2cXf',
@@ -789,6 +819,7 @@ export class ResumeStateConfig {
         'cZRgvl',
         'Uv0Q1M',
         '2A5TJG',
+        '9s6RUs',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -908,17 +939,10 @@ export class ResumeStateConfig {
       'pKWFgj',
       'a7yjRM',
       '2A5TJG',
+      '9s6RUs',
     ],
-    experiences: {
-    },
+    experiences: {},
     experienceDescriptions: {
-      V8AFW1: {
-        id: 'V8AFW1',
-        experienceId: 'wv7RWA',
-        position: 1,
-        value:
-          'Configuring and supporting Blackberry devices on the Blackberry Enterprise Server to receive Exchange email.',
-      },
       '04jBVn': {
         id: '04jBVn',
         experienceId: 'wv7RWA',
