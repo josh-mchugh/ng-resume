@@ -681,6 +681,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'HTML',
       },
+      U2wv8Q: {
+        id: 'U2wv8Q',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 3,
+        value: 'CSS',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -745,6 +753,7 @@ export class ResumeStateConfig {
         'cYkQL7',
         'eni8JG',
         'X34K8a',
+        'U2wv8Q',
       ],
     },
     allIds: [
@@ -829,6 +838,7 @@ export class ResumeStateConfig {
       'cYkQL7',
       'eni8JG',
       'X34K8a',
+      'U2wv8Q',
     ],
     experiences: {
       wv7RWA: {
@@ -863,12 +873,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      '33PoKh': {
-        id: '33PoKh',
-        experienceId: 'JDi6zL',
-        position: 3,
-        value: 'CSS',
-      },
       kPNAZo: {
         id: 'kPNAZo',
         experienceId: 'wv7RWA',
