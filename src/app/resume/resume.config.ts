@@ -706,7 +706,7 @@ export class ResumeStateConfig {
       },
       Uq4URW: {
         id: 'Uq4URW',
-        groupId: '',
+        groupId: 'wv7RWA',
         groupPosition: 5,
         type: SelectorType.EXPERIENCE_ORGANIZATION,
         position: 0,
@@ -714,7 +714,7 @@ export class ResumeStateConfig {
       },
       ZOcstA: {
         id: 'ZOcstA',
-        groupId: '',
+        groupId: 'wv7RWA',
         groupPosition: 5,
         type: SelectorType.EXPERIENCE_TITLE,
         position: 0,
@@ -722,11 +722,19 @@ export class ResumeStateConfig {
       },
       pKWFgj: {
         id: 'pKWFgj',
-        groupId: '',
+        groupId: 'wv7RWA',
         groupPosition: 5,
         type: SelectorType.EXPERIENCE_DURATION,
         position: 0,
         value: 'Jan 2018 - Dec 2018',
+      },
+      a7yjRM: {
+        id: 'a7yjRM',
+        groupId: 'wv7RWA',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_LOCATION,
+        position: 0,
+        value: 'Remote',
       },
     },
     byType: {
@@ -749,7 +757,7 @@ export class ResumeStateConfig {
       ],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV', 'ZOcstA'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF', 'pKWFgj'],
-      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC', 'uWmqfg'],
+      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC', 'uWmqfg', 'a7yjRM'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
         'IH2cXf',
@@ -888,15 +896,9 @@ export class ResumeStateConfig {
       'Uq4URW',
       'ZOcstA',
       'pKWFgj',
+      'a7yjRM',
     ],
     experiences: {
-      wv7RWA: {
-        id: 'wv7RWA',
-        organization: 'Homenick Group',
-        title: 'Information Technology Technician',
-        duration: 'Jan 2018 - Dec 2018',
-        location: 'Remote',
-      },
     },
     experienceDescriptions: {
       tEHYrq: {
