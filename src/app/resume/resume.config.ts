@@ -553,6 +553,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'Creating and managing storage in Microsoft Windows Azure (IaaS).',
       },
+      piDAhU: {
+        id: 'piDAhU',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 3,
+        value: 'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -584,6 +592,7 @@ export class ResumeStateConfig {
         'AvkEKp',
         'iQdo3T',
         'Ry2Nhk',
+        'piDAhU',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -673,6 +682,7 @@ export class ResumeStateConfig {
       'AvkEKp',
       'iQdo3T',
       'Ry2Nhk',
+      'piDAhU',
     ],
     experiences: {
       JDi6zL: {
@@ -691,13 +701,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      duyQxx: {
-        id: 'duyQxx',
-        experienceId: 'DqS3iu',
-        position: 3,
-        value:
-          'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
-      },
       X2RU0c: {
         id: 'X2RU0c',
         experienceId: 'JDi6zL',
