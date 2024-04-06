@@ -771,6 +771,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'VB.Net',
       },
+      tCKKWu: {
+        id: 'tCKKWu',
+        groupId: 'wv7RWA',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 1,
+        value: 'T-SQL',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -868,6 +876,7 @@ export class ResumeStateConfig {
         'X34K8a',
         'U2wv8Q',
         'l6NSia',
+        'tCKKWu',
       ],
     },
     allIds: [
@@ -961,6 +970,7 @@ export class ResumeStateConfig {
       '9s6RUs',
       'xyHXEg',
       'l6NSia',
+      'tCKKWu',
     ],
     experiences: {},
     experienceDescriptions: {},
