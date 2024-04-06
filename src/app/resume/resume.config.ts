@@ -712,6 +712,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Homenick Group',
       },
+      ZOcstA: {
+        id: 'ZOcstA',
+        groupId: '',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_TITLE,
+        position: 0,
+        value: 'Information Technology Technician',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -731,7 +739,7 @@ export class ResumeStateConfig {
         'jTcVWu',
         'Uq4URW',
       ],
-      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV'],
+      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV', 'ZOcstA'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC', 'uWmqfg'],
       EXPERIENCE_DESCRIPTION: [
@@ -870,6 +878,7 @@ export class ResumeStateConfig {
       'X34K8a',
       'U2wv8Q',
       'Uq4URW',
+      'ZOcstA',
     ],
     experiences: {
       wv7RWA: {
