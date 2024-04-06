@@ -720,6 +720,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Information Technology Technician',
       },
+      pKWFgj: {
+        id: 'pKWFgj',
+        groupId: '',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_DURATION,
+        position: 0,
+        value: 'Jan 2018 - Dec 2018',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -740,7 +748,7 @@ export class ResumeStateConfig {
         'Uq4URW',
       ],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV', 'ZOcstA'],
-      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF'],
+      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF', 'pKWFgj'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC', 'uWmqfg'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
@@ -879,6 +887,7 @@ export class ResumeStateConfig {
       'U2wv8Q',
       'Uq4URW',
       'ZOcstA',
+      'pKWFgj',
     ],
     experiences: {
       wv7RWA: {
