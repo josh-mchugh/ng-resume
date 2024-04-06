@@ -609,6 +609,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Information Services Liaison',
       },
+      COnDfF: {
+        id: 'COnDfF',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_DURATION,
+        position: 0,
+        value: 'Jan 2019 - Dec 2019',
+      }
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -622,7 +630,7 @@ export class ResumeStateConfig {
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6', '24xuSH', 'jTcVWu'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV'],
-      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU'],
+      EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
@@ -741,6 +749,7 @@ export class ResumeStateConfig {
       'E5gPE0',
       'jTcVWu',
       'GNVHRV',
+      'COnDfF',
     ],
     experiences: {
       JDi6zL: {
