@@ -736,6 +736,15 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Remote',
       },
+      '2A5TJG': {
+        id: '2A5TJG',
+        groupId: 'wv7RWA',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 0,
+        value:
+        'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -779,6 +788,7 @@ export class ResumeStateConfig {
         'B6AloM',
         'cZRgvl',
         'Uv0Q1M',
+        '2A5TJG',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -897,17 +907,11 @@ export class ResumeStateConfig {
       'ZOcstA',
       'pKWFgj',
       'a7yjRM',
+      '2A5TJG',
     ],
     experiences: {
     },
     experienceDescriptions: {
-      tEHYrq: {
-        id: 'tEHYrq',
-        experienceId: 'wv7RWA',
-        position: 0,
-        value:
-          'Developing, testing, designing, and implementing application scripts using languages such as command batch files, Visual Basic Script, and PowerShell.',
-      },
       V8AFW1: {
         id: 'V8AFW1',
         experienceId: 'wv7RWA',
