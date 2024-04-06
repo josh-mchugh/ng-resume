@@ -521,6 +521,14 @@ export class ResumeStateConfig {
         position: 0,
         value: "Jan 2020 - Dec 2020",
       },
+      '4aihVC': {
+        id: '4aihVC',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_LOCATION,
+        position: 0,
+        value: "Remote",
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -535,7 +543,7 @@ export class ResumeStateConfig {
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6', '24xuSH'],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU'],
-      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX'],
+      EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC'],
       EXPERIENCE_DESCRIPTION: [
         'Oq1IQ6',
         'IH2cXf',
@@ -634,15 +642,9 @@ export class ResumeStateConfig {
       '24xuSH',
       'FhMROM',
       '3Zt1jU',
+      '4aihVC',
     ],
     experiences: {
-      DqS3iu: {
-        id: 'DqS3iu',
-        organization: "O'Connell LLC",
-        title: 'Junior Engineer',
-        duration: 'Jan 2020 - Dec 2020',
-        location: 'Remote',
-      },
       JDi6zL: {
         id: 'JDi6zL',
         organization: 'Turner Inc',
