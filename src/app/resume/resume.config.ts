@@ -311,7 +311,8 @@ export class ResumeStateConfig {
         groupPosition: 1,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
-        value: 'Collaboratively administrate empowered markets via plug-and-play networks.',
+        value:
+          'Collaboratively administrate empowered markets via plug-and-play networks.',
       },
       et6YYy: {
         id: 'et6YYy',
@@ -319,7 +320,8 @@ export class ResumeStateConfig {
         groupPosition: 1,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 1,
-        value: 'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
+        value:
+          'Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.',
       },
       Af1Gpd: {
         id: 'Af1Gpd',
@@ -327,7 +329,8 @@ export class ResumeStateConfig {
         groupPosition: 1,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 2,
-        value: 'Pursue scalable customer service through sustainable potentialities.',
+        value:
+          'Pursue scalable customer service through sustainable potentialities.',
       },
       HQAfhi: {
         id: 'HQAfhi',
@@ -335,7 +338,8 @@ export class ResumeStateConfig {
         groupPosition: 1,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 3,
-        value: 'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
+        value:
+          'Draft policy ppml proposal tiger team, or face time are we in agreeance.',
       },
       hb34AN: {
         id: 'hb34AN',
@@ -431,7 +435,8 @@ export class ResumeStateConfig {
         groupPosition: 2,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
-        value: 'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
+        value:
+          'Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce.',
       },
       '87cdhd': {
         id: '87cdhd',
@@ -439,7 +444,8 @@ export class ResumeStateConfig {
         groupPosition: 2,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 1,
-        value: 'Envisioned multimedia based expertise and cross-media growth strategies.',
+        value:
+          'Envisioned multimedia based expertise and cross-media growth strategies.',
       },
       '7VRrjV': {
         id: '7VRrjV',
@@ -447,7 +453,8 @@ export class ResumeStateConfig {
         groupPosition: 2,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 2,
-        value: 'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
+        value:
+          'Synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.',
       },
       oHfWhn: {
         id: 'oHfWhn',
@@ -535,7 +542,8 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
-        value: 'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
+        value:
+          'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
       },
       iQdo3T: {
         id: 'iQdo3T',
@@ -543,7 +551,8 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 1,
-        value: 'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services (ADFS) in Microsoft Windows Azure (IaaS).',
+        value:
+          'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services (ADFS) in Microsoft Windows Azure (IaaS).',
       },
       Ry2Nhk: {
         id: 'Ry2Nhk',
@@ -551,7 +560,8 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 2,
-        value: 'Creating and managing storage in Microsoft Windows Azure (IaaS).',
+        value:
+          'Creating and managing storage in Microsoft Windows Azure (IaaS).',
       },
       piDAhU: {
         id: 'piDAhU',
@@ -559,7 +569,8 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 3,
-        value: 'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
+        value:
+          'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
       },
       uwIZP3: {
         id: 'uwIZP3',
@@ -631,7 +642,8 @@ export class ResumeStateConfig {
         groupPosition: 4,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
-        value: 'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
+        value:
+          'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
       },
       B6AloM: {
         id: 'B6AloM',
@@ -639,7 +651,8 @@ export class ResumeStateConfig {
         groupPosition: 4,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 1,
-        value: 'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
+        value:
+          'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
       },
       cZRgvl: {
         id: 'cZRgvl',
@@ -647,7 +660,8 @@ export class ResumeStateConfig {
         groupPosition: 4,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 2,
-        value: 'Installing, configuring, and supporting BBars computer backup software.',
+        value:
+          'Installing, configuring, and supporting BBars computer backup software.',
       },
       Uv0Q1M: {
         id: 'Uv0Q1M',
@@ -655,7 +669,8 @@ export class ResumeStateConfig {
         groupPosition: 4,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 3,
-        value: 'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
+        value:
+          'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
       },
       cYkQL7: {
         id: 'cYkQL7',
@@ -700,7 +715,13 @@ export class ResumeStateConfig {
       SOCIAL_NAME: ['bSWNcA', 'NSKVRu', 'nyHCys'],
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
-      EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6', '24xuSH', 'jTcVWu'],
+      EXPERIENCE_ORGANIZATION: [
+        'mHqQo5',
+        'xvvZMK',
+        'iuqlt6',
+        '24xuSH',
+        'jTcVWu',
+      ],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC', 'uWmqfg'],
