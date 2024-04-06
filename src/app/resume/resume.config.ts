@@ -537,6 +537,14 @@ export class ResumeStateConfig {
         position: 0,
         value: "Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.",
       },
+      iQdo3T: {
+        id: 'iQdo3T',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 1,
+        value: 'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services (ADFS) in Microsoft Windows Azure (IaaS).',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -566,6 +574,7 @@ export class ResumeStateConfig {
         '87cdhd',
         '7VRrjV',
         'AvkEKp',
+        'iQdo3T',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -653,6 +662,7 @@ export class ResumeStateConfig {
       '3Zt1jU',
       '4aihVC',
       'AvkEKp',
+      'iQdo3T',
     ],
     experiences: {
       JDi6zL: {
@@ -671,13 +681,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      '3Qfl0f': {
-        id: '3Qfl0f',
-        experienceId: 'DqS3iu',
-        position: 1,
-        value:
-          'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services (ADFS) in Microsoft Windows Azure (IaaS).',
-      },
       c9HOmD: {
         id: 'c9HOmD',
         experienceId: 'DqS3iu',
