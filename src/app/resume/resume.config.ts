@@ -641,6 +641,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
       },
+      cZRgvl: {
+        id: 'cZRgvl',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 2,
+        value: 'Installing, configuring, and supporting BBars computer backup software.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -675,6 +683,7 @@ export class ResumeStateConfig {
         'piDAhU',
         'CadaeY',
         'B6AloM',
+        'cZRgvl',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -779,6 +788,7 @@ export class ResumeStateConfig {
       'uWmqfg',
       'CadaeY',
       'B6AloM',
+      'cZRgvl',
     ],
     experiences: {
       wv7RWA: {
@@ -790,13 +800,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      YWpmDa: {
-        id: 'YWpmDa',
-        experienceId: 'JDi6zL',
-        position: 2,
-        value:
-          'Installing, configuring, and supporting BBars computer backup software.',
-      },
       '7dsIrL': {
         id: '7dsIrL',
         experienceId: 'JDi6zL',
