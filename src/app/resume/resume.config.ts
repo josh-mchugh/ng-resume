@@ -511,7 +511,7 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_TITLE,
         position: 0,
-        value: "Junior Engineer",
+        value: 'Junior Engineer',
       },
       '3Zt1jU': {
         id: '3Zt1jU',
@@ -519,7 +519,7 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_DURATION,
         position: 0,
-        value: "Jan 2020 - Dec 2020",
+        value: 'Jan 2020 - Dec 2020',
       },
       '4aihVC': {
         id: '4aihVC',
@@ -527,7 +527,7 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_LOCATION,
         position: 0,
-        value: "Remote",
+        value: 'Remote',
       },
       AvkEKp: {
         id: 'AvkEKp',
@@ -535,7 +535,7 @@ export class ResumeStateConfig {
         groupPosition: 3,
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 0,
-        value: "Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.",
+        value: 'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
       },
       iQdo3T: {
         id: 'iQdo3T',
@@ -544,6 +544,14 @@ export class ResumeStateConfig {
         type: SelectorType.EXPERIENCE_DESCRIPTION,
         position: 1,
         value: 'Creating and managing virtual machines for systems such as domain controllers and Active Directory Federation Services (ADFS) in Microsoft Windows Azure (IaaS).',
+      },
+      Ry2Nhk: {
+        id: 'Ry2Nhk',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 2,
+        value: 'Creating and managing storage in Microsoft Windows Azure (IaaS).',
       },
     },
     byType: {
@@ -575,6 +583,7 @@ export class ResumeStateConfig {
         '7VRrjV',
         'AvkEKp',
         'iQdo3T',
+        'Ry2Nhk',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -663,6 +672,7 @@ export class ResumeStateConfig {
       '4aihVC',
       'AvkEKp',
       'iQdo3T',
+      'Ry2Nhk',
     ],
     experiences: {
       JDi6zL: {
@@ -681,13 +691,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      c9HOmD: {
-        id: 'c9HOmD',
-        experienceId: 'DqS3iu',
-        position: 2,
-        value:
-          'Creating and managing storage in Microsoft Windows Azure (IaaS).',
-      },
       duyQxx: {
         id: 'duyQxx',
         experienceId: 'DqS3iu',
