@@ -673,6 +673,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'Java',
       },
+      X34K8a: {
+        id: 'X34K8a',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 2,
+        value: 'HTML',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -736,6 +744,7 @@ export class ResumeStateConfig {
         'E5gPE0',
         'cYkQL7',
         'eni8JG',
+        'X34K8a',
       ],
     },
     allIds: [
@@ -819,6 +828,7 @@ export class ResumeStateConfig {
       'Uv0Q1M',
       'cYkQL7',
       'eni8JG',
+      'X34K8a',
     ],
     experiences: {
       wv7RWA: {
@@ -853,12 +863,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      ZXieJh: {
-        id: 'ZXieJh',
-        experienceId: 'JDi6zL',
-        position: 2,
-        value: 'HTML,',
-      },
       '33PoKh': {
         id: '33PoKh',
         experienceId: 'JDi6zL',
