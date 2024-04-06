@@ -529,6 +529,14 @@ export class ResumeStateConfig {
         position: 0,
         value: "Remote",
       },
+      AvkEKp: {
+        id: 'AvkEKp',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 0,
+        value: "Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.",
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -557,6 +565,7 @@ export class ResumeStateConfig {
         'vq87P2',
         '87cdhd',
         '7VRrjV',
+        'AvkEKp',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -643,6 +652,7 @@ export class ResumeStateConfig {
       'FhMROM',
       '3Zt1jU',
       '4aihVC',
+      'AvkEKp',
     ],
     experiences: {
       JDi6zL: {
@@ -661,13 +671,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      cfuZQP: {
-        id: 'cfuZQP',
-        experienceId: 'DqS3iu',
-        position: 0,
-        value:
-          'Migrating and managing user accounts in Microsoft Office 365 and Exchange Online.',
-      },
       '3Qfl0f': {
         id: '3Qfl0f',
         experienceId: 'DqS3iu',
