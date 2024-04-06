@@ -569,6 +569,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Active Directory',
       },
+      w5f42s: {
+        id: 'w5f42s',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 1,
+        value: 'VMWare',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -623,6 +631,7 @@ export class ResumeStateConfig {
         'xHTzxU',
         'bm0beF',
         'uwIZP3',
+        'w5f42s',
       ],
     },
     allIds: [
@@ -693,6 +702,7 @@ export class ResumeStateConfig {
       'Ry2Nhk',
       'piDAhU',
       'uwIZP3',
+      'w5f42s',
     ],
     experiences: {
       JDi6zL: {
@@ -762,12 +772,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      FWbOYH: {
-        id: 'FWbOYH',
-        experienceId: 'DqS3iu',
-        position: 1,
-        value: 'VMWare',
-      },
       mnj4z9: {
         id: 'mnj4z9',
         experienceId: 'DqS3iu',
