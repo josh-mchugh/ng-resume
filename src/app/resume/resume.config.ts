@@ -763,6 +763,14 @@ export class ResumeStateConfig {
         value:
           'Installing, configuring, and testing Veeam virtual machine backup software and Virtual Desktop Infrastructure (VDI).',
       },
+      l6NSia: {
+        id: 'l6NSia',
+        groupId: 'wv7RWA',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 0,
+        value: 'VB.Net',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -859,6 +867,7 @@ export class ResumeStateConfig {
         'eni8JG',
         'X34K8a',
         'U2wv8Q',
+        'l6NSia',
       ],
     },
     allIds: [
@@ -951,16 +960,11 @@ export class ResumeStateConfig {
       '2A5TJG',
       '9s6RUs',
       'xyHXEg',
+      'l6NSia',
     ],
     experiences: {},
     experienceDescriptions: {},
     experienceSkills: {
-      kPNAZo: {
-        id: 'kPNAZo',
-        experienceId: 'wv7RWA',
-        position: 0,
-        value: 'VB.Net',
-      },
       '6XKu0i': {
         id: '6XKu0i',
         experienceId: 'wv7RWA',
