@@ -633,6 +633,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
       },
+      B6AloM: {
+        id: 'B6AloM',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 1,
+        value: 'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -666,6 +674,7 @@ export class ResumeStateConfig {
         'Ry2Nhk',
         'piDAhU',
         'CadaeY',
+        'B6AloM',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -769,6 +778,7 @@ export class ResumeStateConfig {
       'COnDfF',
       'uWmqfg',
       'CadaeY',
+      'B6AloM',
     ],
     experiences: {
       wv7RWA: {
@@ -780,13 +790,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      sT4moZ: {
-        id: 'sT4moZ',
-        experienceId: 'JDi6zL',
-        position: 1,
-        value:
-          'Installing, configuring, and supporting McAfee anti-virus software on desktops.',
-      },
       YWpmDa: {
         id: 'YWpmDa',
         experienceId: 'JDi6zL',
