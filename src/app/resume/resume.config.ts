@@ -497,6 +497,22 @@ export class ResumeStateConfig {
         position: 5,
         value: 'Couchbase',
       },
+      '24xuSH': {
+        id: '24xuSH',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_ORGANIZATION,
+        position: 0,
+        value: "O'Connell LLC",
+      },
+      FhMROM: {
+        id: 'FhMROM',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_TITLE,
+        position: 0,
+        value: "Junior Engineer",
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -508,8 +524,8 @@ export class ResumeStateConfig {
       SOCIAL_NAME: ['bSWNcA', 'NSKVRu', 'nyHCys'],
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
-      EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6'],
-      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w'],
+      EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6', '24xuSH'],
+      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX'],
       EXPERIENCE_DESCRIPTION: [
@@ -607,6 +623,8 @@ export class ResumeStateConfig {
       'uaftXK',
       'xHTzxU',
       'bm0beF',
+      '24xuSH',
+      'FhMROM',
     ],
     experiences: {
       DqS3iu: {
