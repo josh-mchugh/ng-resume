@@ -585,6 +585,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'PowerShell',
       },
+      E5gPE0: {
+        id: 'E5gPE0',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 3,
+        value: 'Office 365',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -641,6 +649,7 @@ export class ResumeStateConfig {
         'uwIZP3',
         'w5f42s',
         'F2wYOq',
+        'E5gPE0',
       ],
     },
     allIds: [
@@ -713,6 +722,7 @@ export class ResumeStateConfig {
       'uwIZP3',
       'w5f42s',
       'F2wYOq',
+      'E5gPE0',
     ],
     experiences: {
       JDi6zL: {
@@ -782,12 +792,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      LDxNuH: {
-        id: 'LDxNuH',
-        experienceId: 'DqS3iu',
-        position: 3,
-        value: 'Office 365',
-      },
       '8Mf0xD': {
         id: '8Mf0xD',
         experienceId: 'JDi6zL',
