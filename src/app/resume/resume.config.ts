@@ -704,6 +704,14 @@ export class ResumeStateConfig {
         position: 3,
         value: 'CSS',
       },
+      Uq4URW: {
+        id: 'Uq4URW',
+        groupId: '',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_ORGANIZATION,
+        position: 0,
+        value: 'Homenick Group',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -721,6 +729,7 @@ export class ResumeStateConfig {
         'iuqlt6',
         '24xuSH',
         'jTcVWu',
+        'Uq4URW',
       ],
       EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU', 'COnDfF'],
@@ -860,6 +869,7 @@ export class ResumeStateConfig {
       'eni8JG',
       'X34K8a',
       'U2wv8Q',
+      'Uq4URW',
     ],
     experiences: {
       wv7RWA: {
