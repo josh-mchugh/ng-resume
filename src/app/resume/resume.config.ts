@@ -561,6 +561,14 @@ export class ResumeStateConfig {
         position: 3,
         value: 'Installing and configuring StorSimple iSCSI cloud array (STaaS/BaaS).',
       },
+      uwIZP3: {
+        id: 'uwIZP3',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 0,
+        value: 'Active Directory',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -614,6 +622,7 @@ export class ResumeStateConfig {
         'uaftXK',
         'xHTzxU',
         'bm0beF',
+        'uwIZP3',
       ],
     },
     allIds: [
@@ -683,6 +692,7 @@ export class ResumeStateConfig {
       'iQdo3T',
       'Ry2Nhk',
       'piDAhU',
+      'uwIZP3',
     ],
     experiences: {
       JDi6zL: {
@@ -752,12 +762,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      lY6dHN: {
-        id: 'lY6dHN',
-        experienceId: 'DqS3iu',
-        position: 0,
-        value: 'Active Directory',
-      },
       FWbOYH: {
         id: 'FWbOYH',
         experienceId: 'DqS3iu',
