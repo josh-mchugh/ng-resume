@@ -662,8 +662,16 @@ export class ResumeStateConfig {
         groupId: 'JDi6zL',
         groupPosition: 4,
         type: SelectorType.EXPERIENCE_SKILL,
-        position: 3,
+        position: 0,
         value: 'C++',
+      },
+      eni8JG: {
+        id: 'eni8JG',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 1,
+        value: 'Java',
       },
     },
     byType: {
@@ -727,6 +735,7 @@ export class ResumeStateConfig {
         'F2wYOq',
         'E5gPE0',
         'cYkQL7',
+        'eni8JG',
       ],
     },
     allIds: [
@@ -809,6 +818,7 @@ export class ResumeStateConfig {
       'cZRgvl',
       'Uv0Q1M',
       'cYkQL7',
+      'eni8JG',
     ],
     experiences: {
       wv7RWA: {
@@ -843,12 +853,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      slefNV: {
-        id: 'slefNV',
-        experienceId: 'JDi6zL',
-        position: 1,
-        value: 'Java',
-      },
       ZXieJh: {
         id: 'ZXieJh',
         experienceId: 'JDi6zL',
