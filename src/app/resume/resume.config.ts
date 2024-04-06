@@ -649,6 +649,14 @@ export class ResumeStateConfig {
         position: 2,
         value: 'Installing, configuring, and supporting BBars computer backup software.',
       },
+      Uv0Q1M: {
+        id: 'Uv0Q1M',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 3,
+        value: 'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -684,6 +692,7 @@ export class ResumeStateConfig {
         'CadaeY',
         'B6AloM',
         'cZRgvl',
+        'Uv0Q1M',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -789,6 +798,7 @@ export class ResumeStateConfig {
       'CadaeY',
       'B6AloM',
       'cZRgvl',
+      'Uv0Q1M',
     ],
     experiences: {
       wv7RWA: {
@@ -800,13 +810,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      '7dsIrL': {
-        id: '7dsIrL',
-        experienceId: 'JDi6zL',
-        position: 3,
-        value:
-          'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
-      },
       tEHYrq: {
         id: 'tEHYrq',
         experienceId: 'wv7RWA',
