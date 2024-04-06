@@ -577,6 +577,14 @@ export class ResumeStateConfig {
         position: 1,
         value: 'VMWare',
       },
+      F2wYOq: {
+        id: 'F2wYOq',
+        groupId: 'cfuZQP',
+        groupPosition: 3,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 2,
+        value: 'PowerShell',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -632,6 +640,7 @@ export class ResumeStateConfig {
         'bm0beF',
         'uwIZP3',
         'w5f42s',
+        'F2wYOq',
       ],
     },
     allIds: [
@@ -703,6 +712,7 @@ export class ResumeStateConfig {
       'piDAhU',
       'uwIZP3',
       'w5f42s',
+      'F2wYOq',
     ],
     experiences: {
       JDi6zL: {
@@ -772,12 +782,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      mnj4z9: {
-        id: 'mnj4z9',
-        experienceId: 'DqS3iu',
-        position: 2,
-        value: 'PowerShell',
-      },
       LDxNuH: {
         id: 'LDxNuH',
         experienceId: 'DqS3iu',
