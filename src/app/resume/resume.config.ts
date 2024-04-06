@@ -974,14 +974,7 @@ export class ResumeStateConfig {
     ],
     experiences: {},
     experienceDescriptions: {},
-    experienceSkills: {
-      '6XKu0i': {
-        id: '6XKu0i',
-        experienceId: 'wv7RWA',
-        position: 1,
-        value: 'T-SQL',
-      },
-    },
+    experienceSkills: {},
     skills: {
       jGFwg2: {
         id: 'jGFwg2',
