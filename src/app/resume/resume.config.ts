@@ -657,6 +657,14 @@ export class ResumeStateConfig {
         position: 3,
         value: 'Developing and maintaining websites on servers running Microsoft SharePoint Server and Internet Information Services (IIS).',
       },
+      cYkQL7: {
+        id: 'cYkQL7',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_SKILL,
+        position: 3,
+        value: 'C++',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -718,6 +726,7 @@ export class ResumeStateConfig {
         'w5f42s',
         'F2wYOq',
         'E5gPE0',
+        'cYkQL7',
       ],
     },
     allIds: [
@@ -799,6 +808,7 @@ export class ResumeStateConfig {
       'B6AloM',
       'cZRgvl',
       'Uv0Q1M',
+      'cYkQL7',
     ],
     experiences: {
       wv7RWA: {
@@ -833,12 +843,6 @@ export class ResumeStateConfig {
       },
     },
     experienceSkills: {
-      '8Mf0xD': {
-        id: '8Mf0xD',
-        experienceId: 'JDi6zL',
-        position: 0,
-        value: 'C++',
-      },
       slefNV: {
         id: 'slefNV',
         experienceId: 'JDi6zL',
