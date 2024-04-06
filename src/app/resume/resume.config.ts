@@ -601,6 +601,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Turner Inc',
       },
+      GNVHRV: {
+        id: 'GNVHRV',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_TITLE,
+        position: 0,
+        value: 'Information Services Liaison',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -613,7 +621,7 @@ export class ResumeStateConfig {
       SOCIAL_ICON: ['TKGmg8', '3ClFV3', 'EevRIX'],
       SOCIAL_URL: ['QzaUKU', 'kZQ0D0', 'PdFyKt'],
       EXPERIENCE_ORGANIZATION: ['mHqQo5', 'xvvZMK', 'iuqlt6', '24xuSH', 'jTcVWu'],
-      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM'],
+      EXPERIENCE_TITLE: ['woPRPF', 'xaQQXi', 'g8g11w', 'FhMROM', 'GNVHRV'],
       EXPERIENCE_DURATION: ['D63MSQ', 'JOpOqX', '5knyWV', '3Zt1jU'],
       EXPERIENCE_LOCATION: ['xSdMqL', '4GajzB', '7QKmCX', '4aihVC'],
       EXPERIENCE_DESCRIPTION: [
@@ -732,6 +740,7 @@ export class ResumeStateConfig {
       'F2wYOq',
       'E5gPE0',
       'jTcVWu',
+      'GNVHRV',
     ],
     experiences: {
       JDi6zL: {
