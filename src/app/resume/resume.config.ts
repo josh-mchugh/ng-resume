@@ -625,6 +625,14 @@ export class ResumeStateConfig {
         position: 0,
         value: 'Remote',
       },
+      CadaeY: {
+        id: 'CadaeY',
+        groupId: 'JDi6zL',
+        groupPosition: 4,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 0,
+        value: 'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -657,6 +665,7 @@ export class ResumeStateConfig {
         'iQdo3T',
         'Ry2Nhk',
         'piDAhU',
+        'CadaeY',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -759,6 +768,7 @@ export class ResumeStateConfig {
       'GNVHRV',
       'COnDfF',
       'uWmqfg',
+      'CadaeY',
     ],
     experiences: {
       wv7RWA: {
@@ -770,13 +780,6 @@ export class ResumeStateConfig {
       },
     },
     experienceDescriptions: {
-      X2RU0c: {
-        id: 'X2RU0c',
-        experienceId: 'JDi6zL',
-        position: 0,
-        value:
-          'Troubleshooting hardware and software problems over the telephone and through remote PC administration software.',
-      },
       sT4moZ: {
         id: 'sT4moZ',
         experienceId: 'JDi6zL',
