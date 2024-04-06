@@ -754,6 +754,15 @@ export class ResumeStateConfig {
         value:
           'Configuring and supporting Blackberry devices on the Blackberry Enterprise Server to receive Exchange email.',
       },
+      xyHXEg: {
+        id: 'xyHXEg',
+        groupId: 'wv7RWA',
+        groupPosition: 5,
+        type: SelectorType.EXPERIENCE_DESCRIPTION,
+        position: 2,
+        value:
+          'Installing, configuring, and testing Veeam virtual machine backup software and Virtual Desktop Infrastructure (VDI).',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -820,6 +829,7 @@ export class ResumeStateConfig {
         'Uv0Q1M',
         '2A5TJG',
         '9s6RUs',
+        'xyHXEg',
       ],
       EXPERIENCE_SKILL: [
         'Z4AfFQ',
@@ -940,17 +950,10 @@ export class ResumeStateConfig {
       'a7yjRM',
       '2A5TJG',
       '9s6RUs',
+      'xyHXEg',
     ],
     experiences: {},
-    experienceDescriptions: {
-      '04jBVn': {
-        id: '04jBVn',
-        experienceId: 'wv7RWA',
-        position: 2,
-        value:
-          'Installing, configuring, and testing Veeam virtual machine backup software and Virtual Desktop Infrastructure (VDI).',
-      },
-    },
+    experienceDescriptions: {},
     experienceSkills: {
       kPNAZo: {
         id: 'kPNAZo',
