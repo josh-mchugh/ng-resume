@@ -794,6 +794,22 @@ export class ResumeStateConfig {
         position: 0,
         value: 4,
       },
+      t1UqMp: {
+        id: 't1UqMp',
+        groupId: 'i4OWR1',
+        groupPosition: 1,
+        type: SelectorType.SKILL_NAME,
+        position: 0,
+        value: 'Illustrator',
+      },
+      wd8AaT: {
+        id: 'wd8AaT',
+        groupId: 'i4OWR1',
+        groupPosition: 1,
+        type: SelectorType.SKILL_PROFICIENCY,
+        position: 0,
+        value: 2,
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -893,8 +909,8 @@ export class ResumeStateConfig {
         'l6NSia',
         'tCKKWu',
       ],
-      SKILL_NAME: ['tZjZkU'],
-      SKILL_PROFICIENCY: ['41odr7'],
+      SKILL_NAME: ['tZjZkU', 't1UqMp'],
+      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT'],
     },
     allIds: [
       'cGOn1Z',
@@ -990,18 +1006,10 @@ export class ResumeStateConfig {
       'tCKKWu',
       'tZjZkU',
       '41odr7',
+      't1UqMp',
+      'wd8AaT',
     ],
     skills: {
-      jGFwg2: {
-        id: 'jGFwg2',
-        name: 'Photoshop',
-        proficiency: 4,
-      },
-      i4OWR1: {
-        id: 'i4OWR1',
-        name: 'Illustrator',
-        proficiency: 2,
-      },
       '4nQsf4': {
         id: '4nQsf4',
         name: 'PHP',
