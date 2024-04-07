@@ -11,9 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  experiences: { [id: string]: Experience };
-  experienceDescriptions: { [id: string]: ExperienceDescription };
-  experienceSkills: { [id: string]: ExperienceSkill };
   skills: { [id: string]: Skill };
   certifications: { [id: string]: Certification };
 }
@@ -25,35 +22,6 @@ export interface ResumeNode {
   type: SelectorType;
   position: number;
   value: string | number;
-}
-
-export interface Social {
-  id: string;
-  icon: string;
-  name: string;
-  url: string;
-}
-
-export interface Experience {
-  id: string;
-  title: string;
-  organization: string;
-  duration: string;
-  location: string;
-}
-
-export interface ExperienceDescription {
-  id: string;
-  experienceId: string;
-  position: number;
-  value: string;
-}
-
-export interface ExperienceSkill {
-  id: string;
-  experienceId: string;
-  position: number;
-  value: string;
 }
 
 export interface Skill {

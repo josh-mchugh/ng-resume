@@ -19,9 +19,6 @@ export class ResumeStateConfig {
       EXPERIENCE_DURATION: [],
       EXPERIENCE_SKILL: [],
     },
-    experiences: {},
-    experienceDescriptions: {},
-    experienceSkills: {},
     skills: {},
     certifications: {},
   };
@@ -972,9 +969,6 @@ export class ResumeStateConfig {
       'l6NSia',
       'tCKKWu',
     ],
-    experiences: {},
-    experienceDescriptions: {},
-    experienceSkills: {},
     skills: {
       jGFwg2: {
         id: 'jGFwg2',
