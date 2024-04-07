@@ -841,7 +841,23 @@ export class ResumeStateConfig {
         type: SelectorType.SKILL_PROFICIENCY,
         position: 0,
         value: 3,
-      }
+      },
+      '6tElKw': {
+        id: '6tElKw',
+        groupId: 'cpXp68',
+        groupPosition: 4,
+        type: SelectorType.SKILL_NAME,
+        position: 0,
+        value: 'WordPress',
+      },
+      '7VQ2BC': {
+        id: '7VQ2BC',
+        groupId: 'cpXp68',
+        groupPosition: 4,
+        type: SelectorType.SKILL_PROFICIENCY,
+        position: 0,
+        value: '3',
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -941,8 +957,8 @@ export class ResumeStateConfig {
         'l6NSia',
         'tCKKWu',
       ],
-      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO', 'YPjCgM'],
-      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS', 'HGGFDS'],
+      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO', 'YPjCgM', '6tElKw'],
+      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS', 'HGGFDS', '7VQ2BC'],
     },
     allIds: [
       'cGOn1Z',
@@ -1044,13 +1060,10 @@ export class ResumeStateConfig {
       'cFDoYS',
       'YPjCgM',
       'HGGFDS',
+      '6tElKw',
+      '7VQ2BC',
     ],
     skills: {
-      cpXp68: {
-        id: 'cpXp68',
-        name: 'WordPress',
-        proficiency: 3,
-      },
       oWDqpM: {
         id: 'oWDqpM',
         name: 'CSS',
