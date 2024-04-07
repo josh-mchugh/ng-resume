@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  certifications: { [id: string]: Certification };
 }
 
 export interface ResumeNode {
@@ -21,14 +20,6 @@ export interface ResumeNode {
   type: SelectorType;
   position: number;
   value: string | number;
-}
-
-export interface Certification {
-  id: string;
-  title: string;
-  organization: string;
-  year: string;
-  location: string;
 }
 
 @State<ResumeStateModel>({
@@ -313,37 +304,51 @@ export class ResumeState {
   }
 
   private static selectorCertificationList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      Object.keys(state.certifications),
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const groupIds = [
+        ...state.byType[SelectorType.CERTIFICATION_ORGANIZATION],
+        ...state.byType[SelectorType.CERTIFICATION_TITLE],
+        ...state.byType[SelectorType.CERTIFICATION_LOCATION],
+        ...state.byType[SelectorType.CERTIFICATION_YEAR],
+      ].map((id) => state.byId[id].groupId);
+      return [...new Set<string>(groupIds)];
+    });
   }
 
   private static selectorCertificationTitle(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.certifications[id].title,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.CERTIFICATION_TITLE]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorCertificationYear(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.certifications[id].year,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.CERTIFICATION_YEAR]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorCertificationOrganization(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.certifications[id].organization,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.CERTIFICATION_ORGANIZATION]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorCertificationLocation(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.certifications[id].location,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.CERTIFICATION_LOCATION]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   @Action(Resume.InitializeState)
@@ -493,189 +498,5 @@ export class ResumeState {
     return ctx.dispatch([
       ...removeIds.map((id) => new Display.SectionDelete(id)),
     ]);
-  }
-
-  @Action(Resume.CertificationCreate)
-  certificationCreate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationCreate,
-  ) {
-    const certification = {
-      id: action.id,
-      title: '',
-      organization: '',
-      year: '',
-      location: '',
-    };
-    const updatedCertifications = {
-      ...ctx.getState().certifications,
-      [certification.id]: certification,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      certifications: updatedCertifications,
-    });
-  }
-
-  @Action(Resume.CertificationDelete)
-  certificationDelete(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationDelete,
-  ) {
-    const updatedCertifications = Object.values(ctx.getState().certifications)
-      .filter((certification) => certification.id !== action.id)
-      .reduce(
-        (acc, certification) => ({ ...acc, [certification.id]: certification }),
-        {},
-      );
-
-    ctx.setState({
-      ...ctx.getState(),
-      certifications: updatedCertifications,
-    });
-
-    return ctx.dispatch(new Display.SectionDelete(action.id));
-  }
-
-  @Action(Resume.CertificationTitleUpdate)
-  certificationTitleUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationTitleUpdate,
-  ) {
-    const certification = ctx.getState().certifications[action.id];
-    const updatedCertification = { ...certification, title: action.title };
-
-    ctx.setState({
-      ...ctx.getState(),
-      certifications: {
-        ...ctx.getState().certifications,
-        [updatedCertification.id]: updatedCertification,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedCertification.id,
-        SelectorType.CERTIFICATION_TITLE,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(
-          updatedCertification.id,
-          SelectorType.CERTIFICATION_TITLE,
-        ),
-      );
-    } else {
-      return;
-    }
-  }
-
-  @Action(Resume.CertificationOrganizationUpdate)
-  certificationOrganizationUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationOrganizationUpdate,
-  ) {
-    const certification = ctx.getState().certifications[action.id];
-    const updatedCertification = {
-      ...certification,
-      organization: action.organization,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      certifications: {
-        ...ctx.getState().certifications,
-        [updatedCertification.id]: updatedCertification,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedCertification.id,
-        SelectorType.CERTIFICATION_ORGANIZATION,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(
-          updatedCertification.id,
-          SelectorType.CERTIFICATION_ORGANIZATION,
-        ),
-      );
-    } else {
-      return;
-    }
-  }
-
-  @Action(Resume.CertificationYearUpdate)
-  certificationYearUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationYearUpdate,
-  ) {
-    const certification = ctx.getState().certifications[action.id];
-    const updatedCertification = {
-      ...certification,
-      year: action.year,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      certifications: {
-        ...ctx.getState().certifications,
-        [updatedCertification.id]: updatedCertification,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedCertification.id,
-        SelectorType.CERTIFICATION_YEAR,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(
-          updatedCertification.id,
-          SelectorType.CERTIFICATION_YEAR,
-        ),
-      );
-    } else {
-      return;
-    }
-  }
-
-  @Action(Resume.CertificationLocationUpdate)
-  certificationLocationUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.CertificationLocationUpdate,
-  ) {
-    const certification = ctx.getState().certifications[action.id];
-    const updatedCertification = {
-      ...certification,
-      location: action.location,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      certifications: {
-        ...ctx.getState().certifications,
-        [updatedCertification.id]: updatedCertification,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedCertification.id,
-        SelectorType.CERTIFICATION_LOCATION,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(
-          updatedCertification.id,
-          SelectorType.CERTIFICATION_LOCATION,
-        ),
-      );
-    } else {
-      return;
-    }
   }
 }

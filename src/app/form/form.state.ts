@@ -288,17 +288,40 @@ export class FormState {
         {} as { [id: string]: FormSkill },
       );
 
-    const certifications = Object.values(action.resume.certifications)
-      .map((certification) => ({
-        id: certification.id,
-        title: certification.title,
-        organization: certification.organization,
-        year: certification.year,
-        location: certification.location,
-      }))
+    const certifications = [
+      ...action.resume.byType[SelectorType.CERTIFICATION_ORGANIZATION],
+      ...action.resume.byType[SelectorType.CERTIFICATION_TITLE],
+      ...action.resume.byType[SelectorType.CERTIFICATION_YEAR],
+      ...action.resume.byType[SelectorType.CERTIFICATION_LOCATION],
+    ]
+      .map((nodeId) => action.resume.byId[nodeId])
+      .sort((a, b) => a.groupPosition - b.groupPosition)
       .reduce(
-        (acc, certification) => ({ ...acc, [certification.id]: certification }),
-        {},
+        (acc, node) => {
+          if (!acc[node.groupId]) {
+            acc[node.groupId] = {
+              id: node.groupId,
+              organization: '',
+              title: '',
+              year: '',
+              location: '',
+            };
+          }
+          if (SelectorType.CERTIFICATION_ORGANIZATION === node.type) {
+            acc[node.groupId].organization = node.value.toString();
+          }
+          if (SelectorType.CERTIFICATION_TITLE === node.type) {
+            acc[node.groupId].title = node.value.toString();
+          }
+          if (SelectorType.CERTIFICATION_YEAR === node.type) {
+            acc[node.groupId].year = node.value.toString();
+          }
+          if (SelectorType.CERTIFICATION_LOCATION === node.type) {
+            acc[node.groupId].location = node.value.toString();
+          }
+          return acc;
+        },
+        {} as { [id: string]: FormCertification },
       );
 
     const newState = {
@@ -1061,8 +1084,6 @@ export class FormState {
         allIds: [...certifications.allIds, certification.id],
       },
     });
-
-    return ctx.dispatch(new Resume.CertificationCreate(certification.id));
   }
 
   @Action(Form.Certification.Delete)
@@ -1086,7 +1107,7 @@ export class FormState {
       },
     });
 
-    return ctx.dispatch(new Resume.CertificationDelete(action.id));
+    return ctx.dispatch(new Resume.NodeDeleteByGroupId(action.id));
   }
 
   @Action(Form.Certification.TitleUpdate)
@@ -1109,9 +1130,10 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.CertificationTitleUpdate(
-        updatedCertification.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.CERTIFICATION_TITLE,
         updatedCertification.title,
+        updatedCertification.id,
       ),
     );
   }
@@ -1139,9 +1161,10 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.CertificationOrganizationUpdate(
-        updatedCertification.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.CERTIFICATION_ORGANIZATION,
         updatedCertification.organization,
+        updatedCertification.id,
       ),
     );
   }
@@ -1166,9 +1189,10 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.CertificationYearUpdate(
-        updatedCertification.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.CERTIFICATION_YEAR,
         updatedCertification.year,
+        updatedCertification.id,
       ),
     );
   }
@@ -1196,9 +1220,10 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.CertificationLocationUpdate(
-        updatedCertification.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.CERTIFICATION_LOCATION,
         updatedCertification.location,
+        updatedCertification.id,
       ),
     );
   }

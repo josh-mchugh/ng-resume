@@ -31,46 +31,4 @@ export namespace Resume {
       public position: number,
     ) {}
   }
-
-  export class CertificationCreate {
-    static readonly type = '[Resume] Certification Create';
-    constructor(public id: string) {}
-  }
-
-  export class CertificationDelete {
-    static readonly type = '[Resume] Certification Delete';
-    constructor(public id: string) {}
-  }
-
-  export class CertificationTitleUpdate {
-    static readonly type = '[Resume] Certification Title Update';
-    constructor(
-      public id: string,
-      public title: string,
-    ) {}
-  }
-
-  export class CertificationOrganizationUpdate {
-    static readonly type = '[Resume] Certification Organization Update';
-    constructor(
-      public id: string,
-      public organization: string,
-    ) {}
-  }
-
-  export class CertificationYearUpdate {
-    static readonly type = '[Resume] Certification Year Update';
-    constructor(
-      public id: string,
-      public year: string,
-    ) {}
-  }
-
-  export class CertificationLocationUpdate {
-    static readonly type = '[Resume] Certification Location Update';
-    constructor(
-      public id: string,
-      public location: string,
-    ) {}
-  }
 }
