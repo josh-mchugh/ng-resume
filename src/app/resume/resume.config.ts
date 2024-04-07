@@ -858,6 +858,22 @@ export class ResumeStateConfig {
         position: 0,
         value: '3',
       },
+      njCsZu: {
+        id: 'njCsZu',
+        groupId: 'oWDqpM',
+        groupPosition: 5,
+        type: SelectorType.SKILL_NAME,
+        position: 0,
+        value: 'CSS',
+      },
+      '7mzsKr': {
+        id: '7mzsKr',
+        groupId: 'oWDqpM',
+        groupPosition: 5,
+        type: SelectorType.SKILL_PROFICIENCY,
+        position: 0,
+        value: 3,
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -957,8 +973,8 @@ export class ResumeStateConfig {
         'l6NSia',
         'tCKKWu',
       ],
-      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO', 'YPjCgM', '6tElKw'],
-      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS', 'HGGFDS', '7VQ2BC'],
+      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO', 'YPjCgM', '6tElKw', 'njCsZu'],
+      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS', 'HGGFDS', '7VQ2BC', '7mzsKr'],
     },
     allIds: [
       'cGOn1Z',
@@ -1062,13 +1078,10 @@ export class ResumeStateConfig {
       'HGGFDS',
       '6tElKw',
       '7VQ2BC',
+      'njCsZu',
+      '7mzsKr',
     ],
     skills: {
-      oWDqpM: {
-        id: 'oWDqpM',
-        name: 'CSS',
-        proficiency: 3,
-      },
       '4d9Uoh': {
         id: '4d9Uoh',
         name: 'Joomla',
