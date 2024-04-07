@@ -21,7 +21,6 @@ export class ResumeStateConfig {
       SKILL_NAME: [],
       SKILL_PROFICIENCY: [],
     },
-    skills: {},
     certifications: {},
   };
 
@@ -989,8 +988,24 @@ export class ResumeStateConfig {
         'l6NSia',
         'tCKKWu',
       ],
-      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO', 'YPjCgM', '6tElKw', 'njCsZu', 'ewmZW0'],
-      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS', 'HGGFDS', '7VQ2BC', '7mzsKr', 'qeLFqK'],
+      SKILL_NAME: [
+        'tZjZkU',
+        't1UqMp',
+        '3954mO',
+        'YPjCgM',
+        '6tElKw',
+        'njCsZu',
+        'ewmZW0',
+      ],
+      SKILL_PROFICIENCY: [
+        '41odr7',
+        'wd8AaT',
+        'cFDoYS',
+        'HGGFDS',
+        '7VQ2BC',
+        '7mzsKr',
+        'qeLFqK',
+      ],
     },
     allIds: [
       'cGOn1Z',
@@ -1099,7 +1114,6 @@ export class ResumeStateConfig {
       'ewmZW0',
       'qeLFqK',
     ],
-    skills: {},
     certifications: {
       doku5G: {
         id: 'doku5G',

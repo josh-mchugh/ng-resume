@@ -11,7 +11,6 @@ export interface ResumeStateModel {
   byId: { [id: string]: ResumeNode };
   allIds: string[];
   byType: { [type: string]: string[] };
-  skills: { [id: string]: Skill };
   certifications: { [id: string]: Certification };
 }
 
@@ -22,12 +21,6 @@ export interface ResumeNode {
   type: SelectorType;
   position: number;
   value: string | number;
-}
-
-export interface Skill {
-  id: string;
-  name: string;
-  proficiency: number;
 }
 
 export interface Certification {
