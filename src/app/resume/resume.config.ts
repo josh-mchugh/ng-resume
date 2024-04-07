@@ -826,6 +826,22 @@ export class ResumeStateConfig {
         position: 0,
         value: 2,
       },
+      YPjCgM: {
+        id: 'YPjCgM',
+        groupId: 'CfsDjk',
+        groupPosition: 3,
+        type: SelectorType.SKILL_NAME,
+        position: 0,
+        value: 'HTML',
+      },
+      HGGFDS: {
+        id: 'HGGFDS',
+        groupId: 'CfsDjk',
+        groupPosition: 3,
+        type: SelectorType.SKILL_PROFICIENCY,
+        position: 0,
+        value: 3,
+      }
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -925,8 +941,8 @@ export class ResumeStateConfig {
         'l6NSia',
         'tCKKWu',
       ],
-      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO'],
-      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS'],
+      SKILL_NAME: ['tZjZkU', 't1UqMp', '3954mO', 'YPjCgM'],
+      SKILL_PROFICIENCY: ['41odr7', 'wd8AaT', 'cFDoYS', 'HGGFDS'],
     },
     allIds: [
       'cGOn1Z',
@@ -1026,13 +1042,10 @@ export class ResumeStateConfig {
       'wd8AaT',
       '3954mO',
       'cFDoYS',
+      'YPjCgM',
+      'HGGFDS',
     ],
     skills: {
-      CfsDjk: {
-        id: 'CfsDjk',
-        name: 'HTML',
-        proficiency: 3,
-      },
       cpXp68: {
         id: 'cpXp68',
         name: 'WordPress',
