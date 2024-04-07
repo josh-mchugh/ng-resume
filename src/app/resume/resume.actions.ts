@@ -11,7 +11,7 @@ export namespace Resume {
     static readonly type = '[Resume] Node Create Or Update';
     constructor(
       public type: SelectorType,
-      public value: string,
+      public value: string | number,
       public groupId = '',
       public groupPosition = 0,
       public position = 0,
@@ -29,32 +29,6 @@ export namespace Resume {
       public groupId: string,
       public type: SelectorType,
       public position: number,
-    ) {}
-  }
-
-  export class SkillCreate {
-    static readonly type = '[Resume] Skill Create';
-    constructor(public id: string) {}
-  }
-
-  export class SkillDelete {
-    static readonly type = '[Resume] Skill Delete';
-    constructor(public id: string) {}
-  }
-
-  export class SkillNameUpdate {
-    static readonly type = '[Resume] Skill Name Update';
-    constructor(
-      public id: string,
-      public name: string,
-    ) {}
-  }
-
-  export class SkillProficiencyUpdate {
-    static readonly type = '[Resume] Skill Proficiency Update';
-    constructor(
-      public id: string,
-      public proficiency: number,
     ) {}
   }
 

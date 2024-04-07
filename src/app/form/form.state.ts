@@ -262,13 +262,31 @@ export class FormState {
         {} as { [id: string]: FormExperienceSkill },
       );
 
-    const skills = Object.values(action.resume.skills)
-      .map((skill) => ({
-        id: skill.id,
-        name: skill.name,
-        proficiency: skill.proficiency,
-      }))
-      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
+    const skills = [
+      ...action.resume.byType[SelectorType.SKILL_NAME],
+      ...action.resume.byType[SelectorType.SKILL_PROFICIENCY],
+    ]
+      .map((nodeId) => action.resume.byId[nodeId])
+      .sort((a, b) => a.groupPosition - b.groupPosition)
+      .reduce(
+        (acc, node) => {
+          if (!acc[node.groupId]) {
+            acc[node.groupId] = {
+              id: node.groupId,
+              name: '',
+              proficiency: 0,
+            };
+          }
+          if (SelectorType.SKILL_NAME === node.type) {
+            acc[node.groupId].name = node.value.toString();
+          }
+          if (SelectorType.SKILL_PROFICIENCY === node.type) {
+            acc[node.groupId].proficiency = node.value as number;
+          }
+          return acc;
+        },
+        {} as { [id: string]: FormSkill },
+      );
 
     const certifications = Object.values(action.resume.certifications)
       .map((certification) => ({
@@ -946,8 +964,6 @@ export class FormState {
         allIds: [...skills.allIds, skill.id],
       },
     });
-
-    return ctx.dispatch(new Resume.SkillCreate(skill.id));
   }
 
   @Action(Form.Skill.Delete)
@@ -965,7 +981,7 @@ export class FormState {
       },
     });
 
-    return ctx.dispatch(new Resume.SkillDelete(action.id));
+    return ctx.dispatch(new Resume.NodeDeleteByGroupId(action.id));
   }
 
   @Action(Form.Skill.NameUpdate)
@@ -988,7 +1004,11 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.SkillNameUpdate(updatedSkill.id, updatedSkill.name),
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.SKILL_NAME,
+        updatedSkill.name,
+        updatedSkill.id,
+      ),
     );
   }
 
@@ -1012,9 +1032,10 @@ export class FormState {
     });
 
     return ctx.dispatch(
-      new Resume.SkillProficiencyUpdate(
-        updatedSkill.id,
+      new Resume.NodeCreateOrUpdate(
+        SelectorType.SKILL_PROFICIENCY,
         updatedSkill.proficiency,
+        updatedSkill.id,
       ),
     );
   }

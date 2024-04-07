@@ -104,7 +104,7 @@ export class ResumeState {
         return this.selectorSkillList();
       case SelectorType.SKILL_NAME:
         return this.selectorSkillName(id);
-      case SelectorType.SKILL_BLOCKS:
+      case SelectorType.SKILL_PROFICIENCY:
         return this.selectorSkillBlocks(id);
       case SelectorType.CERTIFICATION_LIST:
         return this.selectorCertificationList();
@@ -288,26 +288,35 @@ export class ResumeState {
   }
 
   private static selectorSkillList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      Object.keys(state.skills),
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const groupIds = [
+        ...state.byType[SelectorType.SKILL_NAME],
+        ...state.byType[SelectorType.SKILL_PROFICIENCY],
+      ].map((id) => state.byId[id].groupId);
+      return [...new Set<string>(groupIds)];
+    });
   }
 
   private static selectorSkillName(id: string) {
-    return createSelector(
-      [ResumeState],
-      (state: ResumeStateModel) => state.skills[id].name,
-    );
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.SKILL_NAME]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return nodes[0].value;
+    });
   }
 
   private static selectorSkillBlocks(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) =>
-      [...Array(5).keys()].map((value) => {
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[SelectorType.SKILL_PROFICIENCY]
+        .filter((nodeId) => state.byId[nodeId].groupId === id)
+        .map((nodeId) => state.byId[nodeId]);
+      return [...Array(5).keys()].map((value) => {
         return {
-          active: state.skills[id].proficiency >= value + 1,
+          active: (nodes[0].value as number) >= value + 1,
         };
-      }),
-    );
+      });
+    });
   }
 
   private static selectorCertificationList() {
@@ -491,94 +500,6 @@ export class ResumeState {
     return ctx.dispatch([
       ...removeIds.map((id) => new Display.SectionDelete(id)),
     ]);
-  }
-
-  @Action(Resume.SkillCreate)
-  skillCreate(ctx: StateContext<ResumeStateModel>, action: Resume.SkillCreate) {
-    const skill = { id: action.id, name: '', proficiency: 0 };
-    const updatedSkills = {
-      ...ctx.getState().skills,
-      [skill.id]: skill,
-    };
-
-    ctx.setState({
-      ...ctx.getState(),
-      skills: updatedSkills,
-    });
-  }
-
-  @Action(Resume.SkillDelete)
-  skillDelete(ctx: StateContext<ResumeStateModel>, action: Resume.SkillDelete) {
-    const updatedSkills = Object.values(ctx.getState().skills)
-      .filter((skill) => skill.id !== action.id)
-      .reduce((acc, skill) => ({ ...acc, [skill.id]: skill }), {});
-
-    ctx.setState({
-      ...ctx.getState(),
-      skills: updatedSkills,
-    });
-
-    return ctx.dispatch(new Display.SectionDelete(action.id));
-  }
-
-  @Action(Resume.SkillNameUpdate)
-  skillNameUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SkillNameUpdate,
-  ) {
-    const skill = ctx.getState().skills[action.id];
-    const updatedSkill = { ...skill, name: action.name };
-
-    ctx.setState({
-      ...ctx.getState(),
-      skills: {
-        ...ctx.getState().skills,
-        [updatedSkill.id]: updatedSkill,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedSkill.id,
-        SelectorType.SKILL_NAME,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(updatedSkill.id, SelectorType.SKILL_NAME),
-      );
-    } else {
-      return;
-    }
-  }
-
-  @Action(Resume.SkillProficiencyUpdate)
-  skillProficiencyUpdate(
-    ctx: StateContext<ResumeStateModel>,
-    action: Resume.SkillProficiencyUpdate,
-  ) {
-    const skill = ctx.getState().skills[action.id];
-    const updatedSkill = { ...skill, proficiency: action.proficiency };
-
-    ctx.setState({
-      ...ctx.getState(),
-      skills: {
-        ...ctx.getState().skills,
-        [updatedSkill.id]: updatedSkill,
-      },
-    });
-
-    if (
-      !this.displayService.hasSectionByResumeId(
-        updatedSkill.id,
-        SelectorType.SKILL_BLOCKS,
-      )
-    ) {
-      return ctx.dispatch(
-        new Display.SectionCreate(updatedSkill.id, SelectorType.SKILL_BLOCKS),
-      );
-    } else {
-      return;
-    }
   }
 
   @Action(Resume.CertificationCreate)

@@ -564,7 +564,7 @@ export class LayoutStateConfig {
               key: 'name',
             },
             {
-              type: SelectorType.SKILL_BLOCKS,
+              type: SelectorType.SKILL_PROFICIENCY,
               key: 'blocks',
             },
           ],

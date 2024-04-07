@@ -18,6 +18,8 @@ export class ResumeStateConfig {
       EXPERIENCE_TITLE: [],
       EXPERIENCE_DURATION: [],
       EXPERIENCE_SKILL: [],
+      SKILL_NAME: [],
+      SKILL_PROFICIENCY: [],
     },
     skills: {},
     certifications: {},
@@ -776,6 +778,22 @@ export class ResumeStateConfig {
         position: 1,
         value: 'T-SQL',
       },
+      tZjZkU: {
+        id: 'tZjZkU',
+        groupId: 'jGFwg2',
+        groupPosition: 0,
+        type: SelectorType.SKILL_NAME,
+        position: 0,
+        value: 'Photoshop',
+      },
+      '41odr7': {
+        id: '41odr7',
+        groupId: 'jGFwg2',
+        groupPosition: 0,
+        type: SelectorType.SKILL_PROFICIENCY,
+        position: 0,
+        value: 4,
+      },
     },
     byType: {
       NAME: ['cGOn1Z'],
@@ -875,6 +893,8 @@ export class ResumeStateConfig {
         'l6NSia',
         'tCKKWu',
       ],
+      SKILL_NAME: ['tZjZkU'],
+      SKILL_PROFICIENCY: ['41odr7'],
     },
     allIds: [
       'cGOn1Z',
@@ -968,6 +988,8 @@ export class ResumeStateConfig {
       'xyHXEg',
       'l6NSia',
       'tCKKWu',
+      'tZjZkU',
+      '41odr7',
     ],
     skills: {
       jGFwg2: {
