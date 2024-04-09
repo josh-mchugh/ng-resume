@@ -43,10 +43,10 @@ export interface Sections {
 export interface Section {
   id: string;
   parentId: string;
-  layoutNodeId: string;
-  resumeId: string;
-  position: number;
   pageId: string;
+  layoutNodeId: string;
+  layoutNodePosition: number;
+  resumeId: string;
   dimension: Dimension;
 }
 
@@ -172,10 +172,10 @@ export class DisplayState {
       const section = {
         id: id,
         parentId: parentId,
-        layoutNodeId: layoutNode.id,
-        position: layoutNode.position,
-        resumeId: resumeId,
         pageId: page.id,
+        layoutNodeId: layoutNode.id,
+        layoutNodePosition: layoutNode.position,
+        resumeId: resumeId,
         dimension: initDimension(),
       };
       sections[id] = section;
@@ -270,10 +270,10 @@ export class DisplayState {
     const section = {
       id: this.uuid.rnd(),
       parentId: parentSection.id,
-      layoutNodeId: layoutNode.id,
-      resumeId: action.resumeId,
-      position: layoutNode.position,
       pageId: '0',
+      layoutNodeId: layoutNode.id,
+      layoutNodePosition: layoutNode.position,
+      resumeId: action.resumeId,
       dimension: initDimension(),
     };
 
@@ -331,11 +331,11 @@ export class DisplayState {
       const id = this.uuid.rnd();
       const section = {
         id: id,
-        layoutNodeId: layoutNode.id,
         parentId: parentId,
-        resumeId: resumeId,
-        position: layoutNode.position,
         pageId: page.id,
+        layoutNodeId: layoutNode.id,
+        layoutNodePosition: layoutNode.position,
+        resumeId: resumeId,
         dimension: initDimension(),
       };
 
@@ -651,7 +651,7 @@ export class DisplayState {
           parentId: parentId,
           pageId: nextPageId,
           layoutNodeId: section.layoutNodeId,
-          position: section.position,
+          layoutNodePosition: section.position,
           resumeId: section.resumeId,
           dimension: initDimension(),
         };
