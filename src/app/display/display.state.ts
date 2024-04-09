@@ -161,53 +161,38 @@ export class DisplayState {
       position: 0,
     };
 
-    const rootNodes = this.store.selectSnapshot(LayoutState.rootNodes());
+    const sections: { [id: string]: Section } = {};
 
-    const buildSection = (
-      parentId: string,
-      resumeId: string,
-      layoutNode: LayoutNode,
-    ): Section[] => {
+    const recurs = (layoutNode: LayoutNode, parentId = '', resumeId = ''): void => {
       const id = this.uuid.rnd();
       const section = {
         id: id,
-        layoutNodeId: layoutNode.id,
         parentId: parentId,
-        resumeId: resumeId,
+        layoutNodeId: layoutNode.id,
         position: layoutNode.position,
+        resumeId: resumeId,
         pageId: page.id,
         dimension: initDimension(),
       };
+      sections[id] = section;
 
       const childNodes = this.store.selectSnapshot(
         LayoutState.childNodes(layoutNode.id),
       );
       if (childNodes.length) {
-        const isDynamicContainer =
-          NodeType.CONTAINER === layoutNode.type &&
-          NodeDataType.DYNAMIC === layoutNode.dataType;
-
-        const resumeIds: string[] = isDynamicContainer
-          ? this.store.selectSnapshot(
+        if (NodeType.CONTAINER === layoutNode.type && NodeDataType.DYNAMIC === layoutNode.dataType) {
+          const resumeIds: string[] = this.store.selectSnapshot(
               ResumeState.selectorValue(layoutNode.selectors[0].type, resumeId),
-            )
-          : [''];
-        const childSections = resumeIds
-          .map((resumeId) =>
-            childNodes.map((node) => buildSection(id, resumeId, node)),
-          )
-          .flat()
-          .flat();
-        return [section, ...childSections];
+          );
+          resumeIds.forEach((resumeId) => childNodes.forEach((node) => recurs(node, id, resumeId)));
+        } else {
+          childNodes.forEach((node) => recurs(node, id));
+        }
       }
+    }
 
-      return [section];
-    };
-
-    const sections = rootNodes
-      .map((node) => buildSection('', '', node))
-      .flat()
-      .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
+    this.store.selectSnapshot(LayoutState.rootNodes())
+      .forEach((node) => recurs(node));
 
     ctx.setState({
       pages: {
