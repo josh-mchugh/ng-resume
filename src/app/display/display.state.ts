@@ -47,7 +47,7 @@ export interface Section {
   layoutNodeId: string;
   layoutNodePosition: number;
   layoutNodeName: string;
-  resumeId: string;
+  resumeGroupId: string;
   dimension: Dimension;
 }
 
@@ -115,8 +115,8 @@ export class DisplayState {
     );
   }
 
-  static hasSectionByResumeId(
-    resumeId: string,
+  static hasSectionByResumeGroupId(
+    resumeGroupId: string,
     layoutNodeId: string,
   ): (state: DisplayStateModel) => boolean {
     return createSelector(
@@ -124,7 +124,7 @@ export class DisplayState {
       (state: DisplayStateModel) =>
         Object.values(state.sections.byId).filter(
           (section) =>
-            section.resumeId === resumeId &&
+            section.resumeGroupId === resumeGroupId &&
             section.layoutNodeId === layoutNodeId,
         ).length > 0,
     );
@@ -167,7 +167,7 @@ export class DisplayState {
     const recurs = (
       layoutNode: LayoutNode,
       parentId = '',
-      resumeId = '',
+      resumeGroupId = '',
     ): void => {
       const id = this.uuid.rnd();
       const section = {
@@ -177,7 +177,7 @@ export class DisplayState {
         layoutNodeId: layoutNode.id,
         layoutNodePosition: layoutNode.position,
         layoutNodeName: layoutNode.name,
-        resumeId: resumeId,
+        resumeGroupId: resumeGroupId,
         dimension: initDimension(),
       };
       sections[id] = section;
@@ -191,7 +191,7 @@ export class DisplayState {
           NodeDataType.DYNAMIC === layoutNode.dataType
         ) {
           const resumeIds: string[] = this.store.selectSnapshot(
-            ResumeState.selectorValue(layoutNode.selectors[0].type, resumeId),
+            ResumeState.selectorValue(layoutNode.selectors[0].type, resumeGroupId),
           );
           resumeIds.forEach((resumeId) =>
             childNodes.forEach((node) => recurs(node, id, resumeId)),
@@ -276,7 +276,7 @@ export class DisplayState {
       layoutNodeId: layoutNode.id,
       layoutNodePosition: layoutNode.position,
       layoutNodeName: layoutNode.name,
-      resumeId: action.resumeId,
+      resumeGroupId: action.resumeGroupId,
       dimension: initDimension(),
     };
 
@@ -301,7 +301,7 @@ export class DisplayState {
     action: Display.SectionDelete,
   ) {
     const updatedById = Object.values(ctx.getState().sections.byId)
-      .filter((section) => section.resumeId !== action.resumeId)
+      .filter((section) => section.resumeGroupId !== action.resumeGroupId)
       .reduce((acc, section) => ({ ...acc, [section.id]: section }), {});
     const updatedAllIds = Object.keys(updatedById);
 
@@ -328,7 +328,7 @@ export class DisplayState {
 
     const buildSection = (
       parentId: string,
-      resumeId: string,
+      resumeGroupId: string,
       layoutNode: LayoutNode,
     ): Section[] => {
       const id = this.uuid.rnd();
@@ -339,7 +339,7 @@ export class DisplayState {
         layoutNodeId: layoutNode.id,
         layoutNodePosition: layoutNode.position,
         layoutNodeName: layoutNode.name,
-        resumeId: resumeId,
+        resumeGroupId: resumeGroupId,
         dimension: initDimension(),
       };
 
@@ -358,7 +358,7 @@ export class DisplayState {
             ? this.store.selectSnapshot(
                 ResumeState.selectorValue(
                   layoutNode.selectors[0].type,
-                  resumeId,
+                  resumeGroupId,
                 ),
               )
             : [''];
@@ -657,7 +657,7 @@ export class DisplayState {
           layoutNodeId: section.layoutNodeId,
           layoutNodePosition: section.layoutNodePosition,
           layoutNodeName: section.layoutNodeName,
-          resumeId: section.resumeId,
+          resumeGroupId: section.resumeGroupId,
           dimension: initDimension(),
         };
 

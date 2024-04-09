@@ -402,9 +402,9 @@ export class ResumeState {
 
     if (
       action.groupId &&
-      !this.displayService.hasSectionByResumeId(node.id, node.type)
+      !this.displayService.hasSectionByResumeGroupId(node.groupId, node.type)
     ) {
-      return ctx.dispatch(new Display.SectionCreate(node.id, node.type));
+      return ctx.dispatch(new Display.SectionCreate(node.groupId, node.type));
     } else {
       return;
     }

@@ -17,14 +17,14 @@ export namespace Display {
   export class SectionCreate {
     static readonly type = '[Display] Section Create';
     constructor(
-      public resumeId: string,
+      public resumeGroupId: string,
       public selectorType: SelectorType,
     ) {}
   }
 
   export class SectionDelete {
     static readonly type = '[Display] Section Delete';
-    constructor(public resumeId: string) {}
+    constructor(public resumeGroupId: string) {}
   }
 
   export class PageCreate {

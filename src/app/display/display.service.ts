@@ -10,7 +10,7 @@ import { SelectorType } from '@resume/selector-type.enum';
 export class DisplayService {
   constructor(private store: Store) {}
 
-  public hasSectionByResumeId(
+  public hasSectionByResumeGroupId(
     resumeId: string,
     selectorType: SelectorType,
   ): boolean {
@@ -18,7 +18,7 @@ export class DisplayService {
       LayoutState.layoutNodeBySelectorType(selectorType),
     );
     return this.store.selectSnapshot(
-      DisplayState.hasSectionByResumeId(resumeId, layoutNode.id),
+      DisplayState.hasSectionByResumeGroupId(resumeId, layoutNode.id),
     );
   }
 }

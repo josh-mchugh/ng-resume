@@ -84,7 +84,7 @@ export class SectionComponent implements OnInit {
   private renderDynamicHTML(layoutNode: LayoutNode): Observable<SafeHtml> {
     const observables$ = layoutNode.selectors.map((selector) =>
       this.store
-        .select(ResumeState.selectorValue(selector.type, this.section.resumeId))
+        .select(ResumeState.selectorValue(selector.type, this.section.resumeGroupId))
         .pipe(map((value) => [selector.key, value])),
     );
     return combineLatest(observables$).pipe(
