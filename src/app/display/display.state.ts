@@ -297,50 +297,6 @@ export class DisplayState {
     });
   }
 
-  @Action(Display.NestedSectionCreate)
-  nestedSectionCreate(
-    ctx: StateContext<DisplayStateModel>,
-    action: Display.NestedSectionCreate,
-  ) {
-    const layoutNode = this.store.selectSnapshot(
-      LayoutState.layoutNodeBySelectorType(action.selectorType),
-    );
-    const parentSection = Object.values(ctx.getState().sections.byId).find(
-      (section) =>
-        section.layoutNodeId === layoutNode.parentId &&
-        section.resumeId === action.parentResumeId,
-    );
-    if (!parentSection) {
-      throw new Error(
-        `Unable to find parent section by layoutNodeId: ${layoutNode.id}`,
-      );
-    }
-
-    const section = {
-      id: this.uuid.rnd(),
-      parentId: parentSection.id,
-      layoutNodeId: layoutNode.id,
-      resumeId: action.resumeId,
-      position: layoutNode.position,
-      pageId: '0',
-      dimension: initDimension(),
-    };
-
-    const updatedById = {
-      ...ctx.getState().sections.byId,
-      [section.id]: section,
-    };
-    const updatedAllIds = Object.keys(updatedById);
-
-    ctx.setState({
-      ...ctx.getState(),
-      sections: {
-        byId: updatedById,
-        allIds: updatedAllIds,
-      },
-    });
-  }
-
   @Action(Display.SectionDelete)
   sectionDelete(
     ctx: StateContext<DisplayStateModel>,

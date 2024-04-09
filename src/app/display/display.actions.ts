@@ -22,15 +22,6 @@ export namespace Display {
     ) {}
   }
 
-  export class NestedSectionCreate {
-    static readonly type = '[Display] Nested Section Create';
-    constructor(
-      public resumeId: string,
-      public parentResumeId: string,
-      public selectorType: SelectorType,
-    ) {}
-  }
-
   export class SectionDelete {
     static readonly type = '[Display] Section Delete';
     constructor(public resumeId: string) {}
