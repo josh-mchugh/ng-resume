@@ -163,7 +163,11 @@ export class DisplayState {
 
     const sections: { [id: string]: Section } = {};
 
-    const recurs = (layoutNode: LayoutNode, parentId = '', resumeId = ''): void => {
+    const recurs = (
+      layoutNode: LayoutNode,
+      parentId = '',
+      resumeId = '',
+    ): void => {
       const id = this.uuid.rnd();
       const section = {
         id: id,
@@ -180,18 +184,24 @@ export class DisplayState {
         LayoutState.childNodes(layoutNode.id),
       );
       if (childNodes.length) {
-        if (NodeType.CONTAINER === layoutNode.type && NodeDataType.DYNAMIC === layoutNode.dataType) {
+        if (
+          NodeType.CONTAINER === layoutNode.type &&
+          NodeDataType.DYNAMIC === layoutNode.dataType
+        ) {
           const resumeIds: string[] = this.store.selectSnapshot(
-              ResumeState.selectorValue(layoutNode.selectors[0].type, resumeId),
+            ResumeState.selectorValue(layoutNode.selectors[0].type, resumeId),
           );
-          resumeIds.forEach((resumeId) => childNodes.forEach((node) => recurs(node, id, resumeId)));
+          resumeIds.forEach((resumeId) =>
+            childNodes.forEach((node) => recurs(node, id, resumeId)),
+          );
         } else {
           childNodes.forEach((node) => recurs(node, id));
         }
       }
-    }
+    };
 
-    this.store.selectSnapshot(LayoutState.rootNodes())
+    this.store
+      .selectSnapshot(LayoutState.rootNodes())
       .forEach((node) => recurs(node));
 
     ctx.setState({
