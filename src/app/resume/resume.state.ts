@@ -61,21 +61,21 @@ export class ResumeState {
       case SelectorType.SOCIAL_LIST:
         return this.selectorSocialList();
       case SelectorType.SOCIAL_ICON:
-        return this.selectorSocialIcon(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.SOCIAL_NAME:
-        return this.selectorSocialName(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.SOCIAL_URL:
-        return this.selectorSocialUrl(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.EXPERIENCE_LIST:
         return this.selectorExperienceList();
       case SelectorType.EXPERIENCE_TITLE:
-        return this.selectorExperienceTitle(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.EXPERIENCE_DURATION:
-        return this.selectorExperienceDuration(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.EXPERIENCE_ORGANIZATION:
-        return this.selectorExperienceOrganization(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.EXPERIENCE_LOCATION:
-        return this.selectorExperienceLocation(id);
+        return this.valueByTypeAndGroupId(type, id)
       case SelectorType.EXPERIENCE_DESCRIPTION_LIST:
         return this.selectorExperienceDescriptionList(id);
       case SelectorType.EXPERIENCE_DESCRIPTION:
@@ -87,19 +87,19 @@ export class ResumeState {
       case SelectorType.SKILL_LIST:
         return this.selectorSkillList();
       case SelectorType.SKILL_NAME:
-        return this.selectorSkillName(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.SKILL_PROFICIENCY:
         return this.selectorSkillBlocks(id);
       case SelectorType.CERTIFICATION_LIST:
         return this.selectorCertificationList();
       case SelectorType.CERTIFICATION_TITLE:
-        return this.selectorCertificationTitle(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.CERTIFICATION_YEAR:
-        return this.selectorCertificationYear(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.CERTIFICATION_ORGANIZATION:
-        return this.selectorCertificationOrganization(id);
+        return this.valueByTypeAndGroupId(type, id);
       case SelectorType.CERTIFICATION_LOCATION:
-        return this.selectorCertificationLocation(id);
+        return this.valueByTypeAndGroupId(type, id);
       default:
         throw new Error('Unknow selector type: ' + type);
     }
@@ -109,6 +109,15 @@ export class ResumeState {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
       const id = state.byType[type][0];
       return id ? state.byId[id].value : '';
+    });
+  }
+
+  private static valueByTypeAndGroupId(type: SelectorType, groupId: string) {
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const nodes = state.byType[type]
+        .map((nodeId) => state.byId[nodeId])
+        .filter((node) => node.groupId === groupId);
+      return nodes[0].value;
     });
   }
 
@@ -123,33 +132,6 @@ export class ResumeState {
     });
   }
 
-  private static selectorSocialIcon(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.SOCIAL_ICON]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorSocialName(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.SOCIAL_NAME]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorSocialUrl(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.SOCIAL_URL]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
   private static selectorExperienceList() {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
       const groupIds = [
@@ -161,42 +143,6 @@ export class ResumeState {
         ...state.byType[SelectorType.EXPERIENCE_SKILL],
       ].map((id) => state.byId[id].groupId);
       return [...new Set<string>(groupIds)];
-    });
-  }
-
-  private static selectorExperienceTitle(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.EXPERIENCE_TITLE]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorExperienceDuration(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.EXPERIENCE_DURATION]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorExperienceOrganization(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.EXPERIENCE_ORGANIZATION]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorExperienceLocation(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.EXPERIENCE_LOCATION]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
     });
   }
 
@@ -246,15 +192,6 @@ export class ResumeState {
     });
   }
 
-  private static selectorSkillName(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.SKILL_NAME]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
   private static selectorSkillBlocks(id: string) {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
       const nodes = state.byType[SelectorType.SKILL_PROFICIENCY]
@@ -277,42 +214,6 @@ export class ResumeState {
         ...state.byType[SelectorType.CERTIFICATION_YEAR],
       ].map((id) => state.byId[id].groupId);
       return [...new Set<string>(groupIds)];
-    });
-  }
-
-  private static selectorCertificationTitle(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.CERTIFICATION_TITLE]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorCertificationYear(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.CERTIFICATION_YEAR]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorCertificationOrganization(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.CERTIFICATION_ORGANIZATION]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
-    });
-  }
-
-  private static selectorCertificationLocation(id: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const nodes = state.byType[SelectorType.CERTIFICATION_LOCATION]
-        .filter((nodeId) => state.byId[nodeId].groupId === id)
-        .map((nodeId) => state.byId[nodeId]);
-      return nodes[0].value;
     });
   }
 
