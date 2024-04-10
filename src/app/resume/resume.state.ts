@@ -44,20 +44,20 @@ export class ResumeState {
 
   // Ignore until refactoring out generic type any
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  static selectorValue(selectorType: SelectorType, id: string): any {
-    switch (selectorType) {
+  static selectorValue(type: SelectorType, id: string): any {
+    switch (type) {
       case SelectorType.NAME:
-        return this.selectorName();
+        return this.valueByType(type);
       case SelectorType.TITLE:
-        return this.selectorTitle();
+        return this.valueByType(type);
       case SelectorType.SUMMARY:
-        return this.selectorSummary();
+        return this.valueByType(type);
       case SelectorType.EMAIL:
-        return this.selectorEmail();
+        return this.valueByType(type);
       case SelectorType.LOCATION:
-        return this.selectorLocation();
+        return this.valueByType(type);
       case SelectorType.PHONE:
-        return this.selectorPhone();
+        return this.valueByType(type);
       case SelectorType.SOCIAL_LIST:
         return this.selectorSocialList();
       case SelectorType.SOCIAL_ICON:
@@ -101,48 +101,13 @@ export class ResumeState {
       case SelectorType.CERTIFICATION_LOCATION:
         return this.selectorCertificationLocation(id);
       default:
-        throw new Error('Unknow selector type: ' + selectorType);
+        throw new Error('Unknow selector type: ' + type);
     }
   }
 
-  private static selectorName() {
+  private static valueByType(type: SelectorType) {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[SelectorType.NAME][0];
-      return id ? state.byId[id].value : '';
-    });
-  }
-
-  private static selectorTitle() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[SelectorType.TITLE][0];
-      return id ? state.byId[id].value : '';
-    });
-  }
-
-  private static selectorSummary() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[SelectorType.SUMMARY][0];
-      return id ? state.byId[id].value : '';
-    });
-  }
-
-  private static selectorEmail() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[SelectorType.EMAIL][0];
-      return id ? state.byId[id].value : '';
-    });
-  }
-
-  private static selectorLocation() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[SelectorType.LOCATION][0];
-      return id ? state.byId[id].value : '';
-    });
-  }
-
-  private static selectorPhone() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[SelectorType.PHONE][0];
+      const id = state.byType[type][0];
       return id ? state.byId[id].value : '';
     });
   }
