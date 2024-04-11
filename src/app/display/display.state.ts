@@ -190,6 +190,8 @@ export class DisplayState {
           NodeType.CONTAINER === layoutNode.type &&
           NodeDataType.DYNAMIC === layoutNode.dataType
         ) {
+          // TODO: Refactor this call to return ResumeNode?
+          // TODO: This call should be unique to this, as selectValue is used on the template value rendering not Section building.
           const resumeIds: string[] = this.store.selectSnapshot(
             ResumeState.selectorValue(layoutNode.selectors[0].type, resumeGroupId),
           );

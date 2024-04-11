@@ -4,7 +4,7 @@ import { Resume } from './resume.actions';
 import { Display } from '@display/display.actions';
 import { DisplayService } from '@display/display.service';
 import { ResumeStateConfig } from '@resume/resume.config';
-import { SelectorType } from '@resume/selector-type.enum';
+import { SelectorType, selectorTypesByListType } from '@resume/selector-type.enum';
 import ShortUniqueId from 'short-unique-id';
 
 export interface ResumeStateModel {
@@ -59,7 +59,7 @@ export class ResumeState {
       case SelectorType.PHONE:
         return this.valueByType(type);
       case SelectorType.SOCIAL_LIST:
-        return this.selectorSocialList();
+        return this.groupIdsByListType(type);
       case SelectorType.SOCIAL_ICON:
         return this.valueByTypeAndGroupId(type, id);
       case SelectorType.SOCIAL_NAME:
@@ -67,7 +67,7 @@ export class ResumeState {
       case SelectorType.SOCIAL_URL:
         return this.valueByTypeAndGroupId(type, id);
       case SelectorType.EXPERIENCE_LIST:
-        return this.selectorExperienceList();
+        return this.groupIdsByListType(type);
       case SelectorType.EXPERIENCE_TITLE:
         return this.valueByTypeAndGroupId(type, id);
       case SelectorType.EXPERIENCE_DURATION:
@@ -85,13 +85,13 @@ export class ResumeState {
       case SelectorType.EXPERIENCE_SKILL:
         return this.selectorExperienceSkill(id);
       case SelectorType.SKILL_LIST:
-        return this.selectorSkillList();
+        return this.groupIdsByListType(type);
       case SelectorType.SKILL_NAME:
         return this.valueByTypeAndGroupId(type, id);
       case SelectorType.SKILL_PROFICIENCY:
         return this.selectorSkillBlocks(id);
       case SelectorType.CERTIFICATION_LIST:
-        return this.selectorCertificationList();
+        return this.groupIdsByListType(type);
       case SelectorType.CERTIFICATION_TITLE:
         return this.valueByTypeAndGroupId(type, id);
       case SelectorType.CERTIFICATION_YEAR:
@@ -121,27 +121,11 @@ export class ResumeState {
     });
   }
 
-  private static selectorSocialList() {
+  private static groupIdsByListType(type: SelectorType) {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const groupIds = [
-        ...state.byType[SelectorType.SOCIAL_NAME],
-        ...state.byType[SelectorType.SOCIAL_ICON],
-        ...state.byType[SelectorType.SOCIAL_URL],
-      ].map((id) => state.byId[id].groupId);
-      return [...new Set<string>(groupIds)];
-    });
-  }
-
-  private static selectorExperienceList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const groupIds = [
-        ...state.byType[SelectorType.EXPERIENCE_ORGANIZATION],
-        ...state.byType[SelectorType.EXPERIENCE_TITLE],
-        ...state.byType[SelectorType.EXPERIENCE_DURATION],
-        ...state.byType[SelectorType.EXPERIENCE_LOCATION],
-        ...state.byType[SelectorType.EXPERIENCE_DESCRIPTION],
-        ...state.byType[SelectorType.EXPERIENCE_SKILL],
-      ].map((id) => state.byId[id].groupId);
+      const groupIds = selectorTypesByListType(type)
+        .flatMap((type) => state.byType[type])
+        .map((id) => state.byId[id].groupId);
       return [...new Set<string>(groupIds)];
     });
   }
@@ -182,16 +166,6 @@ export class ResumeState {
     );
   }
 
-  private static selectorSkillList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const groupIds = [
-        ...state.byType[SelectorType.SKILL_NAME],
-        ...state.byType[SelectorType.SKILL_PROFICIENCY],
-      ].map((id) => state.byId[id].groupId);
-      return [...new Set<string>(groupIds)];
-    });
-  }
-
   private static selectorSkillBlocks(id: string) {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
       const nodes = state.byType[SelectorType.SKILL_PROFICIENCY]
@@ -202,18 +176,6 @@ export class ResumeState {
           active: (nodes[0].value as number) >= value + 1,
         };
       });
-    });
-  }
-
-  private static selectorCertificationList() {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const groupIds = [
-        ...state.byType[SelectorType.CERTIFICATION_ORGANIZATION],
-        ...state.byType[SelectorType.CERTIFICATION_TITLE],
-        ...state.byType[SelectorType.CERTIFICATION_LOCATION],
-        ...state.byType[SelectorType.CERTIFICATION_YEAR],
-      ].map((id) => state.byId[id].groupId);
-      return [...new Set<string>(groupIds)];
     });
   }
 

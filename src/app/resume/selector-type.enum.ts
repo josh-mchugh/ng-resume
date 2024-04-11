@@ -27,3 +27,37 @@ export enum SelectorType {
   CERTIFICATION_ORGANIZATION = 'CERTIFICATION_ORGANIZATION',
   CERTIFICATION_LOCATION = 'CERTIFICATION_LOCATION',
 }
+
+export function selectorTypesByListType(type: SelectorType) {
+  switch(type) {
+    case SelectorType.SOCIAL_LIST:
+      return [
+        SelectorType.SOCIAL_ICON,
+        SelectorType.SOCIAL_NAME,
+        SelectorType.SOCIAL_URL,
+      ];
+    case SelectorType.EXPERIENCE_LIST:
+      return [
+        SelectorType.EXPERIENCE_TITLE,
+        SelectorType.EXPERIENCE_DURATION,
+        SelectorType.EXPERIENCE_ORGANIZATION,
+        SelectorType.EXPERIENCE_LOCATION,
+        SelectorType.EXPERIENCE_DESCRIPTION,
+        SelectorType.EXPERIENCE_SKILL,
+      ];
+    case SelectorType.SKILL_LIST:
+      return [
+        SelectorType.SKILL_NAME,
+        SelectorType.SKILL_PROFICIENCY,
+      ];
+    case SelectorType.CERTIFICATION_LIST:
+      return [
+        SelectorType.CERTIFICATION_TITLE,
+        SelectorType.CERTIFICATION_YEAR,
+        SelectorType.CERTIFICATION_ORGANIZATION,
+        SelectorType.CERTIFICATION_LOCATION,
+      ];
+    default:
+      throw Error("Unknown type");
+  };
+}
