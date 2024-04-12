@@ -105,18 +105,18 @@ export class ResumeState {
     }
   }
 
-  private static valueByType(type: SelectorType) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const id = state.byType[type][0];
-      return id ? state.byId[id].value : '';
-    });
-  }
-
   private static valueById(id: string) {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) => state.byId[id].value,
     );
+  }
+
+  private static valueByType(type: SelectorType) {
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const id = state.byType[type][0];
+      return id ? state.byId[id].value : '';
+    });
   }
 
   private static valueByTypeAndGroupId(type: SelectorType, groupId: string) {
