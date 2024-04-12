@@ -77,11 +77,11 @@ export class ResumeState {
       case SelectorType.EXPERIENCE_LOCATION:
         return this.valueByTypeAndGroupId(type, id)
       case SelectorType.EXPERIENCE_DESCRIPTION_LIST:
-        return this.selectorExperienceDescriptionList(id);
+        return this.idsByTypeAndGroupId(SelectorType.EXPERIENCE_DESCRIPTION, id);
       case SelectorType.EXPERIENCE_DESCRIPTION:
         return this.selectorExperienceDescription(id);
       case SelectorType.EXPERIENCE_SKILL_LIST:
-        return this.selectorExperienceSkillList(id);
+        return this.idsByTypeAndGroupId(SelectorType.EXPERIENCE_SKILL, id);
       case SelectorType.EXPERIENCE_SKILL:
         return this.selectorExperienceSkill(id);
       case SelectorType.SKILL_LIST:
@@ -121,6 +121,17 @@ export class ResumeState {
     });
   }
 
+  private static idsByTypeAndGroupId(type: SelectorType, groupId: string) {
+    return createSelector([ResumeState], (state: ResumeStateModel) => {
+      const ids = state.byType[type]
+        .map((id) => state.byId[id])
+        .filter((node) => node.groupId === groupId)
+        .sort((a, b) => a.position - b.position)
+        .map((node) => node.id);
+      return [...new Set<string>(ids)];
+    });
+  }
+
   private static groupIdsByListType(type: SelectorType) {
     return createSelector([ResumeState], (state: ResumeStateModel) => {
       const groupIds = selectorTypesByListType(type)
@@ -130,33 +141,11 @@ export class ResumeState {
     });
   }
 
-  private static selectorExperienceDescriptionList(groupId: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const ids = state.byType[SelectorType.EXPERIENCE_DESCRIPTION]
-        .map((id) => state.byId[id])
-        .filter((node) => node.groupId === groupId)
-        .sort((a, b) => a.position - b.position)
-        .map((node) => node.id);
-      return [...new Set<string>(ids)];
-    });
-  }
-
   private static selectorExperienceDescription(id: string) {
     return createSelector(
       [ResumeState],
       (state: ResumeStateModel) => state.byId[id].value,
     );
-  }
-
-  private static selectorExperienceSkillList(groupId: string) {
-    return createSelector([ResumeState], (state: ResumeStateModel) => {
-      const ids = state.byType[SelectorType.EXPERIENCE_SKILL]
-        .map((id) => state.byId[id])
-        .filter((node) => node.groupId === groupId)
-        .sort((a, b) => a.position - b.position)
-        .map((node) => node.id);
-      return [...new Set<string>(ids)];
-    });
   }
 
   private static selectorExperienceSkill(id: string) {
